@@ -7,8 +7,8 @@ export ZSH=/home/kuettel/.oh-my-zsh
 # time that oh-my-zsh is loaded.
 #ZSH_THEME="blink"
 #ZSH_THEME="robbyrussell"
-#ZSH_THEME="agnoster"
-ZSH_THEME="amuse"
+ZSH_THEME="agnoster"
+#ZSH_THEME="amuse"
 #ZSH_THEME="avit"
 #ZSH_THEME="blinks"
 
@@ -50,7 +50,7 @@ ZSH_THEME="amuse"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git command-not-found)
+plugins=(command-not-found)
 # might be interesting: common-aliases compleat
 
 # User configuration
