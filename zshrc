@@ -55,7 +55,7 @@ plugins=(command-not-found)
 
 # User configuration
 
-export PATH="/home/kuettel/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games"
+export PATH="/home/kuettel/bin:/home/kuettel/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games"
 # export MANPATH="/usr/local/man:$MANPATH"
 
 source $ZSH/oh-my-zsh.sh
@@ -107,3 +107,6 @@ export LESS="-j.3 -WRSX"
 # this interferes with other aws stuff we have, need to put it into a config file
 # otherwise env variables take precedence
 #source /home/kuettel/src/nn/automation/aws_dev_keys.sh
+
+# try it for now
+source ~/.local/lib/python2.7/site-packages/powerline/bindings/zsh/powerline.zsh
