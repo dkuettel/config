@@ -2,4 +2,4 @@
 
 sudo apt-get install xmonad
 mkdir ~/.xmonad
-ln -s --backup ~/.xmonad/xmonad.hs
+ln -s --backup ~/config/xmonad.hs ~/.xmonad/xmonad.hs
