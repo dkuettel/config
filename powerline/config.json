@@ -1,0 +1,10 @@
+{
+	"shell":{
+		"colorscheme":"solarized"
+	},
+	"ext":{
+		"vim":{
+			"colorscheme":"solarizedlight"
+		}
+	}
+}
