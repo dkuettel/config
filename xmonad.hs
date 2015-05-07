@@ -15,5 +15,5 @@ main = do
 		[ ("<F8>",spawn "/home/kuettel/playerctl/playerctl/playerctl play-pause")
 		, ("<F9>",spawn "/home/kuettel/playerctl/playerctl/playerctl next")
 		, ("<F7>",spawn "/home/kuettel/playerctl/playerctl/playerctl previous")
-		, ("M-l",spawn "/usr/bin/slock")
+		, ("M-S-l",spawn "/usr/bin/slock")
 		]
