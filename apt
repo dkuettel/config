@@ -16,3 +16,5 @@ python-setuptools
 feh
 unzip
 jq
+openssh-server
+default-jdk

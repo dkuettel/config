@@ -1,0 +1,6 @@
+#!/bin/bash
+
+cd ~/src/nn/core
+. ./configure_compilers
+
+/home/kuettel/qtcreator-3.4.0/bin/qtcreator
