@@ -21,3 +21,7 @@ git clone https://github.com/sjbach/lusty.git
 # easy motion
 cd ~/.vim/bundle
 git clone https://github.com/Lokaltog/vim-easymotion.git
+
+# auto save
+cd ~/.vim/bundle
+git clone https://github.com/907th/vim-auto-save.git

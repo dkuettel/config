@@ -175,6 +175,7 @@ nmap <Leader>bb :ls<CR>:buffer<Space>
 "let g:syntastic_cpp_checkers=['gcc']
 "let g:syntastic_cpp_compiler_options='-Wall'
 
+" using autosave bundle
 let g:auto_save = 1
 
 " matches trailing white spaces and highlights them as an error
