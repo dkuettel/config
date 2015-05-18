@@ -17,3 +17,7 @@ git clone https://github.com/scrooloose/nerdtree.git
 # lusty juggler and file explorer
 cd ~/.vim/bundle
 git clone https://github.com/sjbach/lusty.git
+
+# easy motion
+cd ~/.vim/bundle
+git clone https://github.com/Lokaltog/vim-easymotion.git
