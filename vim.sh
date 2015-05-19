@@ -25,3 +25,7 @@ git clone https://github.com/Lokaltog/vim-easymotion.git
 # auto save
 cd ~/.vim/bundle
 git clone https://github.com/907th/vim-auto-save.git
+
+# ctrl p
+cd ~/.vim/bundle
+git clone https://github.com/kien/ctrlp.vim.git
