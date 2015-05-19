@@ -10,7 +10,7 @@ main = do
 		{ manageHook = manageDocks <+> manageHook defaultConfig
 		, layoutHook = avoidStruts $ layoutHook defaultConfig
 		, modMask = mod4Mask -- bind mod to windows key (default was alt)
-		, borderWidth = 2
+		, borderWidth = 4
 		} `additionalKeysP`
 		[ ("<F8>",spawn "/home/kuettel/playerctl/playerctl/playerctl play-pause")
 		, ("<F9>",spawn "/home/kuettel/playerctl/playerctl/playerctl next")
