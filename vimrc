@@ -177,6 +177,7 @@ nmap <Leader>bb :ls<CR>:buffer<Space>
 
 " using autosave bundle
 let g:auto_save = 1
+let g:auto_save_in_insert_mode = 0  " do not save while in insert mode
 
 " matches trailing white spaces and highlights them as an error
 "match ErrorMsg '\s\+$'
