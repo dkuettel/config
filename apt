@@ -19,3 +19,5 @@ jq
 openssh-server
 default-jdk
 gitg
+realpath
+exuberant-ctags
