@@ -21,3 +21,4 @@ default-jdk
 gitg
 realpath
 exuberant-ctags
+icedtea-plugin
