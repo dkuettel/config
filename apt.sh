@@ -1,5 +1,5 @@
 #!/bin/bash
 
 sudo apt-get update
-sudo apt-get upgrade
-sudo apt-get install $(cat apt)
+sudo apt-get upgrade -y
+sudo apt-get install -y $(cat apt)
