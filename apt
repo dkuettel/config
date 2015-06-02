@@ -14,6 +14,7 @@ suckless-tools
 python-pip
 python-setuptools
 feh
+zip
 unzip
 jq
 openssh-server
