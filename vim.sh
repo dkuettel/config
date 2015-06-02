@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # install packages
-sudo apt-get -q install vim-nox
+sudo apt-get -qy install vim-nox
 
 if [[ $(realpath ~/config/vimrc) == $(realpath ~/.vimrc) ]]
 then
@@ -12,9 +12,12 @@ else
 fi
 
 # pathogen
-mkdir -p ~/.vim/autoload ~/.vim/bundle
-if [[ ! -f ~/.vim/autoload/pathogen.vim ]]
+[[ -d ~/.vim/autoload ]] || mkdir -p ~/.vim/autoload
+[[ -d ~/.vim/bundle ]] || mkdir -p ~/.vim/bundle
+if [[ -f ~/.vim/autoload/pathogen.vim ]]
 then
+	echo 'pathogen already installed'
+else
 	curl -LSso ~/.vim/autoload/pathogen.vim https://tpo.pe/pathogen.vim
 fi
 

@@ -1,11 +1,13 @@
 #!/bin/bash
 
-mkdir ~/plugins
+[[ -d ~/plugins ]] || mkdir ~/plugins
 
 # gnome terminal solarized theme
 cd ~/plugins
-if [[ ! -d gnome-terminal-colors-solarized ]]
+if [[ -d gnome-terminal-colors-solarized ]]
 then
+	echo 'gnome terimal colors solarized already installed'
+else
 	git clone https://github.com/Anthony25/gnome-terminal-colors-solarized.git
 	cd gnome-terminal-colors-solarized
 	sudo apt-get install dconf-cli
@@ -15,7 +17,10 @@ fi
 
 # ls colors
 cd ~/plugins
-if [[ ! -d dircolors-solarized ]]
+if [[ -d dircolors-solarized ]]
+then
+	echo 'dircolors solarized already installed'
+else
 	git clone git@github.com:dkuettel/dircolors-solarized.git
 	cd dircolors-solarized
 	git config user.email 'dkuettel@gmail.com'
