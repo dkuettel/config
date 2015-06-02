@@ -14,8 +14,8 @@ main = do
 		, borderWidth = 4
 		, handleEventHook = handleEventHook defaultConfig <+> fullscreenEventHook -- chrome and others don't support proper x11 anymore
 		} `additionalKeysP`
-		[ ("<F8>",spawn "/home/kuettel/playerctl/playerctl/playerctl play-pause")
-		, ("<F9>",spawn "/home/kuettel/playerctl/playerctl/playerctl next")
-		, ("<F7>",spawn "/home/kuettel/playerctl/playerctl/playerctl previous")
+		[ ("<F8>",spawn "/home/kuettel/plugins/playerctl/playerctl/playerctl play-pause")
+		, ("<F9>",spawn "/home/kuettel/plugins/playerctl/playerctl/playerctl next")
+		, ("<F7>",spawn "/home/kuettel/plugins/playerctl/playerctl/playerctl previous")
 		, ("M-S-l",spawn "/usr/bin/slock")
 		]
