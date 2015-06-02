@@ -1,8 +1,8 @@
 #!/bin/bash
 
-sudo apt-get install zsh
+sudo apt-get install -y zsh
 wget https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh -O - | sh
-chsh -s /bin/zsh # seems like oh-my-zsh is doing that already, sometimes?
+sudo chsh -s /bin/zsh # seems like oh-my-zsh is doing that already, sometimes?
 ln -s --backup ~/config/zshrc ~/.zshrc
 
 mkdir -p ~/plugins
