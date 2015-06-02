@@ -4,7 +4,7 @@
 pip install --user powerline-status
 
 mkdir -p ~/.config
-if [[ $(realpath ~/config/powerline) != $(realphat ~/.config/powerline) ]]
+if [[ $(realpath ~/config/powerline) != $(realpath ~/.config/powerline) ]]
 then
 	ln -s ~/config/powerline ~/.config/powerline
 fi
