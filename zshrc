@@ -110,3 +110,6 @@ export LESS="-j.3 -WRSX"
 
 # try it for now
 source ~/.local/lib/python2.7/site-packages/powerline/bindings/zsh/powerline.zsh
+
+# try vim mode for zle
+bindkey -v
