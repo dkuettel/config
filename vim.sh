@@ -1,4 +1,5 @@
 #!/bin/bash
+set -ex
 
 # install packages
 sudo apt-get -qy install vim-nox

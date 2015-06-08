@@ -1,4 +1,5 @@
 #!/bin/bash
+set -ex
 
 [[ -d ~/plugins ]] || mkdir ~/plugins
 
