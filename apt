@@ -11,8 +11,6 @@ libboost-dev
 tree
 zsh
 suckless-tools
-python-pip
-python-setuptools
 feh
 zip
 unzip
