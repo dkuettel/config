@@ -1,7 +1,7 @@
 #!/bin/bash
 set -ex
 
-# sudo apt-get install -y python-pip python-setuptools # by now anaconda should be installed
+# assuming anaconda is installed now
 pip install --user powerline-status
 
 mkdir -p ~/.config
