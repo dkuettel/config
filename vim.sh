@@ -19,7 +19,8 @@ if [[ -f ~/.vim/autoload/pathogen.vim ]]
 then
 	echo 'pathogen already installed'
 else
-	curl -LSso ~/.vim/autoload/pathogen.vim https://tpo.pe/pathogen.vim
+#	curl -LSso ~/.vim/autoload/pathogen.vim https://tpo.pe/pathogen.vim
+	wget https://tpo.pe/pathogen.vim -O ~/.vim/autoload/pathogen.vim
 fi
 
 # solarized colors
