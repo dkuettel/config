@@ -9,6 +9,12 @@ then
 else
 	wget https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh -O - | sh
 	chsh -s /usr/bin/zsh # seems like oh-my-zsh is doing that already, sometimes?
+fi
+
+if [[ $(realpath ~/config/zshrc) == $(realpath ~/.zshrc) ]]
+then
+	echo 'zshrc.sh already installed'
+else
 	ln -s --backup ~/config/zshrc ~/.zshrc
 fi
 
