@@ -1,5 +1,6 @@
 #!/bin/bash
 
+# from https://github.com/curonian/qtcreator-solarized
 if [[ -d ~/.config/QtProject/qtcreator ]]
 then
 	mkdir -p ~/.config/QtProject/qtcreator/styles
