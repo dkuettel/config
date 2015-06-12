@@ -2,7 +2,7 @@
 
 bluez-test-audio connect 00:0C:8A:69:3B:C4
 pactl list cards short
-pactl set-default-sink bluez_card.00_0C_8A_69_3B_C4
+pactl set-default-sink bluez_sink.00_0C_8A_69_3B_C4
 
 # notes:
 # also needed to Disable=Headset in section [General] in /etc/bluetooth/audio.conf
