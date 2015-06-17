@@ -126,3 +126,5 @@ bindkey '^w' backward-kill-word
 # ctrl-r starts searching history backward
 bindkey '^r' history-incremental-search-backward
 
+# extended globbing, any conflicts?
+setopt extendedglob
