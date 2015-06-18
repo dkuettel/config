@@ -7,9 +7,9 @@ if [[ -d ~/.oh-my-zsh ]]
 then
 	echo 'oh my zsh is already installed'
 else
-	wget https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh -O - | sh
+	wget https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh -O - | sh || echo 'oh-my-zsh fails in the end as expected'
+	chsh -s `which zsh`
 fi
-chsh -s `which zsh`
 
 if [[ $(realpath ~/config/zshrc) == $(realpath ~/.zshrc) ]]
 then
