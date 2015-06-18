@@ -10,3 +10,4 @@ set -ex
 ./tmux.sh
 ./vim.sh
 ./powerline.sh
+./toprc.sh
