@@ -1,0 +1,4 @@
+#!/bin/bash
+# see https://forums.aws.amazon.com/thread.jspa?threadID=77788
+
+curl -s http://169.254.169.254/latest/meta-data/public-hostname
