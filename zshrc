@@ -128,3 +128,7 @@ bindkey '^r' history-incremental-search-backward
 
 # extended globbing, any conflicts?
 setopt extendedglob
+
+# ssh auth in tmux
+alias sshca_set='. sshca_set.sh'
+alias tmux='sshca_set; SSH_AUTH_SOCK=~/.ssh/ssh-auth-sock.tmux tmux'
