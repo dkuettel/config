@@ -131,4 +131,4 @@ setopt extendedglob
 
 # ssh auth in tmux
 alias sshca_set='. sshca_set.sh'
-alias tmux='sshca_set; SSH_AUTH_SOCK=~/.ssh/ssh-auth-sock.tmux tmux'
+alias tmux='sshca_bind; SSH_AUTH_SOCK=~/.ssh/ssh-auth-sock.tmux tmux'
