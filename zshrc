@@ -109,7 +109,7 @@ export LESS="-j.3 -WRSX"
 #source /home/kuettel/src/nn/automation/aws_dev_keys.sh
 
 # try it for now
-source ~/.local/lib/python2.7/site-packages/powerline/bindings/zsh/powerline.zsh
+#source ~/.local/lib/python2.7/site-packages/powerline/bindings/zsh/powerline.zsh
 
 # try vim mode for zle
 bindkey -v
@@ -132,3 +132,6 @@ setopt extendedglob
 # ssh auth in tmux
 alias sshca_set='. sshca_set.sh'
 alias tmux='sshca_bind; SSH_AUTH_SOCK=~/.ssh/ssh-auth-sock.tmux tmux'
+
+# for feh to work well with tiling window manager
+alias feh='feh --auto-zoom --scale-down'
