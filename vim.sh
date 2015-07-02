@@ -82,3 +82,13 @@ then
 else
 	git clone https://github.com/kien/ctrlp.vim.git
 fi
+
+# fugitive
+cd ~/.vim/bundle
+if [[ -d vim-fugitive ]]
+then
+	cd vim-fugitive
+	git pull
+else
+	git clone https://github.com/tpope/vim-fugitive.git
+fi
