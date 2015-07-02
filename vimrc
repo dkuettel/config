@@ -20,7 +20,7 @@ set hidden
 "set nowrap " don't wrap lines
 set tabstop=4 " a tab is X spaces
 set shiftwidth=4 " number of spaces to use for autoindenting
-"set shiftround " use multiple of shiftwidth when indenting with '<' and '>'
+set shiftround " use multiple of shiftwidth when indenting with '<' and '>'
 set backspace=indent,eol,start " allow backspacing over everything in insert mode
 set autoindent " always set autoindenting on
 set copyindent " copy the previous indentation on autoindenting
@@ -195,7 +195,7 @@ autocmd InsertLeave * match ExtraWhitespace /\s\+$/
 autocmd BufWinLeave * call clearmatches()
 
 " find tags with ctrlp
-"nnoremap <leader>. :CtrlPTag<cr>
+nnoremap <leader>. :CtrlPTag<cr>
 
 " recompute ctags for select projects
 " todo this matches only py files in src/nn, not further down in the folders
