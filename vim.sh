@@ -92,3 +92,13 @@ then
 else
 	git clone https://github.com/tpope/vim-fugitive.git
 fi
+
+# arg text objects (a for argument, daa = delete an argument)
+cd ~/.vim/bundle
+if [[ -d argtextobj.vim ]]
+then
+	cd argtextobj.vim
+	git pull
+else
+	git clone https://github.com/vim-scripts/argtextobj.vim.git
+fi
