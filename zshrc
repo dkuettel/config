@@ -11,6 +11,8 @@ ZSH_THEME="agnoster"
 #ZSH_THEME="amuse"
 #ZSH_THEME="avit"
 #ZSH_THEME="blinks"
+#ZSH_THEME="funky"
+#ZSH_THEME="ys"
 
 # Uncomment the following line to use case-sensitive completion.
 # CASE_SENSITIVE="true"
