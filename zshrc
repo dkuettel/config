@@ -137,3 +137,6 @@ alias tmux='sshca_bind; SSH_AUTH_SOCK=~/.ssh/ssh-auth-sock.tmux tmux'
 
 # for feh to work well with tiling window manager
 alias feh='feh --auto-zoom --scale-down'
+
+# for mosh, but in general, i'm not comfortable with all the LC settings
+export LC_ALL=en_US.UTF-8
