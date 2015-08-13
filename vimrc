@@ -209,4 +209,4 @@ set scrolloff=8
 "python from powerline.vim import setup as powerline_setup
 "python powerline_setup()
 "python del powerline_setup
-"set laststatus=2 " so the status line (powerline) is always shown
+set laststatus=2 " so the status line (powerline) is always shown
