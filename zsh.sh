@@ -13,7 +13,7 @@ else
 	git config user.email 'dkuettel@gmail.com'
 	git remote set-url origin git@github.com:dkuettel/oh-my-zsh.git
 	git remote add upstream https://github.com/robbyrussell/oh-my-zsh.git
-	git push origin master
+#	git push origin master
 	git checkout mine
 fi
 
