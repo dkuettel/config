@@ -199,7 +199,7 @@ nnoremap <leader>. :CtrlPTag<cr>
 
 " recompute ctags for select projects
 " todo this matches only py files in src/nn, not further down in the folders
-autocmd BufWritePost /home/kuettel/src/nn/*.py silent !ctags -f /home/kuettel/src/nn/tags -R /home/kuettel/src/nn
+autocmd BufWritePost /home/kuettel/src/nn/*.py silent !ctags -f /home/kuettel/src/nn/tags --exclude=libs -R /home/kuettel/src/nn
 
 " always keep some context lines visible
 set scrolloff=8
