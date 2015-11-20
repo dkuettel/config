@@ -3,6 +3,8 @@
 " should be off by default anyway as long as there is a .vimrc file
 set nocompatible
 
+set t_Co=16 " vim-colors-solarized, but has no effect (?)
+
 " allows to install extensions as "bundles"
 " https://github.com/tpope/vim-pathogen
 call pathogen#infect()
@@ -14,7 +16,7 @@ let mapleader=","
 "nmap <silent> <leader>ev :e $MYVIMRC<CR>
 "nmap <silent> <leader>sv :so $MYVIMRC<CR>
 
-" don't need to save buffers when switching (no autosave!)
+" don't need to save buffers when switching (does not imply autosave)
 set hidden
 
 "set nowrap " don't wrap lines
@@ -199,6 +201,7 @@ nnoremap <leader>. :CtrlPTag<cr>
 
 " recompute ctags for select projects
 " todo this matches only py files in src/nn, not further down in the folders
+" todo probably more to exclude as well, see zsh history on staging machine
 autocmd BufWritePost /home/kuettel/src/nn/*.py silent !ctags -f /home/kuettel/src/nn/tags --exclude=libs -R /home/kuettel/src/nn
 
 " always keep some context lines visible
