@@ -153,7 +153,7 @@ nnoremap ; :
 "let g:ctrlp_cmd = 'CtrlPMixed'
 "let g:ctrlp_root_markers = ['.ctrlp']
 "let g:ctrlp_prompt_mappings = {'PrtClearCache()': ['<c-q>']}
-"map <C-[> :CtrlPBuffer<CR>
+map <C-[> :CtrlPBuffer<CR>
 "let g:ctrlp_extensions = ['tag']
 
 " solarized theme
