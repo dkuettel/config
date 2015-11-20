@@ -30,7 +30,11 @@ then
 	cd vim-colors-solarized
 	git pull
 else
-	git clone git://github.com/altercation/vim-colors-solarized.git
+#	git clone git://github.com/altercation/vim-colors-solarized.git
+	git clone git@github-personal:dkuettel/vim-colors-solarized.git
+	git config user.email 'dkuettel@gmail.com'
+	git remote add upstream git://github.com/altercation/vim-colors-solarized.git
+	git checkout mine
 fi
 
 # nerdtree
