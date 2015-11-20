@@ -3,6 +3,8 @@
 " should be off by default anyway as long as there is a .vimrc file
 set nocompatible
 
+set t_Co=16 " vim-colors-solarized, but has no effect (?)
+
 " allows to install extensions as "bundles"
 " https://github.com/tpope/vim-pathogen
 call pathogen#infect()
