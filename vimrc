@@ -160,12 +160,8 @@ map <C-[> :CtrlPBuffer<CR>
 
 " solarized theme
 syntax enable
-"if $theme == "light"
-	set background=light
-"elseif $theme == "dark"
-	"set background=dark
-"endif
-let g:solarized_termtrans=1 " was necessary for putty to work
+set background=dark " the plugin considers dark the default, and it should fit with invertable colors
+"let g:solarized_termtrans=1 " was necessary for putty to work
 let g:solarized_termcolors=16 " 16 is better if set right, 256 is the compatible fixed color mode
 let g:solarized_visibility="normal" " set list to see nonprint characters
 colorscheme solarized
