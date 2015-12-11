@@ -11,7 +11,9 @@ main = do
 		{ manageHook = manageDocks <+> manageHook defaultConfig
 		, layoutHook = avoidStruts $ layoutHook defaultConfig
 		, modMask = mod4Mask -- bind mod to windows key (default was alt)
-		, borderWidth = 4
+		, borderWidth = 2
+		, normalBorderColor = "#073642"
+		, focusedBorderColor = "#b58900"
 		, handleEventHook = handleEventHook defaultConfig <+> fullscreenEventHook -- chrome and others don't support proper x11 anymore
 		} `additionalKeysP`
 		[ ("<F8>",spawn "/home/kuettel/plugins/playerctl/playerctl/playerctl play-pause")
