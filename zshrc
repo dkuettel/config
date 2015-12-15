@@ -60,6 +60,7 @@ plugins=(command-not-found)
 export PATH="/home/kuettel/anaconda/bin:/home/kuettel/bin:/home/kuettel/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/usr/local/cuda-7.0/bin"
 # export MANPATH="/usr/local/man:$MANPATH"
 
+DISABLE_AUTO_UPDATE=true # todo how to manually do it?
 source $ZSH/oh-my-zsh.sh
 
 # You may need to manually set your language environment
