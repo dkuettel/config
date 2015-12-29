@@ -107,3 +107,13 @@ then
 else
 	git clone https://github.com/vim-scripts/argtextobj.vim.git
 fi
+
+# nerdcommenter
+cd ~/.vim/bundle
+if [[ -d nerdcommenter ]]
+then
+	cd nerdcommenter
+	get pull
+else
+	git clone https://github.com/scrooloose/nerdcommenter.git
+fi
