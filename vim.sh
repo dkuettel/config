@@ -117,3 +117,13 @@ then
 else
 	git clone https://github.com/scrooloose/nerdcommenter.git
 fi
+
+# syntastic
+cd ~/.vim/bundle
+if [[ -d syntastic ]]
+then
+	cd syntastic
+	get pull
+else
+	git clone https://github.com/scrooloose/syntastic.git
+fi
