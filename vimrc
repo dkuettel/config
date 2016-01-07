@@ -157,6 +157,7 @@ nnoremap ; :
 "let g:ctrlp_prompt_mappings = {'PrtClearCache()': ['<c-q>']}
 map <C-[> :CtrlPBuffer<CR>
 "let g:ctrlp_extensions = ['tag']
+let g:ctrlp_working_path_mode = 0 " always base off initial working folder
 
 " solarized theme
 syntax enable
