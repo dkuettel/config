@@ -159,6 +159,11 @@ map <C-[> :CtrlPBuffer<CR>
 "let g:ctrlp_extensions = ['tag']
 let g:ctrlp_working_path_mode = 0 " always base off initial working folder
 
+" try out ignore, hard coded for caffe here
+let g:ctrlp_custom_ignore = {
+	\ 'dir': '\v[\/](build|cmake|data|distribute|docs|examples|matlab|models|scripts|tools)$'
+	\ }
+
 " solarized theme
 syntax enable
 set background=dark " the plugin considers dark the default, and it should fit with invertable colors
