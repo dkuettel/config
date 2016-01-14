@@ -134,7 +134,7 @@ setopt extendedglob
 
 # ssh auth in tmux
 alias sshca_set='. sshca_set.sh'
-alias tmux='sshca_bind; SSH_AUTH_SOCK=~/.ssh/ssh-auth-sock.tmux tmux'
+alias tmux='sshca_bind; SSH_AUTH_SOCK=~/.ssh/ssh-auth-sock.tmux ~/tmux/tmux'
 
 # for feh to work well with tiling window manager
 alias feh='feh --auto-zoom --scale-down'
