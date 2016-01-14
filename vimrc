@@ -21,6 +21,7 @@ set hidden
 
 "set nowrap " don't wrap lines
 set tabstop=4 " a tab is X spaces
+set noexpandtab " don't put spaces for tabs
 set shiftwidth=4 " number of spaces to use for autoindenting
 set shiftround " use multiple of shiftwidth when indenting with '<' and '>'
 set backspace=indent,eol,start " allow backspacing over everything in insert mode
@@ -43,6 +44,12 @@ set noerrorbells " don't beep
 
 set nobackup
 set noswapfile
+
+filetype plugin on " settings based on filetypes
+" see ~/.vim/after/ftplugin/[type].vim
+" or also /usr/share/vim/vim74/ftplugin/[type].vim
+
+autocmd FileType python setlocal tabstop=4 noexpandtab shiftwidth=4
 
 " no smartness (autoindenting,...) while pasteing from outside
 "set pastetoggle=F2
