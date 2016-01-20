@@ -1,0 +1,2 @@
+kuettel staging = (root) NOPASSWD: /bin/mount
+kuettel staging = (root) NOPASSWD: /bin/umount
