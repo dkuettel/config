@@ -1,2 +1,2 @@
 #!/bin/bash
-python -u /data/xps/metric/dev/nn/xpman.py "$@"
+python -u -m nn.xpman "$@"
