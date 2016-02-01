@@ -97,7 +97,7 @@ alias d+='pushd .'
 alias d-='popd'
 #alias ..='cd ..'
 #alias ...='cd ../..'
-alias lrt='ls -hltrcF --color=always | tail'
+#alias lrt='ls -hltrcF --color=always | tail' # use script in ~/bin instead
 alias cdl='. cdl.sh'
 
 # color support for ls with the solarized theme
