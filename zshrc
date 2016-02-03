@@ -5,14 +5,21 @@ export ZSH=/home/kuettel/.oh-my-zsh
 # Look in ~/.oh-my-zsh/themes/
 # Optionally, if you set this to "random", it'll load a random theme each
 # time that oh-my-zsh is loaded.
+ZSH_THEME="random"
+
+# themes I tried
+#ZSH_THEME="agnoster"
 #ZSH_THEME="blink"
 #ZSH_THEME="robbyrussell"
-ZSH_THEME="agnoster"
 #ZSH_THEME="amuse"
 #ZSH_THEME="avit"
 #ZSH_THEME="blinks"
 #ZSH_THEME="funky"
 #ZSH_THEME="ys"
+
+# themes others used
+#ZSH_THEME="pure" # cristi
+ZSH_THEME="tjkirch" # roman
 
 # Uncomment the following line to use case-sensitive completion.
 # CASE_SENSITIVE="true"
@@ -52,7 +59,7 @@ ZSH_THEME="agnoster"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(command-not-found)
+plugins=(command-not-found zsh-syntax-highlighting)
 # might be interesting: common-aliases compleat
 
 # User configuration
