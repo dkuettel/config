@@ -106,6 +106,7 @@ alias d-='popd'
 #alias ...='cd ../..'
 #alias lrt='ls -hltrcF --color=always | tail' # use script in ~/bin instead
 alias cdl='. cdl.sh'
+alias watch='watch -c'
 
 # color support for ls with the solarized theme
 eval `dircolors ~/plugins/dircolors-solarized/dircolors.ansi-light`
