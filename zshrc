@@ -59,7 +59,7 @@ ZSH_THEME="tjkirch" # roman
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(command-not-found zsh-syntax-highlighting per-directory-history vi-mode)
+plugins=(command-not-found per-directory-history vi-mode zsh-syntax-highlighting) # note: syntax plugin must be the last to import
 # might be interesting: common-aliases compleat
 
 # User configuration
