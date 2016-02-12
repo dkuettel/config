@@ -5,10 +5,10 @@ export ZSH=/home/kuettel/.oh-my-zsh
 # Look in ~/.oh-my-zsh/themes/
 # Optionally, if you set this to "random", it'll load a random theme each
 # time that oh-my-zsh is loaded.
-ZSH_THEME="random"
+#ZSH_THEME="random"
 
 # themes I tried
-#ZSH_THEME="agnoster"
+ZSH_THEME="agnoster"
 #ZSH_THEME="blink"
 #ZSH_THEME="robbyrussell"
 #ZSH_THEME="amuse"
@@ -19,7 +19,7 @@ ZSH_THEME="random"
 
 # themes others used
 #ZSH_THEME="pure" # cristi
-ZSH_THEME="tjkirch" # roman
+#ZSH_THEME="tjkirch" # roman
 
 # Uncomment the following line to use case-sensitive completion.
 # CASE_SENSITIVE="true"
@@ -54,12 +54,13 @@ ZSH_THEME="tjkirch" # roman
 
 # Would you like to use another custom folder than $ZSH/custom?
 # ZSH_CUSTOM=/path/to/new-custom-folder
+#
 
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(command-not-found per-directory-history vi-mode zsh-syntax-highlighting) # note: syntax plugin must be the last to import
+plugins=(command-not-found per-directory-history vi-mode zaw zsh-syntax-highlighting) # note: syntax plugin must be the last to import
 # might be interesting: common-aliases compleat
 
 # User configuration
@@ -149,3 +150,9 @@ alias feh='feh --auto-zoom --scale-down'
 
 # for mosh, but in general, i'm not comfortable with all the LC settings
 export LC_ALL=en_US.UTF-8
+
+# todo: try zaw for history search
+bindkey '^R' zaw-history
+
+# todo: bind (should already be bound)
+bindkey '^G' per-directory-history-toggle-history
