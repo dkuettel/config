@@ -223,3 +223,39 @@ set scrolloff=8
 "python powerline_setup()
 "python del powerline_setup
 set laststatus=2 " so the status line (powerline) is always shown
+
+" python mode settings
+"let g:pymode_lint_ignore = "W191"
+
+" syntastic settings
+let g:syntastic_python_checkers = ["pep8"]
+
+" try easier split navigation
+nnoremap <C-J> <C-W><C-J>
+nnoremap <C-K> <C-W><C-K>
+nnoremap <C-L> <C-W><C-L>
+nnoremap <C-H> <C-W><C-H>
+
+" recommended syntastic settings for newbies
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 1
+let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 0
+" from marcin
+let g:syntastic_python_checkers=['flake8']
+let g:syntastic_quiet_messages = { "type": "style" } " remove all style warnings
+"let g:syntastic_python_flake8_args='--ignore=E501,E225,E251,E231,W191'
+"let g:syntastic_always_populate_loc_list = 1
+"let g:syntastic_auto_loc_list = 1
+"let g:syntastic_check_on_open = 1
+nmap ]l :lnext<CR>
+nmap ]r :lprev<CR>
+" from me
+let g:syntastic_auto_jump = 1
+let g:syntastic_mode_map = {"mode":"passive"}
+nmap <leader>s :SyntasticCheck<CR>
+
+nmap <Leader>bb :ls<CR>:buffer<Space>
