@@ -8,6 +8,7 @@ set t_Co=16 " vim-colors-solarized, but has no effect (?)
 " allows to install extensions as "bundles"
 " https://github.com/tpope/vim-pathogen
 call pathogen#infect()
+call pathogen#helptags()
 
 " default mapleader was "\" but "," seems easier
 let mapleader=","
@@ -172,7 +173,7 @@ let g:ctrlp_custom_ignore = {
 	\ }
 
 " solarized theme
-syntax enable
+syntax enable " todo enabling this twice
 set background=dark " the plugin considers dark the default, and it should fit with invertable colors
 "let g:solarized_termtrans=1 " was necessary for putty to work
 let g:solarized_termcolors=16 " 16 is better if set right, 256 is the compatible fixed color mode
