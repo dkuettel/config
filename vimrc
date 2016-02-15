@@ -180,10 +180,6 @@ let g:solarized_termcolors=16 " 16 is better if set right, 256 is the compatible
 let g:solarized_visibility="normal" " set list to see nonprint characters
 colorscheme solarized
 
-" quite nice and lightweight
-nmap <Leader>bb :ls<CR>:buffer<Space>
-" still it would be nicer to have it like easy motion with letters instead of number, and smarter sorting?
-
 "let g:syntastic_cpp_checkers=['gcc']
 "let g:syntastic_cpp_compiler_options='-Wall'
 
@@ -207,7 +203,9 @@ autocmd InsertLeave * match ExtraWhitespace /\s\+$/
 autocmd BufWinLeave * call clearmatches()
 
 " find tags with ctrlp
+" ctrl-p is normal ctrl p
 nnoremap <leader>. :CtrlPTag<cr>
+nnoremap <leader>b :CtrlPBuffer<cr>
 
 " recompute ctags for select projects
 " todo this matches only py files in src/nn, not further down in the folders
@@ -258,4 +256,9 @@ let g:syntastic_auto_jump = 1
 let g:syntastic_mode_map = {"mode":"passive"}
 nmap <leader>s :SyntasticCheck<CR>
 
-nmap <Leader>bb :ls<CR>:buffer<Space>
+" nmap <Leader>bb :ls<CR>:buffer<Space>
+" disabled because <Leader>b is already ctrlpbuffer
+" quite nice and lightweight
+" nmap <Leader>bb :ls<CR>:buffer<Space>
+" still it would be nicer to have it like easy motion with letters instead of number, and smarter sorting?
+
