@@ -156,3 +156,6 @@ bindkey '^R' zaw-history
 
 # todo: bind (should already be bound)
 bindkey '^G' per-directory-history-toggle-history
+
+# global history by default
+_per-directory-history-set-global-history
