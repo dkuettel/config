@@ -1,7 +1,3 @@
-Host data
-	HostName data.dev.vuforia.com
-	User kuettel
-
 Host github-personal
-	Hostname github.com
+	HostName github.com
 	IdentityFile ~/.ssh/id_rsa-personal
