@@ -216,10 +216,10 @@ autocmd BufWritePost /home/kuettel/src/nn/*.py silent !ctags -f /home/kuettel/sr
 set scrolloff=8
 
 " vim powerline
-"set rtp+=~/.local/lib/python2.7/site-packages/powerline/bindings/vim
-"python from powerline.vim import setup as powerline_setup
-"python powerline_setup()
-"python del powerline_setup
+set rtp+=/home/kuettel/anaconda2/lib/python2.7/site-packages/powerline/bindings/vim
+python from powerline.vim import setup as powerline_setup
+python powerline_setup()
+python del powerline_setup
 set laststatus=2 " so the status line (powerline) is always shown
 
 " python mode settings
@@ -262,3 +262,6 @@ nmap <leader>s :SyntasticCheck<CR>
 " nmap <Leader>bb :ls<CR>:buffer<Space>
 " still it would be nicer to have it like easy motion with letters instead of number, and smarter sorting?
 
+" don't switch between splits when selecting a file/buffer to open, stay on
+" split, makes it easier to open same file in many splits
+let g:ctrlp_switch_buffer = 0
