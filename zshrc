@@ -60,12 +60,14 @@ ZSH_THEME="agnoster"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(command-not-found per-directory-history vi-mode zaw zsh-syntax-highlighting) # note: syntax plugin must be the last to import
+#plugins=(command-not-found per-directory-history vi-mode zaw zsh-syntax-highlighting) # note: syntax plugin must be the last to import
+# vi-mode disabled, it breaks syntax highlighting
+plugins=(command-not-found per-directory-history zaw zsh-syntax-highlighting) # note: syntax plugin must be the last to import
 # might be interesting: common-aliases compleat
 
 # User configuration
 
-export PATH="/home/kuettel/anaconda/bin:/home/kuettel/bin:/home/kuettel/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/usr/local/cuda-7.0/bin"
+export PATH="/home/kuettel/anaconda2/bin:/home/kuettel/bin:/home/kuettel/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/usr/local/cuda-7.5/bin"
 # export MANPATH="/usr/local/man:$MANPATH"
 
 DISABLE_AUTO_UPDATE=true # todo how to manually do it?
@@ -124,19 +126,19 @@ export LESS="-j.3 -WRSX"
 #source ~/.local/lib/python2.7/site-packages/powerline/bindings/zsh/powerline.zsh
 
 # try vim mode for zle
-bindkey -v
-export KEYTIMEMOUT=1 # quicker reaction to mode change (might interfere with other things)
+#bindkey -v
+#export KEYTIMEMOUT=1 # quicker reaction to mode change (might interfere with other things)
 # Use vim cli mode
-bindkey '^P' up-history
-bindkey '^N' down-history
+#bindkey '^P' up-history
+#bindkey '^N' down-history
 # backspace and ^h working even after
 # returning from command mode
-bindkey '^?' backward-delete-char
-bindkey '^h' backward-delete-char
+#bindkey '^?' backward-delete-char
+#bindkey '^h' backward-delete-char
 # ctrl-w removed word backwards
-bindkey '^w' backward-kill-word
+#bindkey '^w' backward-kill-word
 # ctrl-r starts searching history backward
-bindkey '^r' history-incremental-search-backward
+#bindkey '^r' history-incremental-search-backward
 
 # extended globbing, any conflicts?
 setopt extendedglob
