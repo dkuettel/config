@@ -161,3 +161,6 @@ bindkey '^G' per-directory-history-toggle-history
 
 # global history by default
 _per-directory-history-set-global-history
+
+# some xpman shortcuts
+xp_mag () { xpman mount_xp $1; cd $1 } # mount and go to xp
