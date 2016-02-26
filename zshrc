@@ -8,11 +8,11 @@ export ZSH=/home/kuettel/.oh-my-zsh
 #ZSH_THEME="random"
 
 # themes I tried
-ZSH_THEME="agnoster"
+#ZSH_THEME="agnoster"
 #ZSH_THEME="blink"
 #ZSH_THEME="robbyrussell"
 #ZSH_THEME="amuse"
-#ZSH_THEME="avit"
+ZSH_THEME="avit"
 #ZSH_THEME="blinks"
 #ZSH_THEME="funky"
 #ZSH_THEME="ys"
