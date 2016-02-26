@@ -1,8 +1,8 @@
-#!/bin/bash
-set -ex
+#!/bin/bash -xeu
 
 # assuming anaconda is installed now
-pip install --user powerline-status
+# install latest git version (to work with latest tmux)
+pip install --user git+git://github.com/powerline/powerline
 
 [[ -d ~/.config ]] || mkdir -p ~/.config
 if [[ $(realpath ~/config/powerline) != $(realpath ~/.config/powerline) ]]
