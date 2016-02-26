@@ -1,21 +1,18 @@
 #!/bin/bash
-set -ex
+set -eux
 
 sudo apt-get install -y zsh
 
 if [[ -d ~/.oh-my-zsh ]]
 then
 	echo 'oh my zsh is already installed'
-else
-	wget https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh -O - | sh || echo 'oh-my-zsh fails in the end as expected'
-	chsh -s `which zsh`
 	cd ~/.oh-my-zsh
-	git config user.email 'dkuettel@gmail.com'
-	git remote set-url origin git@github.com:dkuettel/oh-my-zsh.git
-	git remote add upstream https://github.com/robbyrussell/oh-my-zsh.git
-	#git push origin master
-	#git checkout mine
-	echo 'check if you want private or public repo here'
+	git pull
+else
+	cd ~
+	git clone https://github.com/robbyrussell/oh-my-zsh.git ~/.oh-my-zsh
+	chmod go-r -R ~/.oh-my-zsh
+	chsh -s $(which zsh) # doesn't seem to take effect in the current session (tmux session?)
 fi
 
 if [[ $(realpath ~/config/zshrc) == $(realpath ~/.zshrc) ]]
@@ -23,6 +20,17 @@ then
 	echo 'zshrc.sh already installed'
 else
 	ln -s --backup ~/config/zshrc ~/.zshrc
+fi
+
+# ls colors
+[[ -d ~/plugins ]] || mkdir ~/plugins
+if [[ -d ~/plugins/dircolors-solarized ]]
+then
+	echo 'dircolors solarized already installed'
+	cd ~/plugins/dircolors-solarized
+	git pull
+else
+	git clone https://github.com/seebi/dircolors-solarized.git ~/plugins/dircolors-solarized
 fi
 
 # zsh syntax highlighting plugin
@@ -36,15 +44,15 @@ else
 fi
 
 [[ -d ~/plugins ]] || mkdir ~/plugins
-
 if [[ -d ~/plugins/fonts ]]
 then
 	echo 'fonts already installed'
-	cd ~/plugins
+	cd ~/plugins/fonts
 	git pull
 else
-	cd ~/plugins
-	git clone https://github.com/powerline/fonts.git
-	cd fonts
+	git clone https://github.com/powerline/fonts.git ~/plugins/fonts
+	cd ~/plugins/fonts
 	./install.sh
 fi
+
+echo 'remember to select a patched font in your terminal'
