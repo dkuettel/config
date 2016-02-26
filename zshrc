@@ -1,5 +1,5 @@
 # Path to your oh-my-zsh installation.
-export ZSH=/home/kuettel/.oh-my-zsh
+export ZSH=~/.oh-my-zsh
 
 # Set name of the theme to load.
 # Look in ~/.oh-my-zsh/themes/
@@ -65,10 +65,11 @@ plugins=(command-not-found per-directory-history vi-mode zaw zsh-syntax-highligh
 
 # User configuration
 
-export PATH="/home/kuettel/anaconda/bin:/home/kuettel/bin:/home/kuettel/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/usr/local/cuda-7.0/bin"
+# note: ~ does not expand, but $HOME does
+export PATH="$HOME/anaconda/bin:$HOME/anaconda2/bin:$HOME/miniconda2/bin:$HOME/bin:$HOME/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/usr/local/cuda-7.0/bin"
 # export MANPATH="/usr/local/man:$MANPATH"
 
-DISABLE_AUTO_UPDATE=true # todo how to manually do it?
+#DISABLE_AUTO_UPDATE=true # todo how to manually do it?
 source $ZSH/oh-my-zsh.sh
 
 # You may need to manually set your language environment
@@ -115,10 +116,6 @@ eval `dircolors ~/plugins/dircolors-solarized/dircolors.ansi-light`
 # option -J is also interesting
 # but I'd rather highlight the whole line with a match after searching and key n
 export LESS="-j.3 -WRSX"
-
-# this interferes with other aws stuff we have, need to put it into a config file
-# otherwise env variables take precedence
-#source /home/kuettel/src/nn/automation/aws_dev_keys.sh
 
 # try it for now
 #source ~/.local/lib/python2.7/site-packages/powerline/bindings/zsh/powerline.zsh
