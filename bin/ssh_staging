@@ -1,0 +1,4 @@
+#!/bin/bash -xeu
+while true; do
+	ssh -L 5901:localhost:5901 -L 1984:localhost:1984 -R 2222:localhost:22 kuettel.dev.vuforia.com
+done
