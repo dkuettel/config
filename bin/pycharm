@@ -1,4 +1,4 @@
 #!/bin/bash
 
 export _JAVA_AWT_WM_NONREPARENTING=1
-/home/kuettel/pycharm-community-4.5/bin/pycharm.sh
+/home/kuettel/pycharm-community-5.0.4/bin/pycharm.sh

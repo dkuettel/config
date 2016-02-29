@@ -8,6 +8,7 @@ set t_Co=16 " vim-colors-solarized, but has no effect (?)
 " allows to install extensions as "bundles"
 " https://github.com/tpope/vim-pathogen
 call pathogen#infect()
+call pathogen#helptags()
 
 " default mapleader was "\" but "," seems easier
 let mapleader=","
@@ -27,7 +28,7 @@ set shiftround " use multiple of shiftwidth when indenting with '<' and '>'
 set backspace=indent,eol,start " allow backspacing over everything in insert mode
 set autoindent " always set autoindenting on
 set copyindent " copy the previous indentation on autoindenting
-set number " always show line numbers
+set nonumber " line numbers
 set showmatch " set show matching parenthesis
 set ignorecase " ignore case when searching
 set smartcase " ignore case if search pattern is all lowercase, case-sensitive otherwise
@@ -172,16 +173,12 @@ let g:ctrlp_custom_ignore = {
 	\ }
 
 " solarized theme
-syntax enable
+syntax enable " todo enabling this twice
 set background=dark " the plugin considers dark the default, and it should fit with invertable colors
 "let g:solarized_termtrans=1 " was necessary for putty to work
 let g:solarized_termcolors=16 " 16 is better if set right, 256 is the compatible fixed color mode
 let g:solarized_visibility="normal" " set list to see nonprint characters
 colorscheme solarized
-
-" quite nice and lightweight
-nmap <Leader>bb :ls<CR>:buffer<Space>
-" still it would be nicer to have it like easy motion with letters instead of number, and smarter sorting?
 
 "let g:syntastic_cpp_checkers=['gcc']
 "let g:syntastic_cpp_compiler_options='-Wall'
@@ -206,7 +203,9 @@ autocmd InsertLeave * match ExtraWhitespace /\s\+$/
 autocmd BufWinLeave * call clearmatches()
 
 " find tags with ctrlp
+" ctrl-p is normal ctrl p
 nnoremap <leader>. :CtrlPTag<cr>
+nnoremap <leader>b :CtrlPBuffer<cr>
 
 " recompute ctags for select projects
 " todo this matches only py files in src/nn, not further down in the folders
@@ -217,8 +216,52 @@ autocmd BufWritePost /home/kuettel/src/nn/*.py silent !ctags -f /home/kuettel/sr
 set scrolloff=8
 
 " vim powerline
-"set rtp+=~/.local/lib/python2.7/site-packages/powerline/bindings/vim
-"python from powerline.vim import setup as powerline_setup
-"python powerline_setup()
-"python del powerline_setup
+set rtp+=/home/kuettel/anaconda2/lib/python2.7/site-packages/powerline/bindings/vim
+python from powerline.vim import setup as powerline_setup
+python powerline_setup()
+python del powerline_setup
 set laststatus=2 " so the status line (powerline) is always shown
+
+" python mode settings
+"let g:pymode_lint_ignore = "W191"
+
+" syntastic settings
+let g:syntastic_python_checkers = ["pep8"]
+
+" try easier split navigation
+nnoremap <C-J> <C-W><C-J>
+nnoremap <C-K> <C-W><C-K>
+nnoremap <C-L> <C-W><C-L>
+nnoremap <C-H> <C-W><C-H>
+
+" recommended syntastic settings for newbies
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 1
+let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 0
+" from marcin
+let g:syntastic_python_checkers=['flake8']
+let g:syntastic_quiet_messages = { "type": "style" } " remove all style warnings
+"let g:syntastic_python_flake8_args='--ignore=E501,E225,E251,E231,W191'
+"let g:syntastic_always_populate_loc_list = 1
+"let g:syntastic_auto_loc_list = 1
+"let g:syntastic_check_on_open = 1
+nmap ]l :lnext<CR>
+nmap ]r :lprev<CR>
+" from me
+let g:syntastic_auto_jump = 1
+let g:syntastic_mode_map = {"mode":"passive"}
+nmap <leader>s :SyntasticCheck<CR>
+
+" nmap <Leader>bb :ls<CR>:buffer<Space>
+" disabled because <Leader>b is already ctrlpbuffer
+" quite nice and lightweight
+" nmap <Leader>bb :ls<CR>:buffer<Space>
+" still it would be nicer to have it like easy motion with letters instead of number, and smarter sorting?
+
+" don't switch between splits when selecting a file/buffer to open, stay on
+" split, makes it easier to open same file in many splits
+let g:ctrlp_switch_buffer = 0

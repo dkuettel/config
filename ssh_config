@@ -4,5 +4,5 @@ Host staging
 	LocalForward 1984 localhost:1984
 
 Host github-personal
-	Hostname github.com
+	HostName github.com
 	IdentityFile ~/.ssh/id_rsa-personal
