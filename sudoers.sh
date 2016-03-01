@@ -4,4 +4,4 @@
 
 sudo cp sudoers /etc/sudoers.d/kuettel
 
-echo 'dont forget sudoers needs to include the sudoers.d folder, edit with visudo'
+echo 'dont forget sudoers needs to include the sudoers.d folder, edit with visudo, remember hostname needs to be staging for it to have an effect'
