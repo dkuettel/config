@@ -162,17 +162,21 @@ _per-directory-history-set-global-history
 # some xpman shortcuts
 xp_mag () { # mount and go to xp
 	f=$(realpath $1)
+	echo 'xp' $f
 	xpman mount_xp $f
 	cd $1
 }
 xp_lau () { # leave and unmount
 	cd ~
 	f=$(realpath $1)
+	echo 'xp' $f
 	xpman umount_xp $f
 }
 xp_las () { # leave and start on demand
-	cd ~
 	f=$(realpath $1)
+	echo 'xp' $f
+	cd ~
 	xpman umount_xp $f
+	echo 'starting' "$2"
 	xpman start_xp_on_demand $f "$2"
 }
