@@ -206,3 +206,10 @@ xp_update () { # update to what's on $dev right now, fails if there are uncommit
 		return
 	fi
 }
+xp_cxp () { # change xp (unmount current, mount new)
+	a=$(realpath .)
+	cd ~
+	xpman umount_xp $a
+	xpman mount_xp $1
+	cd $1
+}
