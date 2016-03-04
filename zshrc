@@ -160,4 +160,19 @@ bindkey '^G' per-directory-history-toggle-history
 _per-directory-history-set-global-history
 
 # some xpman shortcuts
-xp_mag () { xpman mount_xp $1; cd $1 } # mount and go to xp
+xp_mag () { # mount and go to xp
+	f=$(realpath $1)
+	xpman mount_xp $f
+	cd $1
+}
+xp_lau () { # leave and unmount
+	cd ~
+	f=$(realpath $1)
+	xpman umount_xp $f
+}
+xp_las () { # leave and start on demand
+	cd ~
+	f=$(realpath $1)
+	xpman umount_xp $f
+	xpman start_xp_on_demand $f "$2"
+}
