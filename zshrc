@@ -180,3 +180,29 @@ xp_las () { # leave and start on demand
 	echo 'starting' "$2"
 	xpman start_xp_on_demand $f "$2"
 }
+xp_update () { # update to what's on $dev right now, fails if there are uncommited things
+	if [[ -d nn ]]; then
+		if [[ -z $(cd nn; git status -s) ]]; then
+			rm -rf nn
+			cp -r $dev/nn .
+		else
+			echo 'nn has uncommited changes'
+			return
+		fi
+	else
+		echo 'no nn folder'
+		return
+	fi
+	if [[ -d caffe ]]; then
+		if [[ -z $(cd caffe; git status -s) ]]; then
+			rm -rf caffe
+			cp -r $dev/caffe .
+		else
+			echo 'caffe has uncommited changes'
+			return
+		fi
+	else
+		echo 'no caffe folder'
+		return
+	fi
+}
