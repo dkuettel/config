@@ -1,4 +1,5 @@
 Host staging
+	User kuettel
 	HostName kuettel.dev.vuforia.com
 	LocalForward 5901 localhost:5901
 	LocalForward 1984 localhost:1984
