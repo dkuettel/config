@@ -167,8 +167,8 @@ xp_mag () { # mount and go to xp
 	cd $1
 }
 xp_lau () { # leave and unmount
-	cd ~
 	f=$(realpath $1)
+	cd ~
 	echo 'xp' $f
 	xpman umount_xp $f
 }
