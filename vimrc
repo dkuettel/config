@@ -266,3 +266,7 @@ nmap <leader>s :SyntasticCheck<CR>
 " don't switch between splits when selecting a file/buffer to open, stay on
 " split, makes it easier to open same file in many splits
 let g:ctrlp_switch_buffer = 0
+
+" jedi-vim settings
+let g:jedi#popup_on_dot = 0
+let g:jedi#show_call_signatures = "2"
