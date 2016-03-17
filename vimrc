@@ -106,6 +106,7 @@ autocmd BufEnter * let &titlestring = expand("%:t")
 "set wildmenu
 "set wildmode=list:longest,full
 " set wildchar=<Tab> wildmenu wildmode=full " show list on tab (?)
+set wildchar=<Tab> wildmenu wildmode=longest,list,full
 
 " cursor line and column
 "hi CursorLine cterm=NONE ctermbg=DarkMagenta ctermfg=white guibg=darkred guifg=white " DarkRed
