@@ -161,6 +161,9 @@ _per-directory-history-set-global-history
 
 # some xpman shortcuts
 xp_mag () { # mount and go to xp
+	if [ ! -d $1 ]; then
+		mkdir -p $1
+	fi
 	f=$(realpath $1)
 	echo 'xp' $f
 	xpman mount_xp $f
