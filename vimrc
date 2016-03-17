@@ -217,11 +217,11 @@ autocmd BufWritePost /home/kuettel/src/nn/*.py silent !ctags -f /home/kuettel/sr
 set scrolloff=8
 
 " vim powerline
-set rtp+=/home/kuettel/anaconda2/lib/python2.7/site-packages/powerline/bindings/vim
-python from powerline.vim import setup as powerline_setup
-python powerline_setup()
-python del powerline_setup
-set laststatus=2 " so the status line (powerline) is always shown
+"set rtp+=/home/kuettel/anaconda2/lib/python2.7/site-packages/powerline/bindings/vim
+"python from powerline.vim import setup as powerline_setup
+"python powerline_setup()
+"python del powerline_setup
+"set laststatus=2 " so the status line (powerline) is always shown
 
 " python mode settings
 "let g:pymode_lint_ignore = "W191"
