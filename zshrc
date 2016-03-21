@@ -216,3 +216,8 @@ xp_cxp () { # change xp (unmount current, mount new)
 	xpman mount_xp $1
 	cd $1
 }
+
+# copy with progress, use rsync, not sure about $1/ or $1 without / and rsyncs semantics
+rsync_cp () {
+	rsync -ah -L -r --info=progress2 $1 $2
+}
