@@ -209,6 +209,12 @@ xp_update () { # update to what's on $dev right now, fails if there are uncommit
 		return
 	fi
 }
+xp_replace () {
+	rm -rf nn
+	cp -r $dev/nn .
+	rm -rf caffe
+	cp -r $dev/caffe .
+}
 xp_cxp () { # change xp (unmount current, mount new)
 	a=$(realpath .)
 	cd ~
