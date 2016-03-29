@@ -110,9 +110,9 @@ set wildchar=<Tab> wildmenu wildmode=longest,list,full
 
 " cursor line and column
 "hi CursorLine cterm=NONE ctermbg=DarkMagenta ctermfg=white guibg=darkred guifg=white " DarkRed
-hi CursorLine cterm=NONE ctermbg=black ctermfg=lightblue guibg=darkred guifg=white " DarkRed
-hi CursorColumn cterm=NONE ctermbg=darkred ctermfg=white guibg=darkred guifg=white
-set cursorline
+"hi CursorLine cterm=NONE ctermbg=black ctermfg=lightblue guibg=darkred guifg=white " DarkRed
+"hi CursorColumn cterm=NONE ctermbg=darkred ctermfg=white guibg=darkred guifg=white
+"set cursorline
 "set cursorcolumn
 
 " set textwidth=60 " when formatting text
