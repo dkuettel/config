@@ -10,9 +10,12 @@ else
 	git clone https://github.com/vim/vim.git ~/vim
 fi
 cd ~/vim
+sudo apt-get install -qy libncurses5-dev
 ./configure --disable-gui --without-x --enable-luainterp=dynamic --enable-perlinterp=dynamic --enable-pythoninterp=dynamic --enable-rubyinterp --enable-cscope --with-features=huge
 make -j
 sudo make install
+vim +PluginInstall +qall
+# todo depends on terminal colors, ctags, python, ...
 
 if [[ -f ~/.vimrc ]]; then
 	if [[ $(realpath ~/config/vimrc) == $(realpath ~/.vimrc) ]]; then
