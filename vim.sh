@@ -1,8 +1,18 @@
 #!/bin/bash -xeu
 
-# install packages
-# todo use custom compile
-sudo apt-get -qy install vim-nox
+# not using vim package anymore
+# sudo apt-get -qy install vim-nox
+if [[ -d ~/vim ]]; then
+	echo '~/vim already exists'
+	git -C ~/vim pull
+else
+	echo 'cloning vim'
+	git clone https://github.com/vim/vim.git ~/vim
+fi
+cd ~/vim
+./configure --disable-gui --without-x --enable-luainterp=dynamic --enable-perlinterp=dynamic --enable-pythoninterp=dynamic --enable-rubyinterp --enable-cscope --with-features=huge
+make -j
+sudo make install
 
 if [[ -f ~/.vimrc ]]; then
 	if [[ $(realpath ~/config/vimrc) == $(realpath ~/.vimrc) ]]; then
