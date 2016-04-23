@@ -10,8 +10,8 @@ antigen bundle per-directory-history
 antigen bundle zsh-users/zaw
 antigen bundle zsh-users/zsh-syntax-highlighting # note: might have to be the last to import
 
-# some themes: random, agnoster, blink, robbyrussell, amuse, avit, blinks, funky, ys, pure, tjkirch
-antigen theme funky
+# some themes: random, agnoster, blinks, robbyrussell, amuse, avit, blinks, funky, ys, pure, tjkirch
+antigen theme agnoster
 
 antigen apply
 
