@@ -1,5 +1,7 @@
 #!/bin/bash -xeu
 
+sudo apt-get install -qy git
+
 # not using vim package anymore
 # sudo apt-get -qy install vim-nox
 if [[ -d ~/vim ]]; then
@@ -10,7 +12,7 @@ else
 	git clone https://github.com/vim/vim.git ~/vim
 fi
 cd ~/vim
-sudo apt-get install -qy libncurses5-dev
+sudo apt-get install -qy libncurses5-dev # vim dependencies
 ./configure --disable-gui --without-x --enable-luainterp=dynamic --enable-perlinterp=dynamic --enable-pythoninterp=dynamic --enable-rubyinterp --enable-cscope --with-features=huge
 make -j
 sudo make install
