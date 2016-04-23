@@ -25,7 +25,7 @@ ZSH_THEME="avit"
 # CASE_SENSITIVE="true"
 
 # Uncomment the following line to disable bi-weekly auto-update checks.
-# DISABLE_AUTO_UPDATE="true"
+DISABLE_AUTO_UPDATE="true"
 
 # Uncomment the following line to change how often to auto-update (in days).
 # export UPDATE_ZSH_DAYS=13
@@ -215,6 +215,12 @@ xp_replace () {
 	rm -rf caffe
 	cp -r $dev/caffe .
 }
+xp_link () {
+	rm -rf nn
+	ln -sf $dev/nn nn
+	rm -rf caffe
+	ln -sf $dev/caffe caffe
+}
 xp_cxp () { # change xp (unmount current, mount new)
 	a=$(realpath .)
 	cd ~
@@ -227,3 +233,7 @@ xp_cxp () { # change xp (unmount current, mount new)
 rsync_cp () {
 	rsync -ah -L -r --info=progress2 $1 $2
 }
+
+export PYTHONDONTWRITEBYTECODE=True # no .pyc files for python
+
+stty -ixon # disables flow control, for example ctrl-s
