@@ -152,3 +152,9 @@ let g:syntastic_auto_jump = 1
 let g:syntastic_mode_map = {"mode":"passive"}
 nmap <leader>s :SyntasticCheck<CR>
 
+" kinda cool, useful?
+inoremap jj <Esc> " quick jj exit insert mode
+
+" notes
+" gi go to last insert mode in insert mode
+" '' go to last insert mode
