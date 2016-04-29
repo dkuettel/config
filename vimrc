@@ -158,3 +158,5 @@ inoremap jj <Esc> " quick jj exit insert mode
 " notes
 " gi go to last insert mode in insert mode
 " '' go to last insert mode
+
+syntax on
