@@ -155,6 +155,9 @@ xp_cxp () { # change xp (unmount current, mount new)
 	cd $1
 }
 
+# copy latest snapshot to dev with proper naming for further training (stages)
+xp_snap () { s=$(ls snapshots/*.caffemodel | tail -n 1); x=$(basename $(realpath .)); x=$x[12,-1]; y=$(basename $s); cp $s $dev/${x}_$y }
+
 # copy with progress, use rsync, not sure about $1/ or $1 without / and rsyncs semantics
 rsync_cp () {
 	rsync -ah -L -r --info=progress2 $1 $2
