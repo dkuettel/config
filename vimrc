@@ -41,6 +41,7 @@ set wildchar=<Tab> wildmenu wildmode=longest,list,full " command completion in :
 set scrolloff=8 " always keep some context lines visible
 set lazyredraw " redraw only when necessary (e.g. not when macros run, or similar things)
 set showmatch " highlight matchin braces
+set backspace=indent,eol,start " allow backspacing over everything in insert mode
 
 " navigate splits
 " todo does it disable the redraw on ctrl-l?
@@ -153,7 +154,7 @@ let g:syntastic_mode_map = {"mode":"passive"}
 nmap <leader>s :SyntasticCheck<CR>
 
 " kinda cool, useful?
-inoremap jj <Esc> " quick jj exit insert mode
+inoremap jj <Esc>
 
 " notes
 " gi go to last insert mode in insert mode
