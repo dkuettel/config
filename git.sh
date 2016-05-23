@@ -1,5 +1,4 @@
-#!/bin/bash
-set -ex
+#!/bin/bash -xeu
 
 sudo apt-get install -y git
 git config --global user.email "dkuettel@ptc.com"
