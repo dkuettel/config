@@ -46,7 +46,7 @@ eval `dircolors ~/plugins/dircolors-solarized/dircolors.ansi-light`
 
 # option -J is also interesting
 # but I'd rather highlight the whole line with a match after searching and key n
-export LESS="-j.3 -WRSX"
+export LESS="-j.3 -WRSXc"
 
 # try it for now
 #source ~/.local/lib/python2.7/site-packages/powerline/bindings/zsh/powerline.zsh
@@ -165,6 +165,24 @@ xp_ssh () {
 # copy with progress, use rsync, not sure about $1/ or $1 without / and rsyncs semantics
 rsync_cp () {
 	rsync -ah -L -r --info=progress2 $1 $2
+}
+
+xp_revals () {
+	echo "cd $1; for i in disney_test_closeup disney_challenge disney_realistic disney_white hotwheels_test_closeup hotwheels_test hotwheels_realistic hotwheels_white; do echo \$i; cat evals/\$i/last/confusion.txt | grep 'class average'; echo; done" | xpman ssh_cmd $1
+}
+
+xp_levals () {
+	for i in disney_test_closeup disney_challenge disney_realistic disney_white hotwheels_test_closeup hotwheels_test hotwheels_realistic hotwheels_white
+	do
+		echo $i
+		for k in evals/$i/*
+		do
+			echo -n $(basename $k) " "
+			cat $k/confusion.txt | grep 'class average'
+		done
+		echo
+	done
+	basename $(realpath evals/disney_challenge/last)
 }
 
 export PYTHONDONTWRITEBYTECODE=True # no .pyc files for python
