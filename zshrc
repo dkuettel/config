@@ -185,6 +185,24 @@ xp_levals () {
 	basename $(realpath evals/disney_challenge/last)
 }
 
+xp_watch () {
+	while true
+	do
+		xpman list_xps --reverse | less -c
+	done
+}
+
+xp_djf () {
+	for i in disney_test_closeup disney_challenge disney_realistic disney_white hotwheels_test_closeup hotwheels_test hotwheels_realistic hotwheels_white
+	do
+		echo $i
+		cat evals/$i/last/h1confusion.txt | grep class
+		cat evals/$i/last/q1confusion.txt | grep class
+		cat evals/$i/last/s1confusion.txt | grep class
+		echo
+	done
+}
+
 export PYTHONDONTWRITEBYTECODE=True # no .pyc files for python
 
 stty -ixon # disables flow control, for example ctrl-s
