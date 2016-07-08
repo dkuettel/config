@@ -152,7 +152,7 @@ nmap ]r :lprev<CR>
 " from me
 let g:syntastic_auto_jump = 1
 let g:syntastic_mode_map = {"mode":"passive"}
-nmap <leader>s :SyntasticCheck<CR>
+nmap <leader>s :w<Cr>:SyntasticCheck<CR>
 
 " kinda cool, useful?
 inoremap jj <Esc>
