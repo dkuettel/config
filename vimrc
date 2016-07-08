@@ -21,6 +21,7 @@ Plugin 'sjl/gundo.vim'
 Plugin 'scrooloose/nerdcommenter'
 Plugin 'scrooloose/syntastic'
 
+" Plugin 'mattboehm/vim-unstack'
 " Plugin 'nathanaelkane/vim-indent-guides'
 
 " run :PluginInstall
