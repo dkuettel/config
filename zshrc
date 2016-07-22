@@ -86,70 +86,51 @@ bindkey '^G' per-directory-history-toggle-history
 _per-directory-history-set-global-history
 
 # some xpman shortcuts
+
 xp_mag () { # mount and go to xp
 	if [ ! -d $1 ]; then
 		mkdir -p $1
 	fi
 	f=$(realpath $1)
-	echo 'xp' $f
+	echo 'mount and go ' $f
 	xpman mount_xp $f
 	cd $1
 }
-xp_lau () { # leave and unmount
-	f=$(realpath $1)
-	cd ~
-	echo 'xp' $f
+
+xp_lau () { # leave and unmount cwd
+	f=$(realpath $(pwd))
+	cd $dev
+	echo 'leave and unmount' $f
 	xpman umount_xp $f
 }
-xp_las () { # leave and start on demand
-	f=$(realpath $1)
-	echo 'xp' $f
-	cd ~
+
+xp_las () { # leave and start on demand cwd
+	f=$(realpath $(pwd))
+	echo 'leave' $f 'and start' "$1"
+	cd $dev
 	xpman umount_xp $f
-	echo 'starting' "$2"
-	xpman start_xp_on_demand $f "$2"
+	xpman start_xp_on_demand $f "$1"
 }
-xp_update () { # update to what's on $dev right now, fails if there are uncommited things
-	if [[ -d nn ]]; then
-		if [[ -z $(cd nn; git status -s) ]]; then
-			rm -rf nn
-			cp -r $dev/nn .
-		else
-			echo 'nn has uncommited changes'
-			return
-		fi
-	else
-		echo 'no nn folder'
-		return
-	fi
-	if [[ -d caffe ]]; then
-		if [[ -z $(cd caffe; git status -s) ]]; then
-			rm -rf caffe
-			cp -r $dev/caffe .
-		else
-			echo 'caffe has uncommited changes'
-			return
-		fi
-	else
-		echo 'no caffe folder'
-		return
-	fi
-}
+
 xp_replace () {
+	echo 'replace code with dev code'
 	rm -rf nn
 	cp -r $dev/nn .
 	rm -rf caffe
 	cp -r $dev/caffe .
 }
 xp_link () {
+	echo 'link to code from dev'
 	rm -rf nn
 	ln -sf $dev/nn nn
 	rm -rf caffe
 	ln -sf $dev/caffe caffe
 }
+
 xp_cxp () { # change xp (unmount current, mount new)
+	echo 'change to xp' $1
 	a=$(realpath .)
-	cd ~
+	cd $dev
 	xpman umount_xp $a
 	xpman mount_xp $1
 	cd $1
