@@ -180,3 +180,6 @@ map ,w3 :wincmd t<cr>:wincmd w<cr>:wincmd w<cr>
 map ,w4 :wincmd t<cr>:wincmd w<cr>:wincmd w<cr>:wincmd w<cr>
 map ,w5 :wincmd t<cr>:wincmd w<cr>:wincmd w<cr>:wincmd w<cr>:wincmd w<cr>
 map ,w6 :wincmd t<cr>:wincmd w<cr>:wincmd w<cr>:wincmd w<cr>:wincmd w<cr>:wincmd w<cr>
+
+" clear window for external commands, easier to read especially for fugitive
+set shell=~/bin/vim_shell.sh
