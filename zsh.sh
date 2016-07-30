@@ -1,25 +1,27 @@
-#!/bin/bash
-set -eux
+#!/bin/bash -eux
 
-sudo apt-get install -y zsh
+sudo apt-get install -qy zsh
+chsh -s $(which zsh) # doesn't seem to take effect in the current session (tmux session?)
 
-if [[ -d ~/.oh-my-zsh ]]
-then
-	echo 'oh my zsh is already installed'
-	cd ~/.oh-my-zsh
-	git pull
+# antigen
+if [[ -d ~/antigen ]]; then
+	echo 'antigen exists'
+	git -C ~/antigen pull
 else
-	cd ~
-	git clone https://github.com/robbyrussell/oh-my-zsh.git ~/.oh-my-zsh
-	chmod go-r -R ~/.oh-my-zsh
-	chsh -s $(which zsh) # doesn't seem to take effect in the current session (tmux session?)
+	git clone https://github.com/zsh-users/antigen.git ~/antigen
 fi
 
-if [[ $(realpath ~/config/zshrc) == $(realpath ~/.zshrc) ]]
-then
-	echo 'zshrc.sh already installed'
+
+if [[ -f ~/.zshrc ]]; then
+	if [[ $(realpath ~/config/zshrc) == $(realpath ~/.zshrc) ]]; then
+		echo '.zshrc already linked'
+	else
+		echo 'backup old .zshrc'
+		ln -s --backup ~/config/zshrc ~/.zshrc
+	fi
 else
-	ln -s --backup ~/config/zshrc ~/.zshrc
+	echo 'link .zshrc'
+	ln -s ~/config/zshrc ~/.zshrc
 fi
 
 # ls colors
@@ -31,16 +33,6 @@ then
 	git pull
 else
 	git clone https://github.com/seebi/dircolors-solarized.git ~/plugins/dircolors-solarized
-fi
-
-# zsh syntax highlighting plugin
-if [[ -d ~/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting ]]
-then
-	echo 'zsh-syntax-highlighting already installed'
-	cd ~/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting
-	git pull
-else
-	git clone git://github.com/zsh-users/zsh-syntax-highlighting.git ~/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting
 fi
 
 [[ -d ~/plugins ]] || mkdir ~/plugins

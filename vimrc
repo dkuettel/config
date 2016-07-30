@@ -1,240 +1,138 @@
-
-" makes it behave like vim, instead of like vi
-" should be off by default anyway as long as there is a .vimrc file
 set nocompatible
+filetype off
 
-set t_Co=16 " vim-colors-solarized, but has no effect (?)
+" install vundle: git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
+Plugin 'VundleVim/Vundle.vim'
 
-" allows to install extensions as "bundles"
-" https://github.com/tpope/vim-pathogen
-call pathogen#infect()
-call pathogen#helptags()
+Plugin 'altercation/vim-colors-solarized'
+Plugin 'ctrlpvim/ctrlp.vim'
+Plugin 'tpope/vim-fugitive'
+Plugin 'easymotion/vim-easymotion'
+Plugin 'davidhalter/jedi-vim'
+Plugin 'xolox/vim-misc'
+Plugin 'xolox/vim-easytags'
+Plugin 'vim-airline/vim-airline'
+Plugin 'vim-airline/vim-airline-themes'
+Plugin 'mhinz/vim-signify' " show changes of file to git index
+Plugin 'tmux-plugins/vim-tmux-focus-events'
+Plugin 'sjl/gundo.vim'
+Plugin 'scrooloose/nerdcommenter'
+Plugin 'scrooloose/syntastic'
 
-" default mapleader was "\" but "," seems easier
-let mapleader=","
+" Plugin 'mattboehm/vim-unstack'
+" Plugin 'nathanaelkane/vim-indent-guides'
 
-" Quickly edit/reload the vimrc file
-"nmap <silent> <leader>ev :e $MYVIMRC<CR>
-"nmap <silent> <leader>sv :so $MYVIMRC<CR>
+" run :PluginInstall
+call vundle#end()
+filetype plugin indent on
+" filetype plugin on " todo for now, because I didn't like python indent, but I should customize python filetype
 
-" don't need to save buffers when switching (does not imply autosave)
-set hidden
-
-"set nowrap " don't wrap lines
-set tabstop=4 " a tab is X spaces
-set noexpandtab " don't put spaces for tabs
-set shiftwidth=4 " number of spaces to use for autoindenting
-set shiftround " use multiple of shiftwidth when indenting with '<' and '>'
-set backspace=indent,eol,start " allow backspacing over everything in insert mode
-set autoindent " always set autoindenting on
-set copyindent " copy the previous indentation on autoindenting
-set nonumber " line numbers
-set showmatch " set show matching parenthesis
-set ignorecase " ignore case when searching
-set smartcase " ignore case if search pattern is all lowercase, case-sensitive otherwise
-set smarttab " insert tabs on the start of a line according to shiftwidth, not tabstop
-set hlsearch " highlight search terms
-set incsearch " show search matches as you type
-
-set history=1000 " remember more commands and search history
-set undolevels=1000 " use many muchos levels of undo
-set wildignore=*.swp,*.bak,*.pyc,*.class
-set title " change the terminal's title
-set visualbell " don't beep
-set noerrorbells " don't beep
-
+" core vim settings
+let mapleader="," " default is \
 set nobackup
 set noswapfile
+set hidden " allow unsaved buffers to hidden (does not autosave)
+set textwidth=0 " disabled wrapping when typing
+set hlsearch " highlight search terms
+set incsearch " show search matches as you type
+nohl " so that when starting up we dont already highlight and old search term
+set wildchar=<Tab> wildmenu wildmode=longest,list,full " command completion in :...
+set scrolloff=8 " always keep some context lines visible
+set lazyredraw " redraw only when necessary (e.g. not when macros run, or similar things)
+set showmatch " highlight matchin braces
+set backspace=indent,eol,start " allow backspacing over everything in insert mode
 
-filetype plugin on " settings based on filetypes
-" see ~/.vim/after/ftplugin/[type].vim
-" or also /usr/share/vim/vim74/ftplugin/[type].vim
-
-autocmd FileType python setlocal tabstop=4 noexpandtab shiftwidth=4
-
-" no smartness (autoindenting,...) while pasteing from outside
-"set pastetoggle=F2
-
-" make command line two lines high
-" does not work nice with powerline, powerline already uses a line, 3 in total then
-"set ch=2
-
-" hide the mouse when typing text
-set mousehide
-
-" use mouse to scroll
-" TODO cannot use terminal mark&copy anymore, need to toggle
-"set mouse=a
-set mouse=""
-
-" Make shift-insert work like in Xterm
-map <S-Insert> <MiddleMouse>
-map! <S-Insert> <MiddleMouse>
-
-" I like highlighting strings inside C comments
-let c_comment_strings=1
-
-" Switch on syntax highlighting if it wasn't on yet.
-syntax on
-
-" TODO not sure for what?
-set t_kb=
-fixdel
-set t_kD=[3~
-
-" shortcuts for working with latex files in a tmux session
-" map <F2> :w<CR>:!tmux send-keys -t left './compile.sh' Enter <CR><CR>
-" map <F3> :w<CR>:!tmux send-keys -t left 'svns' Enter <CR><CR>
-" map <F4> :w<CR>:!svnu<CR>:edit<CR>
-" map <F4> :w<CR>:!tmux send-keys -t left 'svnu' Enter <CR><CR>:edit<CR>
-" map <F5> :w<CR>:!tmux send-keys -t left 'svnc' Enter <CR><CR>
-
-" to set the window title in screen or tmux (?)
-" if &term == "screen"
-" 	set t_ts=k
-" 	set t_fs=\
-" 	endif
-" if &term == "screen" || &term == "xterm"
-" 	set title
-" endif
-
-" autocmd BufEnter * let &titlestring = "vim " . expand("%:t") . " " . expand("%:h")
-autocmd BufEnter * let &titlestring = expand("%:t")
-
-" command completion
-"set wildchar=<Tab>
-"set wildmenu
-"set wildmode=list:longest,full
-" set wildchar=<Tab> wildmenu wildmode=full " show list on tab (?)
-
-" cursor line and column
-"hi CursorLine cterm=NONE ctermbg=DarkMagenta ctermfg=white guibg=darkred guifg=white " DarkRed
-hi CursorLine cterm=NONE ctermbg=black ctermfg=lightblue guibg=darkred guifg=white " DarkRed
-hi CursorColumn cterm=NONE ctermbg=darkred ctermfg=white guibg=darkred guifg=white
-set cursorline
-"set cursorcolumn
-
-" set textwidth=60 " when formatting text
-
-" allow enter to insert line below and stay in navigation (shift enter for above)
-" disabled because it interferes with :cwindow and enter to go to error
-"map <CR> o<Esc>k
-"map <S-Enter> O<Esc>j
-
-" quick hack for matlab script edit and execute current file
-" map <F5> :w<CR>:!tmux send-keys -t right '%:r' Enter <CR><CR>
-" quick hack for matlab script edit and execute a fixed file
-" map <F5> :w<CR>:!tmux send-keys -t right 'test_modes' Enter <CR><CR>
-
-" search path for "gf", goto file
-"set suffixesadd=.m
-
-" change command beginning from : to ;, : still works
-nnoremap ; :
-
-" for latex-suite
-"filetype plugin on " load when opening *.tex files
-"set grepprg=grep\ -nH\ $*
-"filetype indent on
-"let g:tex_flavor='latex'
-
-"function! Msend()
-	"silent !tmux load-buffer -b 0 /home/dkuettel/.tmp.tmux.vim.matlab.execute
-	"silent !tmux paste-buffer -b 0 -t 1
-	"redraw!
-"endfunction
-
-"function! Mtest()
-	"let line = getline('.')
-	"call writefile([line],"/home/dkuettel/.tmp.tmux.vim.matlab.execute","")
-	"call Msend()
-"endfunction
-
-"function! Mtest2() range
-	"execute ":'<,'>w! /home/dkuettel/.tmp.tmux.vim.matlab.execute"
-	"call Msend()
-"endfunction
-
-"map <leader>m :call Mtest() <CR>
-"vmap <leader>m :call Mtest2() <CR>
-"map <leader>l :call Msend() <CR>
-
-"set runtimepath^=~/.vim/bundle/ctrlp.vim
-"let g:ctrlp_cmd = 'CtrlPMixed'
-"let g:ctrlp_root_markers = ['.ctrlp']
-"let g:ctrlp_prompt_mappings = {'PrtClearCache()': ['<c-q>']}
-map <C-[> :CtrlPBuffer<CR>
-"let g:ctrlp_extensions = ['tag']
-let g:ctrlp_working_path_mode = 0 " always base off initial working folder
-
-" try out ignore, hard coded for caffe here
-let g:ctrlp_custom_ignore = {
-	\ 'dir': '\v[\/](build|cmake|data|distribute|docs|examples|matlab|models|scripts|tools)$'
-	\ }
-
-" solarized theme
-syntax enable " todo enabling this twice
-set background=dark " the plugin considers dark the default, and it should fit with invertable colors
-"let g:solarized_termtrans=1 " was necessary for putty to work
-let g:solarized_termcolors=16 " 16 is better if set right, 256 is the compatible fixed color mode
-let g:solarized_visibility="normal" " set list to see nonprint characters
-colorscheme solarized
-
-"let g:syntastic_cpp_checkers=['gcc']
-"let g:syntastic_cpp_compiler_options='-Wall'
-
-" using autosave bundle
-let g:auto_save = 1
-let g:auto_save_in_insert_mode = 0  " do not save while in insert mode
-
-" matches trailing white spaces and highlights them as an error
-"match ErrorMsg '\s\+$'
-
-set foldmethod=indent
-set nofoldenable
-
-" show trainling whitespaces
-" http://vim.wikia.com/wiki/Highlight_unwanted_spaces#Using_the_list_and_listchars_options
-highlight ExtraWhitespace ctermbg=red guibg=red
-match ExtraWhitespace /\s\+$/
-autocmd BufWinEnter * match ExtraWhitespace /\s\+$/
-autocmd InsertEnter * match ExtraWhitespace /\s\+\%#\@<!$/
-autocmd InsertLeave * match ExtraWhitespace /\s\+$/
-autocmd BufWinLeave * call clearmatches()
-
-" find tags with ctrlp
-" ctrl-p is normal ctrl p
-nnoremap <leader>. :CtrlPTag<cr>
-nnoremap <leader>b :CtrlPBuffer<cr>
-
-" recompute ctags for select projects
-" todo this matches only py files in src/nn, not further down in the folders
-" todo probably more to exclude as well, see zsh history on staging machine
-autocmd BufWritePost /home/kuettel/src/nn/*.py silent !ctags -f /home/kuettel/src/nn/tags --exclude=libs -R /home/kuettel/src/nn
-
-" always keep some context lines visible
-set scrolloff=8
-
-" vim powerline
-set rtp+=/home/kuettel/anaconda2/lib/python2.7/site-packages/powerline/bindings/vim
-python from powerline.vim import setup as powerline_setup
-python powerline_setup()
-python del powerline_setup
-set laststatus=2 " so the status line (powerline) is always shown
-
-" python mode settings
-"let g:pymode_lint_ignore = "W191"
-
-" syntastic settings
-let g:syntastic_python_checkers = ["pep8"]
-
-" try easier split navigation
+" navigate splits
+" todo does it disable the redraw on ctrl-l?
 nnoremap <C-J> <C-W><C-J>
 nnoremap <C-K> <C-W><C-K>
 nnoremap <C-L> <C-W><C-L>
 nnoremap <C-H> <C-W><C-H>
 
-" recommended syntastic settings for newbies
+" solarized
+" set background=dark " the plugin considers dark the default, and it should fit with invertable colors
+let g:solarized_termcolors=16 " 16 is better if set right, 256 is the compatible fixed color mode
+let g:solarized_visibility="normal" " set list to see nonprint characters
+colorscheme solarized
+
+" higlight/show (problematic) whitespaces
+" other options: http://vim.wikia.com/wiki/Highlight_unwanted_spaces
+"set listchars=tab:›\ ,trail:•,extends:#,nbsp:.
+set listchars=tab:\|\ ,trail:•,extends:#,nbsp:. " todo its not bad but need a subtle color for the bar, solarized?
+"set list
+
+" default tab settings
+set tabstop=4
+set softtabstop=4
+set shiftwidth=4
+set noexpandtab
+"set smarttab
+set autoindent
+set copyindent
+" overwrite filetypes
+" todo should it not be instead changed in the filetype or have it " customized?
+autocmd FileType python setlocal tabstop=4 softtabstop=4 shiftwidth=4 noexpandtab
+autocmd FileType cpp setlocal tabstop=2 softtabstop=2 shiftwidth=2 expandtab
+
+" easymotion
+nmap s <Plug>(easymotion-overwin-f)
+
+" ctrl p
+let g:ctrlp_working_path_mode = 0 " always base off initial working folder
+let g:ctrlp_switch_buffer = 0 " don't switch between splits when selecting a file/buffer to open, stay on split, makes it easier to open same file in many splits
+let g:ctrlp_match_window = 'bottom,order:btt,min:1,max:20,results:20'
+nnoremap <leader>. :CtrlPTag<cr>
+nnoremap <leader>b :CtrlPBuffer<cr>
+
+" --- testing new settings below here ---
+
+filetype indent off
+" hi CursorLine cterm=NONE ctermbg=gray ctermfg=lightblue
+hi CursorLine cterm=NONE ctermbg=gray ctermfg=NONE " NONE for ctermfg lets fg color be -> syntaxcolors
+set cursorline
+set cursorcolumn
+nnoremap ; :
+:nnoremap X :set cursorline! cursorcolumn!<CR>
+
+" jedi-vim settings
+let g:jedi#popup_on_dot = 0
+let g:jedi#show_call_signatures = "2"
+
+" have cursorline/column only in active window
+augroup CursorLineOnlyInActiveWindow
+	autocmd!
+	autocmd VimEnter,WinEnter,BufWinEnter * setlocal cursorline cursorcolumn
+	" autocmd WinLeave * setlocal nocursorline nocursorcolumn
+	autocmd WinLeave * setlocal nocursorcolumn
+	" todo or maybe even change color to more subtle for inactive window?
+augroup END
+
+" todo semigood
+" set virtualedit=all " problem is also over tabs
+
+" easytags, try for now, maybe the syntax highlighting from here made it slow
+set tags=./tags " use this file local to vim working directory
+let g:easytags_dynamic_files = 2 " use tag file path relative to vim working folder, not active buffer
+set cpoptions+=d " use tag file path relative to vim working folder, not active buffer file
+let g:easytags_auto_highlight = 0 " don't do expensive highlighting based on tag file for now
+
+" try airline
+set laststatus=2 " not sure if needed
+let g:airline_powerline_fonts=1
+let g:airline#extensions#tabline#enabled = 1
+let g:airline#extenstions#tabline#fnamemod = ':t'
+
+" trying autosave and co
+set autoread " autoread files if changed outside and not locally, on focus events, does not work out of the box in tmux vim
+au FocusLost * :wa
+
+" try undo tree
+nnoremap <Leader>u :GundoToggle<CR>
+
+" syntastic
+" for newbies
 set statusline+=%#warningmsg#
 set statusline+=%{SyntasticStatuslineFlag()}
 set statusline+=%*
@@ -254,14 +152,34 @@ nmap ]r :lprev<CR>
 " from me
 let g:syntastic_auto_jump = 1
 let g:syntastic_mode_map = {"mode":"passive"}
-nmap <leader>s :SyntasticCheck<CR>
+nmap <leader>s :w<Cr>:SyntasticCheck<CR>
 
-" nmap <Leader>bb :ls<CR>:buffer<Space>
-" disabled because <Leader>b is already ctrlpbuffer
-" quite nice and lightweight
-" nmap <Leader>bb :ls<CR>:buffer<Space>
-" still it would be nicer to have it like easy motion with letters instead of number, and smarter sorting?
+" kinda cool, useful?
+inoremap jj <Esc>
 
-" don't switch between splits when selecting a file/buffer to open, stay on
-" split, makes it easier to open same file in many splits
-let g:ctrlp_switch_buffer = 0
+" notes
+" gi go to last insert mode in insert mode
+" '' go to last insert mode
+
+syntax on
+
+let g:signify_vcs_list = [ 'git' ]
+let g:signify_update_on_bufenter = 1 " also saves, too heavy?
+let g:signify_update_on_focusgained = 1 " maybe also saves, too heavy?
+ " try shortcut for manual refresh, clashes a bit with <leader>g
+ nmap <leader>gu :SignifyRefresh<cr>
+
+" open splits more naturally below and right
+set splitbelow
+set splitright
+
+" try direct numbered selection of windows
+map ,w1 :wincmd t<cr>
+map ,w2 :wincmd t<cr>:wincmd w<cr>
+map ,w3 :wincmd t<cr>:wincmd w<cr>:wincmd w<cr>
+map ,w4 :wincmd t<cr>:wincmd w<cr>:wincmd w<cr>:wincmd w<cr>
+map ,w5 :wincmd t<cr>:wincmd w<cr>:wincmd w<cr>:wincmd w<cr>:wincmd w<cr>
+map ,w6 :wincmd t<cr>:wincmd w<cr>:wincmd w<cr>:wincmd w<cr>:wincmd w<cr>:wincmd w<cr>
+
+" clear window for external commands, easier to read especially for fugitive
+set shell=~/bin/vim_shell.sh

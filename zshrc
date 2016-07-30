@@ -1,103 +1,31 @@
-# Path to your oh-my-zsh installation.
-export ZSH=~/.oh-my-zsh
+source ~/antigen/antigen.zsh
 
-# Set name of the theme to load.
-# Look in ~/.oh-my-zsh/themes/
-# Optionally, if you set this to "random", it'll load a random theme each
-# time that oh-my-zsh is loaded.
-#ZSH_THEME="random"
-
-# themes I tried
-#ZSH_THEME="agnoster"
-#ZSH_THEME="blink"
-#ZSH_THEME="robbyrussell"
-#ZSH_THEME="amuse"
-ZSH_THEME="avit"
-#ZSH_THEME="blinks"
-#ZSH_THEME="funky"
-#ZSH_THEME="ys"
-
-# themes others used
-#ZSH_THEME="pure" # cristi
-#ZSH_THEME="tjkirch" # roman
-
-# Uncomment the following line to use case-sensitive completion.
-# CASE_SENSITIVE="true"
-
-# Uncomment the following line to disable bi-weekly auto-update checks.
-# DISABLE_AUTO_UPDATE="true"
-
-# Uncomment the following line to change how often to auto-update (in days).
-# export UPDATE_ZSH_DAYS=13
-
-# Uncomment the following line to disable colors in ls.
-# DISABLE_LS_COLORS="true"
-
-# Uncomment the following line to disable auto-setting terminal title.
-# DISABLE_AUTO_TITLE="true"
-
-# Uncomment the following line to enable command auto-correction.
-# ENABLE_CORRECTION="true"
-
-# Uncomment the following line to display red dots whilst waiting for completion.
-# COMPLETION_WAITING_DOTS="true"
-
-# Uncomment the following line if you want to disable marking untracked files
-# under VCS as dirty. This makes repository status check for large repositories
-# much, much faster.
-# DISABLE_UNTRACKED_FILES_DIRTY="true"
-
-# Uncomment the following line if you want to change the command execution time
-# stamp shown in the history command output.
-# The optional three formats: "mm/dd/yyyy"|"dd.mm.yyyy"|"yyyy-mm-dd"
-# HIST_STAMPS="mm/dd/yyyy"
-
-# Would you like to use another custom folder than $ZSH/custom?
-# ZSH_CUSTOM=/path/to/new-custom-folder
-#
-
-# Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
-# Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
-# Example format: plugins=(rails git textmate ruby lighthouse)
-# Add wisely, as too many plugins slow down shell startup.
-#plugins=(command-not-found per-directory-history vi-mode zaw zsh-syntax-highlighting) # note: syntax plugin must be the last to import
-# vi-mode disabled, it breaks syntax highlighting
-plugins=(command-not-found per-directory-history zaw zsh-syntax-highlighting) # note: syntax plugin must be the last to import
+# todo where do the oh-my-zsh settings go?
+DISABLE_AUTO_UPDATE="true" # todo it will happen with antigen update?
+antigen use oh-my-zsh
+antigen bundle command-not-found
+antigen bundle per-directory-history
 # might be interesting: common-aliases compleat
 
-# User configuration
+antigen bundle zsh-users/zaw
+antigen bundle zsh-users/zsh-syntax-highlighting # note: might have to be the last to import
+
+# some themes: random, agnoster, blinks, robbyrussell, amuse, avit, blinks, funky, ys, pure, tjkirch
+antigen theme agnoster
+
+antigen apply
+
+# todo
+# antigen selfupdate # update antigen
+# antigen update # update bundles
+# antigen cleanup # remove what's not loaded right now
 
 # note: ~ does not expand, but $HOME does
 export PATH="$HOME/anaconda/bin:$HOME/bin:$HOME/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/usr/local/cuda-7.0/bin"
-# export MANPATH="/usr/local/man:$MANPATH"
 
-#DISABLE_AUTO_UPDATE=true # todo how to manually do it?
-source $ZSH/oh-my-zsh.sh
+# todo: try zaw for history search
+bindkey '^R' zaw-history
 
-# You may need to manually set your language environment
-# export LANG=en_US.UTF-8
-
-# Preferred editor for local and remote sessions
-# if [[ -n $SSH_CONNECTION ]]; then
-#   export EDITOR='vim'
-# else
-#   export EDITOR='mvim'
-# fi
-
-# Compilation flags
-# export ARCHFLAGS="-arch x86_64"
-
-# ssh
-# export SSH_KEY_PATH="~/.ssh/dsa_id"
-
-# Set personal aliases, overriding those provided by oh-my-zsh libs,
-# plugins, and themes. Aliases can be placed here, though oh-my-zsh
-# users are encouraged to define aliases within the ZSH_CUSTOM folder.
-# For a full list of active aliases, run `alias`.
-#
-# Example aliases
-# alias zshconfig="mate ~/.zshrc"
-# alias ohmyzsh="mate ~/.oh-my-zsh"
 alias ls='ls --color=auto'
 alias lr='ls -hltrcF'
 alias ll='ls -lhF'
@@ -113,11 +41,12 @@ alias cdl='. cdl.sh'
 alias watch='watch -c'
 
 # color support for ls with the solarized theme
+# todo as bundle for antigen?
 eval `dircolors ~/plugins/dircolors-solarized/dircolors.ansi-light`
 
 # option -J is also interesting
 # but I'd rather highlight the whole line with a match after searching and key n
-export LESS="-j.3 -WRSX"
+export LESS="-j.3 -WRSXc"
 
 # try it for now
 #source ~/.local/lib/python2.7/site-packages/powerline/bindings/zsh/powerline.zsh
@@ -150,9 +79,6 @@ alias feh='feh --auto-zoom --scale-down'
 # for mosh, but in general, i'm not comfortable with all the LC settings
 export LC_ALL=en_US.UTF-8
 
-# todo: try zaw for history search
-bindkey '^R' zaw-history
-
 # todo: bind (should already be bound)
 bindkey '^G' per-directory-history-toggle-history
 
@@ -160,56 +86,104 @@ bindkey '^G' per-directory-history-toggle-history
 _per-directory-history-set-global-history
 
 # some xpman shortcuts
+
 xp_mag () { # mount and go to xp
+	if [ ! -d $1 ]; then
+		mkdir -p $1
+	fi
 	f=$(realpath $1)
-	echo 'xp' $f
+	echo 'mount and go ' $f
 	xpman mount_xp $f
 	cd $1
 }
-xp_lau () { # leave and unmount
-	f=$(realpath $1)
-	cd ~
-	echo 'xp' $f
+
+xp_lau () { # leave and unmount cwd
+	f=$(realpath $(pwd))
+	cd $dev
+	echo 'leave and unmount' $f
 	xpman umount_xp $f
 }
-xp_las () { # leave and start on demand
-	f=$(realpath $1)
-	echo 'xp' $f
-	cd ~
+
+xp_las () { # leave and start on demand cwd
+	f=$(realpath $(pwd))
+	echo 'leave' $f 'and start' "$1"
+	cd $dev
 	xpman umount_xp $f
-	echo 'starting' "$2"
-	xpman start_xp_on_demand $f "$2"
+	xpman start_xp_on_demand $f "$1"
 }
-xp_update () { # update to what's on $dev right now, fails if there are uncommited things
-	if [[ -d nn ]]; then
-		if [[ -z $(cd nn; git status -s) ]]; then
-			rm -rf nn
-			cp -r $dev/nn .
-		else
-			echo 'nn has uncommited changes'
-			return
-		fi
-	else
-		echo 'no nn folder'
-		return
-	fi
-	if [[ -d caffe ]]; then
-		if [[ -z $(cd caffe; git status -s) ]]; then
-			rm -rf caffe
-			cp -r $dev/caffe .
-		else
-			echo 'caffe has uncommited changes'
-			return
-		fi
-	else
-		echo 'no caffe folder'
-		return
-	fi
+
+xp_replace () {
+	echo 'replace code with dev code'
+	rm -rf nn
+	cp -r $dev/nn .
+	rm -rf caffe
+	cp -r $dev/caffe .
 }
+xp_link () {
+	echo 'link to code from dev'
+	rm -rf nn
+	ln -sf $dev/nn nn
+	rm -rf caffe
+	ln -sf $dev/caffe caffe
+}
+
 xp_cxp () { # change xp (unmount current, mount new)
+	echo 'change to xp' $1
 	a=$(realpath .)
-	cd ~
+	cd $dev
 	xpman umount_xp $a
 	xpman mount_xp $1
 	cd $1
 }
+
+# copy latest snapshot to dev with proper naming for further training (stages)
+xp_snap () { s=$(ls snapshots/*.caffemodel | tail -n 1); x=$(basename $(realpath .)); x=$x[12,-1]; y=$(basename $s); cp $s $dev/${x}_$y }
+
+xp_ssh () {
+	xpman ssh_to_xp $1 --wait --ssh_opts='-t' --cmd='~/bin/tmux at'
+}
+
+# copy with progress, use rsync, not sure about $1/ or $1 without / and rsyncs semantics
+rsync_cp () {
+	rsync -ah -L -r --info=progress2 $1 $2
+}
+
+xp_revals () {
+	echo "cd $1; for i in disney_test_closeup disney_challenge disney_realistic disney_white hotwheels_test_closeup hotwheels_test hotwheels_realistic hotwheels_white; do echo \$i; cat evals/\$i/last/confusion.txt | grep 'class average'; echo; done" | xpman ssh_cmd $1
+}
+
+xp_levals () {
+	for i in disney_test_closeup disney_challenge disney_realistic disney_white hotwheels_test_closeup hotwheels_test hotwheels_realistic hotwheels_white
+	do
+		echo $i
+		for k in evals/$i/*
+		do
+			echo -n $(basename $k) " "
+			cat $k/confusion.txt | grep 'class average'
+		done
+		echo
+	done
+	basename $(realpath evals/disney_challenge/last)
+}
+
+xp_watch () {
+	while true
+	do
+		xpman list_xps --reverse | less -c
+	done
+}
+
+xp_djf () {
+	for i in disney_test_closeup disney_challenge disney_realistic disney_white hotwheels_test_closeup hotwheels_test hotwheels_realistic hotwheels_white
+	do
+		echo $i
+		cat evals/$i/last/h1confusion.txt | grep class
+		cat evals/$i/last/q1confusion.txt | grep class
+		cat evals/$i/last/s1confusion.txt | grep class
+		echo
+	done
+}
+
+export PYTHONDONTWRITEBYTECODE=True # no .pyc files for python
+
+stty -ixon # disables flow control, for example ctrl-s
