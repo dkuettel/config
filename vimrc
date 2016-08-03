@@ -21,6 +21,7 @@ Plugin 'sjl/gundo.vim'
 Plugin 'scrooloose/nerdcommenter'
 Plugin 'scrooloose/syntastic'
 
+" Plugin 'mattboehm/vim-unstack'
 " Plugin 'nathanaelkane/vim-indent-guides'
 
 " run :PluginInstall
@@ -151,7 +152,7 @@ nmap ]r :lprev<CR>
 " from me
 let g:syntastic_auto_jump = 1
 let g:syntastic_mode_map = {"mode":"passive"}
-nmap <leader>s :SyntasticCheck<CR>
+nmap <leader>s :w<Cr>:SyntasticCheck<CR>
 
 " kinda cool, useful?
 inoremap jj <Esc>
@@ -161,3 +162,24 @@ inoremap jj <Esc>
 " '' go to last insert mode
 
 syntax on
+
+let g:signify_vcs_list = [ 'git' ]
+let g:signify_update_on_bufenter = 1 " also saves, too heavy?
+let g:signify_update_on_focusgained = 1 " maybe also saves, too heavy?
+ " try shortcut for manual refresh, clashes a bit with <leader>g
+ nmap <leader>gu :SignifyRefresh<cr>
+
+" open splits more naturally below and right
+set splitbelow
+set splitright
+
+" try direct numbered selection of windows
+map ,w1 :wincmd t<cr>
+map ,w2 :wincmd t<cr>:wincmd w<cr>
+map ,w3 :wincmd t<cr>:wincmd w<cr>:wincmd w<cr>
+map ,w4 :wincmd t<cr>:wincmd w<cr>:wincmd w<cr>:wincmd w<cr>
+map ,w5 :wincmd t<cr>:wincmd w<cr>:wincmd w<cr>:wincmd w<cr>:wincmd w<cr>
+map ,w6 :wincmd t<cr>:wincmd w<cr>:wincmd w<cr>:wincmd w<cr>:wincmd w<cr>:wincmd w<cr>
+
+" clear window for external commands, easier to read especially for fugitive
+set shell=~/bin/vim_shell.sh
