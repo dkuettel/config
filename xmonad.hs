@@ -20,4 +20,5 @@ main = do
 		, ("<F9>",spawn "/home/kuettel/plugins/playerctl/playerctl/playerctl next")
 		, ("<F7>",spawn "/home/kuettel/plugins/playerctl/playerctl/playerctl previous")
 		, ("M-S-l",spawn "/usr/bin/slock")
+		, ("M-S-h",sendMessage Expand) -- when running virtual in windows host, win-L doesn't work well
 		]
