@@ -74,7 +74,9 @@ set copyindent
 " overwrite filetypes
 " todo should it not be instead changed in the filetype or have it " customized?
 autocmd FileType python setlocal tabstop=4 softtabstop=4 shiftwidth=4 noexpandtab
-autocmd FileType cpp setlocal tabstop=2 softtabstop=2 shiftwidth=2 expandtab
+"autocmd FileType cpp setlocal tabstop=2 softtabstop=2 shiftwidth=2 expandtab
+autocmd FileType cpp setlocal tabstop=4 softtabstop=4 shiftwidth=4 noexpandtab
+autocmd FileType cu setlocal tabstop=4 softtabstop=4 shiftwidth=4 noexpandtab
 
 " easymotion
 nmap s <Plug>(easymotion-overwin-f)
