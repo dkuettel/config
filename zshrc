@@ -187,3 +187,5 @@ xp_djf () {
 export PYTHONDONTWRITEBYTECODE=True # no .pyc files for python
 
 stty -ixon # disables flow control, for example ctrl-s
+
+export PATH="$PATH:/data/xps/metric/dev/nn/bin"
