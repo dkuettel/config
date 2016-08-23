@@ -189,3 +189,9 @@ export PYTHONDONTWRITEBYTECODE=True # no .pyc files for python
 stty -ixon # disables flow control, for example ctrl-s
 
 export PATH="$PATH:/data/xps/metric/dev/nn/bin"
+
+rcd () {
+	# sometimes when current folder is invalid because it has been recreated
+	# rcd goes again to the same name but new inode
+	cd $(pwd)
+}
