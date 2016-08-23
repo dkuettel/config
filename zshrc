@@ -93,7 +93,7 @@ xp_mag () { # mount and go to xp
 	fi
 	f=$(realpath $1)
 	echo 'mount and go ' $f
-	xpman mount_xp $f
+	xpman mount_xp --wait $f
 	cd $1
 }
 
