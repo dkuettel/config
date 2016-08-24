@@ -104,6 +104,14 @@ xp_lau () { # leave and unmount cwd
 	xpman umount_xp $f
 }
 
+xp_lad () { # leave and delete
+	f=$(realpath $(pwd))
+	cd $dev
+	echo 'leave and delete' $f
+	xpman umount_xp $f
+	xpman delete_xp $f
+}
+
 xp_las () { # leave and start on demand cwd
 	f=$(realpath $(pwd))
 	echo 'leave' $f 'and start' "$1"
