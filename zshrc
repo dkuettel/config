@@ -87,6 +87,20 @@ _per-directory-history-set-global-history
 
 # some xpman shortcuts
 
+xp_check () {
+	if [ -L nn ]; then
+		echo 'nn is linked'
+	fi
+	if [ -L caffe ]; then
+		echo 'caffe is linked'
+	fi
+	if [ -L nn -o -L caffe ]; then
+		return 1
+	else
+		return 0
+	fi
+}
+
 xp_mag () { # mount and go to xp
 	if [ ! -d $1 ]; then
 		mkdir -p $1
@@ -113,11 +127,15 @@ xp_lad () { # leave and delete
 }
 
 xp_las () { # leave and start on demand cwd
-	f=$(realpath $(pwd))
-	echo 'leave' $f 'and start' "$1"
-	cd $dev
-	xpman umount_xp $f
-	xpman start_xp_on_demand $f "$1"
+	if xp_check; then
+		f=$(realpath $(pwd))
+		echo 'leave' $f 'and start' "$1"
+		cd $dev
+		xpman umount_xp $f
+		xpman start_xp_on_demand $f "$1"
+	else
+		return 1
+	fi
 }
 
 xp_replace () {
