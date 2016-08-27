@@ -11,7 +11,7 @@ antigen bundle zsh-users/zaw
 antigen bundle zsh-users/zsh-syntax-highlighting # note: might have to be the last to import
 
 # some themes: random, agnoster, blinks, robbyrussell, amuse, avit, blinks, funky, ys, pure, tjkirch
-antigen theme agnoster
+antigen theme amuse
 
 antigen apply
 
@@ -116,6 +116,12 @@ xp_lau () { # leave and unmount cwd
 	cd $dev
 	echo 'leave and unmount' $f
 	xpman umount_xp $f
+}
+
+xp_rem () { # remount for flushing to ebs
+	f=$(realpath $(pwd))
+	xp_lau
+	xp_mag $f
 }
 
 xp_lad () { # leave and delete
