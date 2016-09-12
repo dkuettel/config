@@ -7,7 +7,6 @@ else
 cat <<EOF > $1
 #!/bin/bash -xeu
 set -o pipefail
-
 EOF
 chmod +x $1
 vim $1
