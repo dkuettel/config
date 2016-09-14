@@ -9,5 +9,5 @@ cat <<EOF > $1
 set -o pipefail
 EOF
 chmod +x $1
-vim $1
+vim + $1
 fi
