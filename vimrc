@@ -12,7 +12,7 @@ Plugin 'tpope/vim-fugitive'
 Plugin 'easymotion/vim-easymotion'
 Plugin 'davidhalter/jedi-vim'
 Plugin 'xolox/vim-misc'
-Plugin 'xolox/vim-easytags'
+" Plugin 'xolox/vim-easytags' " todo trying with a manual background process, maybe vim8 background process new feature?
 Plugin 'vim-airline/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
 Plugin 'mhinz/vim-signify' " show changes of file to git index
@@ -81,11 +81,14 @@ autocmd FileType cu setlocal tabstop=4 softtabstop=4 shiftwidth=4 noexpandtab
 " easymotion
 nmap s <Plug>(easymotion-overwin-f)
 
-" ctrl p
+" ctrlp
 let g:ctrlp_working_path_mode = 0 " always base off initial working folder
 let g:ctrlp_switch_buffer = 0 " don't switch between splits when selecting a file/buffer to open, stay on split, makes it easier to open same file in many splits
 let g:ctrlp_match_window = 'bottom,order:btt,min:1,max:20,results:20'
+let g:ctrlp_map = '<c-p>'
+let g:ctrlp_cmd = 'CtrlP'
 nnoremap <leader>. :CtrlPTag<cr>
+nnoremap <leader>t :CtrlPBufTag<cr>
 nnoremap <leader>b :CtrlPBuffer<cr>
 
 " --- testing new settings below here ---
@@ -116,9 +119,12 @@ augroup END
 
 " easytags, try for now, maybe the syntax highlighting from here made it slow
 set tags=./tags " use this file local to vim working directory
+" let g:easytags_file=./tags " todo correct?
 let g:easytags_dynamic_files = 2 " use tag file path relative to vim working folder, not active buffer
 set cpoptions+=d " use tag file path relative to vim working folder, not active buffer file
-let g:easytags_auto_highlight = 0 " don't do expensive highlighting based on tag file for now
+let g:easytags_auto_highlight = 1 " todo might slow down vim
+" let g:easytags_opts = 1 " todo async call seems to not work yet, vim8 has built-in async call maybe instead
+" let g:easytags_autorecurse = 1 " todo unfortunately does it also on autosave, not just :UpdateTags
 
 " try airline
 set laststatus=2 " not sure if needed
@@ -168,8 +174,8 @@ syntax on
 let g:signify_vcs_list = [ 'git' ]
 let g:signify_update_on_bufenter = 1 " also saves, too heavy?
 let g:signify_update_on_focusgained = 1 " maybe also saves, too heavy?
- " try shortcut for manual refresh, clashes a bit with <leader>g
- nmap <leader>gu :SignifyRefresh<cr>
+" try shortcut for manual refresh, clashes a bit with <leader>g
+nmap <leader>gu :SignifyRefresh<cr>
 
 " open splits more naturally below and right
 set splitbelow
