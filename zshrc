@@ -168,12 +168,17 @@ xp_cxp () { # change xp (unmount current, mount new)
 	cd $1
 }
 
+xp_fork () { # fork dev
+	xpman fork_xp_dated $dev $runs $1 $2
+}
+
+xp_grid () { # grid fork dev
+	xpman fork_xp_dated_grid $dev $runs "$@"
+}
+
 xp_find () {
 	xpman list_xps --raw --regexp $1
 }
-
-# copy latest snapshot to dev with proper naming for further training (stages)
-xp_snap () { s=$(ls snapshots/*.caffemodel | tail -n 1); x=$(basename $(realpath .)); x=$x[12,-1]; y=$(basename $s); cp $s $dev/${x}_$y }
 
 xp_ssh () {
 	xpman ssh_to_xp $1 --wait --ssh_opts='-t' --cmd='~/bin/tmux at'
@@ -184,39 +189,10 @@ rsync_cp () {
 	rsync -ah -L -r --info=progress2 $1 $2
 }
 
-xp_revals () {
-	echo "cd $1; for i in disney_test_closeup disney_challenge disney_realistic disney_white hotwheels_test_closeup hotwheels_test hotwheels_realistic hotwheels_white; do echo \$i; cat evals/\$i/last/confusion.txt | grep 'class average'; echo; done" | xpman ssh_cmd $1
-}
-
-xp_levals () {
-	for i in disney_test_closeup disney_challenge disney_realistic disney_white hotwheels_test_closeup hotwheels_test hotwheels_realistic hotwheels_white
-	do
-		echo $i
-		for k in evals/$i/*
-		do
-			echo -n $(basename $k) " "
-			cat $k/confusion.txt | grep 'class average'
-		done
-		echo
-	done
-	basename $(realpath evals/disney_challenge/last)
-}
-
 xp_watch () {
 	while true
 	do
 		xpman list_xps --reverse | less -c
-	done
-}
-
-xp_djf () {
-	for i in disney_test_closeup disney_challenge disney_realistic disney_white hotwheels_test_closeup hotwheels_test hotwheels_realistic hotwheels_white
-	do
-		echo $i
-		cat evals/$i/last/h1confusion.txt | grep class
-		cat evals/$i/last/q1confusion.txt | grep class
-		cat evals/$i/last/s1confusion.txt | grep class
-		echo
 	done
 }
 
