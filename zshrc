@@ -11,7 +11,19 @@ antigen bundle zsh-users/zaw
 antigen bundle zsh-users/zsh-syntax-highlighting # note: might have to be the last to import
 
 # some themes: random, agnoster, robbyrussell, amuse, avit, blinks, funky, ys, pure, tjkirch
-antigen theme amuse
+#antigen theme amuse
+
+# adapted theme: amuse + tjkirch
+PROMPT='%(?, ,
+%{$fg[red]%}FAIL: $?%{$reset_color%}
+)
+%{$fg_bold[green]%}${PWD/#$HOME/~}%{$reset_color%}$(git_prompt_info) ⌚ %{$fg_bold[red]%}%*%{$reset_color%}
+$ '
+ZSH_THEME_GIT_PROMPT_PREFIX=" on %{$fg[magenta]%}\uE0A0 "
+ZSH_THEME_GIT_PROMPT_SUFFIX="%{$reset_color%}"
+ZSH_THEME_GIT_PROMPT_DIRTY="%{$fg[red]%}!"
+ZSH_THEME_GIT_PROMPT_UNTRACKED="%{$fg[green]%}?"
+ZSH_THEME_GIT_PROMPT_CLEAN=""
 
 antigen apply
 
