@@ -14,6 +14,8 @@ antigen bundle zsh-users/zsh-syntax-highlighting # note: might have to be the la
 # some themes: random, agnoster, robbyrussell, amuse, avit, blinks, funky, ys, pure, tjkirch
 #antigen theme amuse
 
+antigen apply
+
 # adapted theme: amuse + tjkirch
 PROMPT='%(?, ,
 %{$fg[red]%}FAIL: $?%{$reset_color%}
@@ -25,8 +27,6 @@ ZSH_THEME_GIT_PROMPT_SUFFIX="%{$reset_color%}"
 ZSH_THEME_GIT_PROMPT_DIRTY="%{$fg[red]%}!"
 ZSH_THEME_GIT_PROMPT_UNTRACKED="%{$fg[green]%}?"
 ZSH_THEME_GIT_PROMPT_CLEAN=""
-
-antigen apply
 
 # todo
 # antigen selfupdate # update antigen
