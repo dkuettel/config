@@ -7,7 +7,8 @@ antigen bundle command-not-found
 antigen bundle per-directory-history
 # might be interesting: common-aliases compleat
 
-antigen bundle zsh-users/zaw
+# antigen bundle zsh-users/zaw # todo this one doesn't work anymore with the new antigen caching
+antigen bundle psprint/zsh-navigation-tools # todo also history, works, maybe better
 antigen bundle zsh-users/zsh-syntax-highlighting # note: might have to be the last to import
 
 # some themes: random, agnoster, robbyrussell, amuse, avit, blinks, funky, ys, pure, tjkirch
