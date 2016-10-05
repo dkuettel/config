@@ -1,5 +1,4 @@
-#!/bin/bash
-set -ex
+#!/bin/bash -eux
 
 ./zsh.sh
 ./apt.sh

@@ -53,7 +53,7 @@ alias cdl='. cdl.sh'
 alias watch='watch -c'
 
 # color support for ls with the solarized theme
-# todo as bundle for antigen?
+# todo as bundle for antigen? have to make my own clone for that with a *.zsh to use for bundle
 eval `dircolors ~/plugins/dircolors-solarized/dircolors.ansi-light`
 
 # option -J is also interesting
