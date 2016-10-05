@@ -1,5 +1,4 @@
-#!/bin/bash
-set -ex
+#!/bin/bash -eux
 
 if [[ $(realpath ~/config/bin) == $(realpath ~/bin) ]]
 then

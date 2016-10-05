@@ -1,6 +1,6 @@
-#!/bin/bash -xeu
+#!/bin/bash -eux
 
-sudo apt-get install -y git
+sudo apt-get install -yq git
 git config --global user.email "dkuettel@ptc.com"
 git config --global user.name "Daniel Kuettel"
 git config --global push.default simple

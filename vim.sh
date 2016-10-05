@@ -1,8 +1,8 @@
-#!/bin/bash -xeu
+#!/bin/bash -eux
 
 sudo apt-get install -qy git
 
-# not using vim package anymore
+# not using vim package anymore because it's an older version
 # sudo apt-get -qy install vim-nox
 if [[ -d ~/vim ]]; then
 	echo '~/vim already exists'
@@ -14,10 +14,8 @@ fi
 cd ~/vim
 sudo apt-get install -qy libncurses5-dev # vim dependencies
 ./configure --disable-gui --without-x --enable-luainterp=dynamic --enable-perlinterp=dynamic --enable-pythoninterp=dynamic --enable-rubyinterp --enable-cscope --with-features=huge
-make -j
+make -j$(nproc)
 sudo make install
-vim +PluginInstall +qall
-# todo depends on terminal colors, ctags, python, ...
 
 if [[ -f ~/.vimrc ]]; then
 	if [[ $(realpath ~/config/vimrc) == $(realpath ~/.vimrc) ]]; then
@@ -38,3 +36,7 @@ if [[ -d ~/.vim/bundle/Vundle.vim ]]; then
 else
 	git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
 fi
+
+# todo not sure I think needs new terminal to use new vim (bin paths), try explicit path here
+# todo depends on terminal colors, ctags, python, ...
+/usr/local/bin/vim -u ~/config/vundles.vim +PluginInstall +qall
