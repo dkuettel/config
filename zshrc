@@ -37,7 +37,8 @@ ZSH_THEME_GIT_PROMPT_CLEAN=""
 export PATH="$HOME/anaconda/bin:$HOME/bin:$HOME/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/usr/local/cuda-7.0/bin"
 
 # todo: try zaw for history search
-bindkey '^R' zaw-history
+# todo currently not using anymore
+# bindkey '^R' zaw-history
 
 alias ls='ls --color=auto'
 alias lr='ls -hltrcF'
