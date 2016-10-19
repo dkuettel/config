@@ -21,5 +21,5 @@ if [[ $(realpath ~/config/tmux.conf) != $(realpath ~/.tmux.conf) ]]; then
 	ln -s --backup ~/config/tmux.conf ~/.tmux.conf
 fi
 
-sudo pip install powerline-status
+sudo -H pip install powerline-status
 
