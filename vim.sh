@@ -39,4 +39,4 @@ fi
 
 # todo not sure I think needs new terminal to use new vim (bin paths), try explicit path here
 # todo depends on terminal colors, ctags, python, ...
-/usr/local/bin/vim -u ~/config/vundles.vim +PluginInstall +qall
+/usr/local/bin/vim -u ~/config/vundle.vim +PluginInstall +qall
