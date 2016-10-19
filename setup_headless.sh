@@ -4,7 +4,7 @@
 ./apt.sh
 # todo for now assuming no anaconda anymore
 sudo apt-get install -yq python python-pip build-essential
-sudo pip -H install --upgrade pip
+sudo -H pip install --upgrade pip
 ./bin.sh
 ./git.sh
 ./ssh.sh
