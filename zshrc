@@ -35,7 +35,7 @@ ZSH_THEME_GIT_PROMPT_CLEAN=""
 
 # note: ~ does not expand, but $HOME does
 # todo includes both cuda 7 and 8 for now
-export PATH="$HOME/anaconda/bin:$HOME/bin:$HOME/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/usr/local/cuda-7.0/bin:/usr/local/cuda-8.0/bin"
+export PATH="$HOME/config/bin:$HOME/bin:$HOME/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/usr/local/cuda-7.0/bin:/usr/local/cuda-8.0/bin"
 
 # todo: try zaw for history search
 # todo currently not using anymore

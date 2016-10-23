@@ -2,12 +2,10 @@
 
 ./zsh.sh
 ./apt.sh
-# todo for now assuming no anaconda anymore
-sudo apt-get install -yq python python-pip build-essential
-sudo -H pip install --upgrade pip
 ./bin.sh
 ./git.sh
 ./ssh.sh
+./ssh_config.sh
 ./tmux.sh
 ./vim.sh
 ./powerline.sh

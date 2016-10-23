@@ -1,8 +1,7 @@
 #!/bin/bash -eux
 
-sudo apt-get install -qy zsh
-# todo maybe not hard-coded user?
-sudo chsh -s $(which zsh) kuettel # doesn't seem to take effect in the current session (tmux session?)
+sudo apt-get install -qy zsh zsh-doc
+sudo chsh -s $(which zsh) $(whoami) # doesn't seem to take effect in the current session (tmux session?)
 
 # antigen
 if [[ -d ~/antigen ]]; then
