@@ -163,7 +163,7 @@ map ,w5 :wincmd t<cr>:wincmd w<cr>:wincmd w<cr>:wincmd w<cr>:wincmd w<cr>
 map ,w6 :wincmd t<cr>:wincmd w<cr>:wincmd w<cr>:wincmd w<cr>:wincmd w<cr>:wincmd w<cr>
 
 " clear window for external commands, easier to read especially for fugitive
-set shell=~/bin/vim_shell.sh
+set shell=~/config/bin/vim_shell.sh
 
 " should globally disable any automatic inserting of new lines for longs lines
 set textwidth=0 wrapmargin=0
