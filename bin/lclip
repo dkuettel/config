@@ -1,3 +1,0 @@
-#!/bin/bash -xeu
-set -o pipefail
-ssh -p 2222 localhost xclip -d :0 -loops 1 -f

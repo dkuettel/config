@@ -1,7 +1,7 @@
 #!/bin/bash -eux
 
-sudo apt-get install -qy zsh
-chsh -s $(which zsh) # doesn't seem to take effect in the current session (tmux session?)
+sudo apt-get install -qy zsh zsh-doc
+sudo chsh -s $(which zsh) $(whoami) # doesn't seem to take effect in the current session (tmux session?)
 
 # antigen
 if [[ -d ~/antigen ]]; then
@@ -10,7 +10,6 @@ if [[ -d ~/antigen ]]; then
 else
 	git clone https://github.com/zsh-users/antigen.git ~/antigen
 fi
-
 
 if [[ -f ~/.zshrc ]]; then
 	if [[ $(realpath ~/config/zshrc) == $(realpath ~/.zshrc) ]]; then
@@ -24,8 +23,9 @@ else
 	ln -s ~/config/zshrc ~/.zshrc
 fi
 
-# ls colors
 [[ -d ~/plugins ]] || mkdir ~/plugins
+
+# ls colors
 if [[ -d ~/plugins/dircolors-solarized ]]
 then
 	echo 'dircolors solarized already installed'
@@ -35,7 +35,6 @@ else
 	git clone https://github.com/seebi/dircolors-solarized.git ~/plugins/dircolors-solarized
 fi
 
-[[ -d ~/plugins ]] || mkdir ~/plugins
 if [[ -d ~/plugins/fonts ]]
 then
 	echo 'fonts already installed'

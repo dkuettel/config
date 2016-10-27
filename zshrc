@@ -7,13 +7,26 @@ antigen bundle command-not-found
 antigen bundle per-directory-history
 # might be interesting: common-aliases compleat
 
-antigen bundle zsh-users/zaw
+# antigen bundle zsh-users/zaw # todo this one doesn't work anymore with the new antigen caching
+antigen bundle psprint/zsh-navigation-tools # todo also history, works, maybe better
 antigen bundle zsh-users/zsh-syntax-highlighting # note: might have to be the last to import
 
-# some themes: random, agnoster, blinks, robbyrussell, amuse, avit, blinks, funky, ys, pure, tjkirch
-antigen theme agnoster
+# some themes: random, agnoster, robbyrussell, amuse, avit, blinks, funky, ys, pure, tjkirch
+#antigen theme amuse
 
 antigen apply
+
+# adapted theme: amuse + tjkirch
+PROMPT='%(?, ,
+%{$fg[red]%}FAIL: $?%{$reset_color%}
+)
+%{$fg_bold[green]%}${PWD/#$HOME/~}%{$reset_color%}$(git_prompt_info) ⌚ %{$fg_bold[red]%}%*%{$reset_color%}
+$ '
+ZSH_THEME_GIT_PROMPT_PREFIX=" on %{$fg[magenta]%}\uE0A0 "
+ZSH_THEME_GIT_PROMPT_SUFFIX="%{$reset_color%}"
+ZSH_THEME_GIT_PROMPT_DIRTY="%{$fg[red]%}!"
+ZSH_THEME_GIT_PROMPT_UNTRACKED="%{$fg[green]%}?"
+ZSH_THEME_GIT_PROMPT_CLEAN=""
 
 # todo
 # antigen selfupdate # update antigen
@@ -21,10 +34,12 @@ antigen apply
 # antigen cleanup # remove what's not loaded right now
 
 # note: ~ does not expand, but $HOME does
-export PATH="$HOME/anaconda/bin:$HOME/bin:$HOME/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/usr/local/cuda-7.0/bin"
+# todo includes both cuda 7 and 8 for now
+export PATH="$HOME/config/bin:$HOME/bin:$HOME/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/usr/local/cuda-7.0/bin:/usr/local/cuda-8.0/bin"
 
 # todo: try zaw for history search
-bindkey '^R' zaw-history
+# todo currently not using anymore
+# bindkey '^R' zaw-history
 
 alias ls='ls --color=auto'
 alias lr='ls -hltrcF'
@@ -41,7 +56,7 @@ alias cdl='. cdl.sh'
 alias watch='watch -c'
 
 # color support for ls with the solarized theme
-# todo as bundle for antigen?
+# todo as bundle for antigen? have to make my own clone for that with a *.zsh to use for bundle
 eval `dircolors ~/plugins/dircolors-solarized/dircolors.ansi-light`
 
 # option -J is also interesting
@@ -87,13 +102,27 @@ _per-directory-history-set-global-history
 
 # some xpman shortcuts
 
+xp_check () {
+	if [ -L nn ]; then
+		echo 'nn is linked'
+	fi
+	if [ -L caffe ]; then
+		echo 'caffe is linked'
+	fi
+	if [ -L nn -o -L caffe ]; then
+		return 1
+	else
+		return 0
+	fi
+}
+
 xp_mag () { # mount and go to xp
 	if [ ! -d $1 ]; then
 		mkdir -p $1
 	fi
 	f=$(realpath $1)
 	echo 'mount and go ' $f
-	xpman mount_xp $f
+	xpman mount_xp --wait $f
 	cd $1
 }
 
@@ -104,12 +133,30 @@ xp_lau () { # leave and unmount cwd
 	xpman umount_xp $f
 }
 
-xp_las () { # leave and start on demand cwd
+xp_rem () { # remount for flushing to ebs
 	f=$(realpath $(pwd))
-	echo 'leave' $f 'and start' "$1"
+	xp_lau
+	xp_mag $f
+}
+
+xp_lad () { # leave and delete
+	f=$(realpath $(pwd))
 	cd $dev
+	echo 'leave and delete' $f
 	xpman umount_xp $f
-	xpman start_xp_on_demand $f "$1"
+	xpman delete_xp $f
+}
+
+xp_las () { # leave and start on demand cwd
+	if xp_check; then
+		f=$(realpath $(pwd)) &&
+		echo 'leave' $f 'and start' "$1" &&
+		cd $dev &&
+		xpman umount_xp $f &&
+		xpman start_xp_on_demand $f "$1" &&
+	else
+		return 1
+	fi
 }
 
 xp_replace () {
@@ -136,8 +183,17 @@ xp_cxp () { # change xp (unmount current, mount new)
 	cd $1
 }
 
-# copy latest snapshot to dev with proper naming for further training (stages)
-xp_snap () { s=$(ls snapshots/*.caffemodel | tail -n 1); x=$(basename $(realpath .)); x=$x[12,-1]; y=$(basename $s); cp $s $dev/${x}_$y }
+xp_fork () { # fork dev
+	xpman fork_xp_dated $dev $runs $1 $2
+}
+
+xp_grid () { # grid fork dev
+	xpman fork_xp_dated_grid $dev $runs "$@"
+}
+
+xp_find () {
+	xpman list_xps --raw --regexp $1
+}
 
 xp_ssh () {
 	xpman ssh_to_xp $1 --wait --ssh_opts='-t' --cmd='~/bin/tmux at'
@@ -148,24 +204,6 @@ rsync_cp () {
 	rsync -ah -L -r --info=progress2 $1 $2
 }
 
-xp_revals () {
-	echo "cd $1; for i in disney_test_closeup disney_challenge disney_realistic disney_white hotwheels_test_closeup hotwheels_test hotwheels_realistic hotwheels_white; do echo \$i; cat evals/\$i/last/confusion.txt | grep 'class average'; echo; done" | xpman ssh_cmd $1
-}
-
-xp_levals () {
-	for i in disney_test_closeup disney_challenge disney_realistic disney_white hotwheels_test_closeup hotwheels_test hotwheels_realistic hotwheels_white
-	do
-		echo $i
-		for k in evals/$i/*
-		do
-			echo -n $(basename $k) " "
-			cat $k/confusion.txt | grep 'class average'
-		done
-		echo
-	done
-	basename $(realpath evals/disney_challenge/last)
-}
-
 xp_watch () {
 	while true
 	do
@@ -173,17 +211,14 @@ xp_watch () {
 	done
 }
 
-xp_djf () {
-	for i in disney_test_closeup disney_challenge disney_realistic disney_white hotwheels_test_closeup hotwheels_test hotwheels_realistic hotwheels_white
-	do
-		echo $i
-		cat evals/$i/last/h1confusion.txt | grep class
-		cat evals/$i/last/q1confusion.txt | grep class
-		cat evals/$i/last/s1confusion.txt | grep class
-		echo
-	done
-}
-
 export PYTHONDONTWRITEBYTECODE=True # no .pyc files for python
 
 stty -ixon # disables flow control, for example ctrl-s
+
+export PATH="$PATH:/data/xps/metric/dev/nn/bin"
+
+rcd () {
+	# sometimes when current folder is invalid because it has been recreated
+	# rcd goes again to the same name but new inode
+	cd $(pwd)
+}
