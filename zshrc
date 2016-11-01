@@ -159,6 +159,18 @@ xp_las () { # leave and start on demand cwd
 	fi
 }
 
+xp_las2 () { # leave and start on demand cwd on old gpu instance
+	if xp_check; then
+		f=$(realpath $(pwd)) &&
+		echo 'leave' $f 'and start' "$1" &&
+		cd $dev &&
+		xpman umount_xp $f &&
+		xpman start_xp_on_demand $f "$1" --gpu_type=1old &&
+	else
+		return 1
+	fi
+}
+
 xp_replace () {
 	echo 'replace code with dev code'
 	rm -rf nn
