@@ -16,6 +16,20 @@ antigen bundle zsh-users/zsh-syntax-highlighting # note: might have to be the la
 
 antigen apply
 
+# history
+# todo doesn't seem to update "live" yet ?
+export HISTSIZE=1000000000
+export SAVEHIST=1000000000
+setopt append_history
+setopt extended_history
+setopt hist_expire_dups_first
+setopt hist_ignore_dups # ignore duplication command history list
+setopt hist_save_no_dups
+setopt hist_ignore_space
+setopt hist_verify
+setopt inc_append_history
+setopt share_history
+
 # adapted theme: amuse + tjkirch
 PROMPT='%(?, ,
 %{$fg[red]%}FAIL: $?%{$reset_color%}
