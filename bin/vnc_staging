@@ -1,0 +1,3 @@
+#!/bin/bash -eux
+set -o pipefail
+vncviewer -passwd ~/.vnc/passwd -via kuettel.dev.vuforia.com localhost:5901
