@@ -16,6 +16,20 @@ antigen bundle zsh-users/zsh-syntax-highlighting # note: might have to be the la
 
 antigen apply
 
+# history
+# todo doesn't seem to update "live" yet ?
+export HISTSIZE=1000000000
+export SAVEHIST=1000000000
+setopt append_history
+setopt extended_history
+setopt hist_expire_dups_first
+setopt hist_ignore_dups # ignore duplication command history list
+setopt hist_save_no_dups
+setopt hist_ignore_space
+setopt hist_verify
+setopt inc_append_history
+setopt share_history
+
 # adapted theme: amuse + tjkirch
 PROMPT='%(?, ,
 %{$fg[red]%}FAIL: $?%{$reset_color%}
@@ -159,6 +173,18 @@ xp_las () { # leave and start on demand cwd
 	fi
 }
 
+xp_las2 () { # leave and start on demand cwd on old gpu instance
+	if xp_check; then
+		f=$(realpath $(pwd)) &&
+		echo 'leave' $f 'and start' "$1" &&
+		cd $dev &&
+		xpman umount_xp $f &&
+		xpman start_xp_on_demand $f "$1" --gpu_type=1old &&
+	else
+		return 1
+	fi
+}
+
 xp_replace () {
 	echo 'replace code with dev code'
 	rm -rf nn
@@ -196,7 +222,7 @@ xp_find () {
 }
 
 xp_ssh () {
-	xpman ssh_to_xp $1 --wait --ssh_opts='-t' --cmd='~/bin/tmux at'
+	xpman ssh_to_xp $1 --wait --ssh_opts='-t' --cmd='tmux at'
 }
 
 # copy with progress, use rsync, not sure about $1/ or $1 without / and rsyncs semantics

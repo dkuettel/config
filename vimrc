@@ -19,10 +19,11 @@ set backspace=indent,eol,start " allow backspacing over everything in insert mod
 
 " navigate splits
 " todo does it disable the redraw on ctrl-l?
-nnoremap <C-J> <C-W><C-J>
-nnoremap <C-K> <C-W><C-K>
-nnoremap <C-L> <C-W><C-L>
-nnoremap <C-H> <C-W><C-H>
+"nnoremap  <c-w>j " todo since I moved to vim 8 <c-j> on the first arguent doesn't work anymore, had to actually use c-v c-j to make the character
+nnoremap <c-j> <c-w>j " todo since I moved to vim 8 <c-j> on the first arguent doesn't work anymore, had to actually use c-v c-j to make the character
+nnoremap <c-k> <c-w>k
+nnoremap <c-l> <c-w>l
+nnoremap <c-h> <c-w>h
 
 " solarized
 " set background=dark " the plugin considers dark the default, and it should fit with invertable colors
@@ -136,7 +137,7 @@ let g:syntastic_mode_map = {"mode":"passive"}
 nmap <leader>s :w<Cr>:SyntasticCheck<CR>
 
 " kinda cool, useful?
-inoremap jj <Esc>
+"inoremap jj <Esc>
 
 " notes
 " gi go to last insert mode in insert mode
