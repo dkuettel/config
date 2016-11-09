@@ -1,7 +1,7 @@
 #!/bin/bash -eux
 set -o pipefail
 
-ec2='aws --profile 'aws+dev' ec2 --region eu-west-1'
+ec2='aws --profile aws+dev ec2 --region eu-west-1'
 
 iid=$($ec2 describe-instances --filters Name=tag:Name,Values=dl_staging_kuettel | jq '.Reservations[0].Instances[0].InstanceId' -r)
 $ec2 start-instances --instance-ids $iid
