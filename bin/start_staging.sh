@@ -4,10 +4,13 @@ set -o pipefail
 ec2='aws --profile aws+dev ec2 --region eu-west-1'
 
 iid=$($ec2 describe-instances --filters Name=tag:Name,Values=dl_staging_kuettel | jq '.Reservations[0].Instances[0].InstanceId' -r)
-$ec2 start-instances --instance-ids $iid
+ip=$($ec2 describe-instances --instance-ids $iid | jq '.Reservations[0].Instances[0].PublicIpAddress' -r)
 
-ip=null
-until [ $ip != null ]; do
+if [ $ip == 'null' ]; then
+	$ec2 start-instances --instance-ids $iid
+fi
+
+until [ $ip != 'null' ]; do
 	sleep 3
 	ip=$($ec2 describe-instances --instance-ids $iid | jq '.Reservations[0].Instances[0].PublicIpAddress' -r)
 done
