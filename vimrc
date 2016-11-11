@@ -19,7 +19,7 @@ set backspace=indent,eol,start " allow backspacing over everything in insert mod
 
 " navigate splits
 " todo does it disable the redraw on ctrl-l?
-"nnoremap  <c-w>j " todo since I moved to vim 8 <c-j> on the first arguent doesn't work anymore, had to actually use c-v c-j to make the character
+nnoremap  <c-w>j " todo since I moved to vim 8 <c-j> on the first arguent doesn't work anymore, had to actually use c-v c-j to make the character
 nnoremap <c-j> <c-w>j " todo since I moved to vim 8 <c-j> on the first arguent doesn't work anymore, had to actually use c-v c-j to make the character
 nnoremap <c-k> <c-w>k
 nnoremap <c-l> <c-w>l
