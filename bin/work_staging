@@ -1,0 +1,11 @@
+#!/bin/bash -xeu
+set -o pipefail
+
+if tmux list-sessions | grep staging; then
+	tmux attach-session -t staging
+else
+	mount_typical
+	tmux_dev staging no
+	tmux new-window 'xpman mount_all_attached_xps'
+	tmux attach-session -t staging
+fi
