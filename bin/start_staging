@@ -15,6 +15,6 @@ until [ $ip != 'null' ]; do
 	ip=$($ec2 describe-instances --instance-ids $iid | jq '.Reservations[0].Instances[0].PublicIpAddress' -r)
 done
 
-until ssh -o StrictHostKeyChecking=no -o ConnectTimeout=5 -L 5901:localhost:5901 -R 2222:localhost:22 $ip 'work_staging; zsh'; do
+until ssh -o StrictHostKeyChecking=no -o ConnectTimeout=5 -L 5901:localhost:5901 -R 2222:localhost:22 $ip; do
 	sleep 1
 done
