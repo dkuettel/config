@@ -7,5 +7,6 @@ else
 	mount_typical
 	tmux_dev staging no
 	tmux new-window 'xpman mount_all_attached_xps'
+	tmux new-window 'vnc_office.sh'
 	tmux attach-session -t staging
 fi
