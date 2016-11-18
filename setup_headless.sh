@@ -2,6 +2,7 @@
 
 ./zsh.sh
 ./apt.sh
+./python.sh
 ./bin.sh
 ./git.sh
 ./ssh.sh
