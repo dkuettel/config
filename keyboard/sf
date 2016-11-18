@@ -3,8 +3,8 @@ xkb_symbols "basic" {
 
     name[Group1]= "English (SF)";
 
-    key <LSGT> {	[     grave,	asciitilde	]	};
-    key <TLDE> {	[    Escape,	Escape		]	};
+    key <TLDE> {	[     grave,	asciitilde	]	};
+    key <LSGT> {	[    Escape,	Escape		]	};
     key <AE01> {	[	  1,	exclam 		]	};
     key <AE02> {	[	  2,	at		]	};
     key <AE03> {	[	  3,	numbersign	]	};
