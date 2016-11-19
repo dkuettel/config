@@ -1,5 +1,5 @@
-#!/bin/bash
-set -ex
+#!/bin/bash -eux
+set -o pipefail
 
 [[ -d ~/plugins ]] || mkdir ~/plugins
 
@@ -14,4 +14,5 @@ else
 	sudo apt-get install dconf-cli
 	./install.sh
 	# or maybe set_light.sh ?
+	# todo how to make it unattended? directly copy config files?
 fi
