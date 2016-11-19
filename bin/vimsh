@@ -1,13 +1,15 @@
-#!/bin/bash -xeu
+#!/bin/bash -eux
 set -o pipefail
+
 if [ -f $1 ]; then
-echo $1 'already exists'
-exit 1
+	echo $1 'already exists'
+	exit 1
 else
-cat <<EOF > $1
-#!/bin/bash -xeu
+	cat <<EOF > $1
+#!/bin/bash -eux
 set -o pipefail
+
 EOF
-chmod +x $1
-vim + $1
+	chmod +x $1
+	vim + $1
 fi
