@@ -1,4 +1,5 @@
 #!/bin/bash -eux
+set -o pipefail
 
 sudo apt-get install -qy zsh zsh-doc
 sudo chsh -s $(which zsh) $(whoami) # doesn't seem to take effect in the current session (tmux session?)
@@ -34,16 +35,3 @@ then
 else
 	git clone https://github.com/seebi/dircolors-solarized.git ~/plugins/dircolors-solarized
 fi
-
-if [[ -d ~/plugins/fonts ]]
-then
-	echo 'fonts already installed'
-	cd ~/plugins/fonts
-	git pull
-else
-	git clone https://github.com/powerline/fonts.git ~/plugins/fonts
-	cd ~/plugins/fonts
-	./install.sh
-fi
-
-echo 'remember to select a patched font in your terminal'
