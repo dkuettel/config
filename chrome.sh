@@ -1,6 +1,11 @@
 #!/bin/bash -eux
-sudo apt-get install -yq google-chrome-stable
-#wget https://dl-ssl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
-#sudo apt-get -f install libindicator7 libappindicator1 # in ubuntu 14.04 this dependency was missing
-#sudo dpkg -i google-chrome-stable_current_amd64.deb
-#rm google-chrome-stable_current_amd64.deb
+set -o pipefail
+
+if which google-chrome; then
+	echo 'google-chrome already installed'
+else
+	wget https://dl-ssl.google.com/linux/direct/google-chrome-stable_current_amd64.deb -O google-chrome.deb
+	sudo apt-get -f install libindicator7 libappindicator1 libpango1.0-0 libpangox-1.0-0
+	sudo dpkg -i google-chrome.deb
+	rm google-chrome.deb
+fi
