@@ -27,7 +27,7 @@ nnoremap <c-h> <c-w>h
 
 " solarized
 " todo why does it not flip dark/light by just changing the terminals colors?
-" set background=dark " the plugin considers dark the default, and it should fit with invertable colors
+set background=dark " the plugin considers dark the default, and it should fit with invertable colors
 let g:solarized_termcolors=16 " 16 is better if set right, 256 is the compatible fixed color mode
 let g:solarized_visibility="normal" " set list to see nonprint characters
 colorscheme solarized
