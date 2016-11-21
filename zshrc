@@ -144,6 +144,7 @@ xp_mag () { # mount and go to xp
 }
 
 xp_lau () { # leave and unmount cwd
+	until findmnt . > /dev/null; do cd ..; done
 	f=$(realpath $(pwd))
 	cd $dev
 	echo 'leave and unmount' $f
