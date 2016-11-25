@@ -169,3 +169,11 @@ set shell=~/config/bin/vim_shell.sh
 
 " should globally disable any automatic inserting of new lines for longs lines
 set textwidth=0 wrapmargin=0
+
+" trying out some new (tab) navigation
+" remember: c-w } for tag in preview window
+map T :tab split<cr>
+map ,D :tab split<cr>,d
+map tc :tabclose<cr>
+let g:jedi#goto_command = ''
+nmap ,d :call jedi#goto()<CR>zt " not sure if that is the best way, maybe there is a global setting for how it always centers on the cursor when you move around?
