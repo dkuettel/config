@@ -3,7 +3,6 @@ set -o pipefail
 
 echo 'assumes headless already setup'
 
-# todo spotify and shortcuts
 # todo dropbox?
 
 ./keyboard.sh
@@ -11,3 +10,4 @@ echo 'assumes headless already setup'
 ./fonts.sh
 ./gnome-terminal.sh
 ./chrome.sh
+./spotify.sh
