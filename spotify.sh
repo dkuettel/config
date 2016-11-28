@@ -1,24 +1,21 @@
-#!/bin/bash
+#!/bin/bash -eux
+set -o pipefail
 
-if [[ ! -f /usr/bin/spotify ]]
-then
-	echo 'deb http://repository.spotify.com stable non-free' | sudo tee -a /etc/apt/sources.list
-	sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys 94558F59
-	sudo apt-get update
-	sudo apt-get install -y spotify-client
+if [ ! -e /usr/bin/spotify ]; then
+	sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys BBEBDCB318AD50EC6865090613B00F1FD2C19886
+	echo deb http://repository.spotify.com stable non-free | sudo tee /etc/apt/sources.list.d/spotify.list
+	sudo apt update
+	sudo apt install -y spotify-client
 	echo 'ui.track_notifications_enabled=false' | tee -a /home/kuettel/.config/spotify/Users/118264891-user/prefs
 fi
 
-mkdir ~/plugins
+[ -d ~/plugins ] || mkdir ~/plugins
 
+# playerctl
 cd ~/plugins
-if [[ ! -d playerctl ]]
-then
-	git clone https://github.com/acrisci/playerctl.git
-fi
+[ -d playerctl ] || git clone https://github.com/acrisci/playerctl.git
 cd playerctl
 git pull
-
-sudo apt-get install -y gtk-doc-tools gobject-introspection
+sudo apt install -y gtk-doc-tools gobject-introspection
 ./autogen.sh
 make

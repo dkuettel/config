@@ -3,11 +3,11 @@ set -o pipefail
 
 echo 'assumes headless already setup'
 
-# todo keyboard layout
-# todo xmoand
-# todo spotify and shortcuts
 # todo dropbox?
 
+./keyboard.sh
+./xmonad.sh
 ./fonts.sh
 ./gnome-terminal.sh
 ./chrome.sh
+./spotify.sh

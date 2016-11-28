@@ -1,0 +1,6 @@
+# todo: should only be used when inside a vmware
+# todo: ubuntu seems to be running above PLUS /usr/bin/vmtoolsd -n vmusr --blockFd 3
+[ -e /usr/bin/vmtoolsd ] && /usr/bin/vmtoolsd -n vmusr &
+
+xset r rate 200 50
+setxkbmap -layout sf

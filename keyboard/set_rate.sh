@@ -1,2 +1,2 @@
 #!/bin/bash -xeu
-xet r rate 200 50
+xset r rate 200 50
