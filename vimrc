@@ -101,11 +101,13 @@ let g:easytags_auto_highlight = 1 " todo might slow down vim
 " let g:easytags_opts = 1 " todo async call seems to not work yet, vim8 has built-in async call maybe instead
 " let g:easytags_autorecurse = 1 " todo unfortunately does it also on autosave, not just :UpdateTags
 
-" try airline
+" airline
 set laststatus=2 " not sure if needed
 let g:airline_powerline_fonts=1
 let g:airline#extensions#tabline#enabled = 1
-let g:airline#extenstions#tabline#fnamemod = ':t'
+let g:airline#extensions#tabline#tab_nr_type = 1 " show tab id
+let g:airline#extensions#tabline#fnamemod = ':t'
+let g:airline#extensions#tabline#show_close_button = 0
 
 " trying autosave and co
 set autoread " autoread files if changed outside and not locally, on focus events, does not work out of the box in tmux vim
