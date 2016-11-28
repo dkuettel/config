@@ -174,6 +174,7 @@ set textwidth=0 wrapmargin=0
 " remember: c-w } for tag in preview window
 map T :tab split<cr>
 map ,D :tab split<cr>,d
+nmap ,sd <c-w>s,d
 map tc :tabclose<cr>
 let g:jedi#goto_command = ''
 nmap ,d :call jedi#goto()<CR>zt " not sure if that is the best way, maybe there is a global setting for how it always centers on the cursor when you move around?
