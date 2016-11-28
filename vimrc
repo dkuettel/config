@@ -172,6 +172,7 @@ set textwidth=0 wrapmargin=0
 
 " trying out some new (tab) navigation
 " remember: c-w } for tag in preview window
+" remember: {tabid}gt to jump directly to a tab
 map T :tab split<cr>
 map ,D :tab split<cr>,d
 nmap ,sd <c-w>s,d
