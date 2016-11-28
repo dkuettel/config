@@ -171,7 +171,7 @@ xp_las_new () { # leave and start on demand cwd
 		echo 'leave' $f 'and start' "$1" &&
 		cd $dev &&
 		xpman umount_xp $f &&
-		xpman start_xp_on_demand $f "$1" && --gpu_type=1new
+		xpman start_xp_on_demand $f "$1" --gpu_type=1new
 	else
 		return 1
 	fi
