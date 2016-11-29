@@ -4,6 +4,7 @@ import XMonad.Hooks.ManageDocks
 import XMonad.Hooks.EwmhDesktops
 import XMonad.Util.Run(spawnPipe)
 import XMonad.Util.EZConfig(additionalKeysP)
+import XMonad.Util.EZConfig(additionalKeys)
 import System.IO
 
 main = do
@@ -21,4 +22,6 @@ main = do
 		, ("<F7>",spawn "~/plugins/playerctl/playerctl/playerctl previous")
 		, ("M-S-l",spawn "/usr/bin/slock")
 		, ("M-S-h",sendMessage Expand) -- when running virtual in windows host, win-L doesn't work well
+		] `additionalKeys`
+		[ ((mod4Mask, xK_p), spawn "dmenu_run -i -l 50 -p '>'")
 		]
