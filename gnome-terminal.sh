@@ -14,3 +14,5 @@ else
 	sudo apt-get install dconf-cli
 	./install.sh -s dark -p :b1dcc9dd-5262-4d8d-a863-c897e6d979b9 --skip-dircolors
 fi
+
+# todo how to configure gnome-terminal by CLI not to startup help on F1
