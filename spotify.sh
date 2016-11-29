@@ -6,7 +6,9 @@ if [ ! -e /usr/bin/spotify ]; then
 	echo deb http://repository.spotify.com stable non-free | sudo tee /etc/apt/sources.list.d/spotify.list
 	sudo apt update
 	sudo apt install -y spotify-client
-	echo 'ui.track_notifications_enabled=false' | tee -a /home/kuettel/.config/spotify/Users/118264891-user/prefs
+	# todo not sure if that will work, the spotify folder and prefs only get created when it's started the first time
+	mkdir -p ~/.config/spotify/Users/dkuettel-user
+	cp spotify/prefs ~/.config/spotify/Users/dkuettel-user
 fi
 
 [ -d ~/plugins ] || mkdir ~/plugins
