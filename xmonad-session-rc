@@ -4,3 +4,4 @@
 
 xset r rate 200 50
 setxkbmap -layout sf
+feh --bg-scale ~/config/xmonad/5_stripes_landscape.jpg
