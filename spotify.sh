@@ -18,6 +18,6 @@ cd ~/plugins
 [ -d playerctl ] || git clone https://github.com/acrisci/playerctl.git
 cd playerctl
 git pull
-sudo apt install -y gtk-doc-tools gobject-introspection
+sudo apt install -y gtk-doc-tools gobject-introspection libglib2.0-dev
 ./autogen.sh
 make
