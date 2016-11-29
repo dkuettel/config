@@ -9,3 +9,5 @@ else
 	sudo dpkg -i google-chrome.deb
 	rm google-chrome.deb
 fi
+
+# todo how to automatically configure "use system title bar and borders"? it works better with xmonad
