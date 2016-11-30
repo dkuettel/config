@@ -249,6 +249,8 @@ xp_watch () {
 	done
 }
 
+alias xpc='python -m nn.xp_config'
+
 export PYTHONDONTWRITEBYTECODE=True # no .pyc files for python
 
 stty -ixon # disables flow control, for example ctrl-s
