@@ -66,8 +66,12 @@ alias d-='popd'
 #alias ..='cd ..'
 #alias ...='cd ../..'
 #alias lrt='ls -hltrcF --color=always | tail' # use script in ~/bin instead
-alias cdl='. cdl.sh'
 alias watch='watch -c'
+
+cdl () {
+	cd $1 &&
+	lr
+}
 
 # color support for ls with the solarized theme
 # todo as bundle for antigen? have to make my own clone for that with a *.zsh to use for bundle
