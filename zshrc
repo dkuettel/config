@@ -123,7 +123,7 @@ _per-directory-history-set-global-history
 
 # some xpman shortcuts
 
-xp_check () {
+xp-check () {
 	if [ -L nn ]; then
 		echo 'nn is linked'
 	fi
@@ -137,7 +137,7 @@ xp_check () {
 	fi
 }
 
-xp_mag () { # mount and go to xp
+xp-mag () { # mount and go to xp
 	if [ ! -d $1 ]; then
 		mkdir -p $1
 	fi
@@ -147,7 +147,7 @@ xp_mag () { # mount and go to xp
 	cd $1
 }
 
-xp_lau () { # leave and unmount cwd
+xp-lau () { # leave and unmount cwd
 	until findmnt . > /dev/null; do cd ..; done
 	f=$(realpath $(pwd))
 	cd $dev
@@ -155,13 +155,13 @@ xp_lau () { # leave and unmount cwd
 	xpman umount_xp $f
 }
 
-xp_rem () { # remount for flushing to ebs
+xp-rem () { # remount for flushing to ebs
 	f=$(realpath $(pwd))
-	xp_lau
-	xp_mag $f
+	xp-lau
+	xp-mag $f
 }
 
-xp_lad () { # leave and delete
+xp-lad () { # leave and delete
 	f=$(realpath $(pwd))
 	cd $dev
 	echo 'leave and delete' $f
@@ -169,8 +169,8 @@ xp_lad () { # leave and delete
 	xpman delete_xp $f
 }
 
-xp_las_new () { # leave and start on demand cwd
-	if xp_check; then
+xp-las_new () { # leave and start on demand cwd
+	if xp-check; then
 		f=$(realpath $(pwd)) &&
 		echo 'leave' $f 'and start' "$1" &&
 		cd $dev &&
@@ -181,8 +181,8 @@ xp_las_new () { # leave and start on demand cwd
 	fi
 }
 
-xp_las_old () { # leave and start on demand cwd on old gpu instance
-	if xp_check; then
+xp-las-old () { # leave and start on demand cwd on old gpu instance
+	if xp-check; then
 		f=$(realpath $(pwd)) &&
 		echo 'leave' $f 'and start' "$1" &&
 		cd $dev &&
@@ -194,21 +194,21 @@ xp_las_old () { # leave and start on demand cwd on old gpu instance
 }
 
 
-xp_tam () { # terminate and mag (mount and go)
+xp-tam () { # terminate and mag (mount and go)
 	f=$(realpath $1)
 	xpman terminate_xp --wait $f
-	xp_mag $f
+	xp-mag $f
 }
 
 
-xp_replace () {
+xp-replace () {
 	echo 'replace code with dev code'
 	rm -rf nn
 	cp -r $dev/nn .
 	rm -rf caffe
 	cp -r $dev/caffe .
 }
-xp_link () {
+xp-link () {
 	echo 'link to code from dev'
 	rm -rf nn
 	ln -sf $dev/nn nn
@@ -216,7 +216,7 @@ xp_link () {
 	ln -sf $dev/caffe caffe
 }
 
-xp_cxp () { # change xp (unmount current, mount new)
+xp-cxp () { # change xp (unmount current, mount new)
 	echo 'change to xp' $1
 	a=$(realpath .)
 	cd $dev
@@ -225,19 +225,19 @@ xp_cxp () { # change xp (unmount current, mount new)
 	cd $1
 }
 
-xp_fork () { # fork dev
+xp-fork () { # fork dev
 	xpman fork_xp_dated $dev $runs $1 $2
 }
 
-xp_grid () { # grid fork dev
+xp-grid () { # grid fork dev
 	xpman fork_xp_dated_grid $dev $runs "$@"
 }
 
-xp_find () {
+xp-find () {
 	xpman list_xps --raw --regexp $1
 }
 
-xp_ssh () {
+xp-ssh () {
 	xpman ssh_to_xp $1 --wait --ssh_opts='-t' --cmd='tmux at'
 }
 
@@ -246,7 +246,7 @@ rsync_cp () {
 	rsync -ah -L -r --info=progress2 $1 $2
 }
 
-xp_watch () {
+xp-watch () {
 	while true
 	do
 		xpman list_xps --reverse | less -c
