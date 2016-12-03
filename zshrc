@@ -35,12 +35,18 @@ PROMPT='%(?, ,
 %{$fg[red]%}FAIL: $?%{$reset_color%}
 )
 %{$fg_bold[green]%}${PWD/#$HOME/~}%{$reset_color%}$(git_prompt_info) ⌚ %{$fg_bold[red]%}%*%{$reset_color%}
-$ '
+${${KEYMAP/vicmd/N}/(main|viins)/I}> '
 ZSH_THEME_GIT_PROMPT_PREFIX=" on %{$fg[magenta]%}\uE0A0 "
 ZSH_THEME_GIT_PROMPT_SUFFIX="%{$reset_color%}"
 ZSH_THEME_GIT_PROMPT_DIRTY="%{$fg[red]%}!"
 ZSH_THEME_GIT_PROMPT_UNTRACKED="%{$fg[green]%}?"
 ZSH_THEME_GIT_PROMPT_CLEAN=""
+function zle-line-init zle-keymap-select {
+	zle reset-prompt
+}
+zle -N zle-line-init
+zle -N zle-keymap-select
+# todo I don't understand why I can do all in PROMPT (using KEYMAP), but KEYMAP is only set when it's triggered with a reset-prompt?
 
 # todo
 # antigen selfupdate # update antigen
@@ -86,7 +92,7 @@ export LESS="-j.3 -WRSXc"
 
 # try vim mode for zle
 bindkey -v
-export KEYTIMEMOUT=1 # quicker reaction to mode change (might interfere with other things)
+export KEYTIMEMOUT=1 # quicker reaction to mode change (might interfere with other things) (1=0.1seconds)
 # Use vim cli mode
 bindkey '^P' up-history
 bindkey '^N' down-history
