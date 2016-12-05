@@ -24,6 +24,8 @@ else
 	ln -s ~/config/zshrc ~/.zshrc
 fi
 
+ln -sf ~/config/antigenrc ~/.antigenrc
+
 [[ -d ~/plugins ]] || mkdir ~/plugins
 
 # ls colors

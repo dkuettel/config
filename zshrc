@@ -1,20 +1,7 @@
 source ~/antigen/antigen.zsh
-
-# todo where do the oh-my-zsh settings go?
-DISABLE_AUTO_UPDATE="true" # todo it will happen with antigen update?
-antigen use oh-my-zsh
-antigen bundle command-not-found
-antigen bundle per-directory-history
-# might be interesting: common-aliases compleat
-
-# antigen bundle zsh-users/zaw # todo this one doesn't work anymore with the new antigen caching
-antigen bundle psprint/zsh-navigation-tools # todo also history, works, maybe better
-antigen bundle zsh-users/zsh-syntax-highlighting # note: might have to be the last to import
-
-# some themes: random, agnoster, robbyrussell, amuse, avit, blinks, funky, ys, pure, tjkirch
-#antigen theme amuse
-
-antigen apply
+antigen init ~/.antigenrc # todo does it really make it faster?
+# This setup further improves cache performance (~0.02s). One caveat: antigen-init command doesn't look into bundle configuration changes, thus you'll need to use antigen-reset to reload plugins.
+# see https://github.com/zsh-users/antigen/wiki/Cookbook#init-command
 
 # history
 # todo doesn't seem to update "live" yet ?
