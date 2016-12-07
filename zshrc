@@ -141,11 +141,12 @@ xp-mag () { # mount and go to xp
 }
 
 xp-lau () { # leave and unmount cwd
+	before=$(pwd)
 	until findmnt . > /dev/null; do cd ..; done
 	f=$(realpath $(pwd))
 	cd $dev
 	echo 'leave and unmount' $f
-	xpman umount_xp $f
+	xpman umount_xp $f || cd $before
 }
 
 xp-rem () { # remount for flushing to ebs
