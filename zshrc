@@ -59,7 +59,7 @@ alias d-='popd'
 #alias ..='cd ..'
 #alias ...='cd ../..'
 #alias lrt='ls -hltrcF --color=always | tail' # use script in ~/bin instead
-alias watch='watch --color'
+alias watch='watch --color ' # an alias ending with a space allows for more alias expansion after that, so now watch ll should work (for example)
 
 cdl () {
 	cd $1 &&
