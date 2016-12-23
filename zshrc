@@ -163,7 +163,7 @@ xp-lad () { # leave and delete
 	xpman delete_xp $f
 }
 
-xp-las_new () { # leave and start on demand cwd
+xp-las-new () { # leave and start on demand cwd
 	if xp-check; then
 		f=$(realpath $(pwd)) &&
 		echo 'leave' $f 'and start' "$1" &&
