@@ -182,3 +182,9 @@ nmap ,vd <c-w>v,d
 map tc :tabclose<cr>
 let g:jedi#goto_command = ''
 nmap ,d :call jedi#goto()<CR>zt " not sure if that is the best way, maybe there is a global setting for how it always centers on the cursor when you move around?
+
+" try dealing with long lines
+set breakindent " visually breaks lines using the same indentation
+set showbreak= " characters to show on a continued line (todo some cool powerline font character?
+set nowrap " do or don't viusally break linkes (does not change text)
+map ,ww :set wrap!<cr> " toggle wrapping (on or off)
