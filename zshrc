@@ -187,27 +187,36 @@ xp-las-old () { # leave and start on demand cwd on old gpu instance
 	fi
 }
 
-
 xp-tam () { # terminate and mag (mount and go)
 	f=$(realpath $1)
 	xpman terminate_xp --wait $f
 	xp-mag $f
 }
 
-
 xp-replace () {
-	echo 'replace code with dev code'
-	rm -rf nn
-	cp -r $dev/nn .
-	rm -rf caffe
-	cp -r $dev/caffe .
+	if [ $(realpath .) = $(realpath $dev) ]; then
+		echo 'cannot replace when inside dev'
+		return 1
+	else
+		echo 'replace code with dev code'
+		rm -rf nn
+		cp -r $dev/nn .
+		rm -rf caffe
+		cp -r $dev/caffe .
+	fi
 }
+
 xp-link () {
-	echo 'link to code from dev'
-	rm -rf nn
-	ln -sf $dev/nn nn
-	rm -rf caffe
-	ln -sf $dev/caffe caffe
+	if [ $(realpath .) = $(realpath $dev) ]; then
+		echo 'cannot link when inside dev'
+		return 1
+	else
+		echo 'link to code from dev'
+		rm -rf nn
+		ln -sf $dev/nn nn
+		rm -rf caffe
+		ln -sf $dev/caffe caffe
+	fi
 }
 
 xp-cxp () { # change xp (unmount current, mount new)
