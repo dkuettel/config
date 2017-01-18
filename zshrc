@@ -207,14 +207,25 @@ xp-replace () {
 }
 
 xp-link () {
+	# todo this would better be a script with -eux, only few need to be functions
 	if [ $(realpath .) = $(realpath $dev) ]; then
 		echo 'cannot link when inside dev'
 		return 1
 	else
 		echo 'link to code from dev'
-		rm -rf nn
+		if [ -d nn.removing ]; then
+			echo 'nn.removing exists already'
+			return 1
+		fi
+		mv nn nn.removing
+		rm -rf nn.removing &
 		ln -sf $dev/nn nn
-		rm -rf caffe
+		if [ -d caffe.removing ]; then
+			echo 'caffe.removing exists already'
+			return 1
+		fi
+		mv caffe caffe.removing
+		rm -rf caffe.removing &
 		ln -sf $dev/caffe caffe
 	fi
 }
