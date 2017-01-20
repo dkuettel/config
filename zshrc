@@ -60,7 +60,6 @@ alias d-='popd'
 #alias ...='cd ../..'
 #alias lrt='ls -hltrcF --color=always | tail' # use script in ~/bin instead
 alias watch='watch --color -n 1 ' # an alias ending with a space allows for more alias expansion after that, so now watch ll should work (for example)
-alias fehps='feh logs/plots/losses.png logs/plots/lr.png'
 
 cdl () {
 	cd $1 &&
@@ -266,6 +265,13 @@ xp-watch () {
 	do
 		xpman list_xps --reverse | less -c
 	done
+}
+
+xp-feh () {
+	cat info.txt
+	feh logs/plots/losses.png
+	feh logs/plots/lr.png
+	feh evals/last/cad/conf_ops.png
 }
 
 alias xpc='python -m nn.xp_config'
