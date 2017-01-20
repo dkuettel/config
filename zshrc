@@ -270,9 +270,10 @@ xp-watch () {
 
 xp-feh () {
 	cat info.txt
-	ffeh logs/plots/losses.png
-	ffeh logs/plots/lr.png
-	ffeh evals/last/cad/conf_ops.png
+	./sxp scores2
+	ffeh logs/plots/losses.png >/dev/null 2>&1
+	ffeh logs/plots/lr.png >/dev/null 2>&1
+	ffeh evals/last/cad/conf_ops.png >/dev/null 2>&1
 }
 
 alias xpc='python -m nn.xp_config'
