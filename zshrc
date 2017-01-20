@@ -104,6 +104,7 @@ setopt extendedglob
 
 # for feh to work well with tiling window manager
 alias feh='feh --auto-zoom --scale-down --draw-filename --draw-tinted'
+alias ffeh='feh --fullscreen --draw-filename --draw-tinted'
 
 # for mosh, but in general, i'm not comfortable with all the LC settings
 export LC_ALL=en_US.UTF-8
@@ -269,9 +270,9 @@ xp-watch () {
 
 xp-feh () {
 	cat info.txt
-	feh logs/plots/losses.png
-	feh logs/plots/lr.png
-	feh evals/last/cad/conf_ops.png
+	ffeh logs/plots/losses.png
+	ffeh logs/plots/lr.png
+	ffeh evals/last/cad/conf_ops.png
 }
 
 alias xpc='python -m nn.xp_config'
