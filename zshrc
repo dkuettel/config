@@ -200,10 +200,10 @@ xp-replace () {
 		return 1
 	else
 		echo 'replace code with dev code'
-		rm -rf nn
-		cp -r $dev/nn .
-		rm -rf caffe
-		cp -r $dev/caffe .
+		(rm -rf nn && cp -r $dev/nn .) &
+		(rm -rf caffe && cp -r $dev/caffe .) &
+		echo 'wait'
+		wait
 	fi
 }
 
@@ -288,4 +288,9 @@ rcd () {
 	# sometimes when current folder is invalid because it has been recreated
 	# rcd goes again to the same name but new inode
 	cd $(pwd)
+}
+
+
+xp-py () {
+	ipython --InteractiveShellApp.code_to_run='import nn.xp_config as xpc' -i
 }
