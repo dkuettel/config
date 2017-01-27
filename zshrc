@@ -253,7 +253,7 @@ xp-find () {
 }
 
 xp-ssh () {
-	xpman ssh_to_xp $1 --wait --ssh_opts='-t' --cmd='tmux at'
+	xpman issh $1 --wait
 }
 
 # copy with progress, use rsync, not sure about $1/ or $1 without / and rsyncs semantics
