@@ -269,6 +269,7 @@ xp-watch () {
 }
 
 xp-feh () {
+	echo $(realpath .)
 	cat info.txt
 	./sxp scores2
 	ffeh logs/plots/losses.png >/dev/null 2>&1
