@@ -271,7 +271,7 @@ xp-watch () {
 xp-feh () {
 	echo $(realpath .)
 	cat info.txt
-	./sxp scores2
+	./sxp scores
 	ffeh logs/plots/losses.png >/dev/null 2>&1
 	ffeh logs/plots/lr.png >/dev/null 2>&1
 	ffeh evals/last/cad/conf_ops.png >/dev/null 2>&1
