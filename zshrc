@@ -295,5 +295,5 @@ rcd () {
 
 
 xp-py () {
-	ipython --InteractiveShellApp.code_to_run='import nn.xp_config as xpc' -i
+	ipython --InteractiveShellApp.code_to_run='import nn.xp_config as xpc; c = xpc.load()' -i
 }
