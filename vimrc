@@ -188,3 +188,9 @@ set breakindent " visually breaks lines using the same indentation
 set showbreak= " characters to show on a continued line (todo some cool powerline font character?
 set nowrap " do or don't viusally break linkes (does not change text)
 map ,ww :set wrap!<cr> " toggle wrapping (on or off)
+
+" try custom python import
+function! Test_import()
+pyfile ~/toys/test.vim.py
+endfunc
+nmap <c-i> :call Test_import()<cr>
