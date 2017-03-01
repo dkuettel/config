@@ -19,8 +19,8 @@ set backspace=indent,eol,start " allow backspacing over everything in insert mod
 
 " navigate splits
 " todo does it disable the redraw on ctrl-l?
-nnoremap  <c-w>j " todo since I moved to vim 8 <c-j> on the first arguent doesn't work anymore, had to actually use c-v c-j to make the character
-nnoremap <c-j> <c-w>j " todo since I moved to vim 8 <c-j> on the first arguent doesn't work anymore, had to actually use c-v c-j to make the character
+nnoremap  <c-w>j " todo since I moved to vim 8 <c-j> on the first argument doesn't work anymore, had to actually use c-v c-j to make the character
+nnoremap <c-j> <c-w>j " todo since I moved to vim 8 <c-j> on the first argument doesn't work anymore, had to actually use c-v c-j to make the character
 nnoremap <c-k> <c-w>k
 nnoremap <c-l> <c-w>l
 nnoremap <c-h> <c-w>h
@@ -62,6 +62,7 @@ let g:ctrlp_switch_buffer = 0 " don't switch between splits when selecting a fil
 let g:ctrlp_match_window = 'bottom,order:btt,min:1,max:20,results:20'
 let g:ctrlp_map = '<c-p>'
 let g:ctrlp_cmd = 'CtrlP'
+let g:ctrlp_match_current_file = 1 " match files even when it's the current file
 nnoremap <leader>. :CtrlPTag<cr>
 nnoremap <leader>t :CtrlPBufTag<cr>
 nnoremap <leader>b :CtrlPBuffer<cr>
