@@ -1,0 +1,10 @@
+blueman-manager to find headphones and pair
+unity-control-center to get to sound settings an choose headphones for output
+
+from https://sandalov.org/blog/2146/
+Add to /etc/pulse/default.pa
+.ifexists module-bluetooth-discover.so
+load-module module-bluetooth-discover
+load-module module-switch-on-connect  # Add this
+.endif
+seems to work
