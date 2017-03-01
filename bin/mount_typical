@@ -1,20 +1,20 @@
 #!/bin/bash -eux
 set -o pipefail
 
-if mountpoint /data/xps/metric/dev; then
-	echo '/data/xps/metric/dev is already mounted'
-else
-	sudo mount /dev/xvdf /data/xps/metric/dev
-fi
+#if mountpoint /data/xps/metric/dev; then
+	#echo '/data/xps/metric/dev is already mounted'
+#else
+	#sudo mount /dev/xvdf /data/xps/metric/dev
+#fi
 
 if mountpoint /data/sets; then
 	echo '/data/sets is already mounted'
 else
-	sudo mount /dev/xvdg /data/sets
+	sudo mount /dev/xvdf /data/sets
 fi
 
-if mountpoint ~/old_root; then
-	echo '~/old_root is already mounted'
+if mountpoint /data/testsets; then
+	echo '/data/testsets is already mounted'
 else
-	sudo mount /dev/xvdh1 ~/old_root
+	sudo mount /dev/xvdg /data/testsets
 fi

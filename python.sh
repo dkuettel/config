@@ -6,4 +6,5 @@ sudo -H pip install --upgrade pip
 
 sudo apt-get install -yq ipython
 ipython profile create
-sed -i 's/# c.TerminalInteractiveShell.confirm_exit = True/c.TerminalInteractiveShell.confirm_exit = False/' ~/.ipython/profile_default/ipython_config.py
+# todo this way I will never see if there is a new default config file (new options)
+ln -s ~/config/python/ipython_config.py ~/.ipython/profile_default/ipython_config.py

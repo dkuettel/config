@@ -104,6 +104,7 @@ setopt extendedglob
 
 # for feh to work well with tiling window manager
 alias feh='feh --auto-zoom --scale-down --draw-filename --draw-tinted'
+alias ffeh='feh --fullscreen --draw-filename --draw-tinted'
 
 # for mosh, but in general, i'm not comfortable with all the LC settings
 export LC_ALL=en_US.UTF-8
@@ -199,22 +200,33 @@ xp-replace () {
 		return 1
 	else
 		echo 'replace code with dev code'
-		rm -rf nn
-		cp -r $dev/nn .
-		rm -rf caffe
-		cp -r $dev/caffe .
+		(rm -rf nn && cp -r $dev/nn .) &
+		(rm -rf caffe && cp -r $dev/caffe .) &
+		echo 'wait'
+		wait
 	fi
 }
 
 xp-link () {
+	# todo this would better be a script with -eux, only few need to be functions
 	if [ $(realpath .) = $(realpath $dev) ]; then
 		echo 'cannot link when inside dev'
 		return 1
 	else
 		echo 'link to code from dev'
-		rm -rf nn
+		if [ -d nn.removing ]; then
+			echo 'nn.removing exists already'
+			return 1
+		fi
+		mv nn nn.removing
+		rm -rf nn.removing &
 		ln -sf $dev/nn nn
-		rm -rf caffe
+		if [ -d caffe.removing ]; then
+			echo 'caffe.removing exists already'
+			return 1
+		fi
+		mv caffe caffe.removing
+		rm -rf caffe.removing &
 		ln -sf $dev/caffe caffe
 	fi
 }
@@ -241,7 +253,7 @@ xp-find () {
 }
 
 xp-ssh () {
-	xpman ssh_to_xp $1 --wait --ssh_opts='-t' --cmd='tmux at'
+	xpman issh $1 --wait
 }
 
 # copy with progress, use rsync, not sure about $1/ or $1 without / and rsyncs semantics
@@ -269,3 +281,24 @@ rcd () {
 	# rcd goes again to the same name but new inode
 	cd $(pwd)
 }
+
+
+xp-py () {
+	ipython --InteractiveShellApp.exec_files='["/home/kuettel/config/xp-py.py"]'
+}
+
+xp-feh () {
+	echo $(realpath .)
+	echo
+	cat info.txt
+	echo
+	xpc
+	echo
+	#./sxp scores
+	#ffeh logs/plots/losses.png >/dev/null 2>&1
+	#ffeh logs/plots/lr.png >/dev/null 2>&1
+	#ffeh evals/last/cad/conf_ops.png >/dev/null 2>&1
+	[[ -d logs/d ]] && ffeh logs/d/plots/losses.png logs/d/plots/accuracies.png logs/g/plots/losses.png logs/g/plots/accuracies.png
+	[[ -d logs/plots ]] && ffeh logs/plots/losses.png logs/plots/accuracies.png
+}
+
