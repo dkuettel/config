@@ -284,7 +284,7 @@ rcd () {
 
 
 xp-py () {
-	ipython --InteractiveShellApp.code_to_run='import nn.xp_config as xpc; c = xpc.load()' -i
+	ipython --InteractiveShellApp.exec_files='["/home/kuettel/config/xp-py.py"]'
 }
 
 xp-feh () {
