@@ -6,7 +6,7 @@ if [ -f $1 ]; then
 	exit 1
 else
 	cat <<EOF > $1
-#!/bin/bash -eux
+#!/bin/zsh -eux
 set -o pipefail
 
 EOF
