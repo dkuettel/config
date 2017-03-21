@@ -298,7 +298,7 @@ xp-feh () {
 	#ffeh logs/plots/losses.png >/dev/null 2>&1
 	#ffeh logs/plots/lr.png >/dev/null 2>&1
 	#ffeh evals/last/cad/conf_ops.png >/dev/null 2>&1
-	[[ -d logs/d ]] && ffeh logs/d/plots/losses.png logs/d/plots/accuracies.png logs/g/plots/losses.png logs/g/plots/accuracies.png
-	[[ -d logs/plots ]] && ffeh logs/plots/losses.png logs/plots/accuracies.png
+	[[ -d logs/d ]] && ffeh logs/d/plots/losses-log.png logs/d/plots/accuracies.png logs/g/plots/losses-log.png logs/g/plots/accuracies.png
+	[[ -d logs/plots ]] && ffeh logs/plots/losses-log.png logs/plots/accuracies.png
 }
 
