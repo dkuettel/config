@@ -1,8 +1,12 @@
 import nn.xp_config as xpc
 import nn.gan
 import numpy as np
-import xp
+try:
+	import xp
+except:
+	pass
 import nn.xpman as xm
 from copy import deepcopy
+from nn.xp_config import Struct
 if xpc.has():
 	c = xpc.load()
