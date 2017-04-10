@@ -91,7 +91,8 @@ bindkey '^h' backward-delete-char
 bindkey '^w' backward-kill-word
 # ctrl-r starts searching history backward
 #bindkey '^r' history-incremental-search-backward
-bindkey '^r' znt-history-widget
+#bindkey '^r' znt-history-widget
+bindkey '^r' history-search-multi-word # todo not sure why I have to do it here, the plugin does it already, but it doesnt work
 # edit command line in editor
 bindkey '^x^e' edit-command-line
 
