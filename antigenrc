@@ -9,6 +9,9 @@ antigen bundle per-directory-history
 # antigen bundle psprint/zsh-navigation-tools # todo also history, works, maybe better
 antigen bundle psprint/history-search-multi-word
 
+# colored man pages (solarized dark)
+antigen bundle zlsun/solarized-man
+
 antigen bundle zsh-users/zsh-syntax-highlighting # note: might have to be the last to import
 
 antigen apply
