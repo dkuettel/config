@@ -50,6 +50,7 @@ export PATH="$HOME/config/bin:$HOME/bin:$HOME/.local/bin:/usr/local/sbin:/usr/lo
 
 alias ls='ls --color=auto'
 alias lr='ls -hltrcF'
+alias l='ls -lhFva'
 alias ll='ls -lhFv'
 alias lll='ls -lhFv --color=yes | less -R'
 alias lsdirs='ls -v -d */'
