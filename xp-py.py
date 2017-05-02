@@ -10,3 +10,4 @@ from copy import deepcopy
 from nn.xp_config import Struct
 if xpc.has():
 	c = xpc.load()
+import nn.nn_utils as nnu
