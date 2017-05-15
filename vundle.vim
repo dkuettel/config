@@ -24,6 +24,8 @@ Plugin 'scrooloose/syntastic'
 " Plugin 'mattboehm/vim-unstack'
 " Plugin 'nathanaelkane/vim-indent-guides'
 
+Plugin 'vim-python/python-syntax'
+
 " run :PluginInstall
 call vundle#end()
 filetype plugin indent on

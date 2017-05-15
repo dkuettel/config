@@ -195,3 +195,5 @@ function! Test_import()
 pyfile ~/toys/test.vim.py
 endfunc
 nmap <c-i> :call Test_import()<cr>
+
+let g:python_highlight_all = 1

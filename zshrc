@@ -50,10 +50,11 @@ export PATH="$HOME/config/bin:$HOME/bin:$HOME/.local/bin:/usr/local/sbin:/usr/lo
 
 alias ls='ls --color=auto'
 alias lr='ls -hltrcF'
-alias ll='ls -lhF'
-alias lll='ls -lhF --color=yes | less -R'
-alias lsdirs='ls -d */'
-alias lldirs='ls -ldh */'
+alias l='ls -lhFva'
+alias ll='ls -lhFv'
+alias lll='ls -lhFv --color=yes | less -R'
+alias lsdirs='ls -v -d */'
+alias lldirs='ls -vldh */'
 alias d+='pushd .'
 alias d-='popd'
 #alias ..='cd ..'
@@ -91,7 +92,8 @@ bindkey '^h' backward-delete-char
 bindkey '^w' backward-kill-word
 # ctrl-r starts searching history backward
 #bindkey '^r' history-incremental-search-backward
-bindkey '^r' znt-history-widget
+#bindkey '^r' znt-history-widget
+bindkey '^r' history-search-multi-word # todo not sure why I have to do it here, the plugin does it already, but it doesnt work
 # edit command line in editor
 bindkey '^x^e' edit-command-line
 
