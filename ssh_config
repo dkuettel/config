@@ -3,6 +3,7 @@ Host staging
 	HostName kuettel.dev.vuforia.com
 	RemoteForward 2222 localhost:22
 #	LocalForward 5901 localhost:5901
+	LocalForward 6006 localhost:6006
 
 Host github-personal
 	HostName github.com
