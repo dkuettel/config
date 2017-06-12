@@ -18,4 +18,5 @@ fi
 # todo how to configure gnome-terminal by CLI not to startup help on F1
 # todo how to automatically set the powerline font as a default?
 # todo how to automatically switch of the use of bold in config, that's not right for solarized
+#      actually it's okay if we use the 256 color codes 0-16 instead of 8 colors times bold flag
 # todo auto config to not show menu bar
