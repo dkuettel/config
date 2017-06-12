@@ -40,7 +40,7 @@ def print16(out):
 		)
 
 
-sol2hex = dict(
+sol2hex = dict( # default (dark)
 		base03  = 0x002b36,
 		base02  = 0x073642,
 		base01  = 0x586e75,
@@ -59,7 +59,26 @@ sol2hex = dict(
 		green   = 0x859900,
 	)
 
-sol2idx = dict(
+sol2hex_inverted = dict( # inverted (light)
+		base3  = 0x002b36,
+		base2  = 0x073642,
+		base1  = 0x586e75,
+		base0  = 0x657b83,
+		base00   = 0x839496,
+		base01   = 0x93a1a1,
+		base02   = 0xeee8d5,
+		base03   = 0xfdf6e3,
+		yellow  = 0xb58900,
+		orange  = 0xcb4b16,
+		red     = 0xdc322f,
+		magenta = 0xd33682,
+		violet  = 0x6c71c4,
+		blue    = 0x268bd2,
+		cyan    = 0x2aa198,
+		green   = 0x859900,
+	)
+
+sol2idx = dict( # dark (default)
 		base03  = 8,
 		base02  = 0,
 		base01  = 10,
@@ -77,6 +96,9 @@ sol2idx = dict(
 		cyan    = 6,
 		green   = 2,
 	)
+
+idx2sol = { v:k for (k,v) in sol2idx.items() }
+idx2sol = [ idx2sol[i] for i in range(16) ]
 
 
 def print_solarized16(out):
@@ -102,9 +124,10 @@ def print_solarized16(out):
 	out.write('\n')
 
 
-print256(sys.stdout)
-print
-print16(sys.stdout)
-print
-print_solarized16(sys.stdout)
+if __name__ == '__main__':
+	print256(sys.stdout)
+	print
+	print16(sys.stdout)
+	print
+	print_solarized16(sys.stdout)
 
