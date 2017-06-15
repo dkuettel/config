@@ -197,3 +197,7 @@ endfunc
 nmap <c-i> :call Test_import()<cr>
 
 let g:python_highlight_all = 1
+
+" python debugging template
+map ,pd oimport ipdb; ipdb.set_trace()<esc>
+map ,pD Oimport ipdb; ipdb.set_trace()<esc>

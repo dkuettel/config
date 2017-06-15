@@ -1,6 +1,9 @@
 source ~/antigen/antigen.zsh
-antigen init ~/.antigenrc # todo does it really make it faster?
-# This setup further improves cache performance (~0.02s). One caveat: antigen-init command doesn't look into bundle configuration changes, thus you'll need to use antigen-reset to reload plugins.
+source ~/.antigenrc
+#antigen init ~/.antigenrc # todo does it really make it faster?
+# This setup further improves cache performance (~0.02s).
+# One caveat: antigen-init command doesn't look into bundle configuration changes,
+# thus you'll need to use antigen-reset to reload plugins.
 # see https://github.com/zsh-users/antigen/wiki/Cookbook#init-command
 
 # history
@@ -17,11 +20,14 @@ setopt hist_verify
 setopt inc_append_history
 setopt share_history
 
+# so that bin/activate does not mess with PS1, we do it ourselves
+export VIRTUAL_ENV_DISABLE_PROMPT=true
+
 # adapted theme: amuse + tjkirch
-PROMPT='%(?, ,
+PROMPT='%(?,,
 %{$fg[red]%}FAIL: $?%{$reset_color%}
 )
-%{$fg_bold[green]%}${PWD/#$HOME/~}%{$reset_color%}$(git_prompt_info) ⌚ %{$fg_bold[red]%}%*%{$reset_color%}
+%{$fg_bold[green]%}${PWD/#$HOME/~}%{$reset_color%}$(git_prompt_info) ⌚ %{$fg_bold[red]%}%*%{$reset_color%} ${VIRTUAL_ENV+(env)}
 ${${KEYMAP/vicmd/N}/(main|viins)/I}> '
 ZSH_THEME_GIT_PROMPT_PREFIX=" on %{$fg[magenta]%}\uE0A0 "
 ZSH_THEME_GIT_PROMPT_SUFFIX="%{$reset_color%}"
