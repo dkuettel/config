@@ -44,6 +44,7 @@ def configure():
 	dconf('/org/gnome/terminal/legacy/default-show-menubar', 'false')
 	dconf('/org/gnome/terminal/legacy/keybindings/help', "'disabled'")
 	# todo could set .../profiles:/default to "'b1dc...'" for default
+	# todo need to add to list profiles:/list, otherwise not listed
 
 
 if __name__ == '__main__':
