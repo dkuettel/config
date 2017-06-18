@@ -1,2 +1,2 @@
 #!/bin/bash
-setxkbmap -layout sf
+setxkbmap -layout pointluck -variant MacBookAir
