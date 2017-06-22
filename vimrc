@@ -201,3 +201,8 @@ let g:python_highlight_all = 1
 " python debugging template
 map ,pd oimport ipdb; ipdb.set_trace()<esc>
 map ,pD Oimport ipdb; ipdb.set_trace()<esc>
+
+" plugin vim-argwrap
+let g:argwrap_tail_comma = 1 " python style commas even for the last argument
+let g:argwrap_tail_comma_braces = '[{' " as above
+nnoremap <silent> <leader>a :ArgWrap<CR>
