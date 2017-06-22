@@ -1,5 +1,5 @@
-#!/bin/bash
+#!/bin/bash -eux
+set -o pipefail
 
-sudo ln -s --backup ~/config/keyboard/evdev.xml /usr/share/X11/xkb/rules/evdev.xml
-sudo ln -s --backup ~/config/keyboard/sf /usr/share/X11/xkb/symbols/sf
-sudo dpkg-reconfigure xkb-data
+sudo ln -sf ~/config/keyboard/pointluck /usr/share/X11/xkb/symbols/pointluck
+#sudo dpkg-reconfigure xkb-data # todo still necessary?
