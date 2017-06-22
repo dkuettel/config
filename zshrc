@@ -44,8 +44,13 @@ zle -N zle-keymap-select
 # antigen cleanup # remove what's not loaded right now
 
 # note: ~ does not expand, but $HOME does
-# todo includes both cuda 7 and 8 for now
-export PATH="$HOME/config/bin:$HOME/bin:$HOME/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/usr/local/cuda-7.0/bin:/usr/local/cuda-8.0/bin"
+#export PATH=$HOME/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/usr/local/cuda-7.0/bin:/usr/local/cuda-8.0/bin:$PATH
+# todo trying to make it a bit shorter and honoring previous PATH
+# todo not sure if it's better to append or prepend, for virtualenv it works better to append
+export PATH=$PATH:/usr/local/cuda/bin
+export PATH=$PATH:$HOME/config/bin:$HOME/bin
+export PATH=$PATH:/data/xps/metric/dev/nn/bin
+
 
 # todo: try zaw for history search
 # todo currently not using anymore
@@ -278,8 +283,6 @@ alias xpc='python -m nn.xp_config'
 export PYTHONDONTWRITEBYTECODE=True # no .pyc files for python
 
 stty -ixon # disables flow control, for example ctrl-s
-
-export PATH="$PATH:/data/xps/metric/dev/nn/bin"
 
 rcd () {
 	# sometimes when current folder is invalid because it has been recreated
