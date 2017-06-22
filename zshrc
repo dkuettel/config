@@ -51,7 +51,6 @@ export PATH=$PATH:/usr/local/cuda/bin
 export PATH=$PATH:$HOME/config/bin:$HOME/bin
 export PATH=$PATH:/data/xps/metric/dev/nn/bin
 
-
 # todo: try zaw for history search
 # todo currently not using anymore
 # bindkey '^R' zaw-history
