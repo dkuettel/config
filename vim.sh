@@ -42,7 +42,7 @@ fi
 /usr/local/bin/vim -u ~/config/vundle.vim +PluginInstall +qall
 
 # link custom files
-if [[ -d ~/.vim ]]; then
+if [[ ! -d ~/.vim ]]; then
 	mkdir ~/.vim
 fi
 ln -sf ~/config/vim/syntax ~/.vim/syntax

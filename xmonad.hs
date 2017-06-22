@@ -20,6 +20,7 @@ main = do
 		[ ("<F8>",spawn "~/plugins/playerctl/playerctl/playerctl play-pause")
 		, ("<F9>",spawn "~/plugins/playerctl/playerctl/playerctl next")
 		, ("<F7>",spawn "~/plugins/playerctl/playerctl/playerctl previous")
+		, ("<F12>",spawn "ssh kuettel@10.140.48.30 cp flag/test flag/txt")
 		, ("M-S-l",spawn "/usr/bin/slock")
 		, ("M-S-h",sendMessage Expand) -- when running virtual in windows host, win-L doesn't work well
 		] `additionalKeys`
