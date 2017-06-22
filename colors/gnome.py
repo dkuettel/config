@@ -46,6 +46,7 @@ def configure():
 	# todo could set .../profiles:/default to "'b1dc...'" for default
 	print 'todo: themes are there, but probably not added to the list yet
 	# todo strangely, also need to add the two themes to /org/gnome/terminal/legacy/profiles:/list, but not twice if already there, really?
+	# todo easiest would be just to list it and regenerate the list instead of parse, adapt, and write (I guess?)
 
 
 if __name__ == '__main__':
