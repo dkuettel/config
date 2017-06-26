@@ -1,0 +1,4 @@
+#!/bin/zsh -eux
+set -o pipefail
+
+python ~/config/bin/jpython.py "$@"
