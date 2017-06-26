@@ -57,6 +57,8 @@ autocmd FileType cu setlocal tabstop=4 softtabstop=4 shiftwidth=4 noexpandtab
 nmap s <Plug>(easymotion-overwin-f)
 
 " ctrlp
+" note: ~/.cache/ctrlp saves a global cache
+" :CtrlPClearAllCaches seems to delete most there
 let g:ctrlp_working_path_mode = 0 " always base off initial working folder
 let g:ctrlp_switch_buffer = 0 " don't switch between splits when selecting a file/buffer to open, stay on split, makes it easier to open same file in many splits
 let g:ctrlp_match_window = 'bottom,order:btt,min:1,max:20,results:20'
@@ -206,3 +208,10 @@ map ,pD Oimport ipdb; ipdb.set_trace()<esc>
 let g:argwrap_tail_comma = 1 " python style commas even for the last argument
 let g:argwrap_tail_comma_braces = '[{' " as above
 nnoremap <silent> <leader>a :ArgWrap<CR>
+
+" try to use a local find if it's there (faster, easier to configure there)
+if filereadable('./.ctrlp.find')
+	let g:ctrlp_use_caching = 0
+	" note: annoyingly the command seems to not be used when %s is not in there
+	let g:ctrlp_user_command = './.ctrlp.find %s'
+endif
