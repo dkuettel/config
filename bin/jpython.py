@@ -6,7 +6,8 @@ import os
 import imp
 
 try:                                                               
-	execfile(sys.argv[1])
+	del sys.argv[0]
+	execfile(sys.argv[0])
 except:                                                            
 	ex_type, ex, tb = sys.exc_info()                               
 	print ''.join(traceback.format_exception(ex_type, ex, tb))     
