@@ -1,10 +1,11 @@
 source ~/antigen/antigen.zsh
 source ~/config/antigenrc
-#antigen init ~/config/antigenrc # todo does it really make it faster?
-# This setup further improves cache performance (~0.02s).
-# One caveat: antigen-init command doesn't look into bundle configuration changes,
-# thus you'll need to use antigen-reset to reload plugins.
-# see https://github.com/zsh-users/antigen/wiki/Cookbook#init-command
+# check http://antigen.sharats.me/
+# antigen update for plugins
+# antigen selfupdate for antigen
+# antigen list is also interesting
+# antigen init could speed up, not sure (but is less automatic when changes happens, see doc)
+# antigen init ~/config/antigenrc
 
 # history
 # todo doesn't seem to update "live" yet ?
