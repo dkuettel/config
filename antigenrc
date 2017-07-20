@@ -1,5 +1,8 @@
-DISABLE_AUTO_UPDATE="true" # todo it will happen with antigen update?
+
+# todo the whole ohmy still needed?
+DISABLE_AUTO_UPDATE="true" # todo it will happen with antigen update? (for oh-my-zsh?)
 antigen use oh-my-zsh
+
 antigen bundle command-not-found
 antigen bundle per-directory-history
 # might be interesting: common-aliases compleat

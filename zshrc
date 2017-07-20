@@ -1,6 +1,6 @@
 source ~/antigen/antigen.zsh
-source ~/.antigenrc
-#antigen init ~/.antigenrc # todo does it really make it faster?
+source ~/config/antigenrc
+#antigen init ~/config/antigenrc # todo does it really make it faster?
 # This setup further improves cache performance (~0.02s).
 # One caveat: antigen-init command doesn't look into bundle configuration changes,
 # thus you'll need to use antigen-reset to reload plugins.
