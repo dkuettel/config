@@ -1,0 +1,2 @@
+maybe /etc/default/keyboard contains the default settings
+just change there depending on the machine to the pointluck variant?
