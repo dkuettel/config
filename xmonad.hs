@@ -25,6 +25,7 @@ main = do
 		, ("M-S-l",spawn "/usr/bin/slock")
 		, ("M-S-h",sendMessage Expand) -- when running virtual in windows host, win-L doesn't work well
 		, ("M-`", swapNextScreen) -- swap screens
+		, ("M-r", swapNextScreen) -- swap screens
 		] `additionalKeys`
 		[ ((mod4Mask, xK_p), spawn "PATH=~/config/bin:~/bin:~/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin dmenu_run -i -l 50 -p '>'")
 		]
