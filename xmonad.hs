@@ -6,6 +6,7 @@ import XMonad.Util.Run(spawnPipe)
 import XMonad.Util.EZConfig(additionalKeysP)
 import XMonad.Util.EZConfig(additionalKeys)
 import System.IO
+import XMonad.Actions.CycleWS
 
 main = do
 	xmonad $ ewmh defaultConfig
@@ -23,6 +24,7 @@ main = do
 		, ("<F12>",spawn "ssh kuettel@10.140.48.30 cp flag/test flag/txt")
 		, ("M-S-l",spawn "/usr/bin/slock")
 		, ("M-S-h",sendMessage Expand) -- when running virtual in windows host, win-L doesn't work well
+		, ("M-`", swapNextScreen) -- swap screens
 		] `additionalKeys`
 		[ ((mod4Mask, xK_p), spawn "PATH=~/config/bin:~/bin:~/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin dmenu_run -i -l 50 -p '>'")
 		]
