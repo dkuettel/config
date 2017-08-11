@@ -3,5 +3,5 @@
 [ -e /usr/bin/vmtoolsd ] && /usr/bin/vmtoolsd -n vmusr &
 
 xset r rate 200 50
-setxkbmap -layout sf
+setxkbmap -layout sf # todo this is new now per machine depending on variations
 feh --bg-scale ~/config/xmonad/5_stripes_landscape.jpg
