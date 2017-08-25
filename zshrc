@@ -313,3 +313,4 @@ xp-feh () {
 	[[ -d logs/plots ]] && ffeh logs/plots/losses-log.png logs/plots/accuracies.png
 }
 
+setopt rm_star_silent # no confirmation anymore for "rm *"-like
