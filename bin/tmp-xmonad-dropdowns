@@ -1,0 +1,4 @@
+#!/bin/zsh -eux
+set -o pipefail
+
+while true; do xprop -root -remove _NET_WORKAREA; sleep 30; done
