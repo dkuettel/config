@@ -1,0 +1,9 @@
+#!/bin/zsh -eu
+set -o pipefail
+
+exo () {
+	echo "> $@"
+	$@
+}
+
+exo git branch --list 'dk/*'

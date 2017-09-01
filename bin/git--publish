@@ -1,5 +1,10 @@
-#!/bin/zsh -eux
+#!/bin/zsh -eu
 set -o pipefail
 
+exo () {
+	echo "> $@"
+	$@
+}
+
 branch=$(git rev-parse --abbrev-ref HEAD)
-git push --set-upstream origin $branch
+exo git push --set-upstream origin $branch
