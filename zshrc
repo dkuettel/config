@@ -314,3 +314,5 @@ xp-feh () {
 }
 
 setopt rm_star_silent # no confirmation anymore for "rm *"-like
+
+alias man='man --no-justification'
