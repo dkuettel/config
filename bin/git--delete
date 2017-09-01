@@ -1,0 +1,12 @@
+#!/bin/zsh -eu
+set -o pipefail
+
+branch=${1:?no branch provided}
+
+exo () {
+	echo "> $@"
+	$@
+}
+
+exo git branch -D $branch
+exo git push origin --delete $branch

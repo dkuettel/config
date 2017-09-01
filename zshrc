@@ -314,3 +314,10 @@ xp-feh () {
 }
 
 setopt rm_star_silent # no confirmation anymore for "rm *"-like
+
+alias man='man --no-justification'
+
+exo () { # echo and execute a command (for selective verbosity, instead of zsh -x or -v)
+	echo "> $@"
+	$@
+}
