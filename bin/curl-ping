@@ -1,0 +1,6 @@
+#!/bin/zsh -eu
+set -o pipefail
+
+server=$1
+
+curl -s -o /dev/null -w 'total=%{time_total} dns=%{time_namelookup} connect=%{time_connect} starttransfer=%{time_starttransfer}\n' $1
