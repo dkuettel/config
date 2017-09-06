@@ -27,7 +27,7 @@ Plugin 'scrooloose/syntastic'
 Plugin 'vim-python/python-syntax'
 
 Plugin 'FooSoft/vim-argwrap' " testing: wrap and unwrap function calls into multiline
-Plugin 'jiangmiao/auto-pairs' " testing: () handling
+" Plugin 'jiangmiao/auto-pairs' " testing: () handling
 
 " run :PluginInstall
 call vundle#end()
