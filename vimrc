@@ -215,3 +215,6 @@ if filereadable('./.ctrlp.find')
 	" note: annoyingly the command seems to not be used when %s is not in there
 	let g:ctrlp_user_command = './.ctrlp.find %s'
 endif
+
+" tagbar toggle
+nmap tt :TagbarToggle<cr>
