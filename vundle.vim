@@ -19,7 +19,7 @@ Plugin 'mhinz/vim-signify' " show changes of file to git index
 Plugin 'tmux-plugins/vim-tmux-focus-events'
 Plugin 'sjl/gundo.vim'
 Plugin 'scrooloose/nerdcommenter'
-Plugin 'scrooloose/syntastic'
+Plugin 'scrooloose/syntastic' " syntax checking, now on 'vim-syntastic/syntastic'
 
 " Plugin 'mattboehm/vim-unstack'
 " Plugin 'nathanaelkane/vim-indent-guides'
