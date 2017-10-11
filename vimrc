@@ -24,6 +24,7 @@ nnoremap <c-j> <c-w>j " todo since I moved to vim 8 <c-j> on the first argument 
 nnoremap <c-k> <c-w>k
 nnoremap <c-l> <c-w>l
 nnoremap <c-h> <c-w>h
+nmap ,rr :redraw!<cr>
 
 " solarized
 " todo why does it not flip dark/light by just changing the terminals colors?
