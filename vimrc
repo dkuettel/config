@@ -120,7 +120,8 @@ au FocusLost * :wa
 nnoremap <Leader>u :GundoToggle<CR>
 
 " syntastic
-" for newbies
+" sudo -H pip install flake 8
+" flake8 syntax python 2 vs 3 is decided when installing flake8
 set statusline+=%#warningmsg#
 set statusline+=%{SyntasticStatuslineFlag()}
 set statusline+=%*
@@ -129,18 +130,19 @@ let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
 " from marcin
-let g:syntastic_python_checkers=['flake8']
+let g:syntastic_python_checkers = ['flake8']
 let g:syntastic_quiet_messages = { "type": "style" } " remove all style warnings
 "let g:syntastic_python_flake8_args='--ignore=E501,E225,E251,E231,W191'
 "let g:syntastic_always_populate_loc_list = 1
 "let g:syntastic_auto_loc_list = 1
 "let g:syntastic_check_on_open = 1
-nmap ]l :lnext<CR>
-nmap ]r :lprev<CR>
 " from me
 let g:syntastic_auto_jump = 1
 let g:syntastic_mode_map = {"mode":"passive"}
-nmap <leader>s :w<Cr>:SyntasticCheck<CR>
+nmap <leader>sc :w<cr>:SyntasticCheck<cr>
+nmap <leader>sr :SyntasticReset<cr>
+nmap ]l :lnext<CR>
+nmap [l :lprev<CR>
 
 " kinda cool, useful?
 "inoremap jj <Esc>
@@ -215,3 +217,6 @@ if filereadable('./.ctrlp.find')
 	" note: annoyingly the command seems to not be used when %s is not in there
 	let g:ctrlp_user_command = './.ctrlp.find %s'
 endif
+
+" tagbar toggle
+nmap tt :TagbarToggle<cr>
