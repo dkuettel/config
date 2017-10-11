@@ -5,5 +5,6 @@ cd ~ && wget -O - "https://www.dropbox.com/download?plat=lnx.x86_64" | tar xzf -
 wget 'https://www.dropbox.com/download?dl=packages/dropbox.py' -O ~/.dropbox-dist/dropbox.py
 chmod +x ~/.dropbox-dist/dropbox.py
 
-# run ~/.dropbox-dist/dropboxd to start the daemon
-# use dbox to start the python tool
+# manually run ~/.dropbox-dist/dropboxd to start the daemon
+# or just use dbox start and other dbox commands
+# note: better start it with DISPLAY=0 so that it asks on the terminal about the login (at least on a headless machine)
