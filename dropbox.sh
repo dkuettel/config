@@ -7,4 +7,5 @@ chmod +x ~/.dropbox-dist/dropbox.py
 
 # manually run ~/.dropbox-dist/dropboxd to start the daemon
 # or just use dbox start and other dbox commands
-# note: better start it with DISPLAY=0 so that it asks on the terminal about the login (at least on a headless machine)
+# note: better start it with DISPLAY= so that it asks on the terminal about the login (at least on a headless machine)
+# note: the ./bin/dbox by default unsets DISPLAY because it works more reliably on the cloud

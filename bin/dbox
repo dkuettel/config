@@ -1,1 +1,5 @@
-../../.dropbox-dist/dropbox.py
+#!/bin/zsh -eu
+set -o pipefail
+
+# note: we unset DISPLAY because otherwise it tries to use x windows if available and on the cloud with a VNC it doesn't work well
+DISPLAY= ~/.dropbox-dist/dropbox.py "$@"
