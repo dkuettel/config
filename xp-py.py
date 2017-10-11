@@ -3,7 +3,7 @@ import nn.gan
 import numpy as np
 try:
 	import xp
-except:
+except ImportError as e:
 	pass
 import nn.xpman as xm
 from copy import deepcopy
