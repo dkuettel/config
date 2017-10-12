@@ -53,7 +53,7 @@ zle -N zle-keymap-select
 # todo not sure if it's better to append or prepend, for virtualenv it works better to append
 export PATH=$PATH:/usr/local/cuda/bin
 export PATH=$PATH:$HOME/config/bin:$HOME/bin
-export PATH=$PATH:/data/xps/metric/dev/nn/bin
+export PATH=$PATH:$HOME/dev/main/nn/bin
 
 # todo: try zaw for history search
 # todo currently not using anymore
