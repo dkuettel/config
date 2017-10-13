@@ -221,3 +221,5 @@ endif
 
 " tagbar toggle
 nmap tt :TagbarToggle<cr>
+
+nmap ,Gs :Gstatus<cr>
