@@ -1,15 +1,17 @@
-#!/bin/bash -eux
+#!/bin/zsh -eu
 set -o pipefail
 
-if [ -f $1 ]; then
-	echo $1 'already exists'
+f=${1:?missing argument 1: filename}
+
+if [[ -f $f ]]; then
+	echo $f 'already exists'
 	exit 1
 else
-	cat <<EOF > $1
+	cat <<EOF > $f
 #!/bin/zsh -eux
 set -o pipefail
 
 EOF
-	chmod +x $1
-	vim + $1
+	chmod +x $f
+	vim + $f
 fi
