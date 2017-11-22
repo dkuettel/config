@@ -1,0 +1,22 @@
+#!/bin/zsh -eux
+set -o pipefail
+
+f=${1:?argument 1: session folder}
+
+cd ~/dev/$f
+
+export dev=~/dev/$f
+export nn=$dev/nn
+export caffe=$dev/caffe
+export runs=/data/xps/metric/runs
+
+export PYTHONPATH=$nn/python:$nn/libs/liblinear/python:$nn/libs/caffe/python:$nn/libs/py_faster_rcnn
+export FRCNN_PATH=$dev/py-faster-rcnn
+export OMP_NUM_THREADS=1
+export DISPLAY=localhost:1 # our default vnc
+export PYTHONUNBUFFERED=1
+export PYTHONDONTWRITEBYTECODE=True
+export MPLBACKEND=Agg # python matplotlib
+export HOSTNAME=$(hostname)
+
+tmux new-session -s $f
