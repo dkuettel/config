@@ -12,6 +12,9 @@ if xpc.has():
 	c = xpc.load()
 import nn.nn_utils as nnu
 
+import nn.nn_logging
+nn.nn_logging.setup_stdout_only()
+
 def divert_mm(modelfile='./model.pickle'):
 	import nn.fs
 	modelfile = nn.fs.realpath(modelfile)
