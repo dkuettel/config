@@ -21,7 +21,9 @@ main = do
 		[ ("<F8>",spawn "~/plugins/playerctl/playerctl/playerctl play-pause")
 		, ("<F9>",spawn "~/plugins/playerctl/playerctl/playerctl next")
 		, ("<F7>",spawn "~/plugins/playerctl/playerctl/playerctl previous")
-		, ("<F12>",spawn "ssh kuettel@10.140.48.30 cp flag/test flag/txt")
+		, ("<XF86Launch5>",spawn "~/plugins/playerctl/playerctl/playerctl play-pause")
+		, ("<XF86Launch6>",spawn "~/plugins/playerctl/playerctl/playerctl next")
+		, ("<XF86Tools>",spawn "~/plugins/playerctl/playerctl/playerctl previous")
 		, ("M-S-l",spawn "/usr/bin/slock")
 		, ("M-S-h",sendMessage Expand) -- when running virtual in windows host, win-L doesn't work well
 		, ("M-`", swapNextScreen) -- swap screens
