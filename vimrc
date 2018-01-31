@@ -181,13 +181,15 @@ set textwidth=0 wrapmargin=0
 " trying out some new (tab) navigation
 " remember: c-w } for tag in preview window
 " remember: {tabid}gt to jump directly to a tab
-map T :tab split<cr>
-map ,D :tab split<cr>,d
-nmap ,sd <c-w>s,d
-nmap ,vd <c-w>v,d
-map tc :tabclose<cr>
+map T :tab split<cr> " new tab, view on current buffer
+map tc :tabclose<cr> " close current tab
+" vim jedi goto commands
 let g:jedi#goto_command = ''
-nmap ,d :call jedi#goto()<CR>zt " not sure if that is the best way, maybe there is a global setting for how it always centers on the cursor when you move around?
+nmap ,dd :call jedi#goto()<cr>zt " not sure if that is the best way, maybe there is a global setting for how it always centers on the cursor when you move around?
+nmap ,dt :tab split<cr>,dd
+nmap ,ds <c-w>s,dd
+nmap ,dv <c-w>v,dd
+nmap ,dp <c-w>} " alternative for preview on tag
 
 " try dealing with long lines
 set breakindent " visually breaks lines using the same indentation
