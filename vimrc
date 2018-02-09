@@ -14,7 +14,7 @@ nohl " so that when starting up we dont already highlight and old search term
 set wildchar=<Tab> wildmenu wildmode=longest,list,full " command completion in :...
 set scrolloff=8 " always keep some context lines visible
 set lazyredraw " redraw only when necessary (e.g. not when macros run, or similar things)
-set showmatch " highlight matchin braces
+set showmatch " highlight matching braces
 set backspace=indent,eol,start " allow backspacing over everything in insert mode
 
 " navigate splits
@@ -69,8 +69,6 @@ let g:ctrlp_match_current_file = 1 " match files even when it's the current file
 nnoremap <leader>. :CtrlPTag<cr>
 nnoremap <leader>t :CtrlPBufTag<cr>
 nnoremap <leader>b :CtrlPBuffer<cr>
-
-" --- testing new settings below here ---
 
 filetype indent off
 " hi CursorLine cterm=NONE ctermbg=gray ctermfg=lightblue
@@ -146,7 +144,7 @@ nmap ]l :lnext<CR>
 nmap [l :lprev<CR>
 
 " kinda cool, useful?
-"inoremap jj <Esc>
+inoremap jj <Esc>
 
 " notes
 " gi go to last insert mode in insert mode
@@ -193,7 +191,7 @@ nmap ,dp <c-w>} " alternative for preview on tag
 
 " try dealing with long lines
 set breakindent " visually breaks lines using the same indentation
-set showbreak= " characters to show on a continued line (todo some cool powerline font character?
+let &showbreak = '  ↪ '  " characters to show on a continued line
 set nowrap " do or don't viusally break linkes (does not change text)
 map ,ww :set wrap!<cr> " toggle wrapping (on or off)
 
