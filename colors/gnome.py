@@ -1,7 +1,7 @@
 """
 I assume that the dark version is default
 and light is inverted
-that means temrinal applications must use colors according to
+that means terminal applications must use colors according to
 the dark scheme, and the rest is handled by inverting the base colors
 """
 
