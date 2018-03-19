@@ -31,6 +31,8 @@ Plugin 'FooSoft/vim-argwrap' " testing: wrap and unwrap function calls into mult
 
 Plugin 'majutsushi/tagbar' " show an outline of the current file
 
+Plugin 'tpope/vim-sleuth' " heuristic to set tab configuration based on current file or surrounding files
+
 " run :PluginInstall
 call vundle#end()
 filetype plugin indent on
