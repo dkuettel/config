@@ -1,6 +1,8 @@
 source ~/config/vundle.vim
 
-" filetype plugin on " todo for now, because I didn't like python indent, but I should customize python filetype
+filetype on
+filetype plugin on
+filetype indent on " sleuth always sets this, I don't like it for python, i disable it for the python filetype specifically later
 
 " core vim settings
 let mapleader="," " default is \
@@ -49,7 +51,7 @@ set autoindent
 set copyindent
 " overwrite filetypes
 " todo should it not be instead changed in the filetype or have it " customized?
-autocmd FileType python setlocal tabstop=4 softtabstop=4 shiftwidth=4 noexpandtab
+autocmd FileType python setlocal tabstop=4 softtabstop=4 shiftwidth=4 noexpandtab autoindent copyindent
 "autocmd FileType cpp setlocal tabstop=2 softtabstop=2 shiftwidth=2 expandtab
 autocmd FileType cpp setlocal tabstop=4 softtabstop=4 shiftwidth=4 noexpandtab
 autocmd FileType cu setlocal tabstop=4 softtabstop=4 shiftwidth=4 noexpandtab
@@ -70,7 +72,6 @@ nnoremap <leader>. :CtrlPTag<cr>
 nnoremap <leader>t :CtrlPBufTag<cr>
 nnoremap <leader>b :CtrlPBuffer<cr>
 
-filetype indent off
 " hi CursorLine cterm=NONE ctermbg=gray ctermfg=lightblue
 hi CursorLine cterm=NONE ctermbg=gray ctermfg=NONE " NONE for ctermfg lets fg color be -> syntaxcolors
 set cursorline

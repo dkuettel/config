@@ -35,4 +35,4 @@ Plugin 'tpope/vim-sleuth' " heuristic to set tab configuration based on current 
 
 " run :PluginInstall
 call vundle#end()
-filetype plugin indent on
+"filetype plugin indent on " todo I think vundle or some plugin needed that?
