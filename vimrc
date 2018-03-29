@@ -224,3 +224,11 @@ endif
 nmap tt :TagbarToggle<cr>
 
 nmap ,Gs :Gstatus<cr>
+
+" camel-and-other-case motion (vundle plugin) mappings
+map <silent> ccw <Plug>CamelCaseMotion_w
+map <silent> ccb <Plug>CamelCaseMotion_b
+map <silent> cce <Plug>CamelCaseMotion_e
+omap <silent> cciw <Plug>CamelCaseMotion_iw
+xmap <silent> cciw <Plug>CamelCaseMotion_iw
+

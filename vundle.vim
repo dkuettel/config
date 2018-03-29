@@ -33,6 +33,8 @@ Plugin 'majutsushi/tagbar' " show an outline of the current file
 
 Plugin 'tpope/vim-sleuth' " heuristic to set tab configuration based on current file or surrounding files
 
+Plugin 'bkad/CamelCaseMotion' " allow to move/change/edit inside long variable names
+
 " run :PluginInstall
 call vundle#end()
 "filetype plugin indent on " todo I think vundle or some plugin needed that?
