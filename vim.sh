@@ -45,5 +45,6 @@ fi
 if [[ ! -d ~/.vim ]]; then
 	mkdir ~/.vim
 fi
-ln -sf ~/config/vim/syntax ~/.vim/syntax
-ln -sf ~/config/vim/ftdetect ~/.vim/ftdetect
+ln -sfT ~/config/vim/syntax ~/.vim/syntax
+ln -sfT ~/config/vim/ftdetect ~/.vim/ftdetect
+ln -sfT ~/config/vim/after ~/.vim/after

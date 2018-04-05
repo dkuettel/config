@@ -321,3 +321,6 @@ exo () { # echo and execute a command (for selective verbosity, instead of zsh -
 	echo "> $@"
 	$@
 }
+
+# can use vim for man pager, also support c-] for follwing "links"
+#export MANPAGER="env MAN_PN=1 vim -M +MANPAGER -"
