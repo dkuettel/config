@@ -324,3 +324,5 @@ exo () { # echo and execute a command (for selective verbosity, instead of zsh -
 
 # can use vim for man pager, also support c-] for follwing "links"
 #export MANPAGER="env MAN_PN=1 vim -M +MANPAGER -"
+
+export SUDO_EDITOR=vim
