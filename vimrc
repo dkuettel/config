@@ -96,7 +96,7 @@ augroup END
 " set virtualedit=all " problem is also over tabs
 
 " easytags, try for now, maybe the syntax highlighting from here made it slow
-set tags=./tags " use this file local to vim working directory
+set tags=./.tags " use this file local to vim working directory
 " let g:easytags_file=./tags " todo correct?
 let g:easytags_dynamic_files = 2 " use tag file path relative to vim working folder, not active buffer
 set cpoptions+=d " use tag file path relative to vim working folder, not active buffer file
