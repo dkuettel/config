@@ -1,0 +1,5 @@
+#!/bin/zsh -eux
+set -o pipefail
+
+sudo LD_LIBRARY_PATH=/usr/local/lib:${LD_LIBRARY_PATH:-} openconnect --juniper emea-portal.ptc.com --user=dkuettel
+# passwords: sudo, pin, ptc pass
