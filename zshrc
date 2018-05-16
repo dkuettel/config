@@ -327,7 +327,5 @@ exo () { # echo and execute a command (for selective verbosity, instead of zsh -
 #export MANPAGER="env MAN_PN=1 vim -M +MANPAGER -"
 
 tail-int () {
-	watch tail -c 400 \
-		cad/recolored/docker-log cad/shaded/docker-log lego/recolored/docker-log lego/shaded/docker-log \
-		cad/recolored/logs/nn cad/shaded/logs/nn lego/recolored/logs/nn lego/shaded/logs/nn
+	watch "tail -c 400 cad/recolored/docker-log cad/shaded/docker-log lego/recolored/docker-log lego/shaded/docker-log; echo; echo; echo; echo; echo; tail -n 5 cad/recolored/logs/nn cad/shaded/logs/nn lego/recolored/logs/nn lego/shaded/logs/nn"
 }
