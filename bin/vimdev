@@ -8,9 +8,10 @@ set -o pipefail
 # todo can we then also have the .tags file be anonymous and not polluting the working folder?
 
 tags () {
+	tagsfile=.tags.generating-$$ # $$=pid, in case we run more than one in the same folder
 	while true; do
 		ctags \
-			-o ./.tags.generating \
+			-o $tagsfile \
 			--languages=python \
 			--links=no \
 			--fields=+K \
@@ -24,7 +25,7 @@ tags () {
 		# note ctags also supports --exclude, currently I explicitely add folders that I want python tags for
 		# note --extra==g includes class-qualified entries, but not for python :/, but for c++
 		# todo once I work again with caffe, add lang=c and caffe part? can we mix languages?
-		mv .tags.generating .tags
+		mv $tagsfile .tags
 		sleep 20
 	done
 }
