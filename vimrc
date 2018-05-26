@@ -232,3 +232,8 @@ map <silent> cce <Plug>CamelCaseMotion_e
 omap <silent> cciw <Plug>CamelCaseMotion_iw
 xmap <silent> cciw <Plug>CamelCaseMotion_iw
 
+" easy surround = with spaces
+nmap ,<space><space> i <esc>la <esc>
+
+" try to use command line window for easier editing
+nmap ; q:i
