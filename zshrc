@@ -72,6 +72,7 @@ alias d-='popd'
 #alias ...='cd ../..'
 #alias lrt='ls -hltrcF --color=always | tail' # use script in ~/bin instead
 alias watch='watch --color -n 1 ' # an alias ending with a space allows for more alias expansion after that, so now watch ll should work (for example)
+alias tailf='tail -F ---disable-inotify'
 
 cdl () {
 	cd $1 &&
@@ -325,4 +326,8 @@ exo () { # echo and execute a command (for selective verbosity, instead of zsh -
 # can use vim for man pager, also support c-] for follwing "links"
 #export MANPAGER="env MAN_PN=1 vim -M +MANPAGER -"
 
-export SUDO_EDITOR=vim
+export SUDO_EDITOR=vim # for sudo -e
+
+tail-int () {
+	watch 'f () { if [ -f $1/logs/nn ]; then echo $1/logs/nn; else echo $1/docker-log; fi }; tail -n 8 $(f cad/recolored) $(f cad/shaded) $(f lego/recolored) $(f lego/shaded)'
+}
