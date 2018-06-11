@@ -1,0 +1,4 @@
+#!/bin/zsh
+set -eu -o pipefail
+
+git log --graph --simplify-by-decoration --all --pretty=tformat:'%Cblue%D [%h]%n %Cgreen%ar %Creset%s%n'
