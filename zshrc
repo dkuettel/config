@@ -329,3 +329,5 @@ exo () { # echo and execute a command (for selective verbosity, instead of zsh -
 mtar () {
 	$dev/src/nn/mtar/$1 "$@[2,-1]"
 }
+
+export SUDO_EDITOR=vim # for sudo -e
