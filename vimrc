@@ -120,7 +120,7 @@ au FocusLost * :wa
 nnoremap <Leader>u :GundoToggle<CR>
 
 " syntastic
-" sudo -H pip install flake 8
+" sudo -H pip install flake8
 " flake8 syntax python 2 vs 3 is decided when installing flake8
 set statusline+=%#warningmsg#
 set statusline+=%{SyntasticStatuslineFlag()}
