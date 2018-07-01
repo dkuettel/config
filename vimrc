@@ -236,4 +236,7 @@ xmap <silent> cciw <Plug>CamelCaseMotion_iw
 nmap ,<space><space> i <esc>la <esc>
 
 " try to use command line window for easier editing
-nmap ; q:i
+nmap q; q:i
+
+vmap ; :
+nmap <enter> o<esc>
