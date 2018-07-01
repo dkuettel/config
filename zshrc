@@ -326,6 +326,6 @@ exo () { # echo and execute a command (for selective verbosity, instead of zsh -
 # can use vim for man pager, also support c-] for follwing "links"
 #export MANPAGER="env MAN_PN=1 vim -M +MANPAGER -"
 
-tail-int () {
-	watch 'f () { if [ -f $1/logs/nn ]; then echo $1/logs/nn; else echo $1/docker-log; fi }; tail -n 8 $(f cad/recolored) $(f cad/shaded) $(f lego/recolored) $(f lego/shaded)'
+mtar () {
+	$dev/src/nn/mtar/$1 "$@[2,-1]"
 }
