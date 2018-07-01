@@ -8,8 +8,8 @@ if [[ -f $f ]]; then
 	exit 1
 else
 	cat <<EOF > $f
-#!/bin/zsh -eux
-set -o pipefail
+#!/bin/zsh
+set -eux -o pipefail
 
 EOF
 	chmod +x $f
