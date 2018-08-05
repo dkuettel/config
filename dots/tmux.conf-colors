@@ -1,0 +1,22 @@
+
+# todo
+# in terms of tmux's "color translation" I think 256 colors
+# is the same as 16 or 8 for the first few color codes
+# so I should get the solarized colors without approximation
+# but I think it's a problem that programs might think we support
+# 256 colors and then it tries to use all instead of the first 16
+# which are optimized, plus changed, so maybe not what was intended
+# also current I login using xterm-16color so tmux maps 256 down
+# to the 16 colors
+# change to xterm-256 colors? a bit more stable
+# but best would be a tmux-16color really, so programs use only 16 colors
+# see klutzy in https://github.com/altercation/solarized/issues/159
+# 256 color also means 16 or 8 color I think (just color integers)
+# not sure what it means when I changed the first 16 colors for
+# maybe indeed make my own tmux-16color, or just go for true color
+set-option -g default-terminal tmux-256color
+#set-option -ga terminal-overrides ",xterm-256color:Tc" # explicitely say true color is enabled
+
+# todo could maybe have inactive windows a bit dimmed? probably that will only work nicely with true color and some flexible color translation?
+#set-option -g window-style 'bg=0'
+#set-option -g window-active-style 'bg=8'

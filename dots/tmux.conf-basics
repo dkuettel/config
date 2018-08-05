@@ -1,0 +1,103 @@
+
+# command prefix (default was ctrl-b)
+set-option -g prefix `
+bind-key ` send-key ` # send actual `
+#bind-key -n C-q send-key # for nested tmux
+
+# window and pane indices
+set-option -g base-index 1 # window ids start at 1
+set-option -g pane-base-index 1 # pane ids start at 1
+set-option -g renumber-windows on # renumber windows when one is removed
+
+# display pane identifiers
+set-option -g display-panes-time 10000 # in milliseconds
+bind-key q display-panes -d 0 # d=0 -> display until selected
+
+# vim modes
+set-window-option -g mode-keys vi # vim mode in copy mode
+set-option -g status-keys vi # vim mode in status line
+
+# add selection for 10+ windows
+# todo could they also be named using a,b,c,...?
+# todo new tmux has a new keymap handling for sequence shortcuts?
+# currently we selection 1-10, then with - we do +10
+bind-key 0 select-window -t :=10
+bind-key - switch-client -T more-windows
+bind-key -T more-windows 1 select-window -t :=11
+bind-key -T more-windows 2 select-window -t :=12
+bind-key -T more-windows 3 select-window -t :=13
+bind-key -T more-windows 4 select-window -t :=14
+bind-key -T more-windows 5 select-window -t :=15
+bind-key -T more-windows 6 select-window -t :=16
+bind-key -T more-windows 7 select-window -t :=17
+bind-key -T more-windows 8 select-window -t :=18
+bind-key -T more-windows 9 select-window -t :=19
+bind-key -T more-windows 0 select-window -t :=20
+
+# select panes using Fx without prefix
+# (and send Fx with prefix)
+#bind-key -n F1 select-pane -t 1
+#bind-key F1 send-key F1
+#bind-key -n F2 select-pane -t 2
+#bind-key F2 send-key F2
+#bind-key -n F3 select-pane -t 3
+#bind-key F3 send-key F3
+#bind-key -n F4 select-pane -t 4
+#bind-key F4 send-key F4
+#bind-key -n F5 select-pane -t 5
+#bind-key F5 send-key F5
+#bind-key -n F6 select-pane -t 6
+#bind-key F6 send-key F6
+#bind-key -n F7 select-pane -t 7
+#bind-key F7 send-key F7
+#bind-key -n F8 select-pane -t 8
+#bind-key F8 send-key F8
+
+# pane navigation using prefix-ctrl+hjkl
+bind-key c-h select-pane -L
+bind-key c-j select-pane -D
+bind-key c-k select-pane -U
+bind-key c-l select-pane -R
+
+# pane navigation using meta+hjkl (no prefix)
+bind-key -n M-h select-pane -L
+bind-key -n M-j select-pane -D
+bind-key -n M-k select-pane -U
+bind-key -n M-l select-pane -R
+
+# how long to wait after an escape to know
+# if it's an escape sequence or an actual escape
+# (waiting too long makes vim and others feel sluggish as they react
+# slowly to hitting escape)
+set-option -sg escape-time 0 # in milliseconds
+
+# time for messages to show in the status line
+set-option -g display-time 4000
+
+# renames the terminal to the session name
+# (useful for tabs in a terminal)
+set-option -g set-titles on
+set-option -g set-titles-string '#S'
+
+# don't allow the tty in a pane/window to rename the window
+set-option -g allow-rename off
+
+# new windows/panes start in the current pane's directory
+bind-key c new-window -c "#{pane_current_path}"
+bind-key % split-window -h -c "#{pane_current_path}"
+bind-key '"' split-window -c "#{pane_current_path}"
+
+# applications in tmux can receive focus events
+# (useful for eg vim and autosave)
+set-option -g focus-events on
+
+# resize window to latest viewers terminal size
+# useful when multipe viewers, eg in a grouped session
+# use 'tmux new-session -t name' to make grouped sessions
+# (sharing all windows, but different focus)
+set-window-option -g aggressive-resize on
+
+# todo can be useful if configured correctly
+# marking text should also copy it to the terminal
+# (should be possible with escape codes)
+#set-option -g mouse on
