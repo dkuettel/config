@@ -1,0 +1,30 @@
+#!/bin/zsh
+set -eux -o pipefail
+
+# todo doesn't seem to take effect in the current session (tmux session?)
+sudo chsh -s $(which zsh) $(whoami)
+
+# antigen
+# todo different folder?
+if [[ -d ~/antigen ]]; then
+	git -C ~/antigen pull
+else
+	# todo another option is to get a fixed version, so we know it will work the way we expect? submodule? especially if I start to have my own changes
+	git clone https://github.com/zsh-users/antigen.git ~/antigen
+fi
+
+# zshrc
+if [[ $(realpath ~/.zshrc) != $(realpath ~/config/dots/zshrc) ]]; then
+	ln -sfT --backup=numbered ~/config/dots/zshrc ~/.zshrc
+fi
+
+[[ -d ~/plugins ]] || mkdir -p ~/plugins
+
+# ls colors
+# todo keep colors, better folder? less in the way? see also antigen
+# todo if we keep it, warn if we can't find it referenced in zshrc
+if [[ -e ~/plugins/dircolors-solarized ]]; then
+	git -C ~/plugins/dircolors-solarized pull
+else
+	git clone https://github.com/seebi/dircolors-solarized.git ~/plugins/dircolors-solarized
+fi
