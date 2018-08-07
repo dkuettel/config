@@ -6,6 +6,8 @@
 #   http://www.zovirl.com/2011/07/22/solarized_cheat_sheet/
 # todo see 'man zshzle' for reporting the current vim mode
 # todo could use 'timeout --kill-after=0.01s 0.01s cmd' to stop git info when it takes too long on a slow filesystem
+# todo checkout vcs info from zsh (see yves)
+# todo could also use tmux pane titles for that information?
 setopt PROMPT_SUBST # expand $ in prompt at show time
 PROMPT='
 %(?,,%F{1}%Sexit code = %?%s%f
