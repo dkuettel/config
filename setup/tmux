@@ -4,7 +4,8 @@ set -eux -o pipefail
 # note: ubuntu 16.04 has an older tmux version 2.1
 # note: ubuntu 16.04 has tmux version 2.6
 
-sudo apt-get install -yqq tmux
+sudo apt-get install -yqq tmux \
+	sysstat # mpstat in tmux status
 
 # todo use newest tmux? make sure it's in the path and shadowing apt installed one
 # build latest version of tmux

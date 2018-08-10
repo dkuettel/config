@@ -1,0 +1,3 @@
+#!/bin/zsh
+set -eu -o pipefail
+free -h --seconds 2 --count 5 | awk '/^Mem:/ { print $3 "/" $2 }'
