@@ -54,6 +54,7 @@ zle -N zle-keymap-select
 export PATH=$PATH:/usr/local/cuda/bin
 export PATH=$PATH:$HOME/config/bin:$HOME/bin
 export PATH=$PATH:$HOME/dev/main/nn/bin
+# todo problem: I'm not using my own compiled tmux right now, because my own bin comes after the global bin
 
 # todo: try zaw for history search
 # todo currently not using anymore
