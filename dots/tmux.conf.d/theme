@@ -14,8 +14,8 @@ set-option -g status-left '#{session_name} '
 set-option -g status-right-length 100
 set-option -g status-right-style 'fg=brightgreen,bg=black'
 set-option -g status-right ' '
-set-option -ga status-right '#(~/config/dots/zshrc.d/bin/cpu-usage) '
-set-option -ga status-right '#(~/config/dots/zshrc.d/bin/memory-usage) '
+set-option -ga status-right '#(~/config/dots/tmux.conf.d/bin/cpu-usage) '
+set-option -ga status-right '#(~/config/dots/tmux.conf.d/bin/memory-usage) '
 #set-option -ga status-right "| #(date '+%F %R') "
 #set-option -ga status-right '| #(hostname) '
 
