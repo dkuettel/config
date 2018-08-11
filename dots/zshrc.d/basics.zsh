@@ -8,6 +8,7 @@
 # todo could use 'timeout --kill-after=0.01s 0.01s cmd' to stop git info when it takes too long on a slow filesystem
 # todo checkout vcs info from zsh (see yves)
 # todo could also use tmux pane titles for that information?
+# todo show vim-mode in prompt? or on caret? (color?)
 setopt PROMPT_SUBST # expand $ in prompt at show time
 PROMPT='
 %(?,,%F{1}%Sexit code = %?%s%f
@@ -30,3 +31,18 @@ bindkey '^h' backward-delete-char # make ctrl-h work after returning from comman
 #bindkey '^r' history-search-multi-word # todo not sure why I have to do it here, the plugin does it already, but it doesnt work
 # edit command line in editor
 #bindkey '^x^e' edit-command-line
+
+## history
+# try to make it "forever" and shared
+# todo doesn't seem to update "live" yet ?
+export HISTSIZE=1000000000
+export SAVEHIST=1000000000
+setopt append_history
+setopt extended_history
+setopt hist_expire_dups_first
+setopt hist_ignore_dups # ignore duplication command history list
+setopt hist_save_no_dups
+setopt hist_ignore_space
+setopt hist_verify
+setopt inc_append_history
+setopt share_history

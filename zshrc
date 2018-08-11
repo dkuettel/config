@@ -7,23 +7,6 @@ source ~/config/antigenrc
 # antigen init could speed up, not sure (but is less automatic when changes happens, see doc)
 # antigen init ~/config/antigenrc
 
-# history
-# todo doesn't seem to update "live" yet ?
-export HISTSIZE=1000000000
-export SAVEHIST=1000000000
-setopt append_history
-setopt extended_history
-setopt hist_expire_dups_first
-setopt hist_ignore_dups # ignore duplication command history list
-setopt hist_save_no_dups
-setopt hist_ignore_space
-setopt hist_verify
-setopt inc_append_history
-setopt share_history
-
-# so that bin/activate does not mess with PS1, we do it ourselves
-export VIRTUAL_ENV_DISABLE_PROMPT=true
-
 # adapted theme: amuse + tjkirch
 PROMPT='%(?,,
 %{$fg[red]%}FAIL: $?%{$reset_color%}
@@ -47,38 +30,9 @@ zle -N zle-keymap-select
 # antigen update # update bundles
 # antigen cleanup # remove what's not loaded right now
 
-# note: ~ does not expand, but $HOME does
-#export PATH=$HOME/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/usr/local/cuda-7.0/bin:/usr/local/cuda-8.0/bin:$PATH
-# todo trying to make it a bit shorter and honoring previous PATH
-# todo not sure if it's better to append or prepend, for virtualenv it works better to append
-export PATH=$PATH:/usr/local/cuda/bin
-export PATH=$PATH:$HOME/config/bin:$HOME/bin
-export PATH=$PATH:$HOME/dev/main/nn/bin
-# todo problem: I'm not using my own compiled tmux right now, because my own bin comes after the global bin
-
 # todo: try zaw for history search
 # todo currently not using anymore
 # bindkey '^R' zaw-history
-
-alias ls='ls --color=auto'
-alias lr='ls -hltrcF'
-alias l='ls -lhFva'
-alias ll='ls -lhFv'
-alias lll='ls -lhFv --color=yes | less -R'
-alias lsdirs='ls -v -d */'
-alias lldirs='ls -vldh */'
-alias d+='pushd .'
-alias d-='popd'
-#alias ..='cd ..'
-#alias ...='cd ../..'
-#alias lrt='ls -hltrcF --color=always | tail' # use script in ~/bin instead
-alias watch='watch --color -n 1 ' # an alias ending with a space allows for more alias expansion after that, so now watch ll should work (for example)
-alias tailf='tail -F ---disable-inotify'
-
-cdl () {
-	cd $1 &&
-	lr
-}
 
 # color support for ls with the solarized theme
 # todo as bundle for antigen? have to make my own clone for that with a *.zsh to use for bundle

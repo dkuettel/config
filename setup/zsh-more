@@ -1,6 +1,9 @@
 #!/bin/zsh
 set -eux -o pipefail
 
+sudo apt-get -yqq install \
+	git # git info in prompt
+
 # todo doesn't seem to take effect in the current session (tmux session?)
 sudo chsh -s $(which zsh) $(whoami)
 
