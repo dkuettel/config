@@ -7,30 +7,49 @@
 # todo see 'man zshzle' for reporting the current vim mode
 # todo could use 'timeout --kill-after=0.01s 0.01s cmd' to stop git info when it takes too long on a slow filesystem
 # todo checkout vcs info from zsh (see yves)
-# todo could also use tmux pane titles for that information?
-# todo show vim-mode in prompt? or on caret? (color?)
 setopt PROMPT_SUBST # expand $ in prompt at show time
 PROMPT='
 %(?,,%F{1}%Sexit code = %?%s%f
 )
 %K{0}%F{14}%B%~%b%f ($(git symbolic-ref --short HEAD 2>/dev/null)) %F{10}%*%f %(1j,%F{1}%j&%f,) %E%k
-> '
+${${${KEYMAP:-main}/vicmd/N}/(main|viins)/I}> '
+function zle-keymap-select() {
+	zle reset-prompt
+	zle -R
+}
+zle -N zle-keymap-select
 
 ## vim-mode for zsh line editing
 # see 'man zshzle'
 bindkey -v
 export KEYTIMEMOUT=1 # quicker reaction to mode change (might interfere with other things) (1=0.1seconds)
-# add bindings to vim insert mode
-bindkey '^P' up-history
-bindkey '^N' down-history
+autoload up-line-or-beginning-search
+zle -N up-line-or-beginning-search
+bindkey '^P' up-line-or-beginning-search
+bindkey -M vicmd 'k' up-line-or-beginning-search
+autoload down-line-or-beginning-search
+zle -N down-line-or-beginning-search
+bindkey '^N' down-line-or-beginning-search
+bindkey -M vicmd 'j' down-line-or-beginning-search
+bindkey -M vicmd '?' history-incremental-search-backward
+bindkey -M vicmd '/' history-incremental-search-forward
 bindkey '^?' backward-delete-char # make backspace work after returning from command mode to insert mode
 bindkey '^h' backward-delete-char # make ctrl-h work after returning from command mode to insert mode
+#bindkey '^w' backward-kill-word
 # ctrl-r starts searching history backward
 #bindkey '^r' history-incremental-search-backward
 #bindkey '^r' znt-history-widget
 #bindkey '^r' history-search-multi-word # todo not sure why I have to do it here, the plugin does it already, but it doesnt work
-# edit command line in editor
-#bindkey '^x^e' edit-command-line
+bindkey '^xh' run-help
+bindkey -M vicmd ',h' run-help
+autoload edit-command-line
+zle -N edit-command-line
+bindkey '^xe' edit-command-line
+bindkey -M vicmd ',e' edit-command-line
+autoload insert-files
+zle -N insert-files
+bindkey '^xf' insert-files
+bindkey -M vicmd ',f' insert-files
 
 ## history
 # try to make it "forever" and shared
@@ -46,3 +65,18 @@ setopt hist_ignore_space
 setopt hist_verify
 setopt inc_append_history
 setopt share_history
+
+## less
+# default options
+# also used for man
+LESS+='--status-column ' # mark matched lines on the left side
+LESS+='--HILITE-UNREAD ' # mark next unread line (not working with --status-column?)
+LESS+='--RAW-CONTROL-CHARS ' # pass ansi colors
+LESS+='--chop-long-lines ' # don't wrap long lines
+LESS+='--no-init ' # probably don't clear the screen after exit
+LESS+='--clear-screen ' # complete redraw when scrolling
+export LESS
+
+## other
+#setopt EXTENDED_GLOB # problematic because ^ has to be escaped
+export SUDO_EDITOR=vim # for sudo -e

@@ -7,69 +7,17 @@ source ~/config/antigenrc
 # antigen init could speed up, not sure (but is less automatic when changes happens, see doc)
 # antigen init ~/config/antigenrc
 
-# adapted theme: amuse + tjkirch
-PROMPT='%(?,,
-%{$fg[red]%}FAIL: $?%{$reset_color%}
-)
-%{$fg_bold[green]%}${PWD/#$HOME/~}%{$reset_color%}$(git_prompt_info) ⌚ %{$fg_bold[red]%}%*%{$reset_color%} ${VIRTUAL_ENV+(env)}
-${${KEYMAP/vicmd/N}/(main|viins)/I}> '
-ZSH_THEME_GIT_PROMPT_PREFIX=" on %{$fg[magenta]%}\uE0A0 "
-ZSH_THEME_GIT_PROMPT_SUFFIX="%{$reset_color%}"
-ZSH_THEME_GIT_PROMPT_DIRTY="%{$fg[red]%}!"
-ZSH_THEME_GIT_PROMPT_UNTRACKED="%{$fg[green]%}?"
-ZSH_THEME_GIT_PROMPT_CLEAN=""
-function zle-line-init zle-keymap-select {
-	zle reset-prompt
-}
-zle -N zle-line-init
-zle -N zle-keymap-select
-# todo I don't understand why I can do all in PROMPT (using KEYMAP), but KEYMAP is only set when it's triggered with a reset-prompt?
-
 # todo
 # antigen selfupdate # update antigen
 # antigen update # update bundles
 # antigen cleanup # remove what's not loaded right now
 
-# todo: try zaw for history search
-# todo currently not using anymore
-# bindkey '^R' zaw-history
-
 # color support for ls with the solarized theme
 # todo as bundle for antigen? have to make my own clone for that with a *.zsh to use for bundle
 eval `dircolors ~/plugins/dircolors-solarized/dircolors.ansi-light`
 
-# option -J is also interesting
-# but I'd rather highlight the whole line with a match after searching and key n
-export LESS="-j.3 -WRSXc"
-
-# try it for now
-#source ~/.local/lib/python2.7/site-packages/powerline/bindings/zsh/powerline.zsh
-
-# try vim mode for zle
-bindkey -v
-export KEYTIMEMOUT=1 # quicker reaction to mode change (might interfere with other things) (1=0.1seconds)
-# Use vim cli mode
-bindkey '^P' up-history
-bindkey '^N' down-history
-# backspace and ^h working even after
-# returning from command mode
-bindkey '^?' backward-delete-char
-bindkey '^h' backward-delete-char
-# ctrl-w removed word backwards
-bindkey '^w' backward-kill-word
-# ctrl-r starts searching history backward
-#bindkey '^r' history-incremental-search-backward
-#bindkey '^r' znt-history-widget
-bindkey '^r' history-search-multi-word # todo not sure why I have to do it here, the plugin does it already, but it doesnt work
-# edit command line in editor
-bindkey '^x^e' edit-command-line
-
 # extended globbing, any conflicts?
 setopt extendedglob
-
-# ssh auth in tmux
-#alias sshca_set='. sshca_set.sh'
-#alias tmux='sshca_bind; SSH_AUTH_SOCK=~/.ssh/ssh-auth-sock.tmux ~/tmux/tmux'
 
 # for feh to work well with tiling window manager
 alias feh='feh --auto-zoom --scale-down --draw-filename --draw-tinted'
