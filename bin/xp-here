@@ -1,5 +1,0 @@
-#!/bin/bash -eu
-set -o pipefail
-f=$(realpath .)
-export PYTHONPATH=$f/nn/python:$f/nn/libs/gpurenderer/python:$f/nn/libs/caffe/python:$f/nn/libs/py_faster_rcnn
-./sxp "$@"

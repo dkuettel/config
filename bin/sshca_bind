@@ -1,6 +1,0 @@
-#!/bin/bash
-
-if [[ $SSH_AUTH_SOCK != ~/.ssh/ssh-auth-sock.tmux ]]
-then
-	ln -sf $SSH_AUTH_SOCK ~/.ssh/ssh-auth-sock.tmux
-fi

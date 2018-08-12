@@ -1,5 +1,5 @@
-#!/bin/zsh -eu
-set -o pipefail
+#!/bin/zsh
+set -eu -o pipefail
 
 f=${1:?missing argument 1: filename}
 
