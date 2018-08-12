@@ -2,7 +2,7 @@
 set -eux -o pipefail
 
 # note: ubuntu 16.04 has an older tmux version 2.1
-# note: ubuntu 16.04 has tmux version 2.6
+# note: ubuntu 18.04 has tmux version 2.6
 
 sudo apt-get install -yqq tmux \
 	sysstat # mpstat in tmux status
@@ -26,6 +26,4 @@ sudo apt-get install -yqq tmux \
 if [[ $(realpath ~/.tmux.conf) != $(realpath ~/config/dots/tmux.conf) ]]; then
 	ln -sfT --backup=numbered ~/config/dots/tmux.conf ~/.tmux.conf
 fi
-
-#sudo -H pip install powerline-status
 

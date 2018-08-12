@@ -8,7 +8,6 @@ sudo apt-get -yqq install \
 sudo chsh -s $(which zsh) $(whoami)
 
 # antigen
-# todo different folder?
 if [[ -d ~/antigen ]]; then
 	git -C ~/antigen pull
 else
@@ -24,8 +23,6 @@ fi
 [[ -d ~/plugins ]] || mkdir -p ~/plugins
 
 # ls colors
-# todo keep colors, better folder? less in the way? see also antigen
-# todo if we keep it, warn if we can't find it referenced in zshrc
 if [[ -e ~/plugins/dircolors-solarized ]]; then
 	git -C ~/plugins/dircolors-solarized pull
 else
