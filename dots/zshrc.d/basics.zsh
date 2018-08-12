@@ -1,4 +1,7 @@
 
+# todo not sure about the right way to handle it
+export LC_ALL=en_US.UTF-8
+
 ## prompt
 # see http://zsh.sourceforge.net/Doc/Release/Prompt-Expansion.html
 # for colors:
@@ -7,7 +10,7 @@
 # todo see 'man zshzle' for reporting the current vim mode
 # todo could use 'timeout --kill-after=0.01s 0.01s cmd' to stop git info when it takes too long on a slow filesystem
 # todo checkout vcs info from zsh (see yves)
-setopt PROMPT_SUBST # expand $ in prompt at show time
+setopt prompt_subst # expand $ in prompt at show time
 PROMPT='
 %(?,,%F{1}%Sexit code = %?%s%f
 )
@@ -43,7 +46,7 @@ bindkey '^h' backward-delete-char # make ctrl-h work after returning from comman
 bindkey '^xh' run-help
 bindkey -M vicmd ',h' run-help
 autoload edit-command-line
-zle -N edit-command-line
+zle -N edit-command-line # todo autoload and zle -N, what?
 bindkey '^xe' edit-command-line
 bindkey -M vicmd ',e' edit-command-line
 autoload insert-files
@@ -78,5 +81,15 @@ LESS+='--clear-screen ' # complete redraw when scrolling
 export LESS
 
 ## other
-#setopt EXTENDED_GLOB # problematic because ^ has to be escaped
-export SUDO_EDITOR=vim # for sudo -e
+#setopt extended_glob # problematic because ^ has to be escaped
+setopt rm_star_silent # no confirmation anymore for "rm *"-like
+setopt always_to_end # move to end of word after completion
+setopt complete_in_word
+setopt long_list_jobs
+export SUDO_EDITOR=vim # for sudo -e or sudoedit
+export MANOPT='--no-justification --no-hyphenation'
+export PYTHONDONTWRITEBYTECODE=True # no .pyc files for python
+stty -ixon # disables flow control, for example ctrl-s (useful in vim)
+
+## solarized colors for ls
+eval `dircolors ~/plugins/dircolors-solarized/dircolors.ansi-dark`

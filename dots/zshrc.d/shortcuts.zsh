@@ -27,6 +27,7 @@ _complete_.. () {
 compctl -K _complete_.. ..
 cdl () { cd $1 && echo && echo 'lr of ' $(pwd) && echo && lr }
 compctl -/ cdl # only complete directories for cdl
+rcd () { cd $(pwd) } # reacquire inode when current path was recreated
 #alias d+='pushd .'
 #alias d-='popd'
 
@@ -51,3 +52,29 @@ compctl -c pwatch # complete commands
 # -F = follow and retry
 # disable-inotify makes it never rely on any inode
 alias tailf='tail -F ---disable-inotify'
+
+# feh
+alias feh='feh --auto-zoom --scale-down --draw-filename --draw-tinted'
+alias ffeh='feh --fullscreen --draw-filename --draw-tinted'
+
+# rsync copy with progress
+# todo not sure about $1/ or $1 semantics
+rsync_cp () {
+	rsync -ah -L -r --info=progress2 $1 $2
+}
+
+# some xpman and co
+
+#xp-py () {
+#	ipython --InteractiveShellApp.exec_files='["/home/kuettel/config/xp-py.py"]'
+#}
+
+#exo () { # echo and execute a command (for selective verbosity, instead of zsh -x or -v)
+#	echo "> $@"
+#	$@
+#}
+
+#mtar () {
+#	$dev/src/nn/mtar/$1 "$@[2,-1]"
+#}
+
