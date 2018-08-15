@@ -15,6 +15,9 @@ if tmux #[fg=...] does the right thing
 why I cannot use color00 in fg= in tmux?
 if true color works
 
+would it make sense to have a terminfo tmux-16color so no client is tempted to use more?
+or just completely move to truecolor?
+
 try pane titles with info and for easy spotting of active window?
 pane titles include pane index
 could easily switch then
