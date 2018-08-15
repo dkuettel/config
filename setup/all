@@ -5,3 +5,4 @@ set -eux -o pipefail
 
 ./zsh
 ./tmux
+./vim
