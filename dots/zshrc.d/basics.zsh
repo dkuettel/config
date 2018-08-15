@@ -39,10 +39,8 @@ bindkey -M vicmd '/' history-incremental-search-forward
 bindkey '^?' backward-delete-char # make backspace work after returning from command mode to insert mode
 bindkey '^h' backward-delete-char # make ctrl-h work after returning from command mode to insert mode
 #bindkey '^w' backward-kill-word
-# ctrl-r starts searching history backward
-#bindkey '^r' history-incremental-search-backward
-#bindkey '^r' znt-history-widget
-#bindkey '^r' history-search-multi-word # todo not sure why I have to do it here, the plugin does it already, but it doesnt work
+#bindkey -M vicmd '^r' history-incremental-search-backward # disabled because we use an antigen plugin
+#bindkey -M viins '^r' history-incremental-search-backward # disabled because we use an antigen plugin
 bindkey '^xh' run-help
 bindkey -M vicmd ',h' run-help
 autoload edit-command-line
