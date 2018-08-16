@@ -8,7 +8,7 @@ import XMonad.Util.EZConfig(additionalKeys)
 import System.IO
 import XMonad.Actions.CycleWS
 
-main = do
+main = do -- can be reloaded with mod-q
 	xmonad $ ewmh defaultConfig
 		{ manageHook = manageDocks <+> manageHook defaultConfig
 		, layoutHook = avoidStruts $ layoutHook defaultConfig
@@ -17,6 +17,7 @@ main = do
 		, normalBorderColor = "#073642"
 		, focusedBorderColor = "#b58900"
 		, handleEventHook = handleEventHook defaultConfig <+> fullscreenEventHook -- chrome and others don't support proper x11 anymore
+		, terminal = "st"
 		} `additionalKeysP`
 		[ ("<F8>",spawn "~/plugins/playerctl/playerctl/playerctl play-pause")
 		, ("<F9>",spawn "~/plugins/playerctl/playerctl/playerctl next")

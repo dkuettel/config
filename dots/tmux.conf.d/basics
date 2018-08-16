@@ -36,22 +36,22 @@ bind-key -T more-windows 0 select-window -t :=20
 
 # select panes using Fx without prefix
 # (and send Fx with prefix)
-#bind-key -n F1 select-pane -t 1
-#bind-key F1 send-key F1
-#bind-key -n F2 select-pane -t 2
-#bind-key F2 send-key F2
-#bind-key -n F3 select-pane -t 3
-#bind-key F3 send-key F3
-#bind-key -n F4 select-pane -t 4
-#bind-key F4 send-key F4
-#bind-key -n F5 select-pane -t 5
-#bind-key F5 send-key F5
-#bind-key -n F6 select-pane -t 6
-#bind-key F6 send-key F6
-#bind-key -n F7 select-pane -t 7
-#bind-key F7 send-key F7
-#bind-key -n F8 select-pane -t 8
-#bind-key F8 send-key F8
+bind-key -n F1 select-pane -t 1
+bind-key F1 send-key F1
+bind-key -n F2 select-pane -t 2
+bind-key F2 send-key F2
+bind-key -n F3 select-pane -t 3
+bind-key F3 send-key F3
+bind-key -n F4 select-pane -t 4
+bind-key F4 send-key F4
+bind-key -n F5 select-pane -t 5
+bind-key F5 send-key F5
+bind-key -n F6 select-pane -t 6
+bind-key F6 send-key F6
+bind-key -n F7 select-pane -t 7
+bind-key F7 send-key F7
+bind-key -n F8 select-pane -t 8
+bind-key F8 send-key F8
 
 # pane navigation using prefix-ctrl+hjkl
 bind-key c-h select-pane -L

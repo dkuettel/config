@@ -1,0 +1,22 @@
+#!/bin/zsh
+set -eux -o pipefail
+
+if which google-chrome; then
+else
+	wget https://dl-ssl.google.com/linux/direct/google-chrome-stable_current_amd64.deb -O google-chrome.deb
+	# those dependencies were needed in ubuntu 16.04, 18.04 seems to work now without
+	# sudo apt-get -fyq install libindicator7 libappindicator1 libpango1.0-0 libpangox-1.0-0
+	sudo dpkg -i google-chrome.deb
+	rm google-chrome.deb
+fi
+
+apts=()
+apts+=jq # parse json to change preferences
+apts+=moreutils # for sponge
+sudo apt-get -yqq install $apts
+
+(
+	# todo not sure if that config is already there after installing but not starting
+	cd ~/.config/google-chrome/Default
+	jq '.browser.custom_chrome_frame=false' Preferences | sponge Preferences # system border works better with xmonad
+)

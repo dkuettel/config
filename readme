@@ -25,3 +25,6 @@ prefix-# for windows
 prefix-shift+# for panes or something like that?
 or alt-#?
 or just another prefix (multi stroke is easier)
+
+todo: add st config and compilation stuff
+todo: check in /root for nvidia setup
