@@ -30,5 +30,5 @@ main = do -- can be reloaded with mod-q
 		, ("M-`", swapNextScreen) -- swap screens
 		, ("M-r", swapNextScreen) -- swap screens
 		] `additionalKeys`
-		[ ((mod4Mask, xK_p), spawn "PATH=~/config/bin:~/bin:~/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin dmenu_run -i -l 50 -p '>'")
+		[ ((mod4Mask, xK_p), spawn "PATH=/snap/bin:~/config/bin:~/bin:~/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin dmenu_run -i -l 50 -p '>'")
 		]

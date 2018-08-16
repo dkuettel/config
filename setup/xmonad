@@ -11,7 +11,6 @@ sudo apt-get -yqq install xmonad
 apts=()
 apts+=feh # to set the background image
 apts+=suckless-tools # for dmenu and slock
-# todo still missing playerctl
 sudo apt-get -yqq install $apts
 
 mkdir -p ~/.xmonad
