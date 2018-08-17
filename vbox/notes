@@ -1,3 +1,14 @@
+basic ubuntu 18.04 mini server
+for running in virtual box
+useful to make a snapshot of this for later experimentation
+
+new virtualbox machine with more or less default settings, plus:
+	- a second net interface for a host-only net for ssh
+	- use ubuntu 18.04 mini
+save as fresh snapshot
+
+then make basic snapshot
+
 basic mini with?
 - opensshserver and basic ubuntu server
 network fixed local ip (no dhcp)
