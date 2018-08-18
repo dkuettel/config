@@ -28,3 +28,6 @@ or just another prefix (multi stroke is easier)
 
 todo: add st config and compilation stuff
 todo: check in /root for nvidia setup
+
+could be interesting with tmux?
+	http://zsh.sourceforge.net/Doc/Release/Zsh-Modules.html#The-zsh_002fclone-Module
