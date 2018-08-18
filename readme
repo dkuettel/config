@@ -1,33 +1,34 @@
 bootstrap by getting a clone or copy of this into ~/config
 
-based on an ubuntu 18.04 server installation
-# todo try ubuntu minimal
-# todo normal ubuntu (non-server) has less things installed (?)
+mostly tested on
+	ubuntu 18.04 mini with 'opensshserver' + 'basic ubuntu server'
+	ubuntu 18.04 desktop
 
-save pictures of how colors.py output should look
-maybe on different terminals
-for easy checking if things are right
 
-especially how can I quickly check if bright/bold changes color or just font
-if I have 8 or 16 colors
-if tmux translates colors or not
-if tmux #[fg=...] does the right thing
-why I cannot use color00 in fg= in tmux?
-if true color works
+todos:
+	- save pictures of how colors.py output should look
+		maybe on different terminals
+		for easy checking if things are right
+		especially how can I quickly check if bright/bold changes color or just font
+		if I have 8 or 16 colors
+		if tmux translates colors or not
+		if tmux #[fg=...] does the right thing
+		why I cannot use color00 in fg= in tmux?
+		if true color works
 
-would it make sense to have a terminfo tmux-16color so no client is tempted to use more?
-or just completely move to truecolor?
+	- would it make sense to have a terminfo tmux-16color so no client is tempted to use more?
+		or just completely move to truecolor?
 
-try pane titles with info and for easy spotting of active window?
-pane titles include pane index
-could easily switch then
-prefix-# for windows
-prefix-shift+# for panes or something like that?
-or alt-#?
-or just another prefix (multi stroke is easier)
+	- try pane titles with info and for easy spotting of active window?
+		pane titles include pane index
+		could easily switch then
+		prefix-# for windows
+		prefix-shift+# for panes or something like that?
+		or alt-#?
+		or just another prefix (multi stroke is easier)
 
-todo: add st config and compilation stuff
-todo: check in /root for nvidia setup
+	- add st config and compilation stuff
+	- check in /root for nvidia setup (ptc desktop)
 
-could be interesting with tmux?
-	http://zsh.sourceforge.net/Doc/Release/Zsh-Modules.html#The-zsh_002fclone-Module
+	- could be interesting with tmux?
+		http://zsh.sourceforge.net/Doc/Release/Zsh-Modules.html#The-zsh_002fclone-Module
