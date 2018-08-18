@@ -11,7 +11,7 @@ export LC_ALL=en_US.UTF-8
 # todo could use 'timeout --kill-after=0.01s 0.01s cmd' to stop git info when it takes too long on a slow filesystem
 # todo checkout vcs info from zsh (see yves)
 setopt prompt_subst # expand $ in prompt at show time
-PROMPT='
+export PS1='
 %(?,,%F{1}%Sexit code = %?%s%f
 )
 %K{0}%F{14}%B%~%b%f ($(git symbolic-ref --short HEAD 2>/dev/null)) %F{10}%*%f %(1j,%F{1}%j&%f,) %E%k
@@ -91,3 +91,8 @@ stty -ixon # disables flow control, for example ctrl-s (useful in vim)
 
 ## solarized colors for ls
 eval `dircolors ~/plugins/dircolors-solarized/dircolors.ansi-dark`
+
+## easier output for when using 'set -x'
+# todo if there was an "after ps4" we could use another color and undo it
+# we show "location depth> context state" with inverted coloring for easy spotting
+export PS4='%S%x:%I %e> %N:%i %_%s '
