@@ -76,8 +76,7 @@ nnoremap <leader>b :CtrlPBuffer<cr>
 hi CursorLine cterm=NONE ctermbg=gray ctermfg=NONE " NONE for ctermfg lets fg color be -> syntaxcolors
 set cursorline
 set cursorcolumn
-nnoremap ; :
-:nnoremap X :set cursorline! cursorcolumn!<CR>
+nnoremap X :set cursorline! cursorcolumn!<CR>
 
 " jedi-vim settings
 let g:jedi#popup_on_dot = 0
@@ -235,8 +234,20 @@ xmap <silent> cciw <Plug>CamelCaseMotion_iw
 " easy surround = with spaces
 nmap ,<space><space> i <esc>la <esc>
 
-" try to use command line window for easier editing
-nmap q; q:i
+" insert lines in normal mode
+" note nmap <enter> o<esc> works but breaks <enter> in quickfix/location windows
+" note nmap <s-enter> doesn't work because the terminal doesn't send the shift
+" see https://stackoverflow.com/questions/16359878/vim-how-to-map-shift-enter
+"nnoremap ?? o<esc>
+"nnoremap ?? O<esc>
 
+" different ways to enter command mode
+" ; for :
+nnoremap ; :
 vmap ; :
-nmap <enter> o<esc>
+" command line window in insert mode
+nmap q; q:i
+" space for :
+" note space could also be a good leader like ,
+nnoremap <space> :
+vnoremap <space> :
