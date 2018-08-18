@@ -251,3 +251,6 @@ nmap q; q:i
 " note space could also be a good leader like ,
 nnoremap <space> :
 vnoremap <space> :
+
+" todo could be interesting to have different cursor shapes and colors for normal and insert mode
+" see https://www.reddit.com/r/vim/comments/8se9ug/changing_cursor_in_different_modes_with_tmux/
