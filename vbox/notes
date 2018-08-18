@@ -1,26 +1,20 @@
-basic ubuntu 18.04 mini server
+description how to set up a basic ubuntu 18.04 mini server
 for running in virtual box
-useful to make a snapshot of this for later experimentation
 
-new virtualbox machine with more or less default settings, plus:
-	- a second net interface for a host-only net for ssh
-	- use ubuntu 18.04 mini
-save as fresh snapshot
+make a new virtualbox machine
+	- with default settings, plus:
+		- a second net interface for a host-only network (no dhcp)
+	- use ubuntu 18.04 mini (network installer, it allows to install only certain packages, no gui)
+	- select packages opensshserver and basic ubuntu server
+save this as a snapshot "fresh"
 
-then make basic snapshot
-
-basic mini with?
-- opensshserver and basic ubuntu server
-network fixed local ip (no dhcp)
-	- addresses: [192.168.56.101/24]
-ssh
-	only login with key
-		cp host.pub to authorized_keys
-		sshd_config: AuthenticationMethods publickey
-	no ssh from outside, only on internal interface
-		ListenAddress 192.168.56.101:22
-shared folder mounted
-	- means install vboxsf stuff
-	- vbox /home/dkuettel/vbox vboxsf rw,uid=1000,gid=1004 0 0
-already a config checkout (not executed) + basic git config
-
+now setup a basic starting point
+	- mount vbox tools and install
+	- /etc/fstab with vbox /home/dkuettel/vbox vboxsf rw,uid=1000,gid=1000 0 0
+	- /etc/netplan/* with addresses: [192.168.56.101/24], netplan apply
+	- /etc/ssh/sshd_config add "AuthenticationMethods publickey" and "ListenAddress 192.168.56.101:22"
+		- service sshd restart to apply settings now
+	- in ~/.ssh, copy id_rsa and id_rsa.pub, prepare authorized_keys, restrict access
+	- git clone bitbucket.org:dkuettel/config.git
+		- git config --global user.name and user.email
+save this as a snapshot "basic"
