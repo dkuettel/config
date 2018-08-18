@@ -84,6 +84,7 @@ setopt rm_star_silent # no confirmation anymore for "rm *"-like
 setopt always_to_end # move to end of word after completion
 setopt complete_in_word
 setopt long_list_jobs
+setopt noautocd # dont assume an implicit cd prefix for folder names
 export SUDO_EDITOR=vim # for sudo -e or sudoedit
 export MANOPT='--no-justification --no-hyphenation'
 export PYTHONDONTWRITEBYTECODE=True # no .pyc files for python
