@@ -21,8 +21,10 @@ set backspace=indent,eol,start " allow backspacing over everything in insert mod
 
 " navigate splits
 " todo does it disable the redraw on ctrl-l?
-nnoremap  <c-w>j " todo since I moved to vim 8 <c-j> on the first argument doesn't work anymore, had to actually use c-v c-j to make the character
-nnoremap <c-j> <c-w>j " todo since I moved to vim 8 <c-j> on the first argument doesn't work anymore, had to actually use c-v c-j to make the character
+" todo since I moved to vim 8 <c-j> on the first argument doesn't work anymore, had to actually use c-v c-j to make the character
+nnoremap  <c-w>j
+" todo since I moved to vim 8 <c-j> on the first argument doesn't work anymore, had to actually use c-v c-j to make the character
+nnoremap <c-j> <c-w>j
 nnoremap <c-k> <c-w>k
 nnoremap <c-l> <c-w>l
 nnoremap <c-h> <c-w>h
@@ -190,13 +192,15 @@ nmap ,dd :call jedi#goto()<cr>zt
 nmap ,dt :tab split<cr>,dd
 nmap ,ds <c-w>s,dd
 nmap ,dv <c-w>v,dd
-nmap ,dp <c-w>} " alternative for preview on tag
+" alternative for preview on tag
+nmap ,dp <c-w>}
 
 " try dealing with long lines
 set breakindent " visually breaks lines using the same indentation
 let &showbreak = '  ↪ '  " characters to show on a continued line
 set nowrap " do or don't viusally break linkes (does not change text)
-map ,ww :set wrap!<cr> " toggle wrapping (on or off)
+" toggle wrapping (on or off)
+map ,ww :set wrap!<cr>
 
 " try custom python import
 function! Test_import()
