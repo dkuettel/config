@@ -179,11 +179,14 @@ set textwidth=0 wrapmargin=0
 " trying out some new (tab) navigation
 " remember: c-w } for tag in preview window
 " remember: {tabid}gt to jump directly to a tab
-map T :tab split<cr> " new tab, view on current buffer
-map tc :tabclose<cr> " close current tab
+" new tab, view on current buffer
+map T :tab split<cr>
+" close current tab
+map tc :tabclose<cr>
 " vim jedi goto commands
 let g:jedi#goto_command = ''
-nmap ,dd :call jedi#goto()<cr>zt " not sure if that is the best way, maybe there is a global setting for how it always centers on the cursor when you move around?
+" not sure if that is the best way, maybe there is a global setting for how it always centers on the cursor when you move around?
+nmap ,dd :call jedi#goto()<cr>zt
 nmap ,dt :tab split<cr>,dd
 nmap ,ds <c-w>s,dd
 nmap ,dv <c-w>v,dd
