@@ -32,3 +32,10 @@ todos:
 
 	- could be interesting with tmux?
 		http://zsh.sourceforge.net/Doc/Release/Zsh-Modules.html#The-zsh_002fclone-Module
+
+	- add powerline fonts or remove them form vim config as well
+
+	- snaps now put their config files in ~/snap, so spotify could maybe be configured automatically?
+
+	- my mouse is too slow
+		how to configure independent of guis? and align it with my windows10?
