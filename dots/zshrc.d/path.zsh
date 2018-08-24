@@ -4,6 +4,7 @@
 # todo anyway to prevent duplication?
 
 export PATH
+PATH=$HOME/config/bin:$PATH
 PATH=$HOME/.local/bin:$PATH # seems not to be there by default, for example pip install puts executables there
 #export PATH=$HOME/config/bin:$PATH
 #export PATH=$PATH:/usr/local/cuda/bin
