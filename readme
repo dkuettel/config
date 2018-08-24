@@ -44,3 +44,7 @@ todos:
 
 	- how/where to apt install what we need for eg in config/bin? (eg ctags)
 		one nice way is to maybe just do it in that file? first time you have to sudo? or maybe not so nice
+
+	- vim (at least in python) tries to be too smart again
+		- indent +1 when it thinks it should
+		- import from pops up stuff
