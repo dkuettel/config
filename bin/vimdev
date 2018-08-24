@@ -30,7 +30,7 @@ tags () {
 	done
 }
 
-
+echo =ctags > /dev/null
 tags &
 vim $@
 kill %tags
