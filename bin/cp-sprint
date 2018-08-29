@@ -1,0 +1,16 @@
+#!/bin/zsh
+set -eux -o pipefail
+
+source=${1:?provide source}
+target=${2:?provide target}
+
+if [[ -e $target ]]; then
+	echo $target exists already
+	exit 1
+else
+	if [[ -d $source ]]; then
+		cp -r $1 ~/Dropbox/sprint/$2
+	else
+		cp $1 ~/Dropbox/sprint/$2
+	fi
+fi
