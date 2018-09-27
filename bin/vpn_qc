@@ -1,3 +1,0 @@
-#!/bin/bash
-
-sudo vpnc --no-detach ~kuettel/bin/vpn_qc.conf

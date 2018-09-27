@@ -1,5 +1,28 @@
-#!/bin/zsh -eux
-set -o pipefail
+#!/bin/zsh
+set -eu -o pipefail
 
-sudo LD_LIBRARY_PATH=/usr/local/lib:${LD_LIBRARY_PATH:-} openconnect --juniper emea-portal.ptc.com --user=dkuettel
-# passwords: sudo, pin, ptc pass
+# run the script with sudo or as root
+# it asks the ptc password only once
+# then it connects
+# you can disconnect with ctrl-c
+# and later hit enter to reconnect
+# (with the same password)
+
+echo 'ptc password:'
+read -s pass
+
+while true; do
+	echo 'connect'
+	(stoken; echo $pass) | openconnect \
+		--timestamp \
+		--juniper emea-portal.ptc.com \
+		--user=dkuettel \
+		--passwd-on-stdin || true
+	# order of passwords:
+	# - possibly sudo
+	# - current token
+	# - ptc password
+	echo 'disconnected'
+	echo 'hit enter to reconnect'
+	read
+done
