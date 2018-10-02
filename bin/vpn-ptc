@@ -18,10 +18,6 @@ while true; do
 		--juniper emea-portal.ptc.com \
 		--user=dkuettel \
 		--passwd-on-stdin || true
-	# order of passwords:
-	# - possibly sudo
-	# - current token
-	# - ptc password
 	echo 'disconnected'
 	echo 'hit enter to reconnect'
 	read
