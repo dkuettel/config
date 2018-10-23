@@ -6,7 +6,11 @@ else
 	wget https://dl-ssl.google.com/linux/direct/google-chrome-stable_current_amd64.deb -O google-chrome.deb
 	# those dependencies were needed in ubuntu 16.04, 18.04 seems to work now without
 	# sudo apt-get -fyq install libindicator7 libappindicator1 libpango1.0-0 libpangox-1.0-0
-	sudo dpkg -i google-chrome.deb
+	# sudo dpkg -i google-chrome.deb
+	# todo apt-get should install the dependencies?
+	#   didn't work for me before, needed
+	#   > sudo apt-get --fix-broken install
+	sudo apt-get -yqq install ./google-chrome.deb
 	rm google-chrome.deb
 fi
 
