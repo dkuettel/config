@@ -1,5 +1,5 @@
-#!/bin/zsh -eu
-set -o pipefail
+#!/bin/zsh
+set -eu -o pipefail
 
-# note: we unset DISPLAY because otherwise it tries to use x windows if available and on the cloud with a VNC it doesn't work well
+# note: we unset DISPLAY because otherwise it tries to use X instead of stdout
 DISPLAY= ~/bin/dropbox.py "$@"
