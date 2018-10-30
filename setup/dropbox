@@ -1,0 +1,26 @@
+#!/bin/zsh
+set -eux -o pipefail
+
+# this installs the command line version only
+# it seems like the ~/.dropbox-dist will get updates itself
+# but not the bin/dropbox.py that we download manually
+
+
+if [[ ! -d ~/.dropbox-dist ]]; then
+	cd ~
+	wget -O - "https://www.dropbox.com/download?plat=lnx.x86_64" | tar xzf -
+fi
+
+# copy the command line helper to ~/bin
+# not to the ~/.dropbox-dist folder,
+# because that one gets whiped on updates
+mkdir -p ~/bin
+wget 'https://www.dropbox.com/download?dl=packages/dropbox.py' -O ~/bin/dropbox.py
+chmod +x ~/bin/dropbox.py
+
+# the first time you have to start the daemon manually so that it can ask for the login
+# > DISPLAY= ~/.dropbox-dist/dropboxd
+# when started with a display variable it will try to use X and a browser
+# otherwise it will ask for the login on stdout/stdin
+
+# use ~/config/bin/dbox for easy command line control

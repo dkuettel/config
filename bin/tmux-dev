@@ -1,0 +1,43 @@
+#!/bin/zsh
+set -eux -o pipefail
+
+# use to start a tmux session in a "dev-folder" with suitable environment variables set
+# note: needs to be started with the dev-folder as current folder, there is no argument
+
+
+folder=$(realpath .)
+name=$(basename $folder)
+
+tmux new-session -s $name -d -c $folder
+
+tmux set-environment dev $folder
+tmux set-environment nn $folder/nn
+
+tmux split-window
+tmux kill-pane -t :1.1 # todo only works in 1 based indices, not 0 based, depends on tmux.conf
+tmux attach-session
+
+
+# todo use to have more variables
+
+## variables
+#dev=~/dev/$n
+#nn=$dev/nn
+#caffe=$dev/caffe
+#runs=/data/xps/metric/runs
+#PYTHONPATH=$nn/python:$nn/libs/liblinear/python:$nn/libs/caffe/python:$nn/libs/py_faster_rcnn
+#FRCNN_PATH=$dev/py-faster-rcnn
+#OMP_NUM_THREADS=1
+#DISPLAY=localhost:1 # our default vnc
+#PYTHONUNBUFFERED=1
+#PYTHONDONTWRITEBYTECODE=True
+#MPLBACKEND=Agg # python matplotlib
+#HOSTNAME=$(hostname)
+
+#tmux new-session -s $n -d -c ~/dev/$n
+#for i (dev nn caffe runs PYTHONPATH FRCNN_PATH OMP_NUM_THREADS DISPLAY PYTHONUNBUFFERED PYTHONDONTWRITEBYTECODE MPLBACKEND HOSTNAME) {
+	#tmux setenv $i ${(P)i}
+#}
+#tmux split-window -c ~/dev/$n
+#tmux kill-pane -t :1.1
+#tmux at -t $n
