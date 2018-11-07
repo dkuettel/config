@@ -41,6 +41,7 @@ colorscheme solarized
 " other options: http://vim.wikia.com/wiki/Highlight_unwanted_spaces
 "set listchars=tab:›\ ,trail:•,extends:#,nbsp:.
 set listchars=tab:\|\ ,trail:•,extends:#,nbsp:. " todo its not bad but need a subtle color for the bar, solarized?
+"set listchars=tab:\|\ ,trail:<,extends:#,nbsp:. " todo its not bad but need a subtle color for the bar, solarized?
 "set list
 
 " default tab settings
