@@ -13,6 +13,7 @@ tmux new-session -s $name -d -c $folder
 tmux set-environment dev $folder
 tmux set-environment src $folder/src
 tmux set-environment nn $folder/src/nn
+tmux set-environment runs /efs/kuettel/runs
 tmux set-environment PATH $folder/src/nn/bin:$PATH
 
 PATH=$folder/src/nn/bin:$PATH tmux split-window # need to set path, before attach it doesn't seem to use the set path
