@@ -14,7 +14,7 @@ if [[ $(echo $folders | wc -l) == "1" ]]; then
 	if [[ ! -e $folders ]]; then
 		unzip $f
 		echo "see $folders"
-	else:
+	else
 		unzip -d $f-x $f
 		echo "see $f-x"
 	fi
