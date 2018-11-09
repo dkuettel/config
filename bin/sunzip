@@ -1,0 +1,24 @@
+#!/bin/zsh
+set -eu -o pipefail
+
+# simple unzip
+# unzip into file.zip-x if the zip contains a mess of files
+# unzip into current directory if the zip contains all files in one folder and it doesn't exist yet
+
+
+f=${1:?provide a zipfile to unpack}
+
+folders=$(zipinfo -1 $f | gawk 'match($0, /^([^\/]*)\/?.*$/, m) {print m[1]}' | sort | uniq)
+
+if [[ $(echo $folders | wc -l) == "1" ]]; then
+	if [[ ! -e $folders ]]; then
+		unzip $f
+		echo "see $folders"
+	else:
+		unzip -d $f-x $f
+		echo "see $f-x"
+	fi
+else
+	unzip -d $f-x $f
+	echo "see $f-x"
+fi
