@@ -48,3 +48,5 @@ todos:
 	- vim (at least in python) tries to be too smart again
 		- indent +1 when it thinks it should
 		- import from pops up stuff
+
+	- the .. command doesn't work correctly for example in a folder ~/trains/trains, it will stay in the same folder
