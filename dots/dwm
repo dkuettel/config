@@ -1,0 +1,12 @@
+
+setxkbmap -layout pointluck -variant ptc-office-desktop
+xset r rate 200 50
+
+feh --no-fehbg --bg-fill ~/config/dots/xmonad.d/5_stripes_landscape.jpg
+
+while xsetroot -name "$(date '+%A %R %F')"; do sleep 5; done &
+
+until dwm; do
+	st
+done
+
