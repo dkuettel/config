@@ -7,6 +7,6 @@ if which dbox &> /dev/null; then
 	elif [[ $s == 'Up to date' ]]; then
 		echo '[✓] '
 	else
-		echo "[$s] "
+		echo "[x] "
 	fi
 fi
