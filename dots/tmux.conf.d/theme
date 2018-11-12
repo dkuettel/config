@@ -15,6 +15,7 @@ set-option -g status-left '#{?#{==:#{client_key_table},root},,#[fg=brightblack,b
 set-option -g status-right-length 100
 set-option -g status-right-style 'fg=brightgreen,bg=black'
 set-option -g status-right ' '
+set-option -ga status-right '#(~/config/dots/tmux.conf.d/bin/dropbox)'
 set-option -ga status-right '#(~/config/dots/tmux.conf.d/bin/cpu-usage) '
 set-option -ga status-right '#(~/config/dots/tmux.conf.d/bin/memory-usage) '
 #set-option -ga status-right "| #(date '+%F %R') "
