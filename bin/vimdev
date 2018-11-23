@@ -33,6 +33,31 @@ tags () {
 	done
 }
 
+cat > .ctrlp.find << 'eof'
+#!/bin/zsh
+set -eu -o pipefail
+
+find \
+	src/nn/python \
+	src/nn/xps \
+	-name '*.py'
+
+find \
+	src/nn/python \
+	-name '*.txt'
+
+find \
+	src/nn/python \
+	-name '*.sh'
+
+find \
+	src/nn/docker \
+	src/nn/mtar
+
+find src/nn/bin
+eof
+chmod +x .ctrlp.find
+
 echo =ctags > /dev/null
 tags &
 vim $@
