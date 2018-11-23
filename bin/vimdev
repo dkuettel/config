@@ -4,7 +4,6 @@ set -o pipefail
 # (usually containing src/nn src/caffe and the like)
 # it updates the tags file, and exits with vim
 
-# todo how to also control .ctrlp.find from within here for vim?
 # todo can we then also have the .tags file be anonymous and not polluting the working folder?
 # todo use sponge as in private project
 # todo use pid file for every call
