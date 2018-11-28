@@ -1,3 +1,21 @@
+
+dwm:
+	- dbus works and stuff, but need to make .xsession so all default stuff gets done
+		- just play around with lsvm or so, install a normal ubuntu, compare setting, env, services, ...
+		- can even run one in vbox? shared lsvm and vbox?
+		- snapshotting lsvm for trying out and when nice do again with a clean script?
+	- no or longer monitor-off timeout
+	- control dell monitor profiles?
+	- do I have a 32 or 64 bit installation?
+		/usr/lib has no x86_64
+	- dual hibernate with windows?
+		- some solutions that vetter mentioned? share vbox or so with an acutal disk?
+	- transmission service off by default?
+	- could dwm replace itself with a replace-exec call on its newly compiled binary?
+		- or do we need to shutdown cleanly and then do it? as with exitcode?
+	- for the stacked small windows it would be awesome to scale them instead of resize and reflow, especially on a 4k monitor
+
+
 bootstrap by getting a clone or copy of this into ~/config
 
 mostly tested on
