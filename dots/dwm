@@ -1,12 +1,14 @@
 
 setxkbmap -layout pointluck -variant ptc-office-desktop
+xmodmap ~/config/keyboard/mods
+
 xset r rate 200 50
 
 feh --no-fehbg --bg-fill ~/config/dots/xmonad.d/5_stripes_landscape.jpg
 
 while xsetroot -name " $(date '+%F %A %R') "; do sleep 5; done &
 
-until dwm; do
-	st
+until dwm > ~/.dwm.log 2>&1; do
+	true
 done
 
