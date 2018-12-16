@@ -6,7 +6,7 @@ xset r rate 200 50
 
 feh --no-fehbg --bg-fill ~/config/dots/xmonad.d/5_stripes_landscape.jpg
 
-while xsetroot -name " $(date '+%F %A %R') "; do sleep 5; done &
+while xsetroot -name " ($(pactl list sinks | awk '/Volume: front-left/ { print $5 }')) $(date '+%F %A %R') "; do sleep 5; done &
 
 until dwm > ~/.dwm.log 2>&1; do
 	true
