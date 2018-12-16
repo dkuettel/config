@@ -1,5 +1,9 @@
 
-dwm:
+general:
+	- made mess when trying to show [2]= for tiled
+		- also my bug or is there not a layout per desktop? ah no wait, per monitor, but there is only one monitor
+		- their code already dirtily does it on the fly for [M] and ignores user settings
+	- some problem when unsleeping with ata8.00 (main disk)
 	- dbus works and stuff, but need to make .xsession so all default stuff gets done
 		- just play around with lsvm or so, install a normal ubuntu, compare setting, env, services, ...
 		- can even run one in vbox? shared lsvm and vbox?
@@ -14,6 +18,8 @@ dwm:
 	- could dwm replace itself with a replace-exec call on its newly compiled binary?
 		- or do we need to shutdown cleanly and then do it? as with exitcode?
 	- for the stacked small windows it would be awesome to scale them instead of resize and reflow, especially on a 4k monitor
+	- maybe the stick mount thing in fstab is not good? it seems like it keeps on retrying?
+	- can do key sequences instead of single shortcuts in dwm?
 
 
 bootstrap by getting a clone or copy of this into ~/config
