@@ -4,6 +4,9 @@ set -eux -o pipefail
 # this installs the command line version only
 # it seems like the ~/.dropbox-dist will get updates itself
 # but not the bin/dropbox.py that we download manually
+# note:
+#   first time you install/start it you have to login, check systemctl status dropbox@dkuettel for login link
+#   use dbox (~/config/bin) for easy command line access
 
 
 if [[ ! -d ~/.dropbox-dist ]]; then
@@ -13,14 +16,17 @@ fi
 
 # copy the command line helper to ~/bin
 # not to the ~/.dropbox-dist folder,
-# because that one gets whiped on updates
+# because that one gets wiped on updates
 mkdir -p ~/bin
 wget 'https://www.dropbox.com/download?dl=packages/dropbox.py' -O ~/bin/dropbox.py
 chmod +x ~/bin/dropbox.py
 
-# the first time you have to start the daemon manually so that it can ask for the login
-# > DISPLAY= ~/.dropbox-dist/dropboxd
-# when started with a display variable it will try to use X and a browser
-# otherwise it will ask for the login on stdout/stdin
-
-# use ~/config/bin/dbox for easy command line control
+# install in systemd
+if [[ $(realpath /etc/systemd/system/dropbox@.service) != $(realpath ~/config/dots/dropbox.d/dropbox@.service) ]]; then
+	# todo security risk to link files?
+	sudo ln -sfT --backup=numbered \
+		~/config/dots/dropbox.d/dropbox@.service \
+		/etc/systemd/system/dropbox@.service 
+fi
+systemctl enable dropbox@$USER
+systemctl start dropbox@$USER
