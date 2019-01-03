@@ -105,11 +105,12 @@ def print_solarized16(out):
 	# see http://ethanschoonover.com/solarized (bottom for dark vs light theme)
 	def table(colors):
 		col = max(max(map(len, colors)), 8)
+		assert col > 2
 		out.write('names     : ' + ' '.join(b.center(col) for b in colors) + '\n')
 		out.write('hexes     : ' + ' '.join(format(sol2hex[i], '#08x') for i in colors) + '\n')
-		out.write('[xm       : ' + ' '.join('[0;%dm%s[0m' % (30+sol2idx[i] if sol2idx[i]<8 else (90+sol2idx[i]-8), '█'*col) for i in colors) + '[0m\n')
+		out.write('[xm       : ' + ' '.join('{0:#2d}[0;{0}m{1}[0m'.format(30+sol2idx[i] if sol2idx[i]<8 else (90+sol2idx[i]-8), '█' * (col - 2)) for i in colors) + '[0m\n')
 		out.write(' +bold    : ' + ' '.join('[0;%s%dm%s[0m' % ('' if sol2idx[i]<8 else '1;',30+sol2idx[i] if sol2idx[i]<8 else (30+sol2idx[i]-8), '█'*col) for i in colors) + '[0m\n')
-		out.write('[38;5;xm  : ' + ' '.join('[0;38;5;%dm%s[0m' % (sol2idx[i], '█'*col) for i in colors) + '[0m\n')
+		out.write('[38;5;xm  : ' + ' '.join('{0:#2d}[0;38;5;{0}m{1}[0m'.format(sol2idx[i], '█' * (col - 2)) for i in colors) + '[0m\n')
 		red = lambda i: (sol2hex[i] & 0xff0000) >> 16
 		green = lambda i: (sol2hex[i] & 0x00ff00) >> 8
 		blue = lambda i: (sol2hex[i] & 0x0000ff) >> 0
