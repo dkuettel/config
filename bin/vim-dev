@@ -39,15 +39,12 @@ set -eu -o pipefail
 find \
 	src/nn/python \
 	src/nn/xps \
-	-name '*.py'
-
-find \
-	src/nn/python \
-	-name '*.txt'
-
-find \
-	src/nn/python \
-	-name '*.sh'
+	\( \
+		-name '*.py' \
+		-or -name '*.txt' \
+		-or -name '*.sh' \
+		-or -name '*.yaml' \
+	\)
 
 find \
 	src/nn/docker \
