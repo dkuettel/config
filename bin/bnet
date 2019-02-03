@@ -1,0 +1,4 @@
+#!/bin/zsh
+set -eux -o pipefail
+
+wine '~/.wine/dosdevices/c:/Program Files (x86)/Battle.net/Battle.net.exe' &> /dev/null
