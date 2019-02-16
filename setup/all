@@ -4,5 +4,6 @@ set -eux -o pipefail
 # note this is in bash because zsh is not yet installed
 
 ./zsh
+./git
 ./tmux
 ./vim
