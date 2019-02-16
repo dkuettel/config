@@ -1,0 +1,10 @@
+#!/bin/zsh
+set -eux -o pipefail
+
+sudo apt-get install -yqq git
+
+git config --global user.name "Daniel Kuettel"
+#git config --global user.email "dkuettel@ptc.com"
+git config --global push.default simple
+git config --global core.editor "vim"
+
