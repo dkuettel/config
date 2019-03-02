@@ -21,13 +21,10 @@ fi
 )
 
 if [[ ! -d ~/dmenu ]]; then
-	# todo checkout mine instead
-	git clone https://git.suckless.org/dmenu ~/dmenu
+	git clone git@bitbucket.org:dkuettel/dmenu.git ~/dmenu
 	cd ~/dmenu
-	# todo or use ./install.sh if my branch?
-	make clean
-	make
-	sudo make install
+	./setup-git.sh
+	./install.sh
 fi
 
 # slock
