@@ -54,6 +54,7 @@ find \
 	src/nn/mtar
 
 find src/nn/bin
+find src/nn/setup
 eof
 chmod +x .ctrlp.find
 
