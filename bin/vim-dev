@@ -13,26 +13,27 @@ set -o pipefail
 cd $dev
 
 tags () {
-	tagsfile=.tags.generating-$$ # $$=pid, in case we run more than one in the same folder
-	while true; do
-		ctags \
-			-o $tagsfile \
-			--languages=python \
-			--links=no \
-			--fields=+K \
-			--fields=+m \
-			--extra=+q \
-			--totals=yes \
-			-R \
-				src/nn/python \
-				src/nn/xps \
-			> /dev/null 2>&1
-		# note ctags also supports --exclude, currently I explicitely add folders that I want python tags for
-		# note --extra=+q includes class-qualified entries, but not for python :/, but for c++
-		# todo once I work again with caffe, add lang=c and caffe part? can we mix languages?
-		mv $tagsfile .tags
-		sleep 20
-	done
+    exec > >(ts > .tags.log-$$)
+    exec 2>&1
+    tagsfile=.tags.generating-$$ # $$=pid, in case we run more than one in the same folder
+    while true; do
+        ctags \
+            -o $tagsfile \
+            --languages=python \
+            --links=no \
+            --fields=+K \
+            --fields=+m \
+            --extra=+q \
+            --totals=yes \
+            -R \
+                src/nn/python \
+                src/nn/tests
+        # note ctags also supports --exclude, currently I explicitely add folders that I want python tags for
+        # note --extra=q includes class-qualified entries, but not for python :/, but for c++
+        # todo once I work again with caffe, add lang=c and caffe part? can we mix languages?
+        mv $tagsfile .tags
+        sleep 20
+    done
 }
 
 cat > .ctrlp.find << 'eof'
@@ -40,25 +41,23 @@ cat > .ctrlp.find << 'eof'
 set -eu -o pipefail
 
 find \
-	src/nn/python \
-	src/nn/xps \
-	\( \
-		-name '*.py' \
-		-or -name '*.txt' \
-		-or -name '*.sh' \
-		-or -name '*.yaml' \
-	\)
+    src/nn/python \
+    src/nn/tests \
+    \( \
+        -name '*.py' \
+        -or -name '*.txt' \
+        -or -name '*.sh' \
+        -or -name '*.yaml' \
+    \)
 
 find \
-	src/nn/docker \
-	src/nn/mtar
-
-find src/nn/bin
-find src/nn/setup
+    src/nn/docker \
+    src/nn/bin \
+    src/nn/setup
 eof
 chmod +x .ctrlp.find
 
-echo =ctags > /dev/null
+echo using =ctags
 tags &
 vim $@
 kill %tags
