@@ -59,6 +59,7 @@ chmod +x .ctrlp.find
 
 echo using =ctags
 tags &
+stty -ixon
 vim $@
 kill %tags
 wait
