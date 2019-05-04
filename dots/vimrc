@@ -166,12 +166,13 @@ set splitbelow
 set splitright
 
 " try direct numbered selection of windows
-map ,w1 :wincmd t<cr>
-map ,w2 :wincmd t<cr>:wincmd w<cr>
-map ,w3 :wincmd t<cr>:wincmd w<cr>:wincmd w<cr>
-map ,w4 :wincmd t<cr>:wincmd w<cr>:wincmd w<cr>:wincmd w<cr>
-map ,w5 :wincmd t<cr>:wincmd w<cr>:wincmd w<cr>:wincmd w<cr>:wincmd w<cr>
-map ,w6 :wincmd t<cr>:wincmd w<cr>:wincmd w<cr>:wincmd w<cr>:wincmd w<cr>:wincmd w<cr>
+" todo #<c-w>w already does that
+" map ,w1 :wincmd t<cr>
+" map ,w2 :wincmd t<cr>:wincmd w<cr>
+" map ,w3 :wincmd t<cr>:wincmd w<cr>:wincmd w<cr>
+" map ,w4 :wincmd t<cr>:wincmd w<cr>:wincmd w<cr>:wincmd w<cr>
+" map ,w5 :wincmd t<cr>:wincmd w<cr>:wincmd w<cr>:wincmd w<cr>:wincmd w<cr>
+" map ,w6 :wincmd t<cr>:wincmd w<cr>:wincmd w<cr>:wincmd w<cr>:wincmd w<cr>:wincmd w<cr>
 
 " clear window for external commands, easier to read especially for fugitive
 set shell=~/config/bin/vim_shell.sh
