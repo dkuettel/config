@@ -1,7 +1,7 @@
 
 typeset -U PATH path # array with no duplicates
 # note: ~ does not expand here, but $HOME does
-path=($HOME/config/bin /snap/bin $path)
+path=($HOME/config/bin $HOME/.local/bin /snap/bin $path)
 
 #PATH=$HOME/.local/bin:$PATH # seems not to be there by default, for example pip install puts executables there
 #export PATH=$HOME/config/bin:$PATH
