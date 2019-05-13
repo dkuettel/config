@@ -17,8 +17,8 @@ export PS1='
 %K{0}%F{14}%B%~%b%f ($(git symbolic-ref --short HEAD 2>/dev/null)) %F{10}%* (%m)%f %(1j,%F{1}%j&%f,) %E%k
 ${${${KEYMAP:-main}/vicmd/N}/(main|viins)/I}> '
 function zle-keymap-select() {
-	zle reset-prompt
-	zle -R
+    zle reset-prompt
+    zle -R
 }
 zle -N zle-keymap-select
 

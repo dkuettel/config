@@ -15,14 +15,14 @@ alias lldirs='ls -vldh */'
 #alias ...='cd ../..'
 # go back to a parent folder (default first parent)
 .. () {
-	1=${1:-$(basename $(dirname $(pwd)))}
-	while [[ $(basename $(pwd)) != $1 ]]; do
-		cd ..
-	done
+    1=${1:-$(basename $(dirname $(pwd)))}
+    while [[ $(basename $(pwd)) != $1 ]]; do
+        cd ..
+    done
 }
 _complete_.. () {
-	reply=$(pwd)
-	reply=(${(s|/|)reply})
+    reply=$(pwd)
+    reply=(${(s|/|)reply})
 }
 compctl -K _complete_.. ..
 cdl () { cd $1 && echo && echo 'lr of ' $(pwd) && echo && lr }
@@ -37,14 +37,14 @@ alias watch='watch --color -n 1 '
 # poor man's watch
 # it uses stdout so colors are supported by default
 pwatch () {
-	while true; do
-		clear
-		date
-		echo "> $1"
-		echo
-		eval $1
-		sleep 2
-	done
+    while true; do
+        clear
+        date
+        echo "> $1"
+        echo
+        eval $1
+        sleep 2
+    done
 }
 compctl -c pwatch # complete commands
 
@@ -60,21 +60,5 @@ alias ffeh='feh --fullscreen --draw-filename --draw-tinted'
 # rsync copy with progress
 # todo not sure about $1/ or $1 semantics
 rsync_cp () {
-	rsync -ah -L -r --info=progress2 $1 $2
+    rsync -ah -L -r --info=progress2 $1 $2
 }
-
-# some xpman and co
-
-#xp-py () {
-#	ipython --InteractiveShellApp.exec_files='["/home/kuettel/config/xp-py.py"]'
-#}
-
-#exo () { # echo and execute a command (for selective verbosity, instead of zsh -x or -v)
-#	echo "> $@"
-#	$@
-#}
-
-#mtar () {
-#	$dev/src/nn/mtar/$1 "$@[2,-1]"
-#}
-

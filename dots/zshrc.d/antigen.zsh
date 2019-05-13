@@ -18,7 +18,7 @@ antigen bundle per-directory-history
 antigen bundle compleat # todo could be interesting to make completion for our xpman and co?
 
 # plugins from directly from git
-antigen bundle psprint/history-search-multi-word # widget to search history
+#antigen bundle psprint/history-search-multi-word # widget to search history
 antigen bundle zlsun/solarized-man # dark solarized colors for man
 antigen bundle zsh-users/zsh-syntax-highlighting # note: might have to be the last to import
 #antigen bundle Valiev/almostontop # always clear before new command (output always on top)
@@ -34,5 +34,5 @@ bindkey -M vicmd ',g' per-directory-history-toggle-history
 bindkey -M viins '^xg' per-directory-history-toggle-history
 
 # history-search-multi-word
-bindkey -M vicmd '^r' history-search-multi-word
-bindkey -M viins '^r' history-search-multi-word
+#bindkey -M vicmd '^r' history-search-multi-word
+#bindkey -M viins '^r' history-search-multi-word
