@@ -1,0 +1,9 @@
+# todo: should only be used when inside a vmware
+# todo: ubuntu seems to be running above PLUS /usr/bin/vmtoolsd -n vmusr --blockFd 3
+#[ -e /usr/bin/vmtoolsd ] && /usr/bin/vmtoolsd -n vmusr &
+
+xset r rate 200 50
+setxkbmap -layout pointluck -variant ptc-office-desktop # todo this is new now per machine depending on variations
+#xprop -root -remove _NET_WORKAREA # todo this maybe fixes dropbdown and other menus not working, setting might not persist thru the whole session and you have to reissue, in xmonad-0.13 it's probably fixed, but current 16.04 has only 0.12
+feh --bg-scale ~/config/dots/xmonad.d/5_stripes_landscape.jpg
+xset s off # turn off screensaver

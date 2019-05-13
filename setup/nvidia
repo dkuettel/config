@@ -1,0 +1,10 @@
+#!/bin/zsh
+set -eux -o pipefail
+
+if [[ ! -e nvidia.run ]]; then
+	wget 'https://us.download.nvidia.com/XFree86/Linux-x86_64/410.78/NVIDIA-Linux-x86_64-410.78.run' -O nvidia.run
+fi
+
+sudo apt-get -yqq install dkms
+sudo sh nvidia.run -a -q -n -s --dkms
+

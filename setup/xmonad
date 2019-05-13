@@ -1,0 +1,22 @@
+#!/bin/zsh
+set -eux -o pipefail
+
+# apt install seems to add the correct xmonad.desktop in # /usr/share/xsessions
+# no need to configure more to have it selectable at the greeter
+# lightdm > greeter > xmonad
+# (display manager > X > window manager)
+# also that xmonad.desktop starts xmonad-session-rc on startup
+sudo apt-get -yqq install xmonad
+
+apts=()
+apts+=feh # to set the background image
+apts+=suckless-tools # for dmenu and slock
+sudo apt-get -yqq install $apts
+
+mkdir -p ~/.xmonad
+if [[ $(realpath ~/.xmonad/xmonad.hs) != $(realpath ~/config/dots/xmonad.d/xmonad.hs) ]]; then
+	ln -sfT --backup=numbered ~/config/dots/xmonad.d/xmonad.hs ~/.xmonad/xmonad.hs
+fi
+if [[ $(realpath ~/.xmonad/xmonad-session-rc) != $(realpath ~/config/dots/xmonad.d/xmonad-session-rc) ]]; then
+	ln -sfT --backup=numbered ~/config/dots/xmonad.d/xmonad-session-rc ~/.xmonad/xmonad-session-rc
+fi

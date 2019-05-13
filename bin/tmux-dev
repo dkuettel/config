@@ -1,0 +1,28 @@
+#!/bin/zsh
+set -eux -o pipefail
+
+# use to start a tmux session in a "dev-folder" with suitable environment variables set
+# note: needs to be started with the dev-folder as current folder, there is no argument
+
+
+folder=$(realpath .)
+name=$(basename $folder)
+
+tmux new-session -s $name -d -c $folder
+
+tmux set-environment dev $folder
+tmux set-environment src $folder/src
+tmux set-environment nn $folder/src/nn
+tmux set-environment PATH $folder/src/nn/bin:$PATH
+
+PATH=$folder/src/nn/bin:$PATH tmux split-window # need to set path, before attach it doesn't seem to use the set path
+tmux kill-pane -t :1.1 # todo only works in 1 based indices, not 0 based, depends on tmux.conf
+tmux attach-session
+
+
+# some variables we used to set but probably don't need anymore
+#OMP_NUM_THREADS=1
+#DISPLAY=localhost:1 # our default vnc
+#PYTHONUNBUFFERED=1
+#PYTHONDONTWRITEBYTECODE=True
+#MPLBACKEND=Agg # python matplotlib

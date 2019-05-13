@@ -1,0 +1,12 @@
+
+setxkbmap -layout pointluck -variant ptc-office-desktop
+xmodmap ~/config/keyboard/mods
+
+xset r rate 200 50
+
+feh --no-fehbg --bg-fill ~/config/dots/xmonad.d/5_stripes_landscape.jpg
+
+while xsetroot -name " ($(pactl list sinks | awk '/Volume: front-left/ { print $5 }')) $(date '+%F %A %R') "; do sleep 5; done &
+
+dwm
+

@@ -6,6 +6,9 @@ set -o pipefail
 
 # todo how to also control .ctrlp.find from within here for vim?
 # todo can we then also have the .tags file be anonymous and not polluting the working folder?
+# todo use sponge as in private project
+# todo use pid file for every call
+# todo clean up when exiting
 
 tags () {
 	tagsfile=.tags.generating-$$ # $$=pid, in case we run more than one in the same folder
@@ -16,21 +19,21 @@ tags () {
 			--links=no \
 			--fields=+K \
 			--fields=+m \
-			--extra==g \
+			--extra=+q \
 			--totals=yes \
 			-R \
 				src/nn/python \
 				src/nn/xps \
 			> /dev/null 2>&1
 		# note ctags also supports --exclude, currently I explicitely add folders that I want python tags for
-		# note --extra==g includes class-qualified entries, but not for python :/, but for c++
+		# note --extra=+q includes class-qualified entries, but not for python :/, but for c++
 		# todo once I work again with caffe, add lang=c and caffe part? can we mix languages?
 		mv $tagsfile .tags
 		sleep 20
 	done
 }
 
-
+echo =ctags > /dev/null
 tags &
 vim $@
 kill %tags

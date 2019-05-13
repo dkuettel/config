@@ -1,0 +1,4 @@
+#!/bin/zsh
+set -eux -o pipefail
+
+vim -u ~/config/dots/vimrc-minimal $@

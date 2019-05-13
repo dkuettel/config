@@ -1,0 +1,9 @@
+#!/bin/zsh
+set -eux -o pipefail
+
+sudo apt-get install -yqq git
+
+t=~/config/dots/gitconfig; l=~/.gitconfig
+if [[ ! ( $t -ef $l ) ]]; then
+    ln -sfT --backup=numbered $t $l
+fi
