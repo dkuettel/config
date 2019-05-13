@@ -1,10 +1,10 @@
 [user]
-	name = Daniel Kuettel
+    name = Daniel Kuettel
 [core]
-	editor = vim
+    editor = vim
 [push]
-	default = simple
+    default = simple
 [diff]
-	tool = vimdiff
+    tool = vimdiff
 [pager]
-	branch = false
+    branch = false
