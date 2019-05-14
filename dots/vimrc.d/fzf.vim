@@ -147,8 +147,39 @@ function! NavLines() abort
 endfunction
 
 
+" todo
+" works as a concept
+" but still need a good way to control what exactly to use (full, last part only, ...)
+" and preview could better be docstring, and/or function signature
+" plus now there are ansi colorcodes there that we should to remove
+" two or multistep could be a solution?
+" we also want to search not just local symbols but also project symbols
+" could rely on not list-symbols but on introspection as in doc.py
+" would also be nice to show signature when back in editor (preview window?)
+function! InsertSymbol() abort
+    silent !./.list-symbols | fzf
+        \ --expect=enter,ctrl-c
+        \ --delimiter='\t'
+        \ --ansi
+        \ --with-nth=1,2 --nth=1
+        \ --preview='tail --lines=+{4} {3} | head --lines=$FZF_PREVIEW_LINES'
+        \ --preview-window=top:30\%
+        \ --no-clear
+        \ > fzf-selection
+    redraw!
+    let l:selection = readfile("fzf-selection")
+    call delete("fzf-selection")
+    let l:action = l:selection[0]
+    let [l:symbol, l:cfile, l:file, l:location] = split(l:selection[1], "\t")
+    if l:action == "enter"
+        execute "normal" "i".l:symbol
+    endif
+endfunction
+
+
 map ,s :call NavProjectSymbols()<cr>
 map ,F :call NavAllFiles()<cr>
 map ,f :call NavProjectFiles()<cr>
 map ,b :call NavBuffers()<cr>
 map ,l :call NavLines()<cr>
+imap <c-n> <esc>:call InsertSymbol()<cr>
