@@ -90,6 +90,7 @@ endfunction
 function! NavProjectFiles() abort
     silent !./.list-files | fzf
         \ --expect=enter,ctrl-t,ctrl-v,ctrl-s,ctrl-c
+        \ --preview='head --lines=$FZF_PREVIEW_LINES {}'
         \ --no-clear
         \ > fzf-selection
     redraw!
