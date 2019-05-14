@@ -124,6 +124,7 @@ function! NavBuffers() abort
         \ --expect=enter,ctrl-t,ctrl-v,ctrl-s,ctrl-c
         \ --delimiter=' '
         \ --nth=2
+        \ --preview='head --lines=$FZF_PREVIEW_LINES {2}'
         \ --no-clear
         \ --sync
         \ > fzf-selection
