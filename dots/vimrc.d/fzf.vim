@@ -18,12 +18,24 @@ function! s:OpenAction(action) abort
 endfunction
 
 
-function! s:SelectSymbol() abort
+function! s:SelectSymbol_FormatTags() abort
     let l:selection = readfile("fzf-selection")
     call delete("fzf-selection")
     let l:action = l:selection[0]
     let [l:symbol, l:file, l:location] = split(l:selection[1], "\t")
     let l:location = split(l:location, ";")[0]
+    if s:OpenAction(l:action)
+        execute "edit" l:file
+        execute "normal!" l:location."Gzz"
+    endif
+endfunction
+
+
+function! s:SelectSymbol_FormatVimFzf() abort
+    let l:selection = readfile("fzf-selection")
+    call delete("fzf-selection")
+    let l:action = l:selection[0]
+    let [l:symbol, l:file, l:location] = split(l:selection[1], "\t")
     if s:OpenAction(l:action)
         execute "edit" l:file
         execute "normal!" l:location."Gzz"
@@ -67,12 +79,14 @@ endfunction
 function! NavProjectSymbols() abort
     silent !./.list-symbols | fzf
         \ --expect=enter,ctrl-t,ctrl-v,ctrl-s,ctrl-c
-        \ --delimiter='\t| '
-        \ --with-nth=1,2,4 --nth=1,3
+        \ --delimiter='\t'
+        \ --with-nth=1,2 --nth=1
+        \ --preview='tail --lines=+{3} {2} | head --lines=$FZF_PREVIEW_LINES'
+        \ --preview-window=top:30\%
         \ --no-clear
         \ > fzf-selection
     redraw!
-    call s:SelectSymbol()
+    call s:SelectSymbol_FormatVimFzf()
 endfunction
 
 
