@@ -137,7 +137,7 @@ function! NavLines() abort
     silent !grep --with-filename --line-number '' $(./.list-files) | fzf
         \ --expect=enter,ctrl-t,ctrl-v,ctrl-s,ctrl-c
         \ --delimiter=':'
-        \ --preview="sed -n '{2},+20p' {1}"
+        \ --preview="cat <(for i ($(seq 1 15)) echo) {1} | sed -n '{2},+30p'"
         \ --preview-window=top
         \ --no-clear
         \ > fzf-selection
