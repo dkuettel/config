@@ -79,6 +79,7 @@ endfunction
 function! NavAllFiles() abort
     silent !fzf
         \ --expect=enter,ctrl-t,ctrl-v,ctrl-s,ctrl-c
+        \ --preview='head --lines=$FZF_PREVIEW_LINES {}'
         \ --no-clear
         \ > fzf-selection
     redraw!
