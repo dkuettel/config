@@ -34,9 +34,9 @@ set smarttab
 set autoindent
 set copyindent
 
-" specific tab settings
-autocmd FileType vim setlocal tabstop=4 softtabstop=4 shiftwidth=4 expandtab smarttab autoindent copyindent
-autocmd FileType python setlocal tabstop=4 softtabstop=4 shiftwidth=4 expandtab smarttab autoindent copyindent
+" specific filetype settings
+autocmd FileType vim setlocal tabstop=4 softtabstop=4 shiftwidth=4 expandtab smarttab autoindent copyindent textwidth=0
+autocmd FileType python setlocal tabstop=4 softtabstop=4 shiftwidth=4 expandtab smarttab autoindent copyindent textwidth=0
 
 " command mode
 nnoremap ; :
