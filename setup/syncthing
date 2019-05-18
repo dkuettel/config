@@ -1,0 +1,14 @@
+#!/bin/zsh
+set -eux -o pipefail
+
+echo todo: untested
+
+# https://docs.syncthing.net/intro/getting-started.html
+sudo apt install syncthing # todo not sure if that's in the default repository
+
+# https://docs.syncthing.net/users/autostart.html#linux
+systemctl enable syncthing@$USER.service
+systemctl start syncthing@$USER.service
+
+# check with
+# systemctl status syncthing@myuser.service
