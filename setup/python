@@ -6,6 +6,8 @@ pip3 install --upgrade
 
 sudo apt-get -q install -y ipython3
 if [[ $(realpath ~/.ipython/profile_default/ipython_config.py) != $(realpath ~/config/dots/python/ipython_config.py) ]]; then
+    # we use our own config which was originally created by changing ipythons config template
+    # if ever this is changed or extended, we won't know about it
     mkdir -p ~/.ipython/profile_default
     ln -sfT ~/config/dots/python/ipython_config.py ~/.ipython/profile_default/ipython_config.py
 fi
