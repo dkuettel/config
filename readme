@@ -1,4 +1,8 @@
 
+todo:
+    - ./setup needs an "all" for server and one for desktop, best fully idempotent to run again if needed
+
+
 general:
     - made mess when trying to show [2]= for tiled
         - also my bug or is there not a layout per desktop? ah no wait, per monitor, but there is only one monitor
