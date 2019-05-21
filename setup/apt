@@ -1,0 +1,36 @@
+#!/bin/zsh
+set -eux -o pipefail
+
+sudo apt-get update
+sudo apt-get -q upgrade -y
+
+function i () {
+    sudo apt-get -q install -y $@
+}
+
+# a generic list of useful packages
+# many are also installed and configured by more specific scripts
+i bmon # bandwidth monitor
+i cmake
+i dtrx # easy and clean archive extraction
+i feh
+i g++
+i gcp # like cp, but with progress bar among other features
+i geeqie
+i git
+i htop
+i jq # json query engine
+i libboost-dev
+i lnav # log file viewer
+i mosh # ssh robust for unstable connections
+i openssh-server
+i pv # monitor data progress thru a pipe
+i suckless-tools
+i sysstat
+i tmux
+i tree
+i unzip
+i vim
+i xclip
+i zip
+i zsh

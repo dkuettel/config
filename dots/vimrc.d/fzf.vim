@@ -138,7 +138,22 @@ function! NavBuffers() abort
 endfunction
 
 
-function! NavLines() abort
+function! NavAllLines() abort
+    silent !grep --with-filename --line-number ''
+        \ $(find -L . -mindepth 1 -path '*/\.*' -prune -o -type f -print -o -type l -print 2> /dev/null | cut -b3-)
+        \ | fzf
+        \ --expect=enter,ctrl-t,ctrl-v,ctrl-s,ctrl-c
+        \ --delimiter=':'
+        \ --preview="cat <(for i ($(seq 1 15)) echo) {1} | sed -n '{2},+30p'"
+        \ --preview-window=top
+        \ --no-clear
+        \ > fzf-selection
+    redraw!
+    call s:SelectLine()
+endfunction
+
+
+function! NavProjectLines() abort
     silent !grep --with-filename --line-number '' $(./.list-files) | fzf
         \ --expect=enter,ctrl-t,ctrl-v,ctrl-s,ctrl-c
         \ --delimiter=':'
@@ -186,5 +201,6 @@ map ,s :call NavProjectSymbols()<cr>
 map ,F :call NavAllFiles()<cr>
 map ,f :call NavProjectFiles()<cr>
 map ,b :call NavBuffers()<cr>
-map ,l :call NavLines()<cr>
+map ,L :call NavAllLines()<cr>
+map ,l :call NavProjectLines()<cr>
 imap <c-n> <esc>:call InsertSymbol()<cr>

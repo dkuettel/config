@@ -35,8 +35,18 @@ set autoindent
 set copyindent
 
 " specific filetype settings
-autocmd FileType vim setlocal tabstop=4 softtabstop=4 shiftwidth=4 expandtab smarttab autoindent copyindent textwidth=0
-autocmd FileType python setlocal tabstop=4 softtabstop=4 shiftwidth=4 expandtab smarttab autoindent copyindent textwidth=0
+autocmd FileType vim setlocal
+    \ tabstop=4 softtabstop=4 shiftwidth=4
+    \ expandtab smarttab autoindent copyindent
+    \ textwidth=0
+autocmd FileType python setlocal
+    \ tabstop=4 softtabstop=4 shiftwidth=4
+    \ expandtab smarttab autoindent copyindent
+    \ textwidth=0
+    \ indentexpr= indentkeys=
+" note
+" indentexpr= should stop any automatic indendation (?)
+" indentkeys= should stop any reindentation when typing things like 'else:'
 
 " command mode
 nnoremap ; :

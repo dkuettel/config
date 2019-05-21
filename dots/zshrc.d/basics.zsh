@@ -76,6 +76,7 @@ LESS+='--RAW-CONTROL-CHARS ' # pass ansi colors
 LESS+='--chop-long-lines ' # don't wrap long lines
 LESS+='--no-init ' # probably don't clear the screen after exit
 LESS+='--clear-screen ' # complete redraw when scrolling
+LESS+='--jump-target=.3 ' # the target (for example when searching) is put at 1/3 from the top
 export LESS
 
 ## other

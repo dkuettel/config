@@ -1,0 +1,10 @@
+#!/bin/zsh
+set -eux -o pipefail
+
+sudo apt-get -q install -y openssh-server
+# config see /etc/ssh/sshd_config
+
+if [[ $(realpath ~/.ssh/config) != $(realpath ~/config/dots/ssh/config) ]]; then
+    mkdir -p ~/.ssh
+    ln -sfT --backup=numbered ~/config/dots/ssh/config ~/.ssh/config
+fi

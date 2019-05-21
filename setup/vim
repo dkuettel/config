@@ -7,19 +7,26 @@ if [[ $(realpath ~/.vimrc) != $(realpath ~/config/dots/vimrc) ]]; then
     ln -sfT --backup=numbered ~/config/dots/vimrc ~/.vimrc
 fi
 
-## vundle
-#if [[ -d ~/.vim/bundle/Vundle.vim ]]; then
-    #git -C ~/.vim/bundle/Vundle.vim pull
-#else
-    #git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
-#fi
-#vim -u ~/config/dots/vimrc.d/vundle.vim +PluginInstall +qall
-#vim -u ~/config/dots/vimrc.d/vundle.vim +PluginUpdate +qall
-
 # link custom files
 #if [[ ! -d ~/.vim ]]; then
-#	mkdir ~/.vim
+#    mkdir ~/.vim
 #fi
 #ln -sfT ~/config/vim/syntax ~/.vim/syntax
 #ln -sfT ~/config/vim/ftdetect ~/.vim/ftdetect
 #ln -sfT ~/config/vim/after ~/.vim/after
+
+# ubuntu 18.04 has a good current version of vim
+# but we could also build directly from git
+#sudo apt-get install -qy git
+#if [[ -d ~/vim ]]; then
+    #echo '~/vim already exists'
+    #git -C ~/vim pull
+#else
+    #echo 'cloning vim'
+    #git clone https://github.com/vim/vim.git ~/vim
+#fi
+#cd ~/vim
+#sudo apt-get install -qy libncurses5-dev # vim dependencies
+#./configure --disable-gui --without-x --enable-luainterp=dynamic --enable-perlinterp=dynamic --enable-pythoninterp=dynamic --enable-rubyinterp --enable-cscope --with-features=huge
+#make -j$(nproc)
+#sudo make install

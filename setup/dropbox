@@ -10,8 +10,8 @@ set -eux -o pipefail
 
 
 if [[ ! -d ~/.dropbox-dist ]]; then
-	cd ~
-	wget -O - "https://www.dropbox.com/download?plat=lnx.x86_64" | tar xzf -
+    cd ~
+    wget -O - "https://www.dropbox.com/download?plat=lnx.x86_64" | tar xzf -
 fi
 
 # copy the command line helper to ~/bin
@@ -23,10 +23,10 @@ chmod +x ~/bin/dropbox.py
 
 # install in systemd
 if [[ $(realpath /etc/systemd/system/dropbox@.service) != $(realpath ~/config/dots/dropbox.d/dropbox@.service) ]]; then
-	# todo security risk to link files?
-	sudo ln -sfT --backup=numbered \
-		~/config/dots/dropbox.d/dropbox@.service \
-		/etc/systemd/system/dropbox@.service 
+    # todo security risk to link files?
+    sudo ln -sfT --backup=numbered \
+        ~/config/dots/dropbox.d/dropbox@.service \
+        /etc/systemd/system/dropbox@.service
 fi
 systemctl enable dropbox@$USER
 systemctl start dropbox@$USER
