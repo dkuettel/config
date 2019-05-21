@@ -81,6 +81,7 @@ function! NavProjectSymbols() abort
         \ --expect=enter,ctrl-t,ctrl-v,ctrl-s,ctrl-c
         \ --delimiter='\t'
         \ --ansi
+        \ --color=border:-1
         \ --with-nth=1,2 --nth=1
         \ --preview='tail --lines=+{4} {3} | head --lines=$FZF_PREVIEW_LINES'
         \ --preview-window=top:30\%
@@ -94,6 +95,7 @@ endfunction
 function! NavAllFiles() abort
     silent !fzf
         \ --expect=enter,ctrl-t,ctrl-v,ctrl-s,ctrl-c
+        \ --color=border:-1
         \ --preview='head --lines=$FZF_PREVIEW_LINES {}'
         \ --no-clear
         \ > fzf-selection
@@ -105,6 +107,7 @@ endfunction
 function! NavProjectFiles() abort
     silent !./.list-files | fzf
         \ --expect=enter,ctrl-t,ctrl-v,ctrl-s,ctrl-c
+        \ --color=border:-1
         \ --preview='head --lines=$FZF_PREVIEW_LINES {}'
         \ --no-clear
         \ > fzf-selection
@@ -124,6 +127,7 @@ function! NavBuffers() abort
         \ --expect=enter,ctrl-t,ctrl-v,ctrl-s,ctrl-c
         \ --delimiter=' '
         \ --nth=2
+        \ --color=border:-1
         \ --preview='head --lines=$FZF_PREVIEW_LINES {2}'
         \ --no-clear
         \ --sync
@@ -138,6 +142,7 @@ function! NavLines() abort
     silent !grep --with-filename --line-number '' $(./.list-files) | fzf
         \ --expect=enter,ctrl-t,ctrl-v,ctrl-s,ctrl-c
         \ --delimiter=':'
+        \ --color=border:-1
         \ --preview="cat <(for i ($(seq 1 15)) echo) {1} | sed -n '{2},+30p'"
         \ --preview-window=top
         \ --no-clear
