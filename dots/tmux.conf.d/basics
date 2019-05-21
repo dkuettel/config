@@ -95,7 +95,7 @@ bind-key -T home-row-navigation \; select-pane -t 4
 # if it's an escape sequence or an actual escape
 # (waiting too long makes vim and others feel sluggish as they react
 # slowly to hitting escape)
-set-option -sg escape-time 0 # in milliseconds
+set-option -sg escape-time 1 # in milliseconds
 
 # time for messages to show in the status line
 set-option -g display-time 4000

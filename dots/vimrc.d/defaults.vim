@@ -7,6 +7,11 @@ syntax on
 let mapleader=","
 inoremap jj <Esc>
 
+" escape sequences
+set timeout timeoutlen=1000 " how long to wait until considering a sequence done (when not prefix-free)
+set ttimeout ttimeoutlen=1 " how long to wait to consider an escape code done (quick esc exit from insert mode)
+"set noesckeys " alternatively allows no esc codes in insert mode, very fast
+
 set nobackup
 set noswapfile
 set hidden " allow unsaved buffers

@@ -25,7 +25,7 @@ zle -N zle-keymap-select
 ## vim-mode for zsh line editing
 # see 'man zshzle'
 bindkey -v
-export KEYTIMEMOUT=1 # quicker reaction to mode change (might interfere with other things) (1=0.1seconds)
+export KEYTIMEOUT=1 # quicker reaction to mode change (might interfere with other things) (1=0.1seconds)
 autoload up-line-or-beginning-search
 zle -N up-line-or-beginning-search
 bindkey '^P' up-line-or-beginning-search
