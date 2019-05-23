@@ -16,18 +16,23 @@ endif
 
 " https://github.com/junegunn/vim-plug
 call plug#begin('~/.vim/plugged')
+
     Plug 'easymotion/vim-easymotion'
     Plug 'altercation/vim-colors-solarized'
     Plug 'ambv/black'
     Plug 'airblade/vim-gitgutter'
     Plug 'scrooloose/nerdcommenter'
     Plug 'mattboehm/vim-unstack'
+
     "Plug 'tmux-plugins/vim-tmux-focus-events' " probably in vim8 native?
     "Plug 'tpope/vim-fugitive'
     "Plug 'davidhalter/jedi-vim'
     "Plug 'vim-syntastic/syntastic'
-    "Plugin 'vim-python/python-syntax'
-    "Plugin 'majutsushi/tagbar'
+    "Plug 'vim-python/python-syntax'
+    "Plug 'majutsushi/tagbar'
+
+    Plug '~/toys/vimminent'
+
 call plug#end()
 
 
@@ -110,3 +115,6 @@ vnoremap ,pt :<c-u>call unstack#Unstack(visualmode())<cr>
 """ tagbar toggle
 "nmap tt :TagbarToggle<cr>
 
+
+""" vimminent
+let g:vimminent_default_mappings = 1

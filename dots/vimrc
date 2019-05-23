@@ -1,5 +1,4 @@
 source ~/config/dots/vimrc.d/defaults.vim
 source ~/config/dots/vimrc.d/autosave.vim
-source ~/config/dots/vimrc.d/fzf.vim
 source ~/config/dots/vimrc.d/plug.vim
 source ~/config/dots/vimrc.d/experimental.vim
