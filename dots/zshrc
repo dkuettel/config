@@ -8,3 +8,4 @@ source ~/config/dots/zshrc.d/path.zsh
 source ~/config/dots/zshrc.d/basics.zsh
 source ~/config/dots/zshrc.d/fzf.zsh
 source ~/config/dots/zshrc.d/shortcuts.zsh
+source ~/config/dots/zshrc.d/experimental.zsh
