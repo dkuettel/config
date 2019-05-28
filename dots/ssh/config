@@ -8,6 +8,6 @@ Host staging
 #   for vnc
 #   LocalForward 5901 localhost:5901
 
-Host github-personal
-    HostName github.com
-    IdentityFile ~/.ssh/id_rsa-personal
+Host efs
+    HostName 34.244.195.49
+    User yineichen
