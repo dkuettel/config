@@ -1,0 +1,6 @@
+#!/bin/zsh
+set -eux -o pipefail
+
+instance=i-0622078d91edc5f50
+ip=$(aws ec2 describe-instances --instance-ids i-0622078d91edc5f50 | jq -r '.Reservations[0].Instances[0].PublicIpAddress')
+ssh kuettel@$ip
