@@ -2,7 +2,7 @@
 set -eux -o pipefail
 
 instance=i-0622078d91edc5f50
-ip=$(aws ec2 describe-instances --instance-ids i-0622078d91edc5f50 | jq -r '.Reservations[0].Instances[0].PublicIpAddress')
+ip=$(aws ec2 describe-instances --instance-ids $instance | jq -r '.Reservations[0].Instances[0].PublicIpAddress')
 if [[ -n $TMUX ]]; then
     (sleep 3; tmux new-window -c ~/staging/home/kuettel/dev/main) &
 fi
