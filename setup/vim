@@ -3,8 +3,8 @@ set -eux -o pipefail
 
 sudo apt-get -yqq install vim
 
-if [[ $(realpath ~/.vimrc) != $(realpath ~/config/dots/vimrc) ]]; then
-    ln -sfT --backup=numbered ~/config/dots/vimrc ~/.vimrc
+if [[ $(realpath ~/.vimrc) != $(realpath ~/config/dots/vim/vimrc) ]]; then
+    ln -sfT --backup=numbered ~/config/dots/vim/vimrc ~/.vimrc
 fi
 
 # link custom files

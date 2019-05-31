@@ -1,0 +1,4 @@
+source ~/config/dots/vim/defaults.vim
+source ~/config/dots/vim/autosave.vim
+source ~/config/dots/vim/plug.vim
+source ~/config/dots/vim/experimental.vim
