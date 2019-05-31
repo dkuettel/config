@@ -11,3 +11,7 @@ Host staging
 Host efs
     HostName 34.244.195.49
     User yineichen
+
+Host github-private
+    HostName github.com
+    IdentityFile ~/.ssh/id_rsa-github-private
