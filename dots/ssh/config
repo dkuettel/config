@@ -2,9 +2,9 @@ Host staging
     User kuettel
     HostName kuettel.dev.vuforia.com
 #   for backward tunnel ssh
-    RemoteForward 2222 localhost:22
+#    RemoteForward 2222 localhost:22
 #   for tensorboard
-    LocalForward 6006 localhost:6006
+#    LocalForward 6006 localhost:6006
 #   for vnc
 #   LocalForward 5901 localhost:5901
 
@@ -15,3 +15,7 @@ Host efs
 Host github-private
     HostName github.com
     IdentityFile ~/.ssh/id_rsa-github-private
+
+Host github-ptc
+    HostName github.com
+    IdentityFile ~/.ssh/id_rsa-github-ptc
