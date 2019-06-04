@@ -1,21 +1,26 @@
 
 """ install vim-plug
-" todo only works for vim
-" check https://github.com/junegunn/vim-plug/wiki/tips#automatic-installation
-" and https://github.com/junegunn/vim-plug
-" to see where to put it for neovim
-" can use if has('nvim')
-" neovim wants it at
-" curl -fLo ~/.local/share/nvim/site/autoload/plug.vim --create-dirs \
-"     https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-if empty(glob('~/.vim/autoload/plug.vim'))
-    silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
-        \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+" https://github.com/junegunn/vim-plug/wiki/tips#automatic-installation
+" https://github.com/junegunn/vim-plug
+if has('nvim')
+    if empty(glob('~/.local/share/nvim/site/autoload/plug.vim'))
+        silent !curl -fLo ~/.local/share/nvim/site/autoload/plug.vim --create-dirs
+            \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+    endif
+else
+    if empty(glob('~/.vim/autoload/plug.vim'))
+        silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
+            \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+    endif
 endif
 
 
 " https://github.com/junegunn/vim-plug
-call plug#begin('~/.vim/plugged')
+if has('nvim')
+    call plug#begin('~/.local/share/nvim/plugged')
+else
+    call plug#begin('~/.vim/plugged')
+endif
 
     Plug 'easymotion/vim-easymotion'
     Plug 'altercation/vim-colors-solarized'

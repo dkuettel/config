@@ -1,0 +1,9 @@
+#!/bin/zsh
+set -eux -o pipefail
+
+sudo apt-get -qq install -y neovim
+
+mkdir -p ~/.config/nvim
+if [[ $(realpath ~/.config/nvim/init.vim) != $(realpath ~/config/dots/vim/vimrc) ]]; then
+    ln -sfT --backup=numbered ~/.config/nvim/init.vim ~/.vimrc
+fi
