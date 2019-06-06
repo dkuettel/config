@@ -86,6 +86,7 @@ map ,gt :GitGutterToggle<cr>
 " adds many ,c-something shortcuts
 " maybe remove unneeded ones
 " ,cc ,cu ,c<space> ,ci are interesting
+let g:NERDDefaultAlign = 'left'
 
 
 """ unstack for python stacktraces
