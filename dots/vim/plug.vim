@@ -67,7 +67,7 @@ hi DiffAdd cterm=NONE ctermbg=0 ctermfg=10
 hi DiffChange cterm=NONE ctermbg=0 ctermfg=10
 hi DiffDelete cterm=NONE ctermbg=0 ctermfg=10
 highlight SpecialKey NONE
-highlight NonText ctermbg=black
+highlight NonText None
 
 
 """ black

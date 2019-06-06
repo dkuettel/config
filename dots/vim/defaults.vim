@@ -58,7 +58,7 @@ nnoremap ; :
 vmap ; :
 
 " visual indicators
-set listchars=tab:›\ ,trail:•,precedes:<,extends:>,nbsp:+
+set listchars=tab:›\ ,trail:•,precedes:↢,extends:↣,nbsp:¿
 set list
 set breakindent " visual (not real) breaks
 let &showbreak = '↪'  " visual break indicator
