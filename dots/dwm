@@ -1,4 +1,8 @@
 
+#set -x
+exec >> ~/.xinitrc.log 2>&1
+#echo $SHELL
+
 setxkbmap -layout pointluck -variant ptc-office-desktop
 xmodmap ~/config/keyboard/mods
 

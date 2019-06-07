@@ -1,47 +1,52 @@
 #!/bin/zsh
 set -eux -o pipefail
 
+i=()
+i+=pulseaudio-utils # for volume in dwm status top right
+i+=xinit # start x with .xinitrc
+sudo apt-get -qq install -y $i
+
 if [[ ! -d ~/dwm ]]; then
-	git clone git@bitbucket.org:dkuettel/dwm.git ~/dwm
-	cd ~/dwm
-	./setup-requirements.sh
-	./setup-git.sh
-	./install.sh
+    git clone git@bitbucket.org:dkuettel/dwm.git ~/dwm
+    cd ~/dwm
+    ./setup-requirements.sh
+    ./setup-git.sh
+    ./install.sh
 fi
 
 t=~/config/dots/dwm; l=~/.xinitrc
 if [[ ! ( $t -ef $l ) ]]; then
-	ln -sfT --backup=numbered $t $l
+    ln -sfT --backup=numbered $t $l
 fi
 
 ( # cursor themes for X
-	sudo apt-get -yqq install oxygen-cursor-theme oxygen-cursor-theme-extra
-	mkdir -p ~/.icons
-	ln -sfT /usr/share/icons/oxy-blue/ ~/.icons/default
+    sudo apt-get -yqq install oxygen-cursor-theme oxygen-cursor-theme-extra
+    mkdir -p ~/.icons
+    ln -sfT /usr/share/icons/oxy-blue/ ~/.icons/default
 )
 
 if [[ ! -d ~/dmenu ]]; then
-	git clone git@bitbucket.org:dkuettel/dmenu.git ~/dmenu
-	cd ~/dmenu
-	./setup-git.sh
-	./install.sh
+    git clone git@bitbucket.org:dkuettel/dmenu.git ~/dmenu
+    cd ~/dmenu
+    ./setup-git.sh
+    ./install.sh
 fi
 
 # slock
 if [[ ! -d ~/slock ]]; then
-	git clone https//git.suckless.org/slock ~/slock
-	cd ~/slock
-	sudo apt-get -yqq install libx11-dev make gcc libxft-dev libxinerama-dev libxrandr-dev
-	make clean
-	make
-	sudo make install
+    git clone https://git.suckless.org/slock ~/slock
+    cd ~/slock
+    sudo apt-get -yqq install libx11-dev make gcc libxft-dev libxinerama-dev libxrandr-dev
+    make clean
+    make
+    sudo make install
 fi
 
 # st
 if [[ ! -d ~/st ]]; then
-	git clone git@bitbucket.org:dkuettel/st.git ~/st
-	cd ~/st
-	./setup-requirements.sh
-	./setup-git.sh
-	./install.sh
+    git clone git@bitbucket.org:dkuettel/st.git ~/st
+    cd ~/st
+    ./setup-requirements.sh
+    ./setup-git.sh
+    ./install.sh
 fi
