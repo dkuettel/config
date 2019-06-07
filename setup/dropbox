@@ -30,3 +30,5 @@ if [[ $(realpath /etc/systemd/system/dropbox@.service) != $(realpath ~/config/do
 fi
 systemctl enable dropbox@$USER
 systemctl start dropbox@$USER
+sleep 5
+systemctl status dropbox@$USER
