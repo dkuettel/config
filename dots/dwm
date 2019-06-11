@@ -1,14 +1,17 @@
 
-#set -x
+set -e
 exec >> ~/.xinitrc.log 2>&1
+
+# for debugging
+#set -x
 #echo $SHELL
 
 setxkbmap -layout pointluck -variant ptc-office-desktop
-xmodmap ~/config/keyboard/mods
+xmodmap ~/config/dots/keyboard/mods
 
 xset r rate 200 50
 
-feh --no-fehbg --bg-fill ~/config/dots/xmonad.d/5_stripes_landscape.jpg
+feh --no-fehbg --bg-fill ~/config/dots/dwm.d/5_stripes_landscape.jpg
 
 while xsetroot -name " ($(pactl list sinks | awk '/Volume: front-left/ { print $5 }')) $(date '+%F %A %R') "; do sleep 5; done &
 
