@@ -14,7 +14,16 @@ if [[ ! -d ~/dwm ]]; then
     ./install.sh
 fi
 
-t=~/config/dots/dwm; l=~/.xinitrc
+# note:
+# startx calls .xinitrc and if it doesn't exist
+# then it uses system defaults in /etc/X11/Xinit
+# and /etc/X11/Xsession and then starts
+# ~/.xsession which results in a cleaner setup (eg, dbus)
+if [[ -e ~/.xinitrc ]]; then
+    echo 'should not have an ~/.xinitrc, because then .xsession will not be used'
+    false
+fi
+t=~/config/dots/dwm; l=~/.xsession
 if [[ ! ( $t -ef $l ) ]]; then
     ln -sfT --backup=numbered $t $l
 fi

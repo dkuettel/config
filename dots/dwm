@@ -1,6 +1,12 @@
+# note:
+# this could be both .xinitrc or .xsession
+# startx calls .xinitrc and if it doesn't exist
+# then it uses system defaults in /etc/X11/Xinit
+# and /etc/X11/Xsession and then starts
+# ~/.xsession which results in a cleaner setup (eg, dbus)
 
 set -e
-exec >> ~/.xinitrc.log 2>&1
+exec >> ~/.dwm-log 2>&1
 
 # for debugging
 #set -x
