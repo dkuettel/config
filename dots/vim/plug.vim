@@ -44,6 +44,7 @@ endif
     "Plug 'majutsushi/tagbar'
 
     Plug '~/toys/vimminent'
+    Plug '~/toys/pdocs'
 
 call plug#end()
 
