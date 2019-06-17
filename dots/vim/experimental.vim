@@ -78,5 +78,6 @@ map ,6 6<c-w>w
 
 
 " tab navigation
-"map T :tab split<cr>
-"map tc :tabclose<cr>
+" problem: T and t are default bindings for 'until'
+map T :tab split<cr>
+map tc :tabclose<cr>
