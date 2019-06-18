@@ -17,3 +17,5 @@ if [[ $(realpath ~/.ipython/profile_default/ipython_config.py) != $(realpath ~/c
     # if ever this is changed or extended, we won't know about it
     ln -sfT --backup=numbered ~/config/dots/python/ipython_config.py ~/.ipython/profile_default/ipython_config.py
 fi
+
+pip3 install pipenv
