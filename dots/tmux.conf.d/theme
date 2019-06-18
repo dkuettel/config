@@ -18,6 +18,7 @@ set-option -g status-right ' '
 set-option -ga status-right '#(~/config/dots/tmux.conf.d/bin/dropbox)'
 set-option -ga status-right '#(~/config/dots/tmux.conf.d/bin/cpu-usage) '
 set-option -ga status-right '#(~/config/dots/tmux.conf.d/bin/memory-usage) '
+set-option -ga status-right '#(cd ~/config/dots/tmux.conf.d/bin; pipenv run python -u gpu.py) '
 #set-option -ga status-right "| #(date '+%F %R') "
 #set-option -ga status-right '| #(hostname) '
 
