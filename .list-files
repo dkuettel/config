@@ -1,0 +1,4 @@
+#!/bin/zsh
+set -eu -o pipefail
+
+find -path ./.git -prune -o -print
