@@ -1,4 +1,0 @@
-#!/bin/zsh
-set -eu -o pipefail
-# todo mpstat also supports -o JSON, could be interesting with jq
-mpstat 2 5 | awk '/all/ { print int(100-$13) "%" }'
