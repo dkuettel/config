@@ -2,11 +2,19 @@
 set -eux -o pipefail
 
 # https://docs.syncthing.net/intro/getting-started.html
-sudo apt install syncthing
+# ubuntu repo has a very old version
+# snap seems pretty up-to-date versions but doesn't correctly setup a systemd service for me
+# now we do from https://apt.syncthing.net/
+# (but maybe snap would have worked and I wasn't patient enough)
+curl -s https://syncthing.net/release-key.txt | sudo apt-key add -
+echo "deb https://apt.syncthing.net/ syncthing stable" | sudo tee /etc/apt/sources.list.d/syncthing.list
+sudo apt-get update
+sudo apt-get install syncthing
 
 # https://docs.syncthing.net/users/autostart.html#linux
-systemctl enable syncthing@$USER.service
-systemctl start syncthing@$USER.service
+# note sure if this here is needed with the new repo version
+#systemctl enable syncthing@$USER.service
+#systemctl start syncthing@$USER.service
 
 # check with
 systemctl status syncthing@$USER.service
