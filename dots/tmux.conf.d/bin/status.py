@@ -62,23 +62,29 @@ def status_gpu():
     import pynvml as nv
 
     try:
-        nv.nvmlInit()
-        count = nv.nvmlDeviceGetCount()
-
-        if count > 0:
-            handle = nv.nvmlDeviceGetHandleByIndex(0)
-
-            def status():
-                # memory has .total, .used, .free; in bytes
-                memory = nv.nvmlDeviceGetMemoryInfo(handle)
-                # compute has .gpu, .memory; in percent
-                compute = nv.nvmlDeviceGetUtilizationRates(handle)
-                return f"{compute.gpu:2}% {round(memory.used/1e9)}/{round(memory.total/1e9)}G"
-
-        else:
+        try:
+            nv.nvmlInit()
+        except:
 
             def status():
                 return None
+
+        else:
+            count = nv.nvmlDeviceGetCount()
+            if count > 0:
+                handle = nv.nvmlDeviceGetHandleByIndex(0)
+
+                def status():
+                    # memory has .total, .used, .free; in bytes
+                    memory = nv.nvmlDeviceGetMemoryInfo(handle)
+                    # compute has .gpu, .memory; in percent
+                    compute = nv.nvmlDeviceGetUtilizationRates(handle)
+                    return f"{compute.gpu:2}% {round(memory.used/1e9)}/{round(memory.total/1e9)}G"
+
+            else:
+
+                def status():
+                    return None
 
         yield status
 
