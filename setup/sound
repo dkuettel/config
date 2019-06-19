@@ -1,0 +1,8 @@
+#!/bin/zsh
+set -eux -o pipefail
+
+sudo apt -q install -y pavucontrol blueman
+
+# blueman-manager to connect to a device, use "setup" first time probably
+# I think after pairing it should the connect and show up as a device in pavucontrol
+# without starting blueman-manager?
