@@ -18,7 +18,7 @@ class status_dropbox:
         try:
             self.s.connect(os.path.expanduser("~/.dropbox/command_socket"))
             self.f = self.s.makefile("rw")
-        except FileNotFoundError:
+        except:
             self.f = None
 
     def status(self):
