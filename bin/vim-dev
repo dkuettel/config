@@ -1,6 +1,7 @@
 #!/bin/zsh -eu
 set -o pipefail
 
-cd $dev
+#cd $dev
+cd ~/src
 #stty -ixon
 vim $@
