@@ -19,7 +19,8 @@ hi CursorColumn cterm=NONE ctermbg=0 ctermfg=NONE
 "hi CursorColumn cterm=NONE ctermbg=45 ctermfg=NONE
 "set cursorline cursorcolumn
 set nocursorline nocursorcolumn
-nnoremap ,x :set cursorline! cursorcolumn!<CR>
+nnoremap ,x :set cursorline! cursorcolumn!<cr>
+nnoremap ,X :set cursorcolumn!<cr>
 
 " have cursorline/column only in active window
 " problem, only do when actually activated (,x)
