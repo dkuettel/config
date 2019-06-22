@@ -3,9 +3,14 @@ set -eux -o pipefail
 
 sudo apt-get -yqq install vim
 
+# todo would still be  nice to make sure plugins are installed
+# otherwise first start is painful and need :PlugInstall
+
 if [[ $(realpath ~/.vimrc) != $(realpath ~/config/dots/vim/vimrc) ]]; then
     ln -sfT --backup=numbered ~/config/dots/vim/vimrc ~/.vimrc
 fi
+
+pip3 install black
 
 # link custom files
 #if [[ ! -d ~/.vim ]]; then
