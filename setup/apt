@@ -19,9 +19,11 @@ i+=htop
 i+=jq # json query engine
 i+=libboost-dev
 i+=lnav # log file viewer
+i+=markdown # for my ptc notes standup.markdown
 i+=mosh # ssh robust for unstable connections
 i+=openssh-server
 i+=pv # monitor data progress thru a pipe
+i+=sshfs
 i+=suckless-tools
 i+=sysstat
 i+=tmux
@@ -31,6 +33,5 @@ i+=vim
 i+=xclip
 i+=zip
 i+=zsh
-i+=markdown # for my ptc notes standup.markdown
 
 sudo apt-get -q install -y $i
