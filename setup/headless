@@ -1,0 +1,18 @@
+#!/bin/bash
+set -eux -o pipefail
+
+# note this is in bash because zsh is not yet installed
+
+./zsh
+# pip3 needs this and here we are still in the old shell
+export PATH=$HOME/.local/bin:$PATH
+./apt
+./ssh
+./git
+./fzf
+./top
+./htop
+./python
+./tmux
+./vim
+./nvim

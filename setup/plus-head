@@ -1,0 +1,16 @@
+#!/bin/zsh
+set -eux -o pipefail
+
+echo 'not tested; but see here the list of setups for headfull'
+# not clear what order is needed or make sense
+# maybe also just make two folders, one with headless and one with headfull?
+# these here could be done "on-demand" and might not need a script
+./chrome
+./dropbox
+./dwm
+./keyboard
+./nvidia
+./slack
+./sound
+./spotify
+./syncthing
