@@ -3,7 +3,8 @@ set -eux -o pipefail
 
 i=()
 i+=pulseaudio-utils # for volume in dwm status top right
-i+=xinit # start x with .xinitrc
+i+=xinit # start x with .xsession
+i+=numlockx # set numlock in .xsession
 sudo apt-get -qq install -y $i
 
 if [[ ! -d ~/dwm ]]; then
