@@ -1,0 +1,24 @@
+
+see
+https://wiki.archlinux.org/index.php/Mouse_acceleration#Mouse_acceleration_with_libinput
+
+xset m does not have an effect anymore
+it's using libinput
+
+> xinput --list-props
+
+at home I had originally
+> xinput --set-prop 8 'libinput Accel Speed' 0
+and switched it now to 0.5
+
+compare at work
+
+libinput is using dpi, and it gets it from evdev
+maybe at home it's a differnent dpi than at work?
+at home xdpyinfo reports (not sure if that's what libinput uses)
+  dimensions:    3840x2160 pixels (613x352 millimeters)
+  resolution:    159x156 dots per inch
+
+not sure how to make the setting persistent
+would be nice to do it in the .xsession
+but how to get the right id for the mouse?

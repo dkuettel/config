@@ -17,6 +17,9 @@ xmodmap ~/config/dots/keyboard/mods
 
 xset r rate 200 50
 
+# todo how to get id, what if different mice or accels needed?
+xinput --set-prop 8 'libinput Accel Speed' 0.5
+
 feh --no-fehbg --bg-fill ~/config/dots/dwm.d/5_stripes_landscape.jpg
 
 while xsetroot -name " ($(pactl list sinks | awk '/Volume: front-left/ { print $5 }')) $(date '+%F %A %R') "; do sleep 5; done &
