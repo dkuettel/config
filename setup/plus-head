@@ -5,11 +5,18 @@ echo 'not tested; but see here the list of setups for headfull'
 # not clear what order is needed or make sense
 # maybe also just make two folders, one with headless and one with headfull?
 # these here could be done "on-demand" and might not need a script
-./chrome
-./dropbox
 ./dwm
-./keyboard
+# needed
+# sudo apt install virtualbox-guest-x11 virtualbox-guest-utils virtualbox-guest-dkms
+# for startx to work inside virtualbox
+# pretty good with dwm, don't feel a delay
+# also they say vbox6 has even better support and the apt packages might be a bit older
+./keyboard # probably not doing the right thing in virtual box
+
+# order not tested yet
 ./nvidia
+./dropbox
+./chrome
 ./slack
 ./sound
 ./spotify
