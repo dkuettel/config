@@ -5,7 +5,8 @@ https://wiki.archlinux.org/index.php/Mouse_acceleration#Mouse_acceleration_with_
 xset m does not have an effect anymore
 it's using libinput
 
-> xinput --list-props
+> xinput list
+> xinput --list-props 8
 
 at home I had originally
 > xinput --set-prop 8 'libinput Accel Speed' 0
