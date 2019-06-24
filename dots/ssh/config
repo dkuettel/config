@@ -9,7 +9,7 @@ Host staging
 #   LocalForward 5901 localhost:5901
 
 Host efs
-    HostName 34.244.195.49
+    HostName 00.000.000.00
     User yineichen
 
 Host github-private
@@ -23,3 +23,7 @@ Host github-ptc
 Host mac-vbox
     HostName private-macbookpro.fritz.box
     Port 2244
+
+Host office
+    HostName 00.000.000.00
+    Port 3437
