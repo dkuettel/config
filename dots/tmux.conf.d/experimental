@@ -1,0 +1,6 @@
+# choose pane interactively
+bind-key 0 choose-tree
+
+# move windows left/right
+bind-key -r < swap-window -t -1
+bind-key -r > swap-window -t +1
