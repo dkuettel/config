@@ -49,6 +49,11 @@ autocmd FileType python setlocal
     \ expandtab smarttab autoindent copyindent
     \ textwidth=0
     \ indentexpr= indentkeys=
+autocmd FileType yaml setlocal
+    \ tabstop=2 softtabstop=2 shiftwidth=2
+    \ expandtab smarttab autoindent copyindent
+    \ textwidth=0
+    \ indentexpr= indentkeys=
 " note
 " indentexpr= should stop any automatic indendation (?)
 " indentkeys= should stop any reindentation when typing things like 'else:'
