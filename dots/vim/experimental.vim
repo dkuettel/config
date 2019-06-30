@@ -17,9 +17,8 @@ hi CursorColumn cterm=NONE ctermbg=0 ctermfg=NONE
 " options: 45, 51, 81, 117, 123, 153, 159, 189, 159
 "hi CursorLine cterm=NONE ctermbg=45 ctermfg=NONE
 "hi CursorColumn cterm=NONE ctermbg=45 ctermfg=NONE
-"set cursorline cursorcolumn
-set nocursorline nocursorcolumn
-nnoremap ,x :set cursorline! cursorcolumn!<cr>
+set cursorline nocursorcolumn
+nnoremap ,x :set cursorline!<cr>
 nnoremap ,X :set cursorcolumn!<cr>
 
 " have cursorline/column only in active window
