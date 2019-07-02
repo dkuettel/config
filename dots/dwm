@@ -18,7 +18,8 @@ xset r rate 200 50
 numlockx on
 
 # todo how to get id, what if different mice or accels needed?
-xinput --set-prop 8 'libinput Accel Speed' 1
+xinput --set-prop 8 'libinput Accel Speed' 1 || true
+xinput --set-prop 9 'libinput Accel Speed' 1 || true
 
 feh --no-fehbg --bg-fill ~/config/dots/dwm.d/5_stripes_landscape.jpg
 
