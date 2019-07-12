@@ -1,0 +1,23 @@
+#!/bin/zsh
+set -eux -o pipefail
+
+dev=enx38c986f1095d
+
+ip netns add vpn
+ip link set $dev netns vpn
+#ip netns exec vpn ip link set lo up # seems to be already there
+ip netns exec vpn ip link set $dev up
+ip netns exec vpn dhclient $dev
+#ip netns exec vpn ping www.google.co.uk
+
+#check if what device is doing after startup of machine, configured?
+# only eno1, good
+#how to use netplan inside ns?
+#is resolvconf set from inside via vpn dhcp?
+
+# even the direct connection still has search ptc.com. not sure where it comes from
+
+# seems like /etc/netns/vpn/resolv.conf has to be there before making the ns?
+# so that it will link? or maybe it links the moment you run exec?
+# make that file hard-coded for now, don't know how to get it from ptc dhcp
+# have it as part of the script
