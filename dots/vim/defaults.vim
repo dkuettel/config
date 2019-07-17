@@ -4,6 +4,10 @@ filetype on
 filetype plugin on
 syntax on
 
+" modeline has a security problem
+set modelines=0
+set nomodeline
+
 let mapleader=","
 inoremap jj <Esc>
 
