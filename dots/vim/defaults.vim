@@ -5,6 +5,8 @@ filetype plugin on
 syntax on
 
 " modeline has a security problem
+" https://github.com/numirias/security/blob/master/doc/2019-06-04_ace-vim-neovim.md
+" probably soon fine again?
 set modelines=0
 set nomodeline
 
