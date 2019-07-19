@@ -134,3 +134,7 @@ vnoremap ,pt :<c-u>call unstack#Unstack(visualmode())<cr>
 
 """ vimminent
 let g:vimminent_default_mappings = 1
+
+
+""" pdocs
+let g:pdocs_default_mappings = 1
