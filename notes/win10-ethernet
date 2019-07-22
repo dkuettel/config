@@ -1,0 +1,10 @@
+
+win10 with powermanagement for ethernet might put it in a state that linux doesn't manage well
+switch off powermanagement for ethernet in win10 for convenience
+
+alternatively, reset in linux
+find device number with lspci
+find /sys -name '*00:19.0'
+the one of those, not sure which one worked
+    echo 1 >/sys/devices/pci0000:00/0000:00:19.0/reset
+    echo 1 >/sys/bus/pci/devices/0000:00:19.0/reset
