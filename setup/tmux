@@ -9,7 +9,7 @@ sudo apt-get -qq install -y tmux \
 
 ( # prepare pipenv for tmux status line python code
     cd ~/config/dots/tmux.conf.d/bin
-    sudo apt install python3.7-dev # psutil needs python3.7-dev
+    sudo apt-get -qq install -y python3.7-dev # psutil needs python3.7-dev
     pipenv install
 )
 
