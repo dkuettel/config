@@ -20,6 +20,7 @@ i+=jq # json query engine
 i+=libboost-dev
 i+=lnav # log file viewer
 i+=markdown # for my ptc notes standup.markdown
+i+=moreutils # sponge
 i+=mosh # ssh robust for unstable connections
 i+=openssh-server
 i+=pv # monitor data progress thru a pipe
