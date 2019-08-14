@@ -1,16 +1,4 @@
 default  partial alphanumeric_keys modifier_keys
-xkb_symbols "MacBookAir" {
-
-    include "us(basic)"
-    name[Group1]= "PointLuck (MacBookAir)";
-
-//    key <TLDE> { [grave, asciitilde] };
-    key <LSGT> { [Escape, Escape] };
-    key <RWIN> { [Control_R] };
-    modifier_map Control { <LCTL>, <RWIN> };
-};
-
-default  partial alphanumeric_keys modifier_keys
 xkb_symbols "ptc-office-desktop" {
 
     include "us(basic)"
@@ -18,4 +6,14 @@ xkb_symbols "ptc-office-desktop" {
 
     key <LSGT> { [grave, asciitilde] };
     key <TLDE> { [Escape, Escape] };
+};
+
+default  partial alphanumeric_keys modifier_keys
+xkb_symbols "farbase" {
+
+    include "us(basic)"
+    name[Group1]= "PointLuck (farbase)";
+
+    key <TLDE> { [grave, asciitilde] };
+    key <LSGT> { [Escape, Escape] };
 };

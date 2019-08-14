@@ -5,14 +5,14 @@
 # and /etc/X11/Xsession and then starts
 # ~/.xsession which results in a cleaner setup (eg, dbus)
 
-set -e
+set -eux
 exec >> ~/.dwm-log 2>&1
 
 # for debugging
 #set -x
 #echo $SHELL
 
-setxkbmap -layout pointluck -variant ptc-office-desktop
+setxkbmap -layout pointluck -variant farbase
 xmodmap ~/config/dots/keyboard/mods
 xset r rate 200 50
 numlockx on
