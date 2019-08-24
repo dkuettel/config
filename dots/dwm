@@ -8,11 +8,7 @@
 set -eux
 exec >> ~/.dwm-log 2>&1
 
-# for debugging
-#set -x
-#echo $SHELL
-
-setxkbmap -layout pointluck -variant farbase
+setxkbmap -layout pointluck -variant $(hostname)
 xmodmap ~/config/dots/keyboard/mods
 xset r rate 200 50
 numlockx on
@@ -26,4 +22,3 @@ feh --no-fehbg --bg-fill ~/config/dots/dwm.d/5_stripes_landscape.jpg
 while xsetroot -name " ($(pactl list sinks | awk '/Volume: front-left/ { print $5 }')) $(date '+%F %A %R') "; do sleep 5; done &
 
 dwm
-
