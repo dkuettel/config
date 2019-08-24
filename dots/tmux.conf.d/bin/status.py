@@ -67,7 +67,8 @@ def status_cpu():
     def status():
         compute = round(psutil.cpu_percent())
         memory = psutil.virtual_memory()
-        return f"{compute:2}% {round(memory.used/1e9)}/{round(memory.total/1e9)}G"
+        # using GiB=2**30 instead of GB=1e9, because thats what most other tools show
+        return f"{compute:2}% {round(memory.used/2**30)}/{round(memory.total/2**30)}G"
 
     yield status
 
