@@ -94,7 +94,8 @@ def status_gpu():
                     memory = nv.nvmlDeviceGetMemoryInfo(handle)
                     # compute has .gpu, .memory; in percent
                     compute = nv.nvmlDeviceGetUtilizationRates(handle)
-                    return f"{compute.gpu:2}% {round(memory.used/1e9)}/{round(memory.total/1e9)}G"
+                    # using GiB=2**30 instead of GB=1e9, because thats also what nvidia-smi shows
+                    return f"{compute.gpu:2}% {round(memory.used/2**30)}/{round(memory.total/2**30)}G"
 
             else:
 
