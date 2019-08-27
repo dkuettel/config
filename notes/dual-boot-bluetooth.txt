@@ -2,13 +2,15 @@ on linux:
     /var/lib/bluetooth contains the receivers and devices
     /var/lib/bluetooth/[receiver-mac]/[device-mac]/info contains connection infos
         [LinkKey] Key=... is the private key for the connection
-    sudo hcitool dev also shows the mac addresses for all bluetooth receivers
+    'sudo hcitool dev' also shows the mac addresses for all bluetooth receivers
     also check what you call your linux machine (hostname), as thats the name it shows when connecting via bluetooth
 
 on windows:
     learned from https://github.com/LondonAppDev/dual-boot-bluetooth-pair
     view HKEY_LOCAL_MACHINE\SYSTEM\ControlSet001\Services\BTHPORT\Parameters\Keys in regedit
     it contains the key in a similar fashion as linux
+    in the device manager best change the bluetooth receiver's name to what it is in linux
+    before you connect a device, so the names don't conflict
 
 the main idea is to make both systems use the same link key
 one approach is:
