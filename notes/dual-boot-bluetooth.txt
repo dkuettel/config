@@ -1,0 +1,21 @@
+on linux:
+    /var/lib/bluetooth contains the receivers and devices
+    /var/lib/bluetooth/[receiver-mac]/[device-mac]/info contains connection infos
+        [LinkKey] Key=... is the private key for the connection
+    sudo hcitool dev also shows the mac addresses for all bluetooth receivers
+    also check what you call your linux machine (hostname), as thats the name it shows when connecting via bluetooth
+
+on windows:
+    learned from https://github.com/LondonAppDev/dual-boot-bluetooth-pair
+    view HKEY_LOCAL_MACHINE\SYSTEM\ControlSet001\Services\BTHPORT\Parameters\Keys in regedit
+    it contains the key in a similar fashion as linux
+
+the main idea is to make both systems use the same link key
+one approach is:
+    first the device is not paired at all
+    in linux pair like normal
+    in windows pair like normal gain (making the device forget the pairing with linux)
+    in windows get the link key
+    in linux overwrite the link key
+    restart bluetooth 'sudo systemctl restart bluetooth'
+    (it's probably a good idea to not make the device connect to linux before you have updated this)
