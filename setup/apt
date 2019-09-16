@@ -4,6 +4,13 @@ set -eux -o pipefail
 sudo apt-get update
 sudo apt-get -q upgrade -y
 
+# switch to HWE for ubuntu 18.04
+# https://wiki.ubuntu.com/Kernel/LTSEnablementStack
+sudo apt-get -q install -y --install-recommends linux-generic-hwe-18.04
+# note:
+# after this autoremove can remove some old packages
+# for desktop systems we also want xserver-xorg-hwe-18.04 (see ./plus-head)
+
 # a generic list of useful packages
 # many are also installed and configured by more specific scripts
 i=()

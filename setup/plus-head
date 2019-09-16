@@ -1,6 +1,9 @@
 #!/bin/zsh
 set -eux -o pipefail
 
+# HWE ubuntu 18.04, see ./headless
+sudo apt-get -q install -y --install-recommends xserver-xorg-hwe-18.04
+
 echo 'not tested; but see here the list of setups for headfull'
 # not clear what order is needed or make sense
 # maybe also just make two folders, one with headless and one with headfull?
