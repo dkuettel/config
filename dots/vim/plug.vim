@@ -24,7 +24,8 @@ endif
 
     Plug 'easymotion/vim-easymotion'
     Plug 'altercation/vim-colors-solarized'
-    Plug 'ambv/black'
+    "Plug 'psf/black' " todo https://github.com/psf/black/pull/978 when merged could fix the view reset problems
+    Plug 'sbdchd/neoformat'
     Plug 'airblade/vim-gitgutter'
     Plug 'scrooloose/nerdcommenter'
     Plug 'mattboehm/vim-unstack'
@@ -75,7 +76,18 @@ highlight NonText None
 " todo make it per filetype
 " set equalprg=python3\ -m\ black\ --quiet\ -
 " nnoremap <leader>= mc:%!python3 -m black --quiet -<cr>`c
-nnoremap == :Black<cr>
+"nnoremap == :Black<cr> " Plugin disabled currently, see above
+let g:neoformat_enabled_python = ['black']
+let g:neoformat_try_formatprg = 1
+let g:neoformat_python_black = {
+        \ 'exe': 'black',
+        \ 'args': ['-', '--quiet', '--target-version=py37'],
+        \ 'stdin': 1,
+    \ }
+let g:neoformat_basic_format_align = 0
+let g:neoformat_basic_format_retab = 1
+let g:neoformat_basic_format_trim = 1
+map == :Neoformat<cr>
 
 
 """ gitgutter
