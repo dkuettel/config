@@ -1,0 +1,10 @@
+#!/bin/zsh
+set -eux -o pipefail
+
+# two options:
+# > xset dpms force standby
+# > xset +dpms
+
+xset +dpms
+slock
+xset -dpms
