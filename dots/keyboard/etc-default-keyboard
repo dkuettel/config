@@ -1,0 +1,5 @@
+XKBMODEL="pc105"
+XKBLAYOUT="pointluck"
+XKBVARIANT="farbase"
+XKBOPTIONS=""
+BACKSPACE="guess"
