@@ -62,3 +62,6 @@ alias ffeh='feh --fullscreen --draw-filename --draw-tinted'
 rsync_cp () {
     rsync -ah -L -r --info=progress2 $1 $2
 }
+
+# tensorboard
+alias tb=tensorboard
