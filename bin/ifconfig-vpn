@@ -1,5 +1,5 @@
 #!/bin/zsh
 set -eux -o pipefail
 
-sudo ifconfig down enx38c986f1095d
-sudo ifconfig up enp2s0
+sudo ifconfig enp2s0 down
+sudo ifconfig enx38c986f1095d up
