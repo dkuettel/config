@@ -64,4 +64,4 @@ rsync_cp () {
 }
 
 # tensorboard
-alias tb=tensorboard
+alias tb='tensorboard --logdir=.'
