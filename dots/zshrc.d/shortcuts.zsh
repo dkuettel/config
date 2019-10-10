@@ -64,4 +64,7 @@ rsync_cp () {
 }
 
 # tensorboard
-alias tb='tensorboard --logdir=.'
+function tb { tensorboard --logdir=${1:-.} }
+
+# quick cd's
+alias goto-flow='cd /efs/dkuettel/flow/calpha'
