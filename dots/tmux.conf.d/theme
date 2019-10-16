@@ -15,20 +15,19 @@ set-option -g status-right ' #(cd ~/config/dots/tmux.conf.d/bin; pipenv run pyth
 
 set-option -g status-justify left
 set-option -g status-style 'bg=brightgreen'
-set-window-option -g window-status-format '#[fg=brightblack]#{window_index}/#[fg=#{?window_last_flag,white,brightcyan}]#{window_name}'
+set-window-option -g window-status-format '#[fg=brightblack]#{window_index}#{?window_zoomed_flag,<,/}#[fg=#{?window_last_flag,brightcyan,white}]#{window_name}'
 set-window-option -g window-status-current-style 'bg=blue'
-set-window-option -g window-status-current-format '#[fg=brightblack]#{window_index}/#[fg=white]#{window_name}'
-# todo zoom flag?
+set-window-option -g window-status-current-format '#[fg=brightblack]#{window_index}#{?window_zoomed_flag,<,/}#[fg=white]#{window_name}'
 
 # pane borders
-set-option -g pane-border-style 'fg=blue,bg=brightblack'
-set-option -g pane-active-border-style 'fg=yellow,bg=brightblack'
+set-option -g pane-border-style 'fg=brightgreen,bg=brightgreen'
+set-option -g pane-active-border-style 'fg=brightgreen,bg=brightgreen'
 set-option -g pane-border-status top
-set-option -g pane-border-format '#{?pane_active,#[reverse],}#{pane_index}/git:#(git -C #{pane_current_path} symbolic-ref --short HEAD 2>/dev/null)'
+set-option -g pane-border-format '#[fg=brightblack,bg=#{?pane_active,blue,brightgreen}]#{pane_index}/#[fg=white]#{pane_current_command}'
 
 # colors for display-panes
-set-option -g display-panes-colour blue
-set-option -g display-panes-active-colour yellow
+set-option -g display-panes-colour yellow
+set-option -g display-panes-active-colour blue
 
 # todo consider
 # message-command-style, message-style
