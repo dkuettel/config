@@ -1,22 +1,17 @@
 
-# show status line
 set-option -g status on
 
 set-option -g status-position bottom
 
-# redraw status line every x seconds
 set-option -g status-interval 5
 
 set-option -g status-left-length 100
 set-option -g status-left-style 'fg=brightgreen,bg=black'
-# set-option -g status-left '#{?#{client_key_table}=prefix,yes,no}#{session_name} '
 set-option -g status-left '#{?#{==:#{client_key_table},root},,#[fg=brightblack,bg=blue]}#{session_name}#[bg=black] '
 
 set-option -g status-right-length 100
 set-option -g status-right-style 'fg=brightgreen,bg=black'
 set-option -g status-right ' #(cd ~/config/dots/tmux.conf.d/bin; pipenv run python -u status.py) '
-#set-option -ga status-right "| #(date '+%F %R') "
-#set-option -ga status-right '| #(hostname) '
 
 set-option -g status-justify left
 set-option -g status-style 'bg=brightgreen'
@@ -28,7 +23,6 @@ set-window-option -g window-status-current-format '#[fg=brightblack]#{window_ind
 # pane borders
 set-option -g pane-border-style 'fg=blue,bg=brightblack'
 set-option -g pane-active-border-style 'fg=yellow,bg=brightblack'
-# set-option -g pane-active-border-style 'fg=blue,bg=blue'
 set-option -g pane-border-status top
 set-option -g pane-border-format '#{?pane_active,#[reverse],}#{pane_index}/git:#(git -C #{pane_current_path} symbolic-ref --short HEAD 2>/dev/null)'
 
