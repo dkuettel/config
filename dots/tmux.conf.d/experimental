@@ -1,4 +1,5 @@
 # choose pane interactively
+# todo newer tmux supports -Z to zoom it always
 bind-key 0 choose-tree
 
 # move windows left/right

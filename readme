@@ -1,4 +1,8 @@
 
+tmux from 2.6 to 2.9:
+    - select-layout -E to spread panes out evenly (bound to E key)
+    - some style -fg -bg options are gone and you do the color directly in the style
+
 todo:
     - ./setup needs an "all" for server and one for desktop, best fully idempotent to run again if needed
 
