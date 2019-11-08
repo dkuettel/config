@@ -13,6 +13,7 @@ sudo apt-get -q install -y --install-recommends linux-generic-hwe-18.04
 
 # a generic list of useful packages
 # many are also installed and configured by more specific scripts
+# (keep alphabetically sorted)
 i=()
 i+=bmon # bandwidth monitor
 i+=cmake
@@ -41,5 +42,8 @@ i+=vim
 i+=xclip
 i+=zip
 i+=zsh
+
+# for consideration
+#i+=okular # good pdf viewer with review support, not sure how I can make the configuration persist
 
 sudo apt-get -q install -y $i
