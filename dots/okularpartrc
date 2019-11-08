@@ -1,0 +1,11 @@
+[Core General]
+ObeyDRM=false
+
+[Main View]
+ShowLeftPanel=false
+
+[PageView]
+TrimMargins=true
+
+[Reviews]
+AnnotationTools=<tool type="highlight" id="1"><engine color="#facc59" type="TextSelector"><annotation color="#facc59" type="Highlight"/></engine><shortcut>1</shortcut></tool>,<tool type="note-inline" id="2"><engine color="#ffff00" hoverIcon="tool-note-inline" type="PickPoint" block="true"><annotation color="#ffff00" type="FreeText"/></engine><shortcut>2</shortcut></tool>,<tool type="note-linked" id="3"><engine color="#ffff00" hoverIcon="tool-note" type="PickPoint"><annotation color="#ffff00" icon="Note" type="Text"/></engine><shortcut>3</shortcut></tool>,<tool type="underline" id="4"><engine color="#000000" type="TextSelector"><annotation color="#000000" type="Underline"/></engine><shortcut>4</shortcut></tool>,<tool type="ink" id="5"><engine color="#00ff00" type="SmoothLine"><annotation width="2" color="#00ff00" type="Ink"/></engine><shortcut>5</shortcut></tool>,<tool type="straight-line" id="6"><engine color="#ffe000" type="PolyLine" points="2"><annotation width="1" color="#ffe000" type="Line"/></engine><shortcut>6</shortcut></tool>,<tool type="polygon" id="7"><engine color="#007eee" type="PolyLine" points="-1"><annotation width="1" color="#007eee" type="Line"/></engine><shortcut>7</shortcut></tool>,<tool type="ellipse" id="8"><engine color="#00ffff" type="PickPoint" block="true"><annotation width="5" color="#00ffff" type="GeomCircle"/></engine><shortcut>8</shortcut></tool>

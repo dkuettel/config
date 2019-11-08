@@ -43,7 +43,4 @@ i+=xclip
 i+=zip
 i+=zsh
 
-# for consideration
-#i+=okular # good pdf viewer with review support, not sure how I can make the configuration persist
-
 sudo apt-get -q install -y $i

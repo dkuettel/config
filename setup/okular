@@ -1,0 +1,10 @@
+#!/bin/zsh
+set -eux -o pipefail
+
+sudo apt-get -yqq install okular
+
+if [[ $(realpath ~/.config/okularpartrc) != $(realpath ~/config/dots/okularpartrc) ]]; then
+    ln -sfT --backup=numbered ~/config/dots/okularpartrc ~/.config/okularpartrc
+fi
+
+# note there is another config file "okularrc" but that seems more local so I don't persist it
