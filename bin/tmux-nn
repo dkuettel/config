@@ -1,11 +1,14 @@
 #!/bin/zsh
 set -eux -o pipefail
 
-folder=$(pwd)
-name=$(basename $folder)
+folder=${1:-.}
+folder=$(realpath $folder)
 
-tmux set-option -g update-environment nn
+name=$(basename $folder)
 
 PATH=$folder/bin:$PATH \
 nn=$folder \
-    tmux new-session -s $name -c $folder
+    tmux \
+        start-server \; \
+        set-option -g update-environment nn \; \
+        new-session -AD -s $name -c $folder
