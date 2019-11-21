@@ -1,0 +1,14 @@
+#!/bin/zsh
+set -eux -o pipefail
+
+if [[ $(kubectl version --short --client) != 'Client Version: v1.14.7-eks-1861c5' ]]; then
+    curl -o ~/bin/kubectl https://amazon-eks.s3-us-west-2.amazonaws.com/1.14.6/2019-08-22/bin/linux/amd64/kubectl
+    chmod +x ~/bin/kubectl
+fi
+
+ln -sfT ~/bin/kubectl ~/bin/k
+
+if [[ $(aws-iam-authenticator version) != '{"Version":"v0.4.0","Commit":"c141eda34ad1b6b4d71056810951801348f8c367"}' ]]; then
+    curl -o ~/bin/aws-iam-authenticator https://amazon-eks.s3-us-west-2.amazonaws.com/1.14.6/2019-08-22/bin/linux/amd64/aws-iam-authenticator
+    chmod +x ~/bin/aws-iam-authenticator
+fi
