@@ -8,3 +8,4 @@
     tool = vimdiff
 [pager]
     branch = false
+    stash = false
