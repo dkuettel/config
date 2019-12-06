@@ -15,7 +15,7 @@ set-option -g status-right ' #(cd ~/config/dots/tmux.conf.d/bin; pipenv run pyth
 
 set-option -g status-justify left
 set-option -g status-style 'bg=brightgreen'
-set-window-option -g window-status-format '#[fg=brightblack]#{window_index}#{?window_zoomed_flag,<,/}#[fg=#{?window_last_flag,brightcyan,white}]#{window_name}'
+set-window-option -g window-status-format '#[fg=brightblack]#{window_index}#{?window_zoomed_flag,<,/}#[fg=white,#{?window_last_flag,underscore,none}]#{window_name}'
 set-window-option -g window-status-current-style 'bg=blue'
 set-window-option -g window-status-current-format '#[fg=brightblack]#{window_index}#{?window_zoomed_flag,<,/}#[fg=white]#{window_name}'
 
