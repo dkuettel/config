@@ -17,7 +17,7 @@ set-option -g status-justify left
 set-option -g status-style 'bg=brightgreen'
 set-window-option -g window-status-format '#[fg=brightblack]#{window_index}#{?window_zoomed_flag,<,/}#[fg=white,#{?window_last_flag,bold,none}]#{window_name}'
 set-window-option -g window-status-current-style 'bg=blue'
-set-window-option -g window-status-current-format '#[fg=brightblack]#{window_index}#{?window_zoomed_flag,<,/}#[fg=white]#{window_name}'
+set-window-option -g window-status-current-format '#[fg=brightblack]#{window_index}#{?window_zoomed_flag,<,/}#[fg=white,bold]#{window_name}'
 
 # pane borders
 # todo if we can get something like pane_last_flag then undserscore the last pane
