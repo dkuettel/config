@@ -1,0 +1,5 @@
+#!/bin/zsh
+set -eu -o pipefail
+
+cd ~/toys/pdocs
+./run $@
