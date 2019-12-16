@@ -23,6 +23,7 @@ i+=g++
 i+=gcp # like cp, but with progress bar among other features
 i+=geeqie
 i+=git
+i+=gthumb # together with scrot
 i+=htop
 i+=jq # json query engine
 i+=libboost-dev
