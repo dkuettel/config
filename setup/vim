@@ -13,12 +13,11 @@ fi
 pip3 install black
 
 # link custom files
-#if [[ ! -d ~/.vim ]]; then
-#    mkdir ~/.vim
-#fi
-#ln -sfT ~/config/vim/syntax ~/.vim/syntax
-#ln -sfT ~/config/vim/ftdetect ~/.vim/ftdetect
-#ln -sfT ~/config/vim/after ~/.vim/after
+if [[ ! -d ~/.vim ]]; then
+    mkdir ~/.vim
+fi
+ln -sfT ~/config/dots/vim/syntax ~/.vim/syntax
+ln -sfT ~/config/dots/vim/ftdetect ~/.vim/ftdetect
 
 # ubuntu 18.04 has a good current version of vim
 # but we could also build directly from git
