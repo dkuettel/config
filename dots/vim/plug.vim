@@ -38,7 +38,7 @@ endif
     endif
 
     "Plug 'tmux-plugins/vim-tmux-focus-events' " probably in vim8 native?
-    "Plug 'tpope/vim-fugitive'
+    Plug 'tpope/vim-fugitive'
     "Plug 'davidhalter/jedi-vim'
     "Plug 'vim-syntastic/syntastic'
     "Plug 'vim-python/python-syntax'
