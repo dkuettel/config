@@ -9,3 +9,5 @@
 [pager]
     branch = false
     stash = false
+[alias]
+    log1 = log --oneline
