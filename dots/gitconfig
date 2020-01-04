@@ -9,5 +9,15 @@
 [pager]
     branch = false
     stash = false
+    config = false
 [alias]
-    log1 = log --oneline
+    l = log --oneline
+    s = status
+    b = branch -vv
+    co = checkout
+    cm = commit -m
+    fa = fetch --all
+    fp = fetch --prune
+    sl = stash list
+    su = stash push
+    sd = stash pop
