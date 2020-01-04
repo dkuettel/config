@@ -8,3 +8,14 @@ load-module module-bluetooth-discover
 load-module module-switch-on-connect  # Add this
 .endif
 seems to work
+
+
+
+hciconfig and hcitool might work too
+do they all talk to the same backend?
+> hcitool lm NONE MASTER?
+does NONE here prevent anymore connections? whats a baseband connection?
+> hcitool name xxxx
+could be used for dwm status? is it slow, is it checking the local db only?
+but we need sudo
+can we ask for info on bose?
