@@ -21,3 +21,4 @@
     sl = stash list
     su = stash push
     sd = stash pop
+    cp = cherry-pick
