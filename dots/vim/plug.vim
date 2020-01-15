@@ -128,7 +128,7 @@ vnoremap ,pt :<c-u>call unstack#Unstack(visualmode())<cr>
 
 
 """ fugitive
-nmap ,gs :Gstatus<cr>
+nmap ,gs :tab Gstatus<cr>
 
 
 """ vim-jedi
