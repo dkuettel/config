@@ -1,0 +1,4 @@
+#!/bin/zsh
+set -eux -o pipefail
+
+xmodmap -e 'pointer = 1 0 3 4 5 0 0 2 8'
