@@ -5,7 +5,7 @@
 # and /etc/X11/Xsession and then starts
 # ~/.xsession which results in a cleaner setup (eg, dbus)
 
-set -eux
+set -eu
 exec >> ~/.dwm-log 2>&1
 
 # monitor never off
