@@ -19,6 +19,7 @@
     f = fetch
     fa = fetch --all
     fp = fetch --prune
+    p = push
     sl = stash list
     su = stash push
     sd = stash pop
