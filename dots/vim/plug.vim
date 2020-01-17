@@ -16,6 +16,10 @@ endif
 
 
 " https://github.com/junegunn/vim-plug
+" PlugUpdate to update plugins
+" PlugClean remove unlisted plugins
+" PlugUpgrade upgrade Plug itself
+" PlugDiff shows changes of last update
 if has('nvim')
     call plug#begin('~/.local/share/nvim/plugged')
 else
