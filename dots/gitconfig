@@ -16,6 +16,7 @@
     b = branch -vv
     co = checkout
     cm = commit -m
+    f = fetch
     fa = fetch --all
     fp = fetch --prune
     sl = stash list
