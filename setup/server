@@ -1,29 +1,33 @@
-#!/bin/zsh
+#!/bin/bash
 set -eux -o pipefail
+# switch to zsh
+if [ -z "$ZSH_VERSION" ]; then
+    which zsh || i/zsh
+    exec zsh $0
+fi
 
-sudo apt-get update
-sudo apt-get -q upgrade -y
+# todo still needed now that we try to restart with zsh?
+# pip3 needs this and here we are still in the old shell
+#export PATH=$HOME/.local/bin:$PATH
+echo 'check path, still needed?'
+echo $PATH
+exit 1
 
 # switch to HWE for ubuntu 18.04
 # https://wiki.ubuntu.com/Kernel/LTSEnablementStack
-sudo apt-get -q install -y --install-recommends linux-generic-hwe-18.04
-# note:
-# after this autoremove can remove some old packages
-# for desktop systems we also want xserver-xorg-hwe-18.04 (see ./plus-head)
+sudo apt-get update
+sudo apt-get upgrade -qqy
+sudo apt-get install -qqy --install-recommends linux-generic-hwe-18.04
+sudo apt-get autoremove
 
-# a generic list of useful packages
-# many are also installed and configured by more specific scripts
-# (keep alphabetically sorted)
+# sorted list of packages for server (not desktop)
 i=()
 i+=bmon # bandwidth monitor
 i+=cmake
 i+=dtrx # easy and clean archive extraction
-i+=feh
 i+=g++
 i+=gcp # like cp, but with progress bar among other features
-i+=geeqie
 i+=git
-i+=gthumb # together with scrot
 i+=htop
 i+=jq # json query engine
 i+=libboost-dev
@@ -40,8 +44,17 @@ i+=tmux
 i+=tree
 i+=unzip
 i+=vim
-i+=xclip
 i+=zip
 i+=zsh
+sudo apt-get install -qqy $i
 
-sudo apt-get -q install -y $i
+# customized tools
+i/ssh
+i/git
+i/fzf
+i/top
+i/htop
+i/python
+i/tmux
+i/vim
+i/nvim

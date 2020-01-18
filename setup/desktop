@@ -1,26 +1,40 @@
 #!/bin/zsh
 set -eux -o pipefail
 
-# HWE ubuntu 18.04, see ./headless
-sudo apt-get -q install -y --install-recommends xserver-xorg-hwe-18.04
+# switch to HWE for ubuntu 18.04
+# https://wiki.ubuntu.com/Kernel/LTSEnablementStack
+sudo apt-get update
+sudo apt-get upgrade -qqy
+sudo apt-get install -qqy --install-recommends xserver-xorg-hwe-18.04
+sudo apt-get autoremove
+
+# sorted list of packages for desktop
+i=()
+i+=feh
+i+=geeqie
+i+=gthumb # together with scrot
+i+=xclip
+sudo apt-get install -qqy $i
 
 echo 'not tested; but see here the list of setups for headfull'
+exit 1
 # not clear what order is needed or make sense
 # maybe also just make two folders, one with headless and one with headfull?
 # these here could be done "on-demand" and might not need a script
-./dwm
+i/dwm
 # needed
 # sudo apt install virtualbox-guest-x11 virtualbox-guest-utils virtualbox-guest-dkms
 # for startx to work inside virtualbox
 # pretty good with dwm, don't feel a delay
 # also they say vbox6 has even better support and the apt packages might be a bit older
-./keyboard # probably not doing the right thing in virtual box
+i/keyboard # probably not doing the right thing in virtual box
 
 # order not tested yet
-./nvidia
-./dropbox
-./chrome
-./slack
-./sound
-./spotify
-./syncthing
+i/nvidia
+i/dropbox
+i/chrome
+i/slack
+i/sound
+i/spotify
+i/syncthing
+i/okular
