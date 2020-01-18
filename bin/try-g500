@@ -1,25 +1,26 @@
 #!/bin/zsh
 set -eux -o pipefail
 
-xmodmap -e 'pointer = 1 0 3 4 5 0 0 2 8'
+# todo thumb button sends some keycombination probably thru
+# its virtual keyboard adapter, can we catch this and make it something else?
+# (its not mouse)
 
-# todo thumb button comes thru keyboard adapter
-# so should be possible to remap
+# probably need
+# sudo apt install x11-utils xautomation xbindkeys xkbset
 
-mouse=$(xinput --list --id-only 'pointer:Logitech MX Master')
+mouse=$(xinput --list --id-only 'pointer:Logitech G500')
 
-# todo currently configured from windows?
+# todo not sure which one to use for middle mouse button, both enabled currently
 keys=(
     1   # 1 left click
     0   # 2 wheel click
     3   # 3 right click
     4   # 4 wheel forward
     5   # 5 wheel backward
-    0   # 6 wheel tilt left
-    0   # 7 wheel tilt right
+    8   # 6 wheel tilt left
+    9   # 7 wheel tilt right
     10  # 8 thumb backward
-    0   # 9 thumb forward
-    0   # 10 thumb down?
+    2   # 9 thumb forward
 )
 xinput --set-button-map $mouse $(seq 20)
 #xinput --set-button-map $mouse $keys
@@ -39,9 +40,6 @@ xinput --set-prop $mouse 'libinput Accel Speed' 0
 # for testing keep it in foreground
 # could also be done globally if we dont need it per mouse type
 xbindkeys -n -f =(cat << 'eof'
-
-"xte 'keydown Control_R' 'key w' 'sleep 0.05' 'keyup Control_R'"
-    b:8
 
 # somehow super + w doesnt work
 # not even what xbindkeys --key says (Mod2+Mod4 + Super_L) works

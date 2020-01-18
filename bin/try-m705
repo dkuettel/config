@@ -1,32 +1,30 @@
 #!/bin/zsh
 set -eux -o pipefail
 
-xmodmap -e 'pointer = 1 0 3 4 5 0 0 2 8'
+# probably need
+# sudo apt install x11-utils xautomation xbindkeys xkbset
 
-# todo thumb button comes thru keyboard adapter
-# so should be possible to remap
+mouse=$(xinput --list --id-only 'pointer:Logitech M705')
 
-mouse=$(xinput --list --id-only 'pointer:Logitech MX Master')
-
-# todo currently configured from windows?
+# todo not sure which one to use for middle mouse button, both enabled currently
 keys=(
     1   # 1 left click
     0   # 2 wheel click
     3   # 3 right click
     4   # 4 wheel forward
     5   # 5 wheel backward
-    0   # 6 wheel tilt left
-    0   # 7 wheel tilt right
-    10  # 8 thumb backward
-    0   # 9 thumb forward
-    0   # 10 thumb down?
+    8   # 6 wheel tilt left
+    9   # 7 wheel tilt right
+    2   # 8 thumb backward
+    2   # 9 thumb forward
+    10  # 10 thumb down
 )
-xinput --set-button-map $mouse $(seq 20)
-#xinput --set-button-map $mouse $keys
+#xinput --set-button-map $mouse $(seq 20)
+xinput --set-button-map $mouse $keys
 
 #xset m 0 0  # should be linear model for mouse, exponential would be '3 0' or so
 xinput --set-prop $mouse 'libinput Accel Profile Enabled' 1 0
-xinput --set-prop $mouse 'libinput Accel Speed' 0
+xinput --set-prop $mouse 'libinput Accel Speed' -0.4
 
 # todo works but maps keys, not shortcuts/combinations
 #xkbset m  # to allow mouse keycodes, todo ok? what about xkbset exp =m
@@ -41,7 +39,7 @@ xinput --set-prop $mouse 'libinput Accel Speed' 0
 xbindkeys -n -f =(cat << 'eof'
 
 "xte 'keydown Control_R' 'key w' 'sleep 0.05' 'keyup Control_R'"
-    b:8
+    b:10
 
 # somehow super + w doesnt work
 # not even what xbindkeys --key says (Mod2+Mod4 + Super_L) works
