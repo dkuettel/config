@@ -43,8 +43,8 @@ xbindkeys -n -f =(cat << 'eof'
 
 # somehow super + w doesnt work
 # not even what xbindkeys --key says (Mod2+Mod4 + Super_L) works
-"xte 'mouseclick 2'"
-    Alt + w
+#"xte 'mouseclick 2'"
+#    Alt + w
 
 eof
 )
