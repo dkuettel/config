@@ -1,36 +1,32 @@
 #!/bin/zsh
 set -eux -o pipefail
 
-sudo apt-get -yqq install vim
-
-# todo would still be  nice to make sure plugins are installed
-# otherwise first start is painful and need :PlugInstall
-
-if [[ $(realpath ~/.vimrc) != $(realpath ~/config/dots/vim/vimrc) ]]; then
-    ln -sfT --backup=numbered ~/config/dots/vim/vimrc ~/.vimrc
-fi
-
-pip3 install black
-
-# link custom files
-if [[ ! -d ~/.vim ]]; then
-    mkdir ~/.vim
-fi
+# config files
+ln -sfT ~/config/dots/vim/vimrc ~/.vimrc
+mkdir -p ~/.vim
 ln -sfT ~/config/dots/vim/syntax ~/.vim/syntax
 ln -sfT ~/config/dots/vim/ftdetect ~/.vim/ftdetect
 
-# ubuntu 18.04 has a good current version of vim
-# but we could also build directly from git
-#sudo apt-get install -qy git
-#if [[ -d ~/vim ]]; then
-    #echo '~/vim already exists'
-    #git -C ~/vim pull
-#else
-    #echo 'cloning vim'
-    #git clone https://github.com/vim/vim.git ~/vim
-#fi
-#cd ~/vim
-#sudo apt-get install -qy libncurses5-dev # vim dependencies
-#./configure --disable-gui --without-x --enable-luainterp=dynamic --enable-perlinterp=dynamic --enable-pythoninterp=dynamic --enable-rubyinterp --enable-cscope --with-features=huge
-#make -j$(nproc)
-#sudo make install
+# dependencies
+pip3 install black
+
+# vim from git
+sudo apt-get -yqq install git
+[[ -e ~/vim ]] || git clone https://github.com/vim/vim.git ~/vim
+if [[ ! -e /usr/local/bin/vim ]]; then
+    cd ~/vim
+    sudo apt-get -yqq install libncurses5-dev
+    ./configure \
+        --disable-gui \
+        --without-x \
+        --enable-luainterp=dynamic \
+        --enable-perlinterp=dynamic \
+        --enable-pythoninterp=dynamic \
+        --enable-rubyinterp \
+        --enable-cscope \
+        --with-features=huge
+    make -j$(nproc)
+    sudo make install
+fi
+
+# todo I think plugged now installs plugins automatically the first time, no :PlugInstall needed here
