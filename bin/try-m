@@ -1,9 +1,0 @@
-#!/bin/zsh
-set -eux -o pipefail
-
-while true; do
-    xset m 3 0
-    sleep 2
-    xset m 0 0
-    sleep 2
-done
