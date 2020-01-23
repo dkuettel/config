@@ -25,3 +25,4 @@
     sd = stash pop
     cp = cherry-pick
     d = diff
+    rc = rebase --continue
