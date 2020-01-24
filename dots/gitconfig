@@ -20,6 +20,7 @@
     fa = fetch --all
     fp = fetch --prune
     p = push
+    pu = push -u origin HEAD
     sl = stash list
     su = stash push
     sd = stash pop
