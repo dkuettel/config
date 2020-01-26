@@ -3,12 +3,16 @@ set -eux -o pipefail
 
 folder=${1:-.}
 folder=$(realpath $folder)
+name=$(realpath --relative-base=$HOME $folder)
 
-name=$(basename $folder)
+! tmux has-session -t $name
 
-PATH=$folder/nn/bin:$PATH \
-nn=$folder \
-    tmux \
-        start-server \; \
-        set-option -g update-environment nn \; \
-        new-session -AD -s $name -c $folder
+# todo maybe one day new-session will support setting session environment
+# then we dont have to hack with -g update-environment
+args=(
+    start-server \;
+    set-option -g update-environment 'h PATH' \;
+    new-session -s $name -c $folder \;
+    set-option -gu update-environment
+)
+h=$folder path=($h/bin $path) tmux $args
