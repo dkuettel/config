@@ -1,7 +1,10 @@
 # choose pane interactively
-# todo newer tmux supports -Z to zoom it always
-bind-key 0 choose-tree
+# all unfolded, bind-key+w is with windows collapsed
+bind-key 0 choose-tree -Z
 
 # move windows left/right
 bind-key -r < swap-window -t -1
 bind-key -r > swap-window -t +1
+
+# new window to the right, not last
+bind-key C new-window -a -c "#{pane_current_path}"
