@@ -1,11 +1,18 @@
 
-typeset -U PATH path # array with no duplicates
+typeset -U PATH path  # array with no duplicates
+
+# note: we reverse, append, and reverse
+# together with unique this adds only what's not already there
+typeset -U rev
+rev=(${(Oa)path})
+
 # note: ~ does not expand here, but $HOME does
-path=(
-    $HOME/config/bin
-    $HOME/bin
-    $HOME/fzf/bin
+rev+=(
+    /snap/bin  # should be there from system settings?
     $HOME/.local/bin  # pip install puts executables here
-    /snap/bin
-    $path
+    $HOME/fzf/bin
+    $HOME/bin
+    $HOME/config/bin
 )
+
+path=(${(Oa)rev})
