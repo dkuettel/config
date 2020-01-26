@@ -10,23 +10,28 @@ ln -sfT ~/config/dots/vim/ftdetect ~/.vim/ftdetect
 # dependencies
 pip3 install black
 
-# vim from git
-sudo apt-get -yqq install git
-[[ -e ~/vim ]] || git clone https://github.com/vim/vim.git ~/vim
-if [[ ! -e /usr/local/bin/vim ]]; then
-    cd ~/vim
-    sudo apt-get -yqq install libncurses5-dev
-    ./configure \
-        --disable-gui \
-        --without-x \
-        --enable-luainterp=dynamic \
-        --enable-perlinterp=dynamic \
-        --enable-pythoninterp=dynamic \
-        --enable-rubyinterp \
-        --enable-cscope \
-        --with-features=huge
-    make -j$(nproc)
-    sudo make install
-fi
+( # vim from git
+
+    sudo apt-get -yqq install git libncurses5-dev
+
+    [[ -e ~/vim ]] || git clone https://github.com/vim/vim.git ~/vim
+
+    if [[ ! -e /usr/local/bin/vim ]]; then
+        cd ~/vim
+        sudo apt-get -yqq install libncurses5-dev
+        ./configure \
+            --disable-gui \
+            --without-x \
+            --enable-luainterp=dynamic \
+            --enable-perlinterp=dynamic \
+            --enable-pythoninterp=dynamic \
+            --enable-rubyinterp \
+            --enable-cscope \
+            --with-features=huge
+        make -j$(nproc)
+        sudo make install
+    fi
+
+)
 
 # todo I think plugged now installs plugins automatically the first time, no :PlugInstall needed here
