@@ -1,6 +1,7 @@
 # choose pane interactively
-# all unfolded, bind-key+w is with windows collapsed
-bind-key 0 choose-tree -Z
+# w is already default, but with windows collapsed
+# here changed to windows opened, maybe convenient?
+bind-key w choose-tree -Z
 
 # move windows left/right
 bind-key -r < swap-window -t -1
