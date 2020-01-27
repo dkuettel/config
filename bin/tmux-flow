@@ -15,4 +15,4 @@ args=(
     new-session -s $name -c $folder \;
     set-option -gu update-environment
 )
-h=$folder path=($h/bin $path) tmux $args
+h=$folder path=($h/nn/bin $path) tmux $args
