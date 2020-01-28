@@ -4,4 +4,4 @@ set -eux -o pipefail
 mkdir -p ~/sshots
 
 #gnome-screenshot --area
-scrot ~/sshots/'%Y-%m-%d_%H:%M.png' --silent --select --exec 'gthumb $f'
+scrot ~/sshots/'%Y-%m-%d--%H:%M:%S.png' --silent --select --exec 'gthumb $f'
