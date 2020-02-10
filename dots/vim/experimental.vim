@@ -81,3 +81,6 @@ map ,6 6<c-w>w
 " problem: T and t are default bindings for 'until'
 map T :tab split<cr>
 map tc :tabclose<cr>
+
+" make ctrl-d and ctrl-u move one line (nice for scrolling)
+set scroll=1
