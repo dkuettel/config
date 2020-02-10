@@ -4,8 +4,8 @@
 bind-key w choose-tree -Z
 
 # move windows left/right
-bind-key -r < swap-window -t -1
-bind-key -r > swap-window -t +1
+bind-key -r < swap-window -d -t -1
+bind-key -r > swap-window -d -t +1
 
 # new window to the right, not last
 bind-key C new-window -a -c "#{pane_current_path}"
