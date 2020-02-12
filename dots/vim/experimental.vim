@@ -84,3 +84,7 @@ map tc :tabclose<cr>
 
 " make ctrl-d and ctrl-u move one line (nice for scrolling)
 set scroll=1
+
+" use arrow up and down like ctrl-d and ctrl-u with scroll 1 for easy browsing
+map <Down> 1<c-d>
+map <Up> 1<c-u>
