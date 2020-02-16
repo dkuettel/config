@@ -57,8 +57,8 @@ autocmd FileType python setlocal
     \ expandtab smarttab autoindent copyindent
     \ textwidth=0
     \ indentexpr= indentkeys=
-autocmd FileType python inoremap <buffer> ' "
-autocmd FileType python inoremap <buffer> " '
+"autocmd FileType python inoremap <buffer> ' "
+"autocmd FileType python inoremap <buffer> " '
 
 autocmd FileType yaml setlocal
     \ tabstop=2 softtabstop=2 shiftwidth=2
