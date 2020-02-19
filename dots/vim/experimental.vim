@@ -76,11 +76,14 @@ map ,6 6<c-w>w
 " todo could be interesting to have different cursor shapes and colors for normal and insert mode
 " see https://www.reddit.com/r/vim/comments/8se9ug/changing_cursor_in_different_modes_with_tmux/
 
-
 " tab navigation
 " problem: T and t are default bindings for 'until'
 map T :tab split<cr>
 map tc :tabclose<cr>
+" not sure if that overwrites a default map
+" shift H and L could also be okay, but that's for high and low in default
+map <c-j> :tabprevious<enter>
+map <c-k> :tabnext<enter>
 
 " make ctrl-d and ctrl-u move one line (nice for scrolling)
 set scroll=1
