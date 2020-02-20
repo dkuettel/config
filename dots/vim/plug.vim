@@ -38,10 +38,13 @@ endif
         " nvim can do it natively
         " vim not, they never merged a patch for that
         " maybe could be done easier and with no plugin
-        Plug 'tmux-plugins/vim-tmux-focus-events'
+        Plug 'tmux-plugins/vim-tmux-focus-events' " might be native in vim8?
     endif
 
-    "Plug 'tmux-plugins/vim-tmux-focus-events' " probably in vim8 native?
+    if has('nvim')
+        Plug 'numirias/semshi', {'do': ':UpdateRemotePlugins'}
+    endif
+
     Plug 'tpope/vim-fugitive'
     "Plug 'davidhalter/jedi-vim'
     "Plug 'vim-syntastic/syntastic'
