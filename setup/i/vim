@@ -7,7 +7,7 @@ mkdir -p ~/.vim
 ln -sfT ~/config/dots/vim/syntax ~/.vim/syntax
 ln -sfT ~/config/dots/vim/ftdetect ~/.vim/ftdetect
 
-# dependencies
+# dependencies for vim plugins
 pip3 install black
 
 ( # vim from git
