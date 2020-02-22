@@ -4,6 +4,8 @@ set -eux -o pipefail
 # config files
 mkdir -p ~/.config/nvim
 ln -sfT ~/config/dots/vim/vimrc ~/.config/nvim/init.vim
+ln -sfT ~/config/dots/vim/syntax ~/.config/nvim/syntax
+ln -sfT ~/config/dots/vim/ftdetect ~/.config/nvim/ftdetect
 
 # dependencies for vim plugins
 pip3 install black
