@@ -94,3 +94,18 @@ map <Up> 1<c-u>
 
 " // to disable highlights again after search (any short clash here?)
 map // :nohlsearch<enter>
+
+" try easier pair parantheses & co typing
+" https://github.com/jiangmiao/auto-pairs looks very good, but somehow big for what it is
+" note: use <c-v> + ( or ) to type literally without mapping
+" note: could also map (( instead of ( to have it only when you want it
+inoremap ( ()<left>
+inoremap ) <esc>/)<enter>:nohl<enter>a
+inoremap { {}<left>
+inoremap } <esc>/}<enter>:nohl<enter>a
+inoremap [ []<left>
+inoremap ] <esc>/]<enter>:nohl<enter>a
+inoremap [ []<left>
+inoremap ] <esc>/]<enter>:nohl<enter>a
+inoremap <expr> ' getline('.')[col('.')-1] == "'" ? "<right>" : "''<left>"
+inoremap <expr> " getline('.')[col('.')-1] == '"' ? "<right>" : '""<left>'
