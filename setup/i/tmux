@@ -12,11 +12,10 @@ ln -sfT ~/config/dots/tmux.conf ~/.tmux.conf
 
 ( # tmux from git
 
-    sudo apt-get -yqq install git autoconf automake pkg-config libevent1-dev libncurses5-dev byacc
-
     [[ -e ~/tmux ]] || git clone https://github.com/tmux/tmux.git ~/tmux
 
     if [[ ! -e /usr/local/bin/tmux ]]; then
+        sudo apt-get -yqq install git autoconf automake pkg-config libevent1-dev libncurses5-dev byacc
         cd ~/tmux
         sh autogen.sh
         ./configure
