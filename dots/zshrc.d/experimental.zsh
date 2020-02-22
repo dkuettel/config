@@ -9,3 +9,6 @@ export PIPENV_DEFAULT_PYTHON_VERSION=3.7
 
 # default ncal settings
 alias ncal='ncal -bM'
+
+# nvim
+alias v=nvim
