@@ -12,8 +12,10 @@
     config = false
 [alias]
     l = log --oneline
+    lg = log --graph --simplify-by-decoration --all --pretty=tformat:'%Cblue%D [%h]%n %Cgreen%ar %Creset%s%n'
     s = status
     b = branch -vv
+    mb = branch -vv --list 'dk/*'
     co = checkout
     cm = commit -m
     f = fetch

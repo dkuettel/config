@@ -1,5 +1,0 @@
-#!/bin/zsh
-set -eux -o pipefail
-
-cd ~'/.wine/dosdevices/c:/Program Files (x86)/Battle.net'
-wine64 Battle.net.exe &> /dev/null

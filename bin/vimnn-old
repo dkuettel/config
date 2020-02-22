@@ -1,8 +1,0 @@
-#!/bin/zsh -eu
-set -o pipefail
-# use to run a vim that usees nntags-bg on the current folder until you exit that vim
-
-nntags-bg &
-vim $@
-kill %'nntags-bg'
-wait

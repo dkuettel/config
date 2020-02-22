@@ -1,4 +1,0 @@
-#!/bin/zsh
-set -eux -o pipefail
-
-vim ~/Dropbox/notes/todo.txt

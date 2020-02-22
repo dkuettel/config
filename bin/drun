@@ -1,9 +1,0 @@
-#!/bin/zsh
-set -eu -o pipefail
-
-docker run \
-    --interactive \
-    --tty \
-    --rm \
-    --detach-keys 'ctrl-@,x,x' \
-    $@

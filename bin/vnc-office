@@ -1,3 +1,0 @@
-#!/bin/bash -xeu
-vncserver -kill :1 -clean || echo 'there was no previous x'
-vncserver -geometry 2530x1300
