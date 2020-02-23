@@ -51,6 +51,8 @@ endif
     "Plug 'vim-python/python-syntax'
     "Plug 'majutsushi/tagbar'
 
+    Plug 'jiangmiao/auto-pairs'
+
     Plug '~/toys/vimminent'
     Plug '~/toys/pdocs'
 

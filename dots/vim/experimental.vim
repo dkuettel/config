@@ -99,13 +99,19 @@ map // :nohlsearch<enter>
 " https://github.com/jiangmiao/auto-pairs looks very good, but somehow big for what it is
 " note: use <c-v> + ( or ) to type literally without mapping
 " note: could also map (( instead of ( to have it only when you want it
-inoremap ( ()<left>
-inoremap ) <esc>/)<enter>:nohl<enter>a
-inoremap { {}<left>
-inoremap } <esc>/}<enter>:nohl<enter>a
-inoremap [ []<left>
-inoremap ] <esc>/]<enter>:nohl<enter>a
-inoremap [ []<left>
-inoremap ] <esc>/]<enter>:nohl<enter>a
-inoremap <expr> ' getline('.')[col('.')-1] == "'" ? "<right>" : "''<left>"
-inoremap <expr> " getline('.')[col('.')-1] == '"' ? "<right>" : '""<left>'
+" todo maybe only exit adjacent parantheses, like for ' and "
+" todo maybe also delete if empty pair
+" todo or generally create delete pairs together?
+" todo typing ) in an unexpected place might move you to weird places
+" todo also when adding for example list(...) later it doesnt work well
+" todo doesnt work well when doing "isn't" or something like that
+"inoremap ( ()<left>
+"inoremap ) <esc>/)<enter>:nohl<enter>a
+"inoremap { {}<left>
+"inoremap } <esc>/}<enter>:nohl<enter>a
+"inoremap [ []<left>
+"inoremap ] <esc>/]<enter>:nohl<enter>a
+"inoremap [ []<left>
+"inoremap ] <esc>/]<enter>:nohl<enter>a
+"inoremap <expr> ' getline('.')[col('.')-1] == "'" ? "<right>" : "''<left>"
+"inoremap <expr> " getline('.')[col('.')-1] == '"' ? "<right>" : '""<left>'
