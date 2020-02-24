@@ -77,13 +77,18 @@ map ,6 6<c-w>w
 " see https://www.reddit.com/r/vim/comments/8se9ug/changing_cursor_in_different_modes_with_tmux/
 
 " tab navigation
-" problem: T and t are default bindings for 'until'
-map T :tab split<cr>
-map tc :tabclose<cr>
-" not sure if that overwrites a default map
-" shift H and L could also be okay, but that's for high and low in default
-map <c-j> :tabprevious<enter>
-map <c-k> :tabnext<enter>
+" caveat: t is a default mapping for 'until'
+map tt :tab split<enter>
+map tT <c-w>T
+map tc :tabclose<enter>
+map tp :tabprevious<enter>
+map tn :tabnext<enter>
+for i in [1, 2, 3, 4, 5, 6, 7, 8, 9]
+    " map t# #gt
+    execute "map t" . i . " " . i . "gt"
+    " map tm# :tabmove #-1<enter>
+    execute "map tm" . i . " :tabmove " . (i-1) . "<enter>"
+endfor
 
 " make ctrl-d and ctrl-u move one line (nice for scrolling)
 set scroll=1
