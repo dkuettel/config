@@ -90,6 +90,10 @@ bind-key -T home-row-navigation j select-pane -t 1
 bind-key -T home-row-navigation k select-pane -t 2
 bind-key -T home-row-navigation l select-pane -t 3
 bind-key -T home-row-navigation \; select-pane -t 4
+bind-key -T home-row-navigation 1 select-pane -t 1
+bind-key -T home-row-navigation 2 select-pane -t 2
+bind-key -T home-row-navigation 3 select-pane -t 3
+bind-key -T home-row-navigation 4 select-pane -t 4
 
 # how long to wait after an escape to know
 # if it's an escape sequence or an actual escape
