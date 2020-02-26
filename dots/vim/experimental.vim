@@ -120,3 +120,6 @@ map // :nohlsearch<enter>
 "inoremap ] <esc>/]<enter>:nohl<enter>a
 "inoremap <expr> ' getline('.')[col('.')-1] == "'" ? "<right>" : "''<left>"
 "inoremap <expr> " getline('.')[col('.')-1] == '"' ? "<right>" : '""<left>'
+
+" comment and duplicate
+map ,cp ygv,cc`>p
