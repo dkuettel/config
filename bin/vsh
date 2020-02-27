@@ -4,14 +4,14 @@ set -eu -o pipefail
 f=${1:?missing argument 1: filename}
 
 if [[ -f $f ]]; then
-	echo $f 'already exists'
-	exit 1
+    echo $f 'already exists'
+    exit 1
 else
-	cat <<EOF > $f
+    cat <<EOF > $f
 #!/bin/zsh
 set -eux -o pipefail
 
 EOF
-	chmod +x $f
-	vim + $f
+    chmod +x $f
+    nvim + $f
 fi
