@@ -4,6 +4,7 @@ for running in virtual box
 make a new virtualbox machine
     - with default settings, plus:
         - a second net interface for a host-only network (no dhcp)
+    - for headless switch off audio and maybe other stuff (audio cause 100% cpu usage for me)
     - use ubuntu 18.04 mini (network installer, it allows to install only certain packages, no gui)
     - select packages opensshserver and basic ubuntu server
 save this as a snapshot "fresh"
