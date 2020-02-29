@@ -24,6 +24,7 @@ sudo apt-get autoremove
 i=()
 i+=bmon # bandwidth monitor
 i+=cmake
+i+=dkms
 i+=dtrx # easy and clean archive extraction
 i+=g++
 i+=gcp # like cp, but with progress bar among other features
