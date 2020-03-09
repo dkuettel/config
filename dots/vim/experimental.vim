@@ -83,6 +83,7 @@ map tT <c-w>T
 map tc :tabclose<enter>
 map tp :tabprevious<enter>
 map tn :tabnext<enter>
+map to :tabonly<enter>
 for i in [1, 2, 3, 4, 5, 6, 7, 8, 9]
     " map t# #gt
     execute "map t" . i . " " . i . "gt"
