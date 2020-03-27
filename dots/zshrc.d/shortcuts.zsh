@@ -54,8 +54,8 @@ compctl -c pwatch # complete commands
 alias tailf='tail -F ---disable-inotify'
 
 # feh
-alias feh='feh --auto-zoom --scale-down --draw-filename --draw-tinted'
-alias ffeh='feh --fullscreen --draw-filename --draw-tinted'
+alias feh='feh --auto-zoom --scale-down --draw-filename --draw-tinted --font UbuntuMono-Bold/35 --fontpath ~/.fonts'
+alias ffeh='feh --fullscreen --draw-filename --draw-tinted --font UbuntuMono-Bold/35 --fontpath ~/.fonts'
 
 # rsync copy with progress
 # todo not sure about $1/ or $1 semantics
