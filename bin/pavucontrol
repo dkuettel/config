@@ -1,0 +1,5 @@
+#!/bin/zsh
+set -eu -o pipefail
+
+#GDK_DPI_SCALE=1.8 /usr/bin/pavucontrol
+GDK_SCALE=2 /usr/bin/pavucontrol
