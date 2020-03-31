@@ -1,0 +1,4 @@
+#!/bin/zsh
+set -eux -o pipefail
+
+/usr/bin/slack --force-device-scale-factor=1.7
