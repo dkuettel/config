@@ -1,7 +1,7 @@
 
 # ls
 alias ls='ls --color=auto'
-alias lr='ls -hltrcF'
+alias lr='ls -htrcFgG --time-style=iso'
 alias la='ls -lhFva'
 alias ll='ls -lhFv'
 alias lll='ls -lhFv --color=yes | less -R'
