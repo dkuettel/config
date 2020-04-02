@@ -20,6 +20,10 @@ Host github-ptc
     HostName github.com
     IdentityFile ~/.ssh/id_rsa-github-ptc
 
+Host github-ptc
+    HostName github.com
+    IdentityFile ~/.ssh/id_rsa-github-ptc
+
 Host mac-vbox
     HostName private-macbookpro.fritz.box
     Port 2244
