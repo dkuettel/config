@@ -1,4 +1,9 @@
 #!/bin/zsh
 set -eux -o pipefail
 
+if [[ -v TMUX ]]; then
+    tmux rename-window shows
+    tmux split-window -dh -c ~/Downloads
+fi
+
 nvim ~/dbox/shows.todo
