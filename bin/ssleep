@@ -1,4 +1,10 @@
 #!/bin/zsh
 set -eux -o pipefail
 
-slock & systemctl suspend
+if [[ -v DISPLAY ]]; then
+    slock &
+    systemctl suspend
+else
+    echo 'no display variable set, cant lock display'
+    exit 1
+fi
