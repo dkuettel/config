@@ -3,7 +3,7 @@ set -eux -o pipefail
 
 if [[ -v TMUX ]]; then
     tmux rename-window shows
-    tmux split-window -dh -c ~/Downloads
+    tmux split-window -dh -l 66% -c ~/Downloads
 fi
 
 nvim ~/dbox/shows.todo
