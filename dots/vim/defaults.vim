@@ -32,7 +32,8 @@ set hlsearch " highlight search terms
 set incsearch " show search matches as you type
 nohl " no highlight at startup
 
-set wildchar=<Tab> wildmenu wildmode=longest,list,full " completion in command mode
+" completion in command mode
+set wildchar=<Tab> wildmenu wildmode=list:longest
 
 set lazyredraw " redraw only when necessary (e.g. not when macros run, or similar things)
 
