@@ -16,11 +16,14 @@
     s = status
     b = branch -vv
     mb = branch -vv --list 'dk/*'
+    mrb = branch -rv --list 'origin/dk/*'
     co = checkout
+    c = commit
     cm = commit -m
     f = fetch
     fa = fetch --all
     fp = fetch --prune
+    m = merge
     p = push
     pu = push -u origin HEAD
     sl = stash list
