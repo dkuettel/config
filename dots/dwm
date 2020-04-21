@@ -6,7 +6,13 @@
 # ~/.xsession which results in a cleaner setup (eg, dbus)
 
 set -eu
-exec >> ~/.dwm-log 2>&1
+
+# todo new file or overwrite old file instead?
+exec >> >(ts '%F %T' >>& .log-dwm)
+exec 2>&1
+
+# todo to check if bash or zsh, possible to make it use zsh?
+ps
 
 # monitor never off
 xset -dpms
