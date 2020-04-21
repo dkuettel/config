@@ -124,3 +124,12 @@ map // :nohlsearch<enter>
 
 " comment and duplicate
 map ,cp ygv,cc`>p
+
+" get pylint disabler from current quickfix entry
+function! AddQuickfixPylintDisabler()
+    let idx = getqflist({'idx': 0}).idx
+    let error = getqflist({'items': 0}).items[idx].text
+    let disabler = matchstr(error, '(\zs.*\ze)$')
+    execute ':normal! A' . '  # pylint: disable=' . disabler
+endfunction
+nnoremap ,qfd :call AddQuickfixPylintDisabler()<enter>
