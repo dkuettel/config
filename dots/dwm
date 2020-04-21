@@ -1,3 +1,6 @@
+#!/bin/zsh
+set -eux -o pipefail
+
 # note:
 # this could be both .xinitrc or .xsession
 # startx calls .xinitrc and if it doesn't exist
