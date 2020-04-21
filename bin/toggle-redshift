@@ -1,0 +1,4 @@
+#!/bin/zsh
+set -eux -o pipefail
+
+pkill -USR1 redshift
