@@ -8,17 +8,26 @@ Host staging
 #   for vnc
 #   LocalForward 5901 localhost:5901
 
+#Host efs
+#    HostName 00.000.000.00
+#    User yineichen
+
 Host efs
-    HostName 00.000.000.00
+    HostName i-0166a4352bf931761
     User yineichen
+    ProxyCommand aws ssm start-session --target %h --document-name AWS-StartSSHSession --parameters 'portNumber=%p'
+    ServerAliveInterval 10
+
+Host efs2
+    HostName i-0dfd0827fc547c5e3
+    User ubuntu
+    IdentityFile ~/.ssh/ubuntu.pem-dkuettel
+    ProxyCommand aws ssm start-session --target %h --document-name AWS-StartSSHSession --parameters 'portNumber=%p'
+   ServerAliveInterval 10
 
 Host github-private
     HostName github.com
     IdentityFile ~/.ssh/id_rsa-github-private
-
-Host github-ptc
-    HostName github.com
-    IdentityFile ~/.ssh/id_rsa-github-ptc
 
 Host github-ptc
     HostName github.com
