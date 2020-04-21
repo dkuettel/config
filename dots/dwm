@@ -33,6 +33,8 @@ numlockx on
 #xinput --set-prop 8 'libinput Accel Speed' 1 || true
 #xinput --set-prop 9 'libinput Accel Speed' 1 || true
 
+xsetroot -bg black
+xsetroot -solid black
 feh --no-fehbg --bg-fill ~/config/dots/dwm.d/5_stripes_landscape.jpg
 
 while xsetroot -name " ($(pactl list sinks | awk '/Volume: front-left/ { print $5 }')) $(date '+%F %A %R') "; do sleep 5; done &
