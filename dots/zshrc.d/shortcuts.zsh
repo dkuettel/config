@@ -68,3 +68,8 @@ function tb { tensorboard --logdir=${1:-.} }
 
 # quick cd's
 alias cd-flow='cd /efs/dkuettel/flow'
+
+# jq with less and colors
+function jql {
+    jq --color-output $@ | less
+}
