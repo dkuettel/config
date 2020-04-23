@@ -48,7 +48,7 @@ function status {
         s+=" | "
 
         s+=$(pactl list sinks | awk -v ORS='' '/Description/ {print $2} /Mute/ {if ($2=="yes") print "#"; else print "="} /Base Volume/ {print $5 " "}')
-        s+=" | "
+        s+="| "
 
         s+=$(date '+%F %A %R')
         s+=" "
