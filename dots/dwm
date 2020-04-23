@@ -33,10 +33,29 @@ xsetroot -bg black
 xsetroot -solid black
 feh --no-fehbg --bg-fill ~/config/dots/dwm.d/5_stripes_landscape.jpg
 
-(
-    while xsetroot -name " ($(pactl list sinks | awk '/Volume: front-left/ { print $5 }')) $(date '+%F %A %R') "; do
-        sleep 5
+function status {
+    while true; do
+        s=" "
+
+        if [[ $(tail -n 20 .log-redshift | grep Status | tail -n 1 | awk '{ print $4 }') == 'Enabled' ]]; then
+            s+=$(tail -n 20 .log-redshift | grep Brightness | tail -n 1 | awk '{ print "redshift@" $4 }')
+        else
+            s+="redshift off "
+        fi
+        s+=" | "
+
+        s+=$(pactl list sinks | awk -v ORS='' '/Description/ {print $2} /Mute/ {if ($2=="yes") print "#"; else print "="} /Base Volume/ {print $5 " "}')
+        s+=" | "
+
+        s+=$(date '+%F %A %R')
+        s+=" "
+
+        xsetroot -name $s
+
+        sleep 5s
     done
-) >>& .log-dwm-status &
+}
+
+status >>& .log-dwm-status &
 
 dwm
