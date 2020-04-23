@@ -128,7 +128,7 @@ map ,cp ygv,cc`>p
 " get pylint disabler from current quickfix entry
 function! AddQuickfixPylintDisabler()
     let idx = getqflist({'idx': 0}).idx
-    let error = getqflist({'items': 0}).items[idx].text
+    let error = getqflist({'items': 0}).items[idx-1].text
     let disabler = matchstr(error, '(\zs.*\ze)$')
     execute ':normal! A' . '  # pylint: disable=' . disabler
 endfunction
