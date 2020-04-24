@@ -40,16 +40,22 @@ function status {
     while true; do
         s=" "
 
-        if [[ $(tail -n 20 .log-redshift | grep Status | tail -n 1 | awk '{ print $4 }') == 'Enabled' ]]; then
-            s+=$(tail -n 20 .log-redshift | grep Brightness | tail -n 1 | awk '{ print "redshift@" $4 }')
-        else
-            s+="redshift off "
-        fi
+        # redshift
+        s+=$(awk '
+            /Status/ {s=$4}
+            /Brightness/ {b=$4}
+            END {if (s=="Enabled") print "redshift@" b; else print "redshift off "}
+            ' .log-redshift)
         s+=" | "
 
-        s+=$(pactl list sinks | awk -v ORS='' '/Description/ {print $2} /Mute/ {if ($2=="yes") print "#"; else print "="} /Base Volume/ {print $5 " "}')
+        # sound
+        s+=$(pactl list sinks | awk -v ORS='' '
+            /Description/ {print $2}
+            /Mute/ {if ($2=="yes") print "#"; else print "="}
+            /Base Volume/ {print $5 " "}')
         s+="| "
 
+        # date and time
         s+=$(date '+%F %A %R')
         s+=" "
 
