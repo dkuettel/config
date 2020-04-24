@@ -12,6 +12,7 @@
     config = false
 [alias]
     l = log --oneline
+    lfp = log --oneline --first-parent
     lg = log --graph --simplify-by-decoration --all --pretty=tformat:'%Cblue%D [%h]%n %Cgreen%ar %Creset%s%n'
     s = status
     b = branch -vv
