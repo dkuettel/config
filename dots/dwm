@@ -68,3 +68,6 @@ function status {
 status >& .log-dwm-status &
 
 dwm
+
+kill %status || true
+kill %redshift || true
