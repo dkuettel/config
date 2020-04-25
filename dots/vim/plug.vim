@@ -113,6 +113,45 @@ map ,gt :GitGutterToggle<cr>
 let g:NERDDefaultAlign = 'left'
 
 
+"" semshi
+" todo maybe exclude local, speed? too many colors?
+let g:semshi#excluded_hl_groups = []
+" todo potentially slow?
+let g:semshi#always_update_all_highlights = v:true
+" problem: if semshi would use the default keyword for its highlights, we didn't have to workaround with autocmds
+function! SemshiCustomColors()
+    " vim python highlights
+    hi pythonComment ctermfg=10 cterm=italic
+    hi pythonStatement cterm=italic ctermfg=2
+    hi pythonFunction ctermfg=4
+    hi pythonInclude ctermfg=10 cterm=italic
+    hi pythonString ctermfg=10
+    hi pythonQuotes ctermfg=10
+    hi pythonOperator ctermfg=2 cterm=italic
+    hi pythonKeyword ctermfg=2 cterm=italic
+    hi pythonConditional ctermfg=2 cterm=italic
+    hi pythonDecorator ctermfg=4
+    hi pythonDecoratorName ctermfg=10 cterm=italic
+
+    " semshi highlights
+    " todo missing different colors for type hints
+    " todo missing different colors for kw name vs kw value
+    hi semshiLocal ctermfg=4 cterm=none
+    hi semshiGlobal ctermfg=4 cterm=none
+    hi semshiImported ctermfg=2 cterm=none
+    hi semshiParameter ctermfg=4 cterm=underline
+    hi semshiParameterUnused cterm=standout
+    hi semshiFree ctermfg=10 cterm=bold
+    hi semshiBuiltin ctermfg=2 cterm=italic
+    hi semshiAttribute ctermfg=4 cterm=none
+    hi semshiSelf ctermfg=none cterm=italic
+    hi semshiUnresolved ctermfg=1 cterm=reverse
+    hi semshiSelected ctermfg=14 ctermbg=0 cterm=none
+    hi semshiErrorSign ctermfg=1 cterm=reverse
+    hi semshiErrorChar ctermfg=1 cterm=reverse,bold
+    sign define semshiError text=E> texthl=semshiErrorSign
+endfunction
+autocmd FileType python call SemshiCustomColors()
 
 
 """ fugitive
