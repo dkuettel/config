@@ -11,7 +11,7 @@ augroup autosave
     autocmd InsertLeave,TextChanged * silent! w
     autocmd CursorHold,CursorHoldI * silent! update
     autocmd FocusLost * silent! wa
-    autocmd FocusGained * checktime
+    autocmd FocusGained * silent! checktime
 augroup END
 " problems:
 " should not run :w when buffer has no file
