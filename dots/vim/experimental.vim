@@ -32,6 +32,21 @@ augroup END
 
 set virtualedit=all
 
+" to debug highlights
+" add %{SyntaixItem()} to statusline
+"function! SyntaxItem()
+"    let s = ""
+"    for id in synstack(line("."), col("."))
+"        let tid = synIDtrans(id)
+"        if tid == id
+"            let s = s . " >" . synIDattr(id, "name")
+"        else
+"            let s = s . " >" . synIDattr(id, "name") . "=" . synIDattr(tid, "name")
+"        endif
+"    endfor
+"    return s
+"endfunction
+
 set laststatus=2
 set statusline=[%{winnr()}]\ %q%h%w%f%m%r%=%{mode(1)}\ %p%%\ @%l:%v
 hi StatusLine cterm=italic,bold ctermbg=15 ctermfg=10
