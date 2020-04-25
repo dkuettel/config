@@ -32,7 +32,6 @@ endif
     Plug 'sbdchd/neoformat'
     Plug 'airblade/vim-gitgutter'
     Plug 'scrooloose/nerdcommenter'
-    Plug 'mattboehm/vim-unstack'
 
     if !has('nvim')
         " nvim can do it natively
@@ -114,20 +113,6 @@ map ,gt :GitGutterToggle<cr>
 let g:NERDDefaultAlign = 'left'
 
 
-""" unstack for python stacktraces
-" https://github.com/mattboehm/vim-unstack
-" todo doesn't setup nicely, still well maintained?
-" it's just the parsing that matters, maybe easy to do more lightweight?
-let g:unstack_populate_quickfix=1
-vnoremap ,pt :<c-u>call unstack#Unstack(visualmode())<cr>
-" improve:
-" make it parse and open from trace directly
-" make it maybe do tabs (if clean vim session)
-" make it deal with docker vs realworld paths
-" easy way to see actual exception for context?
-" deal with moved code because of fixing?
-" below seems to have an easy configuration to make quickfix understand " tracebacks?
-" https://vi.stackexchange.com/questions/5110/quickfix-support-for-python-tracebacks
 
 
 """ fugitive
