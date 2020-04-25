@@ -140,8 +140,10 @@ map // :nohlsearch<enter>
 "inoremap <expr> ' getline('.')[col('.')-1] == "'" ? "<right>" : "''<left>"
 "inoremap <expr> " getline('.')[col('.')-1] == '"' ? "<right>" : '""<left>'
 
-" comment and duplicate
-map ,cp ygv,cc`>p
+
+" comment and duplicate (uses nerdcommenter, could be put there if good)
+map ,cp ,cy`>p
+
 
 " get pylint disabler from current quickfix entry
 function! AddQuickfixPylintDisabler()
