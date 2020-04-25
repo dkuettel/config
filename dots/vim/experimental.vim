@@ -10,6 +10,7 @@ imap <c-u> <esc>mmvB~`ma
 
 " consider: cterm=bold, underline, italic, inverse
 " solarized style
+" problem: without fg its considered low priority. a syntax highlight that specifies bg will overwrite bg here
 hi CursorLine cterm=NONE ctermbg=0 ctermfg=NONE
 hi CursorColumn cterm=NONE ctermbg=0 ctermfg=NONE
 " using a 256 color, not solarize-invertible
@@ -23,11 +24,11 @@ nnoremap ,X :set cursorcolumn!<cr>
 
 " have cursorline/column only in active window
 " problem, only do when actually activated (,x)
-"augroup CursorLineOnlyInActiveWindow
-"    autocmd!
-"    autocmd VimEnter,WinEnter,BufWinEnter * setlocal cursorline cursorcolumn
-"    autocmd WinLeave * setlocal nocursorcolumn
-"augroup END
+augroup CursorLineOnlyInActiveWindow
+    autocmd!
+    autocmd VimEnter,WinEnter,BufWinEnter * setlocal cursorline nocursorcolumn
+    autocmd WinLeave * setlocal nocursorline nocursorcolumn
+augroup END
 
 set virtualedit=all
 
@@ -75,6 +76,7 @@ map ,6 6<c-w>w
 
 " todo could be interesting to have different cursor shapes and colors for normal and insert mode
 " see https://www.reddit.com/r/vim/comments/8se9ug/changing_cursor_in_different_modes_with_tmux/
+" seems to just work now in neovim
 
 " tab navigation
 " caveat: t is a default mapping for 'until'
