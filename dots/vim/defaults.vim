@@ -73,7 +73,9 @@ autocmd FileType yaml setlocal
 
 " command mode
 nnoremap ; :
+nnoremap q; q:
 vmap ; :
+vmap q; q:
 
 " visual indicators
 set listchars=tab:›\ ,trail:•,precedes:↢,extends:↣,nbsp:¿
