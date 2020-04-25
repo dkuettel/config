@@ -136,3 +136,8 @@ function! AddQuickfixPylintDisabler()
     execute ':normal! A' . '  # pylint: disable=' . disabler
 endfunction
 nnoremap ,qfd :call AddQuickfixPylintDisabler()<enter>
+
+" highlight active window
+" todo could work, a bit aggressive?
+" with true color probably more useful, less stark change
+highlight NormalNC ctermbg=0
