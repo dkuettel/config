@@ -55,8 +55,9 @@ hi TabLine cterm=inverse
 hi TabLineSel cterm=bold ctermbg=15 ctermfg=10
 hi TablineFill cterm=inverse
 
-" execute current line as vim command
-map ,v yy:@"<cr>
+" execute current line / visual as vim command
+map ,v yy:@"<enter>
+vmap ,v y:@"<enter>
 
 set showcmd
 
