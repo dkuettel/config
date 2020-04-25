@@ -47,6 +47,9 @@ set autoindent
 set copyindent
 
 " specific filetype settings
+" note
+" indentexpr= should stop any automatic indendation (?)
+" indentkeys= should stop any reindentation when typing things like 'else:'
 
 autocmd FileType vim setlocal
     \ tabstop=4 softtabstop=4 shiftwidth=4
@@ -67,9 +70,6 @@ autocmd FileType yaml setlocal
     \ textwidth=0
     \ indentexpr= indentkeys=
 
-" note
-" indentexpr= should stop any automatic indendation (?)
-" indentkeys= should stop any reindentation when typing things like 'else:'
 
 " command mode
 nnoremap ; :
