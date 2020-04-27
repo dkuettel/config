@@ -1,6 +1,6 @@
 #!/bin/zsh
 set -eu -o pipefail
 
-pactl set-card-profile alsa_card.pci-0000_01_00.1 output:hdmi-stereo >&/dev/null && echo speakers on || echo no speakers
+pactl set-card-profile alsa_card.pci-0000_01_00.1 output:hdmi-stereo-extra2 >&/dev/null && echo speakers on || echo no speakers
 pactl set-card-profile alsa_card.pci-0000_00_1b.0 off >&/dev/null && echo headphones off || echo no headphones
 pactl set-card-profile bluez_card.2C_41_A1_49_96_07 off >&/dev/null && echo bose off || echo no bose
