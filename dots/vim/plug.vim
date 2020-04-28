@@ -122,7 +122,7 @@ let g:semshi#always_update_all_highlights = v:true
 function! SemshiCustomColors()
     " vim python highlights
     hi pythonComment ctermfg=10 cterm=italic
-    hi pythonStatement cterm=italic ctermfg=2
+    hi pythonStatement ctermfg=2 cterm=italic
     hi pythonFunction ctermfg=4
     hi pythonInclude ctermfg=10 cterm=italic
     hi pythonString ctermfg=10
@@ -145,11 +145,11 @@ function! SemshiCustomColors()
     hi semshiBuiltin ctermfg=2 cterm=italic
     hi semshiAttribute ctermfg=4 cterm=none
     hi semshiSelf ctermfg=none cterm=italic
-    hi semshiUnresolved ctermfg=1 cterm=reverse
+    hi semshiUnresolved ctermfg=10 ctermbg=8 cterm=strikethrough
     hi semshiSelected ctermfg=14 ctermbg=0 cterm=none
-    hi semshiErrorSign ctermfg=1 cterm=reverse
-    hi semshiErrorChar ctermfg=1 cterm=reverse,bold
+    hi semshiErrorSign ctermfg=1 ctermbg=0 cterm=none
     sign define semshiError text=E> texthl=semshiErrorSign
+    hi semshiErrorChar ctermfg=10 ctermbg=8 cterm=strikethrough
 endfunction
 autocmd FileType python call SemshiCustomColors()
 
