@@ -140,7 +140,7 @@ function! SemshiCustomColors()
     hi semshiGlobal ctermfg=4 cterm=none
     hi semshiImported ctermfg=2 cterm=none
     hi semshiParameter ctermfg=4 cterm=underline
-    hi semshiParameterUnused cterm=standout
+    hi semshiParameterUnused ctermfg=4 cterm=strikethrough
     hi semshiFree ctermfg=10 cterm=bold
     hi semshiBuiltin ctermfg=2 cterm=italic
     hi semshiAttribute ctermfg=4 cterm=none
