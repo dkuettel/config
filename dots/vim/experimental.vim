@@ -34,8 +34,10 @@ set virtualedit=all
 
 set laststatus=2
 set statusline=[%{winnr()}]\ %q%h%w%f%m%r%=%{mode(1)}\ %p%%\ @%l:%v
-hi StatusLine cterm=italic,bold ctermbg=15 ctermfg=10
-hi StatusLineNC cterm=italic,inverse ctermbg=NONE ctermfg=NONE
+"hi StatusLine cterm=italic,bold ctermbg=15 ctermfg=10
+"hi StatusLineNC cterm=italic,inverse ctermbg=NONE ctermfg=NONE
+hi StatusLine ctermfg=15 ctermbg=4 cterm=bold
+hi StatusLineNC ctermfg=10 ctermbg=15 cterm=none
 
 " to debug highlights
 "function! SyntaxItem()
@@ -157,4 +159,4 @@ nnoremap ,qfd :call AddQuickfixPylintDisabler()<enter>
 " highlight active window
 " todo could work, a bit aggressive?
 " with true color probably more useful, less stark change
-highlight NormalNC ctermbg=0
+"highlight NormalNC ctermbg=0
