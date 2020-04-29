@@ -154,8 +154,35 @@ endfunction
 autocmd FileType python call SemshiCustomColors()
 
 
+""" vim diff colors
+" todo cursorline has same background color, vim seems to show overlap with underline (line on marked diff) which hides DiffText
+hi DiffAdd ctermfg=none ctermbg=0 cterm=none
+"hi DiffDelete ctermfg=10 ctermbg=0 cterm=none
+hi DiffDelete ctermfg=8 ctermbg=0 cterm=none
+hi DiffChange ctermfg=none ctermbg=0 cterm=none
+hi DiffText ctermfg=none ctermbg=0 cterm=underline
+
+
 """ fugitive
 nmap ,gs :tab Gstatus<cr>
+" colors
+" currently cannot change diff*, which are only for status diff, maybe one day split
+" would be nice for signs
+"hi GitGutterAdd ctermfg=10
+"hi GitGutterChange ctermfg=10
+"hi GitGutterDelete ctermfg=10
+" if separate
+"hi diffRemoved ctermfg=10
+"hi diffChanged ctermfg=14
+"hi diffAdded ctermfg=7
+" joint for now high contrast
+"hi GitGutterAdd ctermfg=7
+"hi GitGutterChange ctermfg=14
+"hi GitGutterDelete ctermfg=10
+" joint for now low contrast
+hi GitGutterAdd ctermfg=14
+hi GitGutterChange ctermfg=14
+hi GitGutterDelete ctermfg=11
 
 
 """ vim-jedi
