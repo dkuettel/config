@@ -57,19 +57,15 @@ alias tailf='tail -F ---disable-inotify'
 alias feh='feh --auto-zoom --scale-down --draw-filename --draw-tinted --font UbuntuMono-Bold/35 --fontpath ~/.fonts'
 alias ffeh='feh --fullscreen --draw-filename --draw-tinted --font UbuntuMono-Bold/35 --fontpath ~/.fonts'
 
+# "human cp"
 # rsync copy with progress
 # todo not sure about $1/ or $1 semantics
-rsync_cp () {
+hcp () {
     rsync -ah -L -r --info=progress2 $1 $2
 }
 
 # tensorboard
 function tb { tensorboard --logdir=${1:-.} }
 
-# quick cd's
-alias cd-flow='cd /efs/dkuettel/flow'
-
 # jq with less and colors
-function jql {
-    jq --color-output $@ | less
-}
+function jql { jq --color-output $@ | less }
