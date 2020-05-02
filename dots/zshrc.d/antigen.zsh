@@ -38,3 +38,7 @@ bindkey -M viins '^g' per-directory-history-toggle-history
 # history-search-multi-word
 #bindkey -M vicmd '^r' history-search-multi-word
 #bindkey -M viins '^r' history-search-multi-word
+
+# zsh-syntax-highlighting
+ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets)
+ZSH_HIGHLIGHT_DIRS_BLACKLIST+=(/efs)
