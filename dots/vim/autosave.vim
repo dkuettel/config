@@ -18,3 +18,4 @@ augroup END
 " silent! surpressed that error messages
 " but would be nicer not to try at all
 " CursorHoldI doesn't seem to trigger update currently
+" how to enable/disable when editing slow files (efs), 'autocmd! autosave' disables, but now way to get back
