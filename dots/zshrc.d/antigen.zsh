@@ -32,6 +32,8 @@ antigen apply
 _per-directory-history-set-global-history # global by default
 bindkey -M vicmd ',g' per-directory-history-toggle-history
 bindkey -M viins '^xg' per-directory-history-toggle-history
+bindkey -M vicmd '^g' per-directory-history-toggle-history
+bindkey -M viins '^g' per-directory-history-toggle-history
 
 # history-search-multi-word
 #bindkey -M vicmd '^r' history-search-multi-word
