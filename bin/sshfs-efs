@@ -2,3 +2,6 @@
 set -eux -o pipefail
 
 sshfs -o allow_root efs:/efs /efs
+
+# alternative
+# sshfs -o auto_cache,reconnect -o Ciphers=aes128-ctr -o Compression=no -o allow_other efs:/efs /efs
