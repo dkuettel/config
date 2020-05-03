@@ -18,12 +18,12 @@ Host efs
     ProxyCommand aws ssm start-session --target %h --document-name AWS-StartSSHSession --parameters 'portNumber=%p'
     ServerAliveInterval 10
 
-Host efs2
+Host tb
     HostName i-0dfd0827fc547c5e3
     User ubuntu
     IdentityFile ~/.ssh/ubuntu.pem-dkuettel
-    ProxyCommand aws ssm start-session --target %h --document-name AWS-StartSSHSession --parameters 'portNumber=%p'
-   ServerAliveInterval 10
+    ProxyCommand ssh-proxy-command-aws-start-and-ssm %h %p
+    ServerAliveInterval 10
 
 Host github-private
     HostName github.com
@@ -40,3 +40,4 @@ Host mac-vbox
 Host office
     HostName 00.000.000.00
     Port 3437
+    ServerAliveInterval 10
