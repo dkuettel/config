@@ -17,8 +17,10 @@ exit 1
 # https://wiki.ubuntu.com/Kernel/LTSEnablementStack
 sudo apt-get update
 sudo apt-get upgrade -qqy
+# todo install and autoremove have some interactive popups that ask keep local or update (local seems ok)
+# (at least on ec2 ubuntu that happens), could make more unattended?
 sudo apt-get install -qqy --install-recommends linux-generic-hwe-18.04
-sudo apt-get autoremove
+sudo apt-get autoremove -y
 
 # sorted list of packages for server (not desktop)
 i=()
