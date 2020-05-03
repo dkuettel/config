@@ -1,9 +1,8 @@
 #!/bin/bash
 set -eux -o pipefail
+
 # switch to zsh
-# todo I think we could also check if $SHELL points at =zsh? if zsh even exists
-# todo also what about having the bang at zsh? will it fail?
-if [ -z "$ZSH_VERSION" ]; then
+if [ -z ${ZSH_VERSION+1} ]; then
     which zsh || sudo apt-get install -qqy zsh
     exec zsh $0
 fi
