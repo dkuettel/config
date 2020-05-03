@@ -58,3 +58,11 @@ i/python
 i/tmux
 i/vim
 i/nvim
+
+# todo if you want to ssh to this machine using st
+# you need to update /etc/terminfo with the st entries
+# best as they come from compiling it yourself (ubuntu default st entries have a typo, tmux+nvim will fail)
+# but another option would be to add it here? or when st is a submodule have a commit with them prepared?
+# then copy in the right place
+echo 'see above for st logins'
+exit 1
