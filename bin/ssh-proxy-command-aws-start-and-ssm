@@ -1,0 +1,11 @@
+#!/bin/zsh
+set -eu -o pipefail
+
+h=${1:?arg 1: instance id}
+p=${2:?arg 2: port}
+
+aws ec2 start-instances --instance-ids=$h > /dev/null
+aws ec2 wait instance-running --instance-ids=$h > /dev/null
+until aws ssm start-session --target $h --document-name AWS-StartSSHSession --parameters portNumber=$p; do
+    sleep 1s
+done
