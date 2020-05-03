@@ -6,6 +6,6 @@ p=${2:?arg 2: port}
 
 aws ec2 start-instances --instance-ids=$h > /dev/null
 aws ec2 wait instance-running --instance-ids=$h > /dev/null
-until aws ssm start-session --target $h --document-name AWS-StartSSHSession --parameters portNumber=$p; do
+until aws ssm start-session --target $h --document-name AWS-StartSSHSession --parameters portNumber=$p 2> /dev/null; do
     sleep 1s
 done
