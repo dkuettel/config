@@ -23,3 +23,5 @@ pip3 install black
         sudo make install
     fi
 )
+
+# todo :PlugInstall needs to happen, I thought its automatic on first start?
