@@ -20,8 +20,8 @@ Host efs
 
 Host tb
     HostName i-0dfd0827fc547c5e3
-    User ubuntu
-    IdentityFile ~/.ssh/ubuntu.pem-dkuettel
+    User dkuettel
+    IdentityFile ~/.ssh/id_rsa
     ProxyCommand ssh-proxy-command-aws-start-and-ssm %h %p
     ServerAliveInterval 10
 
