@@ -1,18 +1,7 @@
 #!/bin/zsh
 set -eux -o pipefail
 
-folder=${1:-.}
-folder=$(realpath $folder)
+folder=${${1:-.}:a}
 name=$(realpath --relative-base=$HOME $folder)
 
-! tmux has-session -t $name
-
-# todo maybe one day new-session will support setting session environment
-# then we dont have to hack with -g update-environment
-args=(
-    start-server \;
-    set-option -g update-environment 'h PATH' \;
-    new-session -s $name -c $folder \;
-    set-option -gu update-environment
-)
-h=$folder path=($h/nn/bin $path) tmux $args
+path=($folder/nn/bin $path) tmux new-session -s $name -c $folder -e h=$folder
