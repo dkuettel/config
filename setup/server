@@ -40,7 +40,6 @@ i+=pv # monitor data progress thru a pipe
 i+=sshfs
 i+=suckless-tools
 i+=sysstat
-i+=tmux
 i+=tree
 i+=unzip
 i+=vim
@@ -55,7 +54,7 @@ i/fzf
 i/top
 i/htop
 i/python
-i/tmux
+${0:a:h}/../i/tmux/setup
 i/vim
 i/nvim
 
