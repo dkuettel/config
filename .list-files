@@ -1,4 +1,9 @@
 #!/bin/zsh
 set -eu -o pipefail
 
-find -path ./.git -prune -o -print
+prune=(
+    -path ./.git
+    -or -path ./i/tmux/tmux
+)
+
+find . \( $prune \) -prune -o -print
