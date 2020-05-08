@@ -8,7 +8,7 @@ ln -sfT ~/config/dots/vim/syntax ~/.config/nvim/syntax
 ln -sfT ~/config/dots/vim/ftdetect ~/.config/nvim/ftdetect
 
 # dependencies for vim plugins
-pip3 install black
+pip3 install black pynvim
 
 ( # nvim from git
 
