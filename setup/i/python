@@ -18,4 +18,7 @@ if [[ $(realpath ~/.ipython/profile_default/ipython_config.py) != $(realpath ~/c
     ln -sfT --backup=numbered ~/config/dots/python/ipython_config.py ~/.ipython/profile_default/ipython_config.py
 fi
 
-pip3 install pipenv
+# todo pipenv hasn't been update in a while and we need newer functionality
+# either use something else, or wait until they do
+pip3 install git+https://github.com/pypa/pipenv.git@7a12dbb5cacc71d1dd2d74d8cce8eb50ce2db121
+#pip3 install pipenv
