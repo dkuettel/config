@@ -5,5 +5,5 @@ if [[ -v TMUX ]]; then
     tmux rename-window pdocs
 fi
 
-cd ~/toys/pdocs
+cd ${0:a:h}/../i/pdocs/pdocs
 ./run $@

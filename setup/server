@@ -54,6 +54,7 @@ i/fzf
 i/top
 i/htop
 i/python
+${0:a:h}/../i/pdocs/setup
 ${0:a:h}/../i/tmux/setup
 ${0:a:h}/../i/vim/setup
 

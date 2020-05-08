@@ -45,7 +45,7 @@ endif
     Plug 'tpope/vim-fugitive'
 
     Plug '~/config/i/vim/config/vimminent'
-    Plug '~/toys/pdocs'
+    Plug '~/config/i/pdocs/pdocs'
 
 call plug#end()
 

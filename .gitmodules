@@ -10,3 +10,6 @@
 [submodule "i/vim/config/vimminent"]
 	path = i/vim/config/vimminent
 	url = git@github-private:dkuettel/vimminent.git
+[submodule "i/pdocs/pdocs"]
+	path = i/pdocs/pdocs
+	url = git@github-private:dkuettel/pdocs.git
