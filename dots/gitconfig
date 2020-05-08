@@ -33,3 +33,4 @@
     cp = cherry-pick
     d = diff
     rc = rebase --continue
+    sm = submodule
