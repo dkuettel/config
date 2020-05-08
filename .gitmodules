@@ -13,3 +13,6 @@
 [submodule "i/pdocs/pdocs"]
 	path = i/pdocs/pdocs
 	url = git@github-private:dkuettel/pdocs.git
+[submodule "i/ptags/ptags"]
+	path = i/ptags/ptags
+	url = git@github-private:dkuettel/ptags.git
