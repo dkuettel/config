@@ -33,15 +33,13 @@ endif
     Plug 'airblade/vim-gitgutter'
     Plug 'scrooloose/nerdcommenter'
 
-    if !has('nvim')
+    if has('nvim')
+        Plug 'numirias/semshi', {'do': ':UpdateRemotePlugins'}
+    else
         " nvim can do it natively
         " vim not, they never merged a patch for that
         " maybe could be done easier and with no plugin
         Plug 'tmux-plugins/vim-tmux-focus-events' " might be native in vim8?
-    endif
-
-    if has('nvim')
-        Plug 'numirias/semshi', {'do': ':UpdateRemotePlugins'}
     endif
 
     Plug 'tpope/vim-fugitive'
