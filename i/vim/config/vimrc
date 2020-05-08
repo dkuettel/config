@@ -1,0 +1,4 @@
+source ~/config/i/vim/config/defaults.vim
+source ~/config/i/vim/config/autosave.vim
+source ~/config/i/vim/config/plug.vim
+source ~/config/i/vim/config/experimental.vim

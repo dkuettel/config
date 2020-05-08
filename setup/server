@@ -55,8 +55,7 @@ i/top
 i/htop
 i/python
 ${0:a:h}/../i/tmux/setup
-i/vim
-i/nvim
+${0:a:h}/../i/vim/setup
 
 # todo if you want to ssh to this machine using st
 # you need to update /etc/terminfo with the st entries
