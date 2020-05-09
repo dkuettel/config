@@ -117,6 +117,8 @@ set scroll=1
 " use arrow up and down like ctrl-d and ctrl-u with scroll 1 for easy browsing
 map <Down> 1<c-d>
 map <Up> 1<c-u>
+map <Left> zh
+map <Right> zl
 
 " // to disable highlights again after search (any short clash here?)
 map // :nohlsearch<enter>
