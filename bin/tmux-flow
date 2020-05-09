@@ -4,4 +4,5 @@ set -eux -o pipefail
 folder=${${1:-.}:a}
 name=$(realpath --relative-base=$HOME $folder)
 
-path=($folder/nn/bin $path) tmux new-session -s $name -c $folder -e h=$folder
+PATH=$folder/nn/bin:$PATH
+tmux new-session -s $name -c $folder -e h=$folder -e PATH=$PATH
