@@ -28,6 +28,7 @@
     p = push
     pu = push -u origin HEAD
     sl = stash list
+    ss = show stash@{0}
     su = stash push
     sd = stash pop
     cp = cherry-pick
