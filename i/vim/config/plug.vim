@@ -26,8 +26,8 @@ else
     call plug#begin('~/.vim/plugged')
 endif
 
-    Plug 'easymotion/vim-easymotion'
     Plug 'altercation/vim-colors-solarized'
+    Plug 'easymotion/vim-easymotion'
     "Plug 'psf/black' " todo https://github.com/psf/black/pull/978 when merged could fix the view reset problems
     Plug 'sbdchd/neoformat'
     Plug 'airblade/vim-gitgutter'
@@ -50,26 +50,36 @@ endif
 call plug#end()
 
 
-""" easymotion
-" todo: light weight version that only support f and f2?
-let g:EasyMotion_do_mapping = 0
-nmap s <Plug>(easymotion-overwin-f)
-nmap S <Plug>(easymotion-overwin-f2)
-
-
 """ solarized
+" note do this before later we change specific colors, otherwise they are overwritten
 " todo why does it not flip dark/light by just changing the terminals colors?
 " todo not sure still if we are really using 16 color (only)? vim setting, tmux settings?
 set background=dark " the plugin considers dark the default, and it should fit with invertable colors
 let g:solarized_termcolors=16 " 16 is better if set right, 256 is the compatible fixed color mode
 let g:solarized_visibility="normal" " set list to see nonprint characters
 silent! colorscheme solarized
+" note we reset them later in this file
 hi SignColumn cterm=NONE ctermbg=0 ctermfg=10
 hi DiffAdd cterm=NONE ctermbg=0 ctermfg=10
 hi DiffChange cterm=NONE ctermbg=0 ctermfg=10
 hi DiffDelete cterm=NONE ctermbg=0 ctermfg=10
 highlight SpecialKey NONE
 highlight NonText None
+
+
+""" easymotion
+" todo: light weight version that only support f and f2?
+let g:EasyMotion_do_mapping = 0
+nmap s <Plug>(easymotion-overwin-f)
+nmap S <Plug>(easymotion-overwin-f2)
+"nmap s <Plug>(easymotion-bd-f)
+"nmap S <Plug>(easymotion-bd-f2)
+hi EasyMotionShade cterm=none ctermfg=10 ctermbg=none
+hi EasyMotionTarget cterm=bold ctermfg=3 ctermbg=none
+hi EasyMotionTarget2First cterm=bold ctermfg=3 ctermbg=none
+hi EasyMotionTarget2Second cterm=none ctermfg=4 ctermbg=none
+" todo the overwin command currently ignores First and Second :/ only the easymotion-bd-f uses it nicely
+" its a bug see https://github.com/easymotion/vim-easymotion/issues/364
 
 
 """ black
@@ -154,6 +164,7 @@ autocmd FileType python call SemshiCustomColors()
 
 """ vim diff colors
 " todo cursorline has same background color, vim seems to show overlap with underline (line on marked diff) which hides DiffText
+" note we set them before above with solarized
 hi DiffAdd ctermfg=none ctermbg=0 cterm=none
 "hi DiffDelete ctermfg=10 ctermbg=0 cterm=none
 hi DiffDelete ctermfg=8 ctermbg=0 cterm=none
