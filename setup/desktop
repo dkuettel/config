@@ -38,3 +38,6 @@ i/sound
 i/spotify
 i/syncthing
 i/okular
+
+# todo could also make a list of names and then generically call install
+../i/redshift/setup
