@@ -9,10 +9,10 @@
 	url = https://github.com/neovim/neovim.git
 [submodule "i/vim/config/vimminent"]
 	path = i/vim/config/vimminent
-	url = git@github-private:dkuettel/vimminent.git
+	url = git@github.com:dkuettel/vimminent.git
 [submodule "i/pdocs/pdocs"]
 	path = i/pdocs/pdocs
-	url = git@github-private:dkuettel/pdocs.git
+	url = git@github:dkuettel/pdocs.git
 [submodule "i/ptags/ptags"]
 	path = i/ptags/ptags
-	url = git@github-private:dkuettel/ptags.git
+	url = git@github:dkuettel/ptags.git
