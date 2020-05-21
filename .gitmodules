@@ -12,7 +12,7 @@
 	url = git@github.com:dkuettel/vimminent.git
 [submodule "i/pdocs/pdocs"]
 	path = i/pdocs/pdocs
-	url = git@github:dkuettel/pdocs.git
+	url = git@github.com:dkuettel/pdocs.git
 [submodule "i/ptags/ptags"]
 	path = i/ptags/ptags
-	url = git@github:dkuettel/ptags.git
+	url = git@github.com:dkuettel/ptags.git
