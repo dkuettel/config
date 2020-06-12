@@ -1,0 +1,25 @@
+
+to have it wait for selection
+    GRUB_TIMEOUT=-1
+    GRUB_RECORDFAIL_TIMEOUT=-1
+second one is when it didnt record success in the last boot
+but somehow with LVM boot partitions, it doesn't manage to remember that it was successful
+so with LVM the normal timeout never applies
+
+
+to add some shortcuts after the fact, try a file /etc/grub.d/50_shortcuts with something like
+    awk '/gnulinux-simple-1c55bc5a-9c45-4474-bf55-033e1f8a7b72/,/}$/ { gsub("{", "--hotkey u {"); print $0 }' /boot/grub/grub.cfg.new
+    awk '/osprober-efi-1609-D776/,/}$/ { gsub("{", "--hotkey w {"); print $0 }' /boot/grub/grub.cfg.new
+
+
+update-grub should discover all relevant entries (win10), but alternatively:
+https://ihaveabackup.net/article/grub2-entry-for-windows-10-uefi
+add something like
+    menuentry 'Windows 10' {
+        search --fs-uuid --no-floppy --set=root D464-A236
+        chainloader (${root})/EFI/Microsoft/Boot/bootmgfw.efi
+    }
+to /etc/grub.d/40_custom
+using the uuid from blkid from the right partition
+(probably called "EFI system partition")
+update-grub after that
