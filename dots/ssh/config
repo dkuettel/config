@@ -42,3 +42,6 @@ Host blue
     HostName 192.168.178.29
     User dkuettel
     IdentityFile ~/.ssh/private-id-rsa
+
+Host bitbucket.org
+    IdentityFile ~/.ssh/private-id-rsa
