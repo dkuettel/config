@@ -2,12 +2,10 @@
 set -eux -o pipefail
 
 # todo
-# do we need to check if it's installed?
-# it's probably idempotent
-# plus xdg-open didn't work when signing in?
-# maybe snap doesnt properly register?
-# it worked when I copied the link and used xdg-open on the terminal
+# cant find out how to do it automatically
+# and also how to have it update later
+# there seems to be no apt repository?
+# https://slack.com/intl/en-ch/downloads/instructions/ubuntu
+# the snap version might be good for that, but it didn't work very well for me with login&co
 
-if [[ ! -e /snap/bin/slack ]] then
-    sudo snap install --classic slack
-fi
+echo 'https://slack.com/intl/en-ch/downloads/instructions/ubuntu'
