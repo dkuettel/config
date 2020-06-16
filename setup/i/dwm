@@ -8,7 +8,7 @@ i+=numlockx # set numlock in .xsession
 sudo apt-get -qq install -y $i
 
 if [[ ! -d ~/dwm ]]; then
-    git clone git@bitbucket.org:dkuettel/dwm.git ~/dwm
+    git -c core.sshCommand='ssh -i ~/.ssh/private-id-rsa' clone git@bitbucket.org:dkuettel/dwm.git ~/dwm
     cd ~/dwm
     ./setup-requirements.sh
     ./setup-git.sh
@@ -24,6 +24,7 @@ if [[ -e ~/.xinitrc ]]; then
     echo 'should not have an ~/.xinitrc, because then .xsession will not be used'
     false
 fi
+# todo make it hard directly
 t=~/config/dots/dwm; l=~/.xsession
 if [[ ! ( $t -ef $l ) ]]; then
     ln -sfT --backup=numbered $t $l
@@ -36,7 +37,7 @@ fi
 )
 
 if [[ ! -d ~/dmenu ]]; then
-    git clone git@bitbucket.org:dkuettel/dmenu.git ~/dmenu
+    git -c core.sshCommand='ssh -i ~/.ssh/private-id-rsa' clone git@bitbucket.org:dkuettel/dmenu.git ~/dmenu
     cd ~/dmenu
     ./setup-git.sh
     ./install.sh
@@ -54,7 +55,7 @@ fi
 
 # st
 if [[ ! -d ~/st ]]; then
-    git clone git@bitbucket.org:dkuettel/st.git ~/st
+    git -c core.sshCommand='ssh -i ~/.ssh/private-id-rsa' clone git@bitbucket.org:dkuettel/st.git ~/st
     cd ~/st
     ./setup-requirements.sh
     ./setup-git.sh
