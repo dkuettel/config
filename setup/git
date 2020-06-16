@@ -1,0 +1,19 @@
+#!/bin/zsh
+set -eux -o pipefail
+
+cd ${0:a:h}/..
+
+function configure() {
+    git config user.email 'dkuettel@gmail.com'
+    git config core.sshCommand 'ssh -i ~/.ssh/private-id-rsa'
+}
+
+configure
+git submodule init
+
+for i in i/vim/config/vimminent i/pdocs/pdocs i/ptags/ptags; do
+    (
+        cd $i
+        configure
+    )
+done
