@@ -7,6 +7,8 @@ if [ -z ${ZSH_VERSION+1} ]; then
     exec zsh $0
 fi
 
+cd ${0:a:h}
+
 git config user.email 'dkuettel@gmail.com'
 git config core.sshCommand 'ssh -i ~/.ssh/private-id-rsa'
 
@@ -21,6 +23,8 @@ sudo apt-get upgrade -qqy
 # (at least on ec2 ubuntu that happens), could make more unattended?
 sudo apt-get install -qqy --install-recommends linux-generic-hwe-20.04
 sudo apt-get autoremove -y
+
+sudo timedatectl set-timezone Europe/Berlin
 
 # apt installs (sorted)
 i=()
@@ -65,3 +69,6 @@ ${0:a:h}/../i/vim/setup
 # best as they come from compiling it yourself (ubuntu default st entries have a typo, tmux+nvim will fail)
 # but another option would be to add it here? or when st is a submodule have a commit with them prepared?
 # then copy in the right place
+echo 'todo: make ready for logins using st'
+
+echo 'todo: needs restart here?'
