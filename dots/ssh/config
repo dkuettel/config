@@ -15,23 +15,17 @@ Host staging
 Host efs
     HostName i-0166a4352bf931761
     User yineichen
+    IdentityFile ~/.ssh/ptc-id-rsa
     ProxyCommand aws ssm start-session --target %h --document-name AWS-StartSSHSession --parameters 'portNumber=%p'
     ServerAliveInterval 10
 
 Host tb
     HostName i-0dfd0827fc547c5e3
     User dkuettel
-    IdentityFile ~/.ssh/id_rsa
+    IdentityFile ~/.ssh/ptc-id-rsa
     ProxyCommand ssh-proxy-command-aws-start-and-ssm %h %p
     ServerAliveInterval 10
-
-Host github-private
-    HostName github.com
-    IdentityFile ~/.ssh/id_rsa-github-private
-
-Host github-ptc
-    HostName github.com
-    IdentityFile ~/.ssh/id_rsa-github-ptc
+    LocalForward 6006 localhost:6006
 
 Host mac-vbox
     HostName private-macbookpro.fritz.box
@@ -39,5 +33,12 @@ Host mac-vbox
 
 Host office
     HostName 00.000.000.00
+    User dkuettel
+    IdentityFile ~/.ssh/ptc-id-rsa
     Port 3437
     ServerAliveInterval 10
+
+Host blue
+    HostName 192.168.178.29
+    User dkuettel
+    IdentityFile ~/.ssh/private-id-rsa
