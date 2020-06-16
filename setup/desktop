@@ -1,43 +1,57 @@
 #!/bin/zsh
 set -eux -o pipefail
 
-# switch to HWE for ubuntu 18.04
+# switch to HWE for ubuntu 20.04
 # https://wiki.ubuntu.com/Kernel/LTSEnablementStack
-sudo apt-get update
-sudo apt-get upgrade -qqy
-sudo apt-get install -qqy --install-recommends xserver-xorg-hwe-18.04
-sudo apt-get autoremove
+#sudo apt-get update
+#sudo apt-get upgrade -qqy
+# todo hwe-20.04 not there (yet)
+#sudo apt-get install -qqy --install-recommends xserver-xorg-hwe-20.04
+echo 'note: xserver-xorg-hwe-20.04 might be ready now'
 
-# sorted list of packages for desktop
+sudo apt-get install xinit # for startx
+# this installed a gretter already
+sudo systemctl disable gdm.service
+
+i/nvidia
+echo 'nvidia-smi wont work before restart'
+
+# apt installs (sorted)
 i=()
-i+=feh
-i+=geeqie
+i+=feh # note also .xsession uses feh, is that the only way?
+i+=firefox
+i+=geeqie # pulls in many dependencies because of kde
 i+=gthumb # together with scrot
+i+=scrot # screenshots
+i+=transmission-gtk
 i+=xclip
 sudo apt-get install -qqy $i
 
-echo 'not tested; but see here the list of setups for headfull'
-exit 1
-# not clear what order is needed or make sense
-# maybe also just make two folders, one with headless and one with headfull?
-# these here could be done "on-demand" and might not need a script
-i/dwm
-# needed
-# sudo apt install virtualbox-guest-x11 virtualbox-guest-utils virtualbox-guest-dkms
-# for startx to work inside virtualbox
-# pretty good with dwm, don't feel a delay
-# also they say vbox6 has even better support and the apt packages might be a bit older
-i/keyboard # probably not doing the right thing in virtual box
+# todo note above transmission gtk keep settings in
+# /home/dkuettel/.config/transmission/settings.json
+# add to config? not sure if all settings there are independent of machine
 
-# order not tested yet
-i/nvidia
-i/dropbox
-i/chrome
-i/slack
-i/sound
-i/spotify
-i/syncthing
-i/okular
+# sorted list of snaps for desktop
+i=()
+i+=vlc
+sudo snap install $i
 
-# todo could also make a list of names and then generically call install
 ../i/redshift/setup
+
+i/keyboard # probably not doing the right thing in virtual box
+# todo move those to i/*, also dwm should contain not also st, plus make it submodules
+i/dwm
+# at this point, open /dev/fb0: Permission denied, when trying to startx
+# maybe with good gpu drivers that goes away, with nvidia-driver, it goes away
+
+# fonts are missing here for st, because they are on dropbox
+
+i/sound
+i/chrome
+i/spotify
+i/dropbox
+i/okular
+i/syncthing
+i/slack # todo doesnt work yet
+
+# todo maybe anyway have it as an "interactive" list? not all can be really unattended
