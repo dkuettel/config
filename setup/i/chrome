@@ -1,18 +1,10 @@
 #!/bin/zsh
 set -eux -o pipefail
 
-if which google-chrome; then
-else
-    wget https://dl-ssl.google.com/linux/direct/google-chrome-stable_current_amd64.deb -O google-chrome.deb
-    # those dependencies were needed in ubuntu 16.04, 18.04 seems to work now without
-    # sudo apt-get -fyq install libindicator7 libappindicator1 libpango1.0-0 libpangox-1.0-0
-    # sudo dpkg -i google-chrome.deb
-    # todo apt-get should install the dependencies?
-    #   didn't work for me before, needed
-    #   > sudo apt-get --fix-broken install
-    sudo apt-get -yqq install ./google-chrome.deb
-    rm google-chrome.deb
-fi
+curl -sS https://dl-ssl.google.com/linux/linux_signing_key.pub | sudo apt-key add -
+echo 'deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main' | sudo tee /etc/apt/sources.list.d/google-chrome.list
+sudo apt update
+sudo apt install -yqq google-chrome-stable
 
 apts=()
 apts+=jq # parse json to change preferences
@@ -20,9 +12,11 @@ apts+=moreutils # for sponge
 sudo apt-get -yqq install $apts
 
 (
-    # need to start chrome first and then exit so that setting are written
-    google-chrome
-    cd ~/.config/google-chrome/Default
+    f=~/.config/google-chrome/Default/Preferences
+    if [[ ! -f $f ]]; then
+        # need to start chrome first and then exit so that setting are written
+        google-chrome
+    fi
     # system border works better with tiling window managers
-    jq '.browser.custom_chrome_frame=false' Preferences | sponge Preferences 
+    jq '.browser.custom_chrome_frame=false' $f | sponge $f
 )
