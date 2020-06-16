@@ -1,34 +1,39 @@
 #!/bin/zsh
 set -eux -o pipefail
 
-# this installs the command line version only
-# it seems like the ~/.dropbox-dist will get updates itself
-# but not the bin/dropbox.py that we download manually
-# note:
-#   first time you install/start it you have to login, check systemctl status dropbox@dkuettel for login link
-#   use dbox (~/config/bin) for easy command line access
-
-
-if [[ ! -d ~/.dropbox-dist ]]; then
-    cd ~
-    wget -O - "https://www.dropbox.com/download?plat=lnx.x86_64" | tar xzf -
+# commandline helper (aliased to dbox)
+if [[ ! -e ~/bin/dropbox.py ]]; then
+    mkdir -p ~/bin
+    wget 'https://www.dropbox.com/download?dl=packages/dropbox.py' -O ~/bin/dropbox.py
+    chmod +x ~/bin/dropbox.py
+else
+    echo 'note: we dont redownload dropbox.py'
 fi
 
-# copy the command line helper to ~/bin
-# not to the ~/.dropbox-dist folder,
-# because that one gets wiped on updates
-mkdir -p ~/bin
-wget 'https://www.dropbox.com/download?dl=packages/dropbox.py' -O ~/bin/dropbox.py
-chmod +x ~/bin/dropbox.py
+if [[ ! -e ~/.dropbox-dist ]]; then
+    (
+        cd ~
+        wget -O - "https://www.dropbox.com/download?plat=lnx.x86_64" | tar xzf -
+        # it seems like the ~/.dropbox-dist will get updates itself
+    )
+fi
+
+if pgrep dropbox; then
+    echo 'seems like there is already a dropbox running'
+else
+    ~/.dropbox-dist/dropboxd
+    # note: first time this will require you to login
+    #   headless -> link is printed
+    #   headfull -> browser opens
+    #   alternatively, systemctl status dropbox@$USER shows the link when run as service
+fi
+
+ln -sfT ~/Dropbox ~/dbox
 
 # install in systemd
-if [[ $(realpath /etc/systemd/system/dropbox@.service) != $(realpath ~/config/dots/dropbox.d/dropbox@.service) ]]; then
-    # todo security risk to link files?
-    sudo ln -sfT --backup=numbered \
-        ~/config/dots/dropbox.d/dropbox@.service \
-        /etc/systemd/system/dropbox@.service
-fi
-systemctl enable dropbox@$USER
-systemctl start dropbox@$USER
-sleep 5
-systemctl status dropbox@$USER
+# todo security risk to link files here?
+sudo ln -sfT \
+    ~/config/dots/dropbox.d/dropbox@.service \
+    /etc/systemd/system/dropbox@.service
+sudo systemctl enable dropbox@$USER
+sudo systemctl start dropbox@$USER
