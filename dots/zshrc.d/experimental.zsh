@@ -12,3 +12,8 @@ alias ncal='ncal -bM'
 
 # nvim
 alias v=nvim
+
+# correct set of envs?
+export SUDO_EDITOR=nvim
+export VISUAL=nvim
+export EDITOR=nvim
