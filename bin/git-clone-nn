@@ -1,14 +1,16 @@
 #!/bin/zsh
 set -eux -o pipefail
 
+# checkout and configure an nn repository
+
 target=${1:?arg 1: new target folder}
 
 [[ ! -e $target ]]
 
-git -c core.sshCommand='ssh -i ~/.ssh/id_rsa-github-ptc' clone --recurse-submodules git@github.com:ThingWorx/neural-networks.git $target
+git -c core.sshCommand='ssh -i ~/.ssh/ptc-id-rsa' clone --recurse-submodules git@github.com:ThingWorx/neural-networks.git $target
 
 cd $target
 
 git config user.email 'dkuettel@ptc.com'
-git config core.sshcommand 'ssh -i ~/.ssh/id_rsa-github-ptc'
+git config core.sshcommand 'ssh -i ~/.ssh/ptc-id-rsa'
 ln -sfT ../../setup/pre-commit .git/hooks/pre-commit
