@@ -13,21 +13,21 @@ git config core.sshCommand 'ssh -i ~/.ssh/private-id-rsa'
 # pip3 needs this, after setup it's in the zsh config
 export PATH=$HOME/.local/bin:$PATH
 
-# switch to HWE for ubuntu 18.04
+# switch to HWE for ubuntu 20.04
 # https://wiki.ubuntu.com/Kernel/LTSEnablementStack
 sudo apt-get update
 sudo apt-get upgrade -qqy
 # todo install and autoremove have some interactive popups that ask keep local or update (local seems ok)
 # (at least on ec2 ubuntu that happens), could make more unattended?
-sudo apt-get install -qqy --install-recommends linux-generic-hwe-18.04
+sudo apt-get install -qqy --install-recommends linux-generic-hwe-20.04
 sudo apt-get autoremove -y
 
-# sorted list of packages for server (not desktop)
+# apt installs (sorted)
 i=()
+#i+=dtrx # easy and clean archive extraction  # todo gone?
 i+=bmon # bandwidth monitor
 i+=cmake
 i+=dkms
-i+=dtrx # easy and clean archive extraction
 i+=g++
 i+=gcp # like cp, but with progress bar among other features
 i+=git
@@ -45,12 +45,10 @@ i+=suckless-tools
 i+=sysstat
 i+=tree
 i+=unzip
-i+=vim
 i+=zip
-i+=zsh
 sudo apt-get install -qqy $i
 
-# customized tools
+# custom setup
 i/ssh
 i/git
 i/fzf
@@ -67,5 +65,3 @@ ${0:a:h}/../i/vim/setup
 # best as they come from compiling it yourself (ubuntu default st entries have a typo, tmux+nvim will fail)
 # but another option would be to add it here? or when st is a submodule have a commit with them prepared?
 # then copy in the right place
-echo 'see above for st logins'
-exit 1
