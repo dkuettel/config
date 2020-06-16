@@ -7,6 +7,9 @@ if [ -z ${ZSH_VERSION+1} ]; then
     exec zsh $0
 fi
 
+git config user.email 'dkuettel@gmail.com'
+git config core.sshCommand 'ssh -i ~/.ssh/private-id-rsa'
+
 # pip3 needs this, after setup it's in the zsh config
 export PATH=$HOME/.local/bin:$PATH
 
