@@ -2,9 +2,18 @@
 set -eux -o pipefail
 
 sudo apt-get -q install -y openssh-server
-# config see /etc/ssh/sshd_config
 
-if [[ $(realpath ~/.ssh/config) != $(realpath ~/config/dots/ssh/config) ]]; then
-    mkdir -p ~/.ssh
-    ln -sfT --backup=numbered ~/config/dots/ssh/config ~/.ssh/config
-fi
+# server configuration is at
+#   /etc/ssh/sshd_config
+# and
+#   /etc/ssh/sshd_config.d/* (takes precedence)
+
+# disable password login
+echo 'PasswordAuthentication no' | sudo tee /etc/ssh/sshd_config.d/disable-password
+echo 'maybe that will disconnect ssh'
+sudo systemctl restart sshd
+
+mkdir -p ~/.ssh
+ln -sfT \
+    ~/config/dots/ssh/config \
+    ~/.ssh/config
