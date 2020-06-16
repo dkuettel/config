@@ -1,17 +1,13 @@
 #!/bin/zsh
 set -eux -o pipefail
 
-# originally got it directly from nvidia
-# but the graphics-driver repository (see below) is quite up-to-date now, and it's easier
-#if [[ ! -e nvidia.run ]]; then
-    #wget 'https://us.download.nvidia.com/XFree86/Linux-x86_64/410.78/NVIDIA-Linux-x86_64-410.78.run' -O nvidia.run
-#fi
-#sudo apt-get -yqq install dkms
-#sudo sh nvidia.run -a -q -n -s --dkms
-
-sudo add-apt-repository ppa:graphics-drivers/ppa
 # use
-# ubuntu-drivers list
+# > ubuntu-drivers list
 # to see what are the available options
 # to switch to a newer version eventually
 sudo apt install nvidia-driver-440
+
+# alternatively get it from nvidia directly, something like
+# > wget 'https://us.download.nvidia.com/XFree86/Linux-x86_64/410.78/NVIDIA-Linux-x86_64-410.78.run' -O nvidia.run
+# > sudo apt-get -yqq install dkms
+# > sudo sh nvidia.run -a -q -n -s --dkms
