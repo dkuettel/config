@@ -13,6 +13,7 @@ fi
 if [[ ! -e ~/.dropbox-dist ]]; then
     (
         cd ~
+        # todo a bit shaky, could extract anything
         wget -O - "https://www.dropbox.com/download?plat=lnx.x86_64" | tar xzf -
         # it seems like the ~/.dropbox-dist will get updates itself
     )
