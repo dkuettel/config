@@ -21,14 +21,15 @@ set-window-option -g window-status-current-format '#[fg=brightblack]#{window_ind
 
 # pane borders
 # todo if we can get something like pane_last_flag then undserscore the last pane
-set-option -g pane-border-style 'fg=brightgreen,bg=brightgreen'
-set-option -g pane-active-border-style 'fg=brightgreen,bg=brightgreen'
+set-option -g pane-border-lines heavy
+set-option -g pane-border-style 'fg=brightgreen,bg=black'
+set-option -g pane-active-border-style 'fg=blue,bg=black'
 set-option -g pane-border-status top
 set-option -g pane-border-format '#[fg=brightblack,bg=#{?pane_active,blue,brightgreen}]#{pane_index}/#[fg=white]#{pane_current_command}'
 
 # colors for display-panes
-set-option -g display-panes-colour yellow
-set-option -g display-panes-active-colour blue
+set-option -g display-panes-colour blue
+set-option -g display-panes-active-colour yellow
 
 # todo consider
 # message-command-style, message-style
