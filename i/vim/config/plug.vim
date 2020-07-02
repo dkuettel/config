@@ -173,7 +173,7 @@ hi DiffText ctermfg=none ctermbg=0 cterm=underline
 
 
 """ fugitive
-nmap ,gs :tab Gstatus<cr>
+nmap ,gs :tab Git<cr>
 " colors
 " currently cannot change diff*, which are only for status diff, maybe one day split
 " would be nice for signs
