@@ -148,6 +148,11 @@ map // :nohlsearch<enter>
 " comment and duplicate (uses nerdcommenter, could be put there if good)
 map ,cp ,cy`>p
 
+" duplicate visual selection and position at copy below
+" yp is technically a sequence already, but its kinda what you think of, lets try it
+" but it delays the next operation, so maybe not nice
+map yp y`>p
+
 
 " get pylint disabler from current quickfix entry
 function! AddQuickfixPylintDisabler()
