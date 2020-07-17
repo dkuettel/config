@@ -5,7 +5,7 @@ source ~/antigen/antigen.zsh
 #   antigen update # update plugins
 #   antigen selfupdate # update antigen
 #   antigen list # list of installed plugins
-#   antigen clenaup # garbage collect
+#   antigen cleanup # garbage collect
 #   antigen theme # to switch to another theme (interactive)
 
 # todo it does something with completion I can't reproduce yet
