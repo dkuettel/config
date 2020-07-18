@@ -6,8 +6,11 @@ def alert_docker():
     import psutil
 
     def status():
-        # using GiB=2**30 instead of GB=1e9, because thats what most other tools show
-        free = psutil.disk_usage("/var/lib/docker").free / 2 ** 30
+        try:
+            # using GiB=2**30 instead of GB=1e9, because thats what most other tools show
+            free = psutil.disk_usage("/var/lib/docker").free / 2 ** 30
+        except FileNotFoundError:
+            return None
         if free < 10:
             return "#[push-default,fg=black,bg=red]docker-cache#[default]"
         else:
