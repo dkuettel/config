@@ -116,7 +116,7 @@ def main(interval=3):
         while True:
             stati = [db(), cpu(), gpu()]
             stati = [s for s in stati if s is not None]
-            print("[" + "] [".join(stati) + "]")
+            print("[" + "] [".join(stati) + "]", flush=True)
             time.sleep(interval)
 
 
