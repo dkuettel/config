@@ -1,6 +1,21 @@
 import contextlib
 
 
+@contextlib.contextmanager
+def alert_docker():
+    import psutil
+
+    def status():
+        # using GiB=2**30 instead of GB=1e9, because thats what most other tools show
+        free = psutil.disk_usage("/var/lib/docker").free / 2 ** 30
+        if free < 10:
+            return "#[push-default,fg=black,bg=red]docker-cache#[default]"
+        else:
+            return None
+
+    yield status
+
+
 class status_dropbox:
     def __init__(self):
         import os
@@ -112,9 +127,9 @@ def status_gpu():
 def main(interval=3):
     import time
 
-    with status_dropbox() as db, status_cpu() as cpu, status_gpu() as gpu:
+    with alert_docker() as ad, status_dropbox() as db, status_cpu() as cpu, status_gpu() as gpu:
         while True:
-            stati = [db(), cpu(), gpu()]
+            stati = [ad(), db(), cpu(), gpu()]
             stati = [s for s in stati if s is not None]
             print("[" + "] [".join(stati) + "]", flush=True)
             time.sleep(interval)
