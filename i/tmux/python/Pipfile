@@ -8,3 +8,6 @@ verify_ssl = true
 [packages]
 nvidia-ml-py3 = "*"
 psutil = "*"
+
+[requires]
+python_version = "3.8"
