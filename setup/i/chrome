@@ -9,6 +9,7 @@ sudo apt install -yqq google-chrome-stable
 apts=()
 apts+=jq # parse json to change preferences
 apts+=moreutils # for sponge
+apts+=fonts-stix # some math pages seem to need that (also useful for firefox or other browsers)
 sudo apt-get -yqq install $apts
 
 (
@@ -20,3 +21,4 @@ sudo apt-get -yqq install $apts
     # system border works better with tiling window managers
     jq '.browser.custom_chrome_frame=false' $f | sponge $f
 )
+
