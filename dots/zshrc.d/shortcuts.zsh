@@ -73,3 +73,5 @@ function jql { jq --color-output $@ | less }
 # start new vlc in stereo mode (original is somehow strange on stereo)
 # always continue by default
 alias vlc='vlc --stereo-mode=1 --qt-continue=2'
+
+alias ipy=ipython3
