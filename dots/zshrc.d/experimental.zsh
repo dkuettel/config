@@ -17,3 +17,6 @@ alias v=nvim
 export SUDO_EDITOR=nvim
 export VISUAL=nvim
 export EDITOR=nvim
+
+# jql colors
+JQ_COLORS='2;30:2;30:2;30:2;30:0;32:1;39:1;39'
