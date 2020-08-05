@@ -16,3 +16,15 @@
 [submodule "i/ptags/ptags"]
 	path = i/ptags/ptags
 	url = git@github.com:dkuettel/ptags.git
+[submodule "i/dwm/dwm"]
+	path = i/dwm/dwm
+	url = git@bitbucket.org:dkuettel/dwm.git
+[submodule "i/dwm/dmenu"]
+	path = i/dwm/dmenu
+	url = git@bitbucket.org:dkuettel/dmenu.git
+[submodule "i/dwm/slock"]
+	path = i/dwm/slock
+	url = https://git.suckless.org/slock
+[submodule "i/st/st"]
+	path = i/st/st
+	url = git@bitbucket.org:dkuettel/st.git

@@ -34,7 +34,7 @@ numlockx on
 
 xsetroot -bg black
 xsetroot -solid black
-feh --no-fehbg --bg-fill ~/config/dots/dwm.d/5_stripes_landscape.jpg
+feh --no-fehbg --bg-fill ~/config/i/dwm/5_stripes_landscape.jpg
 
 function status {
     while true; do
