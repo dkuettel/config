@@ -36,7 +36,7 @@ i=()
 i+=vlc
 sudo snap install $i
 
-../i/redshift/setup
+${0:a:h}/../i/redshift/setup
 
 i/keyboard # probably not doing the right thing in virtual box
 # todo move those to i/*, also dwm should contain not also st, plus make it submodules
