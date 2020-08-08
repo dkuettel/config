@@ -7,5 +7,9 @@ set -eux -o pipefail
 # there seems to be no apt repository?
 # https://slack.com/intl/en-ch/downloads/instructions/ubuntu
 # the snap version might be good for that, but it didn't work very well for me with login&co
+#
+# update:
+# I dont undertstand how, but apt update notified me of slack-desktop having a new version
+# seems to be up-to-date now, maybe the package installed from slack.com adds itself to repos?
 
 echo 'https://slack.com/intl/en-ch/downloads/instructions/ubuntu'
