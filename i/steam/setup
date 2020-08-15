@@ -1,0 +1,11 @@
+#!/bin/zsh
+set -eux -o pipefail
+
+false
+
+# todo
+# get https://cdn.cloudflare.steamstatic.com/client/installer/steam.deb
+# dpkg -i ./steam.deb
+# rm steam.deb
+# I also needed
+# sudo apt install libnvidia-gl-440
