@@ -1,11 +1,13 @@
 #!/bin/zsh
 set -eux -o pipefail
 
-false
+wget \
+    'https://cdn.cloudflare.steamstatic.com/client/installer/steam.deb' \
+    -O /tmp/steam.deb
+sudo apt-get install /tmp/steam.deb
+rm /tmp/steam.deb
 
-# todo
-# get https://cdn.cloudflare.steamstatic.com/client/installer/steam.deb
-# dpkg -i ./steam.deb
-# rm steam.deb
-# I also needed
-# sudo apt install libnvidia-gl-440
+# last time I needed this, not sure why it didnt come with nvidia-driver-440
+# plus will be wrong the driver gets updated, so making sure we are on 440
+dpkg -s nvidia-driver-440
+sudo apt-get install libnvidia-gl-440
