@@ -2,19 +2,26 @@ import contextlib
 
 
 @contextlib.contextmanager
-def alert_docker():
+def alert_diskspace():
     import psutil
 
+    # map folders to minimum size (in gb) for alerts
+    checks = {"/var/lib/docker": 2, "/": 10, "/home/dkuettel": 5}
+
     def status():
-        try:
-            # using GiB=2**30 instead of GB=1e9, because thats what most other tools show
-            free = psutil.disk_usage("/var/lib/docker").free / 2 ** 30
-        except FileNotFoundError:
+        alerts = []
+        for folder, threshold in checks.items():
+            try:
+                # using GiB=2**30 instead of GB=1e9, because thats what most other tools show
+                free = psutil.disk_usage(folder).free / 2 ** 30
+            except FileNotFoundError:
+                pass
+            if free < threshold:
+                alerts.append(f"{folder}<{threshold}gb")
+        if len(alerts) == 0:
             return None
-        if free < 10:
-            return "#[push-default,fg=black,bg=red]docker-cache#[default]"
         else:
-            return None
+            return "#[push-default,fg=black,bg=red]" + ",".join(alerts) + "#[default]"
 
     yield status
 
@@ -130,7 +137,7 @@ def status_gpu():
 def main(interval=3):
     import time
 
-    with alert_docker() as ad, status_dropbox() as db, status_cpu() as cpu, status_gpu() as gpu:
+    with alert_diskspace() as ad, status_dropbox() as db, status_cpu() as cpu, status_gpu() as gpu:
         while True:
             stati = [ad(), db(), cpu(), gpu()]
             stati = [s for s in stati if s is not None]
