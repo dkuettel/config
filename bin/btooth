@@ -1,0 +1,4 @@
+#!/bin/zsh
+set -eux -o pipefail
+
+GDK_SCALE=2 blueman-manager
