@@ -1,7 +1,10 @@
 #!/bin/zsh
 set -eux -o pipefail
 
-sshfs -o allow_root efs:/efs /efs
+# maybe check https://serverfault.com/questions/6709/sshfs-mount-that-survives-disconnect
+# todo testing reconnect, will it work after sleep/suspend?
+# todo auto_cache working for hemanths big rendering files?
+sshfs -o allow_root,reconnect -o auto_cache efs:/efs /efs
 
 # alternative
 # sshfs -o auto_cache,reconnect -o Ciphers=aes128-ctr -o Compression=no -o allow_other efs:/efs /efs
