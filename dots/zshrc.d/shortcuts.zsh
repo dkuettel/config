@@ -77,3 +77,5 @@ alias vlc='vlc --stereo-mode=1 --qt-continue=2'
 # todo for now assuming globally installed, could also use a canonical pipenv?
 # lets see if fast enough, tf might be heavy/slow to import everytime?
 alias ipy="ipython3 -c 'import numpy as np, tensorflow as tf, math' -i"
+
+function treel { tree -C $@ | less }
