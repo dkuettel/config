@@ -1,15 +1,16 @@
 [Core General]
 ObeyDRM=false
 
-[Core Performance]
-TextHinting=Enabled
+[General]
+ttsEngine=flite
 
 [Main View]
 ShowLeftPanel=false
 
 [PageView]
+EditToolBarPlacement=1
 ScrollOverlap=5
 TrimMargins=true
 
 [Reviews]
-AnnotationTools=<tool id="1" type="highlight"><engine type="TextSelector" color="#facc59"><annotation type="Highlight" color="#facc59"/></engine><shortcut>1</shortcut></tool>,<tool id="2" type="note-inline"><engine hoverIcon="tool-note-inline" block="true" type="PickPoint" color="#ffff00"><annotation type="FreeText" color="#ffff00"/></engine><shortcut>2</shortcut></tool>,<tool id="3" type="note-linked"><engine hoverIcon="tool-note" type="PickPoint" color="#ffff00"><annotation icon="Note" type="Text" color="#ffff00"/></engine><shortcut>3</shortcut></tool>,<tool id="4" type="underline"><engine type="TextSelector" color="#000000"><annotation type="Underline" color="#000000"/></engine><shortcut>4</shortcut></tool>,<tool id="5" type="ink"><engine type="SmoothLine" color="#00ff00"><annotation width="2" type="Ink" color="#00ff00"/></engine><shortcut>5</shortcut></tool>,<tool id="6" type="straight-line"><engine type="PolyLine" color="#ffe000" points="2"><annotation width="1" type="Line" color="#ffe000"/></engine><shortcut>6</shortcut></tool>,<tool id="7" type="polygon"><engine type="PolyLine" color="#007eee" points="-1"><annotation width="1" type="Line" color="#007eee"/></engine><shortcut>7</shortcut></tool>,<tool id="8" type="ellipse"><engine block="true" type="PickPoint" color="#00ffff"><annotation width="5" type="GeomCircle" color="#00ffff"/></engine><shortcut>8</shortcut></tool>
+AnnotationTools=<tool id="1" type="highlight"><engine type="TextSelector" color="#facc59"><annotation type="Highlight" color="#facc59"/></engine><shortcut>1</shortcut></tool>,<tool id="2" type="note-inline"><engine type="PickPoint" hoverIcon="tool-note-inline" color="#ffff00" block="true"><annotation type="FreeText" color="#ffff00"/></engine><shortcut>2</shortcut></tool>,<tool id="3" type="note-linked"><engine type="PickPoint" hoverIcon="tool-note" color="#ffff00"><annotation type="Text" color="#ffff00" icon="Note"/></engine><shortcut>3</shortcut></tool>,<tool id="4" type="underline"><engine type="TextSelector" color="#000000"><annotation type="Underline" color="#000000"/></engine><shortcut>4</shortcut></tool>,<tool id="5" type="ink"><engine type="SmoothLine" color="#00ff00"><annotation width="2" type="Ink" color="#00ff00"/></engine><shortcut>5</shortcut></tool>,<tool id="6" type="straight-line"><engine type="PolyLine" points="2" color="#ffe000"><annotation width="1" type="Line" color="#ffe000"/></engine><shortcut>6</shortcut></tool>,<tool id="7" type="polygon"><engine type="PolyLine" points="-1" color="#007eee"><annotation width="1" type="Line" color="#007eee"/></engine><shortcut>7</shortcut></tool>,<tool id="8" type="ellipse"><engine type="PickPoint" color="#00ffff" block="true"><annotation width="5" type="GeomCircle" color="#00ffff"/></engine><shortcut>8</shortcut></tool>
