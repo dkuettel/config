@@ -12,7 +12,7 @@ source ~/antigen/antigen.zsh
 #DISABLE_AUTO_UPDATE="true" # todo it will happen with antigen update? (for oh-my-zsh?)
 antigen use oh-my-zsh
 
-# oh-my-zsh plugins (can be used without 'use oh-my-zsh'
+# oh-my-zsh plugins (can be used without 'use oh-my-zsh')
 antigen bundle command-not-found
 antigen bundle per-directory-history
 antigen bundle compleat # todo could be interesting to make completion for our xpman and co?
