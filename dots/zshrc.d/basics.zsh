@@ -10,11 +10,22 @@ export LC_ALL=en_US.UTF-8
 # todo see 'man zshzle' for reporting the current vim mode
 # todo could use 'timeout --kill-after=0.01s 0.01s cmd' to stop git info when it takes too long on a slow filesystem
 # todo checkout vcs info from zsh (see yves)
+function zsh-prompt-git {
+    sref=$(git symbolic-ref --short HEAD 2>/dev/null)
+    if [[ $? == 0 ]]; then
+        echo -n '('$sref
+        stashed=$(git stash list 2>/dev/null | wc -l)
+        if [[ $stashed != 0 ]]; then
+            echo -n ', %F{1}'$stashed'-stashed%f'
+        fi
+        echo -n ')'
+    fi
+}
 setopt prompt_subst # expand $ in prompt at show time
 export PS1='
 %(?,,%F{1}%Sexit code = %?%s%f
 )
-%K{0}%F{14}%B%~%b%f ($(git symbolic-ref --short HEAD 2>/dev/null)) %F{10}%* (%m)%f %(1j,%F{1}%j&%f,) %E%k
+%K{0}%F{14}%B%~%b%f $(zsh-prompt-git) %F{10}%* (%m)%f %(1j,%F{1}%j&%f,) %E%k
 ${${${KEYMAP:-main}/vicmd/N}/(main|viins)/I}> '
 function zle-keymap-select() {
     zle reset-prompt
