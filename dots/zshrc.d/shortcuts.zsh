@@ -79,3 +79,6 @@ alias vlc='vlc --stereo-mode=1 --qt-continue=2'
 alias ipy="ipython3 -c 'import numpy as np, tensorflow as tf, math' -i"
 
 function treel { tree -C $@ | less }
+
+alias c-system=systemctl
+alias c-journal=journalctl
