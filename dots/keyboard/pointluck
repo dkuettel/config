@@ -2,17 +2,17 @@ default  partial alphanumeric_keys modifier_keys
 xkb_symbols "base" {
 
     include "us(basic)"
-    name[Group1]= "PointLuck (ptc office desktop)";
+    name[Group1]= "PointLuck (base, home desktop)";
 
-    key <TLDE> { [grave, asciitilde] };
-    key <LSGT> { [Escape, Escape] };
+    key <LSGT> { [grave, asciitilde] };
+    key <TLDE> { [Escape, Escape] };
 };
 
 default  partial alphanumeric_keys modifier_keys
 xkb_symbols "farbase" {
 
     include "us(basic)"
-    name[Group1]= "PointLuck (farbase)";
+    name[Group1]= "PointLuck (farbase, ptc office desktop)";
 
     key <TLDE> { [grave, asciitilde] };
     key <LSGT> { [Escape, Escape] };
