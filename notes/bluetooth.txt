@@ -19,3 +19,5 @@ does NONE here prevent anymore connections? whats a baseband connection?
 could be used for dwm status? is it slow, is it checking the local db only?
 but we need sudo
 can we ask for info on bose?
+
+bose seems to be 2C:41:A1:49:96:07
