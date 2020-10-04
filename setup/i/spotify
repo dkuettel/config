@@ -1,7 +1,12 @@
 #!/bin/zsh
 set -eux -o pipefail
 
-curl -sS https://download.spotify.com/debian/pubkey.gpg | sudo apt-key add -
-echo 'deb http://repository.spotify.com stable non-free' | sudo tee /etc/apt/sources.list.d/spotify.list
-sudo apt-get update
-sudo apt-get install -yqq spotify-client
+# apt version stopped working for me
+#curl -sS https://download.spotify.com/debian/pubkey.gpg | sudo apt-key add -
+#echo 'deb http://repository.spotify.com stable non-free' | sudo tee /etc/apt/sources.list.d/spotify.list
+#sudo apt-get update
+#sudo apt-get install -yqq spotify-client
+
+# snap version easier to handle, sometimes didnt work for me with those "adapters"
+# but didnt have the no-connection problem error 4
+sudo snap install spotify
