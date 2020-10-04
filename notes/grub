@@ -1,10 +1,11 @@
 
-to have it wait for selection
+to have it wait for selection (in /etc/default/grub)
     GRUB_TIMEOUT=-1
     GRUB_RECORDFAIL_TIMEOUT=-1
 second one is when it didnt record success in the last boot
 but somehow with LVM boot partitions, it doesn't manage to remember that it was successful
 so with LVM the normal timeout never applies
+(update-grub if you made changes)
 
 
 to add some shortcuts after the fact, try a file /etc/grub.d/50_shortcuts with something like
