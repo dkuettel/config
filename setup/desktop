@@ -47,6 +47,7 @@ setups=(
     chrome
     spotify
     dropbox
+    okular
 )
 for i in $setups; do
     ${0:a:h}/../i/$i/setup
@@ -54,7 +55,6 @@ done
 
 exit 1
 
-i/okular
 i/syncthing
 i/slack
 

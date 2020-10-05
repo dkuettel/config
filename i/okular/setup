@@ -4,7 +4,7 @@ set -eux -o pipefail
 sudo apt-get -yqq install okular
 
 ln -sfT \
-    ~/config/dots/okularpartrc \
+    ~/config/i/okular/okularpartrc \
     ~/.config/okularpartrc
 
 # note there is another config file "okularrc" but that seems more local so I don't persist it
