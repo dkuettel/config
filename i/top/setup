@@ -1,0 +1,4 @@
+#!/bin/zsh
+set -eux -o pipefail
+
+ln -sfT ~/config/i/top/toprc ~/.toprc

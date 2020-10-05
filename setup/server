@@ -61,6 +61,7 @@ setups=(
     ssh
     git
     fzf
+    top
 )
 for i in $setups; do
     ${0:a:h}/../i/$i/setup
@@ -68,7 +69,6 @@ done
 
 exit 1
 
-i/top
 i/htop
 i/python
 ${0:a:h}/../i/pdocs/setup

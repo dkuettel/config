@@ -1,6 +1,0 @@
-#!/bin/zsh
-set -eux -o pipefail
-
-if [[ $(realpath ~/.toprc) != $(realpath ~/config/dots/toprc) ]]; then
-    ln -sfT --backup=numbered ~/config/dots/toprc ~/.toprc
-fi
