@@ -10,3 +10,4 @@ set -eux -o pipefail
 # snap version easier to handle, sometimes didnt work for me with those "adapters"
 # but didnt have the no-connection problem error 4
 sudo snap install spotify
+# todo can we control the settings, like high quality, show unavalaible, hide feed, ...?
