@@ -3,13 +3,17 @@ set -eux -o pipefail
 
 # switch to zsh
 if [ -z ${ZSH_VERSION+1} ]; then
-    which zsh || i/zsh
+    which zsh || ${0:a:h}/../i/zsh/setup
     exec zsh $0
 fi
 
 cd ${0:a:h}
 
 git config user.email 'dkuettel@gmail.com'
+if [[ ! -f '~/.ssh/private-id-rsa' ]]; then
+    echo 'need a ~/.ssh/private-id-rsa'
+    exit 1
+fi
 git config core.sshCommand 'ssh -i ~/.ssh/private-id-rsa'
 
 # pip3 needs this, after setup it's in the zsh config

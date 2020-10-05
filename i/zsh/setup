@@ -24,10 +24,7 @@ else
     git clone https://github.com/zsh-users/antigen.git ~/antigen
 fi
 
-# zshrc
-if [[ $(realpath ~/.zshrc) != $(realpath ~/config/dots/zshrc) ]]; then
-    ln -sfT --backup=numbered ~/config/dots/zshrc ~/.zshrc
-fi
+ln -sfT ~/config/i/zsh/zshrc ~/.zshrc
 
 [[ -d ~/plugins ]] || mkdir -p ~/plugins
 

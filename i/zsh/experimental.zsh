@@ -21,3 +21,6 @@ export EDITOR=nvim
 
 # jql colors
 JQ_COLORS='2;30:2;30:2;30:2;30:0;32:1;39:1;39'
+
+# one-shell-history
+source ~/toys/one-shell-history/zsh/setup.zsh
