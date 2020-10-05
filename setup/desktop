@@ -13,7 +13,7 @@ sudo apt-get install xinit # for startx
 # this installed a gretter already
 sudo systemctl disable gdm.service
 
-i/nvidia
+${0:a:h}/../i/nvidia/setup
 echo 'nvidia-smi wont work before restart'
 
 # apt installs (sorted)
