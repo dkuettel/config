@@ -7,7 +7,7 @@ if [[ ! -e ~/bin/dropbox.py ]]; then
     wget 'https://www.dropbox.com/download?dl=packages/dropbox.py' -O ~/bin/dropbox.py
     chmod +x ~/bin/dropbox.py
 else
-    echo 'note: we dont redownload dropbox.py'
+    echo 'note: we dont redownload dropbox.py, not sure if that would ever be out of date'
 fi
 
 if [[ ! -e ~/.dropbox-dist ]]; then
@@ -34,7 +34,7 @@ ln -sfT ~/Dropbox ~/dbox
 # install in systemd
 # todo security risk to link files here?
 sudo ln -sfT \
-    ~/config/dots/dropbox.d/dropbox@.service \
+    ~/config/i/dropbox/dropbox@.service \
     /etc/systemd/system/dropbox@.service
 sudo systemctl enable dropbox@$USER
 sudo systemctl start dropbox@$USER
