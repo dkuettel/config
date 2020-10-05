@@ -5,4 +5,4 @@ sudo ln -sfT ~/config/dots/keyboard/pointluck /usr/share/X11/xkb/symbols/pointlu
 sudo ln -sfT ~/config/dots/keyboard/etc-default-keyboard /etc/default/keyboard
 echo options hid_apple fnmode=2 | sudo tee -a /etc/modprobe.d/hid_apple.conf
 sudo update-initramfs -u -k all
-echo note: reboot to have apple keyboard F-keys working like normal F-keys
+echo 'note: reboot to have apple keyboard F-keys working like normal F-keys'

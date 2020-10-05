@@ -24,7 +24,7 @@ redshift -r -v |& ts '%F %T' >& .log-redshift &
 # todo/note currently also setting already in /etc/default/keyboard for to have it in the virtual terminal
 # not really necessary here anymore, but not sure how to do the dynamic variant
 setxkbmap -layout pointluck -variant $(hostname)
-xmodmap ~/config/dots/keyboard/mods
+xmodmap ~/config/i/keyboard/mods
 xset r rate 200 50  # keyboard repeat rate (delay ms, repeats per second)
 numlockx on
 

@@ -38,7 +38,7 @@ sudo snap install $i
 
 ${0:a:h}/../i/redshift/setup
 
-i/keyboard # probably not doing the right thing in virtual box
+${0:a:h}/../i/keyboard/setup # probably not doing the right thing in virtual box
 ${0:a:h}/../i/dwm/setup
 ${0:a:h}/../i/st/setup
 # at this point, open /dev/fb0: Permission denied, when trying to startx
