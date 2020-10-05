@@ -1,0 +1,4 @@
+on linux try
+> apt install usb-creator-gtk
+then
+> sudo GDK_SCALER=2 usb-creator-gt
