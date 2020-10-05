@@ -30,6 +30,7 @@ sudo apt-get install -qqy $i
 # todo note above transmission gtk keep settings in
 # /home/dkuettel/.config/transmission/settings.json
 # add to config? not sure if all settings there are independent of machine
+# also maybe dont install it by default? only at home?
 
 # sorted list of snaps for desktop
 i=()
