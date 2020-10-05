@@ -38,7 +38,6 @@ i+=vlc
 sudo snap install $i
 
 ${0:a:h}/../i/redshift/setup
-
 ${0:a:h}/../i/keyboard/setup # probably not doing the right thing in virtual box
 ${0:a:h}/../i/dwm/setup
 ${0:a:h}/../i/st/setup
@@ -46,6 +45,7 @@ ${0:a:h}/../i/st/setup
 # maybe with good gpu drivers that goes away, with nvidia-driver, it goes away
 
 # fonts are missing here for st, because they are on dropbox
+# maybe use ubuntu only, or at least as default? or include in git?
 
 i/sound
 i/chrome
