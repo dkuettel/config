@@ -48,6 +48,7 @@ setups=(
     spotify
     dropbox
     okular
+    syncthing
 )
 for i in $setups; do
     ${0:a:h}/../i/$i/setup
@@ -55,7 +56,6 @@ done
 
 exit 1
 
-i/syncthing
 i/slack
 
 # todo maybe anyway have it as an "interactive" list? not all can be really unattended
