@@ -1,0 +1,37 @@
+#!/bin/zsh
+set -eux -o pipefail
+
+# previously manually
+#curl -sS https://dl-ssl.google.com/linux/linux_signing_key.pub | sudo apt-key add -
+#echo 'deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main' | sudo tee /etc/apt/sources.list.d/google-chrome.list
+#sudo apt update
+#sudo apt install -yqq google-chrome-stable
+
+# now assuming the deb file will also take care of adding apt lists for updating later?
+wget \
+    'https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb' \
+    -O /tmp/google-chrome.deb
+# todo not using -yqq yet, not sure if direct deb install will add dependencies?
+sudo apt-get install /tmp/google-chrome.deb
+rm /tmp/google-chrome.deb
+
+apts=()
+apts+=jq # parse json to change preferences
+apts+=moreutils # for sponge
+apts+=fonts-stix # some math pages seem to need that (also useful for firefox or other browsers)
+sudo apt-get -yqq install $apts
+
+(
+    f=~/.config/google-chrome/Default/Preferences
+    if [[ ! -f $f ]]; then
+        # need to start chrome first and then exit so that settings are written
+        google-chrome
+    fi
+    while [[ ! -f $f ]]; do
+        sleep 1s
+        echo "waiting for chrome to initialize $f"
+    done
+    # system border works better with tiling window managers
+    jq '.browser.custom_chrome_frame=false' $f | sponge $f
+)
+

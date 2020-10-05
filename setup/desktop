@@ -44,6 +44,7 @@ setups=(
     dwm # sometimes '/dev/fb0: Permission denied' with startx, but probably not with good nvidia-drivers?
     st # fonts are missing here, because on dropbox, default ubuntu and be done, or add to git?
     sound
+    chrome
 )
 for i in $setups; do
     ${0:a:h}/../i/$i/setup
@@ -51,7 +52,6 @@ done
 
 exit 1
 
-i/chrome
 i/spotify
 i/dropbox
 i/okular
