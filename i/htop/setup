@@ -1,0 +1,5 @@
+#!/bin/zsh
+set -eux -o pipefail
+
+mkdir -p ~/.config/htop
+ln -sfT ~/config/i/htop/htoprc ~/.config/htop/htoprc

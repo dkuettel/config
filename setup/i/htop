@@ -1,7 +1,0 @@
-#!/bin/zsh
-set -eux -o pipefail
-
-mkdir -p ~/.config/htop
-if [[ $(realpath ~/.config/htop/htoprc) != $(realpath ~/config/dots/htoprs) ]]; then
-    ln -sfT --backup=numbered ~/config/dots/htoprc ~/.config/htop/htoprc
-fi
