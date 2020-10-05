@@ -60,6 +60,7 @@ sudo apt-get install -qqy $i
 setups=(
     ssh
     git
+    fzf
 )
 for i in $setups; do
     ${0:a:h}/../i/$i/setup
@@ -67,7 +68,6 @@ done
 
 exit 1
 
-i/fzf
 i/top
 i/htop
 i/python

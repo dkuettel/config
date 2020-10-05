@@ -1,10 +1,10 @@
 
-# see https://github.com/junegunn/fzf
+# see i/fzf
 
 # path already set in paths.zsh
 
 # auto completion (if interactive)
-[[ $- == *i* ]] && source $HOME/fzf/shell/completion.zsh 2> /dev/null
+[[ $- == *i* ]] && source /usr/share/doc/fzf/examples/completion.zsh 2> /dev/null
 
 # key bindings
 # ctrl-t for adding files to current command
@@ -12,7 +12,7 @@
 # alt-c to cd to directory
 # and some/path/**<tab> finds file starting there
 # kill <tab>
-source $HOME/fzf/shell/key-bindings.zsh
+source /usr/share/doc/fzf/examples/key-bindings.zsh
 
 # defaults
 #export FZF_CTRL_T_COMMAND=?

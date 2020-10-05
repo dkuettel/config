@@ -10,7 +10,7 @@ rev=(${(Oa)path})
 rev+=(
     /snap/bin  # should be there from system settings?
     $HOME/.local/bin  # pip install puts executables here
-    $HOME/fzf/bin
+    #$HOME/fzf/bin  # not needed anymore, installed with apt now
     $HOME/bin
     $HOME/config/bin
 )
