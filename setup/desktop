@@ -49,13 +49,10 @@ setups=(
     dropbox
     okular
     syncthing
+    slack
 )
 for i in $setups; do
     ${0:a:h}/../i/$i/setup
 done
 
-exit 1
-
-i/slack
-
-# todo maybe anyway have it as an "interactive" list? not all can be really unattended
+# todo maybe some of the above need to be added as interactive? or just on demand? not all are fully unattended
