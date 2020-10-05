@@ -1,0 +1,4 @@
+#!/bin/zsh
+set -eux -o pipefail
+
+sudo apt install -yqq pavucontrol blueman
