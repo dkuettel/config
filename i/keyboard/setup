@@ -1,8 +1,8 @@
 #!/bin/zsh
 set -eux -o pipefail
 
-sudo ln -sfT ~/config/dots/keyboard/pointluck /usr/share/X11/xkb/symbols/pointluck
-sudo ln -sfT ~/config/dots/keyboard/etc-default-keyboard /etc/default/keyboard
+sudo ln -sfT ~/config/i/keyboard/pointluck /usr/share/X11/xkb/symbols/pointluck
+sudo ln -sfT ~/config/i/keyboard/etc-default-keyboard /etc/default/keyboard
 echo options hid_apple fnmode=2 | sudo tee -a /etc/modprobe.d/hid_apple.conf
 sudo update-initramfs -u -k all
 echo 'note: reboot to have apple keyboard F-keys working like normal F-keys'
