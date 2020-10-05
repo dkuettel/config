@@ -18,3 +18,4 @@ sudo systemctl start syncthing@$USER.service
 sudo systemctl status syncthing@$USER.service
 
 echo 'todo: note that by default it makes a ~/Sync folder'
+echo 'todo: seems the new version doesnt do anything, default is no folders syncing, nice, or is it?'
