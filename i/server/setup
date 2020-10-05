@@ -3,7 +3,7 @@ set -eux -o pipefail
 
 # switch to zsh
 if [ -z ${ZSH_VERSION+1} ]; then
-    which zsh || ${0:a:h}/../i/zsh/setup
+    which zsh || $(dirname $0/..)/i/zsh/setup
     exec zsh $0
 fi
 
@@ -70,7 +70,7 @@ setups=(
     vim
 )
 for i in $setups; do
-    ${0:a:h}/../i/$i/setup
+    ${0:a:h}/../$i/setup
 done
 
 # todo if you want to ssh to this machine using st

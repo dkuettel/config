@@ -13,7 +13,7 @@ sudo apt-get install xinit # for startx
 # this installed a gretter already
 sudo systemctl disable gdm.service
 
-${0:a:h}/../i/nvidia/setup
+${0:a:h}/../nvidia/setup
 echo 'nvidia-smi wont work before restart'
 
 # apt installs (sorted)
@@ -52,7 +52,7 @@ setups=(
     slack
 )
 for i in $setups; do
-    ${0:a:h}/../i/$i/setup
+    ${0:a:h}/../$i/setup
 done
 
 # todo maybe some of the above need to be added as interactive? or just on demand? not all are fully unattended
