@@ -15,5 +15,5 @@ sudo systemctl restart ssh sshd  # seems like ssh is actually the server?
 
 mkdir -p ~/.ssh
 ln -sfT \
-    ~/config/dots/ssh/config \
+    ~/config/i/ssh/config \
     ~/.ssh/config

@@ -56,8 +56,16 @@ i+=unzip
 i+=zip
 sudo apt-get install -qqy $i
 
-# custom setup
-i/ssh
+# ordered list of custom setups
+setups=(
+    ssh
+)
+for i in $setups; do
+    ${0:a:h}/../i/$i/setup
+done
+
+exit 1
+
 i/git
 i/fzf
 i/top
