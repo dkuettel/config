@@ -63,6 +63,7 @@ setups=(
     fzf
     top
     htop
+    python
 )
 for i in $setups; do
     ${0:a:h}/../i/$i/setup
@@ -70,7 +71,6 @@ done
 
 exit 1
 
-i/python
 ${0:a:h}/../i/pdocs/setup
 ${0:a:h}/../i/ptags/setup
 ${0:a:h}/../i/tmux/setup
