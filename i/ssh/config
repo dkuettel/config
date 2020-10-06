@@ -31,7 +31,7 @@ Host mac-vbox
     HostName private-macbookpro.fritz.box
     Port 2244
 
-Host office
+Host boom
     HostName 00.000.000.00
     User dkuettel
     IdentityFile ~/.ssh/ptc-id-rsa
