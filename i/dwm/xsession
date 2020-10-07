@@ -38,7 +38,7 @@ feh --no-fehbg --bg-fill ~/config/i/dwm/5_stripes_landscape.jpg
 
 function status {
     while true; do
-        s=" "
+        s=' '
 
         # redshift
         s+=$(awk '
@@ -46,18 +46,31 @@ function status {
             /Brightness/ {b=$4}
             END {if (s=="Enabled") print "redshift@" b; else print "redshift off "}
             ' .log-redshift)
-        s+=" | "
+        s+=' | '
+
+        # bluetooth
+        if bluetoothctl show | grep 'Powered: yes' > /dev/null; then
+            count=$(for mac in $(bluetoothctl devices | awk '{print $2}'); do
+                if bluetoothctl info $mac | grep 'Connected: yes' > /dev/null; then
+                    echo $mac
+                fi
+            done | wc -l)
+            s+="bt @$count"
+        else
+            s+='bt off'
+        fi
+        s+=' | '
 
         # sound
         s+=$(pactl list sinks | awk -v ORS='' '
             /Description/ {print $2}
             /Mute/ {if ($2=="yes") print "#"; else print "="}
             /\tVolume/ {print $5 " "}')
-        s+="| "
+        s+='| '
 
         # date and time
         s+=$(date '+%F %A %R')
-        s+=" "
+        s+=' '
 
         xsetroot -name $s
 
