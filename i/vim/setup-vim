@@ -30,4 +30,10 @@ pip3 install black
     sudo make install
 )
 
-# todo I think plugged now installs plugins automatically the first time, no :PlugInstall needed here
+if [[ ! -f ~/.vim/autoload/plug.vim ]]; then
+    curl --fail --location --create-dirs \
+         --output ~/.vim/autoload/plug.vim \
+        https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+    vim -c PlugInstall
+    # todo but how to make it exit after done, if no error?
+fi

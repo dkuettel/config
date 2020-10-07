@@ -23,5 +23,11 @@ pip3 install black pynvim
     sudo make install
 )
 
-# todo :PlugInstall needs to happen, I thought its automatic on first start?
-# could be in that first if, where we install Plugged? if we had to, we should also install
+
+if [[ ! -f ~/.local/share/nvim/site/autoload/plug.vim ]]; then
+    curl --fail --location --create-dirs \
+        --output ~/.local/share/nvim/site/autoload/plug.vim \
+        https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+    nvim -c PlugInstall
+    # todo but how to make it exit after done, if no error?
+fi
