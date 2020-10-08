@@ -30,6 +30,7 @@ else
 fi
 
 ln -sfT ~/Dropbox ~/dbox
+ln -sfT ~/Dropbox/toys ~/toys
 
 # install in systemd
 # todo security risk to link files here?
