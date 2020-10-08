@@ -4,9 +4,10 @@ set -eux -o pipefail
 # https://docs.aws.amazon.com/systems-manager/latest/userguide/session-manager-getting-started-enable-ssh-connections.html
 
 if ! session-manager-plugin; then
-    curl 'https://s3.amazonaws.com/session-manager-downloads/plugin/latest/ubuntu_64bit/session-manager-plugin.deb' \
-        -o 'session-manager-plugin.deb'
-    sudo dpkg -i session-manager-plugin.deb
+    curl --fail \
+        'https://s3.amazonaws.com/session-manager-downloads/plugin/latest/ubuntu_64bit/session-manager-plugin.deb' \
+        -o /tmp/session-manager-plugin.deb
+    sudo apt-get install /tmp/session-manager-plugin.deb
     session-manager-plugin
-    rm session-manager-plugin.deb
+    rm /tmp/session-manager-plugin.deb
 fi
