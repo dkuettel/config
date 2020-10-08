@@ -9,11 +9,11 @@ xkb_symbols "base" {
 };
 
 default  partial alphanumeric_keys modifier_keys
-xkb_symbols "farbase" {
+xkb_symbols "boom" {
 
     include "us(basic)"
-    name[Group1]= "PointLuck (farbase, ptc office desktop)";
+    name[Group1]= "PointLuck (boom, ptc office desktop)";
 
-    key <TLDE> { [grave, asciitilde] };
-    key <LSGT> { [Escape, Escape] };
+    key <LSGT> { [grave, asciitilde] };
+    key <TLDE> { [Escape, Escape] };
 };
