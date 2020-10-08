@@ -19,19 +19,6 @@ if [[ ! -e ~/.dropbox-dist ]]; then
     )
 fi
 
-if pgrep dropbox; then
-    echo 'seems like there is already a dropbox running'
-else
-    ~/.dropbox-dist/dropboxd
-    # note: first time this will require you to login
-    #   headless -> link is printed
-    #   headfull -> browser opens
-    #   alternatively, systemctl status dropbox@$USER shows the link when run as service
-fi
-
-ln -sfT ~/Dropbox ~/dbox
-ln -sfT ~/Dropbox/toys ~/toys
-
 # install in systemd
 # todo security risk to link files here?
 sudo ln -sfT \
@@ -39,3 +26,9 @@ sudo ln -sfT \
     /etc/systemd/system/dropbox@.service
 sudo systemctl enable dropbox@$USER
 sudo systemctl start dropbox@$USER
+
+echo 'check dropbox status below, probably need to authenticate in a browser'
+journalctl --follow --unit=dropbox@$USER.service || true
+
+ln -sfT ~/Dropbox ~/dbox
+ln -sfT ~/Dropbox/toys ~/toys
