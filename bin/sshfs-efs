@@ -1,6 +1,11 @@
 #!/bin/zsh
 set -eux -o pipefail
 
+if [[ ! -d /efs ]]; then
+    sudo mkdir -p /efs
+    sudo chown dkuettel:dkuettel /efs
+fi
+
 # maybe check https://serverfault.com/questions/6709/sshfs-mount-that-survives-disconnect
 # todo testing reconnect, will it work after sleep/suspend?
 # todo auto_cache working for hemanths big rendering files?
