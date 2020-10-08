@@ -47,3 +47,7 @@ Host blue
 
 Host bitbucket.org
     IdentityFile ~/.ssh/private-id-rsa
+
+Host Base
+    Port 8347
+    HostName somewhere
