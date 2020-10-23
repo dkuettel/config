@@ -4,10 +4,10 @@ alias ls='ls --color=auto'
 alias lr='ls -htrcFgG --time-style=iso'
 alias la='ls -lhFva'
 alias ll='ls -lhFv'
-alias lll='ls -lhFv --color=yes | less -R'
+function lll { ls -lhFv --color=yes $@ | less -R }
 alias lsdirs='ls -v -d */'
 alias lldirs='ls -vldh */'
-# lrt () { ls -hltrcF --color=always "$@" | tail }
+# function lrt { ls -hltrcF --color=always $@ | tail }
 
 ## navigation
 # todo zsh supports .. and ... without aliases?
