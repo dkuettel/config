@@ -1,0 +1,9 @@
+#!/bin/zsh
+set -eux -o pipefail
+
+# from https://www.tecmint.com/install-kvm-on-ubuntu/
+sudo apt-get install -y qemu qemu-kvm libvirt-daemon libvirt-clients bridge-utils virt-manager
+
+# sudo systemctl status libvirtd
+
+echo 'use virt-manager for gui'
