@@ -1,0 +1,16 @@
+
+emea-portal.ptc.com for vpn url, not as in documentation
+https://ptccloud.sharepoint.com/:f:/t/IT-DTT-Team/EmJWI6-v6iRPgA_eDo0kp8ABlOO4CerPB41L-ft7Vc7Z-w?e=DVfivc
+password was ptccde4, change it
+somehow user doesnt change even if set at install time
+works when installed in vbox more or less
+set user to dkuettel1vx1 or 2 and so on, then no need to change it later
+(do it in the setup)
+kvm works nicely actually
+
+after complete update graphics not messed up anymore
+but some updates failed windind or samba or something
+maybe only working inside ptc? samba connection might be nice
+
+updating trying
+but saltsack has some problems, about i386 arch or so
