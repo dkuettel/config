@@ -1,5 +1,0 @@
-#!/bin/zsh
-set -eux -o pipefail
-
-# if not setup, use https://emeas-portal.ptc.com as url
-/usr/local/pulse/pulseUi
