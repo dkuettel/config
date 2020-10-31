@@ -1,9 +1,4 @@
 #!/bin/zsh
 set -eux -o pipefail
 
-# they both can help with the file open dialog (native)
-# but not perfect
-#export GDK_SCALE=2
-export GDK_DPI_SCALE=1.5
-
 /usr/bin/slack --force-device-scale-factor=1.5

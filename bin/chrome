@@ -1,5 +1,4 @@
 #!/bin/zsh
 set -eux -o pipefail
 
-#GDK_DPI_SCALE=1.5 google-chrome --force-device-scale-factor=1.5
-GDK_SCALE=2 google-chrome --force-device-scale-factor=1.5
+google-chrome --force-device-scale-factor=1.5

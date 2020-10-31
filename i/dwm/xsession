@@ -36,6 +36,9 @@ xsetroot -bg black
 xsetroot -solid black
 feh --no-fehbg --bg-fill ~/config/i/dwm/5_stripes_landscape.jpg
 
+# high dpi
+export GDK_SCALE=2
+
 function status {
     while true; do
         s=' '

@@ -1,5 +1,4 @@
 #!/bin/zsh
 set -eu -o pipefail
 
-#GDK_DPI_SCALE=1.8 /usr/bin/transmission-gtk
-GDK_SCALE=2 /usr/bin/transmission-gtk
+/usr/bin/transmission-gtk

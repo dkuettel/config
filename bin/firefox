@@ -1,4 +1,4 @@
 #!/bin/zsh
 set -eux -o pipefail
 
-GDK_DPI_SCALE=1.5 /usr/bin/firefox
+GDK_SCALE= GDK_DPI_SCALE=1.5 /usr/bin/firefox
