@@ -1,0 +1,38 @@
+enable in bios
+but also the os must shutdown in a way that the network card stays in standby mode
+on ubuntu: sudo ethtool -s INTERFACE wol g
+in windows probably needed too
+see https://www.techrepublic.com/article/how-to-enable-wake-on-lan-in-ubuntu-server-18-04/
+see https://help.ubuntu.com/community/WakeOnLan
+
+netplan can configure it permanently
+seems like the right solution
+but someone I need to configure match: macaddress like so:
+    network:
+      ethernets:
+        enp5s0:
+          match:
+            macaddress: 04:d9:f5:d3:63:ff
+          dhcp4: true
+          wakeonlan: true
+      version: 2
+(in /etc/netplan/*)
+not sure if it didnt find enp5s0 or if it needs mac address to enable it
+netplan has no debuging capabilities to speak of
+
+fritzbox allows to start on demand
+it also allows to start on external connection (maybe on port 22)
+
+python to produce a magic packet:
+    #!/usr/bin/env python
+
+    import socket
+    import sys
+
+    broadcast = "192.168.178.255"
+    mac = "04:D9:F5:D3:63:FF"
+
+    data = ''.join(['FF' * 6, mac.replace(':', '') * 16])
+    sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+    sock.setsockopt(socket.SOL_SOCKET, socket.SO_BROADCAST, 1)
+    sock.sendto(data.decode("hex"), (broadcast, 9))
