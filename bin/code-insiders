@@ -1,4 +1,0 @@
-#!/bin/zsh
-set -eux -o pipefail
-
-/snap/bin/code-insiders --force-device-scale-factor=1.5
