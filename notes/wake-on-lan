@@ -1,10 +1,17 @@
 enable in bios
 but also the os must shutdown in a way that the network card stays in standby mode
-on ubuntu: sudo ethtool -s INTERFACE wol g
-in windows probably needed too
-see https://www.techrepublic.com/article/how-to-enable-wake-on-lan-in-ubuntu-server-18-04/
-see https://help.ubuntu.com/community/WakeOnLan
 
+on ubuntu
+    sudo ethtool -s INTERFACE wol g
+    for permanent setting see further down
+    see https://www.techrepublic.com/article/how-to-enable-wake-on-lan-in-ubuntu-server-18-04/
+    see https://help.ubuntu.com/community/WakeOnLan
+
+in windows
+    in device manager/network cards, set in power management and advanced tab
+    see https://www.groovypost.com/howto/enable-wake-on-lan-windows-10/
+
+ubuntu permanent setting
 netplan can configure it permanently
 seems like the right solution
 but someone I need to configure match: macaddress like so:
