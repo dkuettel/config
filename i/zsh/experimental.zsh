@@ -27,3 +27,6 @@ source ~/toys/one-shell-history/zsh/setup.zsh
 
 # gpu usage per process
 alias watch-gpu='watch nvidia-smi pmon -c 1'
+
+# multipass, any name clashes like this?
+alias mp=multipass
