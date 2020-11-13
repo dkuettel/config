@@ -17,7 +17,7 @@ def alert_diskspace():
             except FileNotFoundError:
                 pass
             if free < threshold:
-                alerts.append(f"{folder}<{threshold}gb")
+                alerts.append(f"{folder}@{round(free)}<{threshold}gb")
         if len(alerts) == 0:
             return None
         else:
