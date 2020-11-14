@@ -12,6 +12,12 @@ echo "deb http://repository.spotify.com stable non-free" | sudo tee /etc/apt/sou
 sudo apt-get update
 sudo apt-get install -yqq spotify-client
 
+# as a hacky check to see that we currently use NetworkManager as explained above
+if ! grep '  renderer: NetworkManager' /etc/netplan/00-config.yaml; then
+    echo 'spotify probably doesnt work without using NetworkManager in netplan'
+    exit 1
+fi
+
 # snap version
 # see https://www.spotify.com/ch-de/download/linux/b/
 # pro: no problems with networkd
