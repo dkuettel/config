@@ -35,9 +35,9 @@ sudo apt-get install -qqy $i
 # also maybe dont install it by default? only at home?
 
 # sorted list of snaps for desktop
-i=()
-i+=vlc
-sudo snap install $i
+#i=()
+#i+=something
+#sudo snap install $i
 
 # ordered list of custom setups
 setups=(
@@ -52,6 +52,7 @@ setups=(
     okular
     syncthing
     slack
+    vlc
 )
 for i in $setups; do
     ${0:a:h}/../$i/setup

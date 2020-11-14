@@ -1,0 +1,8 @@
+#!/bin/zsh
+set -eux -o pipefail
+
+sudo snap install vlc
+
+# TODO we wont know if the config file updates
+mkdir -p /home/dkuettel/snap/vlc/common
+ln -sfT ${0:a:h}/vlcrc /home/dkuettel/snap/vlc/common/vlcrc

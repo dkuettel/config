@@ -70,10 +70,6 @@ function tb { tensorboard --logdir=${1:-.} }
 # jq with less and colors
 function jql { jq --color-output $@ | less }
 
-# start new vlc in stereo mode (original is somehow strange on stereo)
-# always continue by default
-alias vlc='vlc --stereo-mode=1 --qt-continue=2'
-
 # todo for now assuming globally installed, could also use a canonical pipenv?
 # lets see if fast enough, tf might be heavy/slow to import everytime?
 alias ipy="ipython3 -c 'import numpy as np, tensorflow as tf, math' -i"
