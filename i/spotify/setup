@@ -1,13 +1,22 @@
 #!/bin/zsh
 set -eux -o pipefail
 
-# apt version stopped working for me
-#curl -sS https://download.spotify.com/debian/pubkey.gpg | sudo apt-key add -
-#echo 'deb http://repository.spotify.com stable non-free' | sudo tee /etc/apt/sources.list.d/spotify.list
-#sudo apt-get update
-#sudo apt-get install -yqq spotify-client
+# apt version
+# see https://www.spotify.com/ch-de/download/linux/b/
+# pro: fast startup, correct mouse size
+# con: doesnt work with networkd, needs NetworkManager (set in netplan as renderer)
+#   see https://community.spotify.com/t5/Desktop-Linux/No-internet-connection-detected-error-code-4-on-Ubuntu-20-04-1/td-p/5062274
+# TODO maybe the above "bug" is fixed at some point?
+curl -sS https://download.spotify.com/debian/pubkey_0D811D58.gpg | sudo apt-key add -
+echo "deb http://repository.spotify.com stable non-free" | sudo tee /etc/apt/sources.list.d/spotify.list
+sudo apt-get update
+sudo apt-get install -yqq spotify-client
 
-# snap version easier to handle, sometimes didnt work for me with those "adapters"
-# but didnt have the no-connection problem error 4
-sudo snap install spotify
-# todo can we control the settings, like high quality, show unavalaible, hide feed, ...?
+# snap version
+# see https://www.spotify.com/ch-de/download/linux/b/
+# pro: no problems with networkd
+# con: slow to startup, small mouse pointer
+# TODO cons might be fixed in a newer version
+#sudo snap install spotify
+
+# TODO can we control the settings, like high quality, show unavalaible, hide feed, ...?
