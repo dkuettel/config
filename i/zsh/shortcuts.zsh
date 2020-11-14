@@ -78,3 +78,6 @@ function treel { tree -C $@ | less }
 
 alias c-system=systemctl
 alias c-journal=journalctl
+
+# make vlc use the custom config from git
+alias vlc='vlc --config ~/config/i/vlc/vlcrc'

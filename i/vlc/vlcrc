@@ -1654,7 +1654,7 @@ qt-privacy-ask=0
 #qt-fs-sensitivity=3
 
 # When to raise the interface (integer)
-#qt-auto-raise=1
+qt-auto-raise=0
 
 [ncurses] # Ncurses interface
 
@@ -4170,7 +4170,7 @@ stereo-mode=1
 #deinterlace-mode=auto
 
 # Video output module (string)
-#vout=
+vout=any
 
 # Video filter module (string)
 #video-filter=
@@ -4224,7 +4224,7 @@ stereo-mode=1
 #audio-language=
 
 # Subtitle language (string)
-#sub-language=
+sub-language=english, English, en, us, any
 
 # Menu language (string)
 #menu-language=
