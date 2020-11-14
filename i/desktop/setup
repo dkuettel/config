@@ -25,6 +25,7 @@ i+=gthumb # together with scrot
 i+=scrot # screenshots
 i+=transmission-gtk
 i+=xclip
+i+=xdotool # for xsession and spotify title
 i+=yaru-theme-icon # gnome apps currently seem to use that one and dont depend on it when installing, might change again
 sudo apt-get install -qqy $i
 

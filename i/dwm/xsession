@@ -43,6 +43,11 @@ function status {
     while true; do
         s=' '
 
+        # spotify
+        if window_id=$(xdotool search --onlyvisible --class spotify); then
+            s+="$(xdotool getwindowname $window_id) | "
+        fi
+
         # redshift
         s+=$(awk '
             /Status/ {s=$4}
