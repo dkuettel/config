@@ -1,4 +1,24 @@
 #!/bin/zsh
 set -eu -o pipefail
 
-~/Dropbox/toys/pstart/start
+# see https://medium.com/njiuko/using-fzf-instead-of-dmenu-2780d184753f
+
+out=exe-selection
+
+args=(
+    -c pstart
+    -t pstart
+    -f 'C64 Pro Mono:size=12:antialias=true:autohint=true'
+    -C 2
+    -g '50x50+1200+100'
+    -e pstart-menu $out
+)
+st $args
+
+if [[ -f $out ]]; then
+    selection=($(cat $out))
+    rm $out
+    if [[ $selection[1] == 'enter' ]]; then
+        exec $selection[2]
+    fi
+fi
