@@ -2,18 +2,7 @@
 set -eu -o pipefail
 
 out=${1:-/dev/stdout}
-
-# other options to list commands:
-# whence -pm '*', but it also seems to list some things that I cant use
-# compgen -c, didnt test
-cmd_find=(
-    find
-    $path
-    -maxdepth 1
-    -type f,l
-    -executable
-    -printf '%f\n'
-)
+env=${2:-restricted}
 
 cmd_fzf=(
     fzf
@@ -21,11 +10,48 @@ cmd_fzf=(
     --preview-window=down:10
     --expect=enter
 )
-
 # ideas
 # could expect other keys apart from enter and then
 # - run in terminal with log
 # - start in terminal and allow to add arguments
 # - have a dedicated tmux (different socket file) and start it in there, easy to attach and check output if necessary
 
-($cmd_find | sort --unique | $cmd_fzf > $out) || rm -f $out
+if [[ $env == 'all' ]]; then
+    # other options to list commands:
+    # whence -pm '*', but it also seems to list some things that I cant use
+    # compgen -c, didnt test
+    cmd_find=(
+        find
+        $path
+        -maxdepth 1
+        -type f,l
+        -executable
+        -printf '%f\n'
+    )
+    ($cmd_find | sort --unique | $cmd_fzf > $out) || rm -f $out
+
+elif [[ $env == 'restricted' ]]; then
+    curated=(  # sorted
+        bt-off
+        bt-on
+        bt-view
+        chrome
+        firefox
+        ichrome
+        pavucontrol
+        slack
+        spotify
+        sshot
+        ssleep
+        todoist
+        torrents
+        use-bose
+        use-headphones
+        use-speakers
+    )
+    ((for i in $curated; do echo $i; done) | $cmd_fzf > $out) || rm -f $out
+
+else
+    echo "unknown env=$env"
+    exit 1
+fi

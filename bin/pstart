@@ -4,6 +4,7 @@ set -eu -o pipefail
 # see https://medium.com/njiuko/using-fzf-instead-of-dmenu-2780d184753f
 
 out=exe-selection
+env=${1:-restricted}
 
 args=(
     -c pstart
@@ -11,7 +12,7 @@ args=(
     -f 'C64 Pro Mono:size=12:antialias=true:autohint=true'
     -C 2
     -g '50x50+1200+100'
-    -e pstart-menu $out
+    -e pstart-menu $out $env
 )
 st $args
 
