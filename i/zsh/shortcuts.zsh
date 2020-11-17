@@ -76,8 +76,8 @@ alias ipy="ipython3 -c 'import numpy as np, tensorflow as tf, math' -i"
 
 function treel { tree -C $@ | less }
 
-alias c-system=systemctl
-alias c-journal=journalctl
-
 # make vlc use the custom config from git
 alias vlc='vlc --config ~/config/i/vlc/vlcrc'
+
+alias sc=systemctl
+alias jc=journalctl
