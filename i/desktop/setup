@@ -10,8 +10,10 @@ set -eux -o pipefail
 echo 'note: xserver-xorg-hwe-20.04 might be ready now'
 
 sudo apt-get install xinit # for startx
-# this installed a gretter already
-sudo systemctl disable gdm.service
+
+# using the right target should prevent any greeter from appearing, not fully tested yet
+#sudo systemctl disable gdm.service
+sudo systemctl set-default multi-user.target
 
 ${0:a:h}/../nvidia/setup
 echo 'nvidia-smi wont work before restart'
