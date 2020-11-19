@@ -1,0 +1,5 @@
+#!/bin/zsh
+set -eux -o pipefail
+
+echo 'merge from boom and base'
+exit 1

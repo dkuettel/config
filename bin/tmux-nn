@@ -4,7 +4,7 @@ set -eux -o pipefail
 folder=${${1:-.}:a}
 name=$(realpath --relative-base=$HOME $folder)
 
-PATH=$folder/bin:$PATH
+PATH=$HOME/config/bin/nn:$folder/bin:$PATH
 
 args=(
     new-session
