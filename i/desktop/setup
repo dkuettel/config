@@ -11,8 +11,10 @@ echo 'note: xserver-xorg-hwe-20.04 might be ready now'
 
 sudo apt-get install xinit # for startx
 
-# using the right target should prevent any greeter from appearing, not fully tested yet
-#sudo systemctl disable gdm.service
+# using the right target should prevent any greeter from appearing?
+# not sure, so currently I still explicitely disable gdm as well
+sudo systemctl disable gdm.service
+sudo systemctl stop gdm.service
 sudo systemctl set-default multi-user.target
 
 ${0:a:h}/../nvidia/setup
