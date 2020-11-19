@@ -1,16 +1,26 @@
+original documentation https://ptccloud.sharepoint.com/:f:/t/IT-DTT-Team/EmJWI6-v6iRPgA_eDo0kp8ABlOO4CerPB41L-ft7Vc7Z-w?e=DVfivc
+has some mistakes
 
-emea-portal.ptc.com for vpn url, not as in documentation
-https://ptccloud.sharepoint.com/:f:/t/IT-DTT-Team/EmJWI6-v6iRPgA_eDo0kp8ABlOO4CerPB41L-ft7Vc7Z-w?e=DVfivc
-password was ptccde4, change it
-somehow user doesnt change even if set at install time
-works when installed in vbox more or less
-set user to dkuettel1vx1 or 2 and so on, then no need to change it later
-(do it in the setup)
-kvm works nicely actually
+use kvm, works nicely (virtualbox is more hassle)
+virt-manager for gui
+install from provided ptc iso image
+if possible during install, set username, and mostly set hostname to something like dkuettel1vx1 or x2, or x3, ...
 
-after complete update graphics not messed up anymore
-but some updates failed windind or samba or something
-maybe only working inside ptc? samba connection might be nice
+default password is ptccde4, change it after login
+use hostnamectl to set hostname as above
 
-updating trying
-but saltsack has some problems, about i386 arch or so
+install all updates
+some will fail, winbind, can probably be removed
+
+this might not really be necessary ...
+systemctl start salt-minion
+systemctl enable salt-minion
+systemctl status cylancesvc.service, probably shows errors, should be fine
+
+launch /usr/local/pulse/pulseUI
+use emea-portal.ptc.com for vpn url, not as in documentation
+login
+
+use firefox for oracle and stuff
+probably finprdapp.ptc.com:5092/OA_HTML/OA.jsp?OAFunc=OAHOMEPAGE
+(not sure if there is a better url)
