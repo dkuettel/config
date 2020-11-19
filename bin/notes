@@ -2,5 +2,5 @@
 set -eux -o pipefail
 
 cd ~/dbox/notes
-[[ -v TMUX ]] && tmux rename-window notes
+[[ -v TMUX_PANE ]] && tmux rename-window -t $TMUX_PANE notes
 nvim -p standup.markdown todo.todo
