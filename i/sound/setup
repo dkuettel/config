@@ -1,4 +1,16 @@
 #!/bin/zsh
 set -eux -o pipefail
 
-sudo apt install -yqq pavucontrol blueman
+packages=(
+    pavucontrol  # gui
+    blueman  # bluetooth
+    pulseaudio-utils  # pacmd
+)
+sudo apt-get install -yqq $packages
+
+# install hostname specific configurations
+mkdir -p ~/.config/pulse
+folder=${0:a:h}/hosts/$(hostname)
+[[ -d $folder ]] || (echo 'no host specific pulse configuration at' $folder; false)
+ln -sfT $folder/daemon.conf ~/.config/pulse/daemon.conf
+ln -sfT $folder/default.pa ~/.config/pulse/default.pa

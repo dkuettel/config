@@ -1,0 +1,5 @@
+#!/bin/zsh
+set -eu -o pipefail
+
+# TODO this probably only works for my machine at home, could make a virtual named sink to be generic?
+pacmd set-default-sink bluez_sink.2C_41_A1_49_96_07.a2dp_sink

@@ -1,0 +1,12 @@
+.include /etc/pulse/default.pa
+
+# disable hdmi from nvidia/monitor
+# TODO doesnt end up in off mode even though we set it here
+set-card-profile alsa_card.pci-0000_09_00.1 off
+
+# set internal to 4.0 and then split into 2 for speakers and 2 for headphones
+set-card-profile alsa_card.pci-0000_0b_00.4 output:analog-surround-40
+load-module module-remap-sink sink_name=speakers sink_properties="device.description='speakers'" remix=no master=alsa_output.pci-0000_0b_00.4.analog-surround-40 channels=2 master_channel_map=front-left,front-right channel_map=front-left,front-right
+load-module module-remap-sink sink_name=headphones sink_properties="device.description='headphones'" remix=no master=alsa_output.pci-0000_0b_00.4.analog-surround-40 channels=2 master_channel_map=rear-left,rear-right channel_map=front-left,front-right
+
+set-default-sink speakers

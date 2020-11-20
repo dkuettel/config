@@ -70,11 +70,27 @@ function status {
         s+=' | '
 
         # sound
-        s+=$(pactl list sinks | awk -v ORS='' '
-            /Description/ {print $2}
-            /Mute/ {if ($2=="yes") print "#"; else print "="}
-            /\tVolume/ {print $5 " "}')
-        s+='| '
+        # TODO might only work for base, and looks only at currently default sink (maybe sources are connected non-default)
+        if s+=$(pacmd list-sinks | awk -v ORS='' '
+            /* index:/ {is_default=1}
+            /  index:/ {is_default=0}
+            /muted: yes/ {is_muted=1}
+            /muted: no/ {is_muted=0}
+            /\tvolume:/ {volume=$5}
+            /device.description/ {
+                match($0, "device.description = \"(.*)\"", m)
+                name=m[1]
+                if(is_default) {
+                    if(is_muted) {
+                        print name "#" volume " "
+                    } else {
+                        print name "=" volume " "
+                    }
+                }
+            }
+        '); then
+            s+='| '
+        fi
 
         # date and time
         s+=$(date '+%F %A %R')

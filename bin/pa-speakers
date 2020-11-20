@@ -1,4 +1,0 @@
-#!/bin/zsh
-set -eu -o pipefail
-
-pa-target speakers

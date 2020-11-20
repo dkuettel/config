@@ -1,0 +1,4 @@
+#!/bin/zsh
+set -eu -o pipefail
+
+pacmd set-default-sink headphones

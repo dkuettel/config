@@ -1,4 +1,4 @@
 #!/bin/zsh
 set -eu -o pipefail
 
-pa-target headphones
+pacmd set-default-sink speakers
