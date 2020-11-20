@@ -6,6 +6,7 @@ prune=(
     -or -path ./i/pdocs/pdocs
     -or -path ./i/ptags/ptags
     -or -path ./i/tmux/tmux
+    -or -path ./i/tmux/python
     -or -path ./i/vim/config/vimminent
     -or -path ./i/vim/nvim
     -or -path ./i/vim/vim
