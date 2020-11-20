@@ -1,6 +1,12 @@
 #!/bin/zsh
 set -eux -o pipefail
 
+# simple check to see if there is an nvidia gpu, might not be perfect
+if ! grep 'VGA.*NVIDIA'; then
+    echo 'no nvidia gpu found'
+    exit 0
+fi
+
 # use
 # > ubuntu-drivers list
 # to see what are the available options
