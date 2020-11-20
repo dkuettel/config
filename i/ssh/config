@@ -24,6 +24,8 @@ Host tb
     LocalForward 6006 localhost:6006
 
 Host i-*
+    User dkuettel
+    IdentityFile ~/.ssh/ptc-id-rsa
     ProxyCommand ssh-proxy-command-aws-start-and-ssm %h %p
     ServerAliveInterval 10
 
