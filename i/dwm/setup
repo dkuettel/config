@@ -36,15 +36,6 @@ ln -sfT $h/xsession ~/.xsession
     ln -sfT /usr/share/icons/oxy-blue/ ~/.icons/default
 )
 
-( # dmenu
-    cd $h/dmenu
-
-    git config user.email 'dkuettel@gmail.com'
-
-    ./setup-git.sh
-    ./install.sh
-)
-
 ( # slock
     cd $h/slock
     sudo apt-get install -yqq libx11-dev make gcc libxft-dev libxinerama-dev libxrandr-dev
