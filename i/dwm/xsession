@@ -107,4 +107,4 @@ status >& .log-dwm-status &
 dwm
 
 kill %status || true
-kill %redshift || true
+#kill %redshift || true  # seems to quit itself anyway, and this way there is no bright flash just before exiting
