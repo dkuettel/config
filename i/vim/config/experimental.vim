@@ -167,3 +167,7 @@ nnoremap ,qfd :call AddQuickfixPylintDisabler()<enter>
 " todo could work, a bit aggressive?
 " with true color probably more useful, less stark change
 "highlight NormalNC ctermbg=0
+
+" save and exit all
+" note: Q is also ex-mode, gQ as well as an alternative
+nmap Q :xa<enter>
