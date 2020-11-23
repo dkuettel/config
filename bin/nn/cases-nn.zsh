@@ -130,6 +130,17 @@ for arg in $@; do
             )
             ;;
 
+        (export)
+            f=/efs/dkuettel/clustering/sigma_tile/MtXp/4691606d654341b98f04e5e2e15b4fc4
+            cmd=(
+                python3 -m nn.mtar360.eap1 export-network
+                    --template-path=$f/template.yaml
+                    --style-path=$f/style.yaml
+                    --model-path=$f/recalibrated_model.h5
+                    --output-dir=$f/export-stefan
+            )
+            ;;
+
         (*)
             echo 'unknown value:' $arg
             exit 1

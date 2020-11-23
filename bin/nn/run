@@ -44,7 +44,7 @@ args+=(
 )
 
 # s3 cache
-[[ ! -d $h/s3-cache ]] || (echo 'you still have a project-local s3-cache'; false)
+[[ -L $h/s3-cache ]] || (echo 's3-cache is not symlinked, maybe still project local?'; false)
 mkdir -p ~/envs/s3-cache
 mount ~/envs/s3-cache /xp/s3-cache
 args+=(
@@ -91,15 +91,15 @@ fi
 case ${0:t} in
 
     (nn)
-        source ${0:a:h}/../cases-nn.zsh
+        source ${0:a:h}/cases-nn.zsh
         ;;
 
     (flow)
-        source ${0:a:h}/../cases-flow.zsh
+        source ${0:a:h}/cases-flow.zsh
         ;;
 
     (*)
-        echo 'unknown value:' $arg
+        echo 'unknown value:' ${0:t}
         exit 1
     ;;
 
