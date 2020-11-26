@@ -33,5 +33,6 @@
     sd = stash pop
     cp = cherry-pick
     d = diff
+    dno = diff --name-only
     rc = rebase --continue
     sm = submodule
