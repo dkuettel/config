@@ -130,13 +130,26 @@ for arg in $@; do
             )
             ;;
 
-        (export)
+        (export-cl)
             f=/efs/dkuettel/clustering/sigma_tile/MtXp/4691606d654341b98f04e5e2e15b4fc4
             cmd=(
                 python3 -m nn.mtar360.eap1 export-network
                     --template-path=$f/template.yaml
                     --style-path=$f/style.yaml
                     --model-path=$f/recalibrated_model.h5
+                    --output-dir=$f/export-stefan
+            )
+            ;;
+
+        (export-pe)
+            #f=/efs/dkuettel/clustering/sigma_tile/MtXp/27419f5d7f16409a8661b63478ea9845
+            #f=/efs/dkuettel/clustering/sigma_tile/MtXp/86c98321923b46fa846014d78d956058
+            f=/efs/dkuettel/clustering/sigma_tile/MtXp/b4faaaa4a1164e61b45a206597ad580c
+            cmd=(
+                python3 -m nn.mtar360.eap1 export-network
+                    --template-path=$f/template.yaml
+                    --style-path=$f/style.yaml
+                    --model-path=$f/ensemble_model.h5
                     --output-dir=$f/export-stefan
             )
             ;;
