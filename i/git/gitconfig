@@ -34,5 +34,6 @@
     cp = cherry-pick
     d = diff
     dno = diff --name-only
+    dns = diff --name-status
     rc = rebase --continue
     sm = submodule
