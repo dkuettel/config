@@ -48,6 +48,7 @@ elif [[ $env == 'restricted' ]]; then
         use-bose
         use-headphones
         use-speakers
+        virt-manager
     )
     ((for i in $curated; do echo $i; done) | $cmd_fzf > $out) || rm -f $out
 
