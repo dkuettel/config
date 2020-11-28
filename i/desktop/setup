@@ -7,7 +7,7 @@ set -eux -o pipefail
 #sudo apt-get upgrade -qqy
 # todo hwe-20.04 not there (yet)
 #sudo apt-get install -qqy --install-recommends xserver-xorg-hwe-20.04
-echo 'note: xserver-xorg-hwe-20.04 might be ready now'
+echo 'note: xserver-xorg-hwe-20.04 might be ready now, did not exist on 2020-11-28'
 
 sudo apt-get install -yqq xinit # for startx
 # this installed a gretter already
