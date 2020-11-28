@@ -1,6 +1,7 @@
 [user]
     name = Daniel Kuettel
 [core]
+    sshCommand = git-ssh-dispatch
     editor = nvim
 [push]
     default = simple

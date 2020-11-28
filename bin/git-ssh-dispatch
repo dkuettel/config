@@ -1,0 +1,43 @@
+#!/bin/zsh
+set -eu -o pipefail
+
+# this script roughly acts like openssh
+# at least in terms of how git uses it
+# I only see it calling ssh in 3 variations:
+# > ssh -G git@bitbucket.org (discovery)
+# > ssh git@bitbucket.org git-upload-pack 'dkuettel/config.git' (fetch)
+# > ssh git@bitbucket.org git-receive-pack 'dkuettel/config.git' (push)
+# note: the last two elements (the command) come as one argument $2
+
+if [[ $1 == '-G' && $# == 2 ]]; then
+    ssh $@
+    exit
+fi
+
+if [[ ! $2 =~ "git-(upload|receive)-pack '(.*)'" && $# == 2 ]]; then
+    echo 'unexpected form' $@ >&2
+    exit 1
+fi
+
+target=$1:$match[2]
+
+case $target in
+
+    (git@bitbucket.org:dkuettel/*)
+        key=private_git_id_rsa ;;
+
+    (git@github.com:dkuettel/*)
+        key=private_git_id_rsa ;;
+
+    (git@github.com:ThingWorx/*)
+        key=ptc_git_id_rsa ;;
+
+    (*)
+        echo 'no match for' $target >&2
+        exit 1
+        ;;
+
+esac
+
+echo $target '->' $key >&2
+ssh -i ~/.ssh/$key $@

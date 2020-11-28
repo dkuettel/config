@@ -1,5 +1,10 @@
 #!/bin/zsh
 set -eux -o pipefail
 
+( # vimminent submodule
+    cd ${0:a:h}/config/vimminent
+    git config user.email 'dkuettel@gmail.com'
+)
+
 ${0:a:h}/setup-vim
 ${0:a:h}/setup-nvim
