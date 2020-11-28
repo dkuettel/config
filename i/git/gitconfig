@@ -1,5 +1,7 @@
-[user]
-    name = Daniel Kuettel
+[includeIf "gitdir:~/config/"]
+    path = ~/config/i/git/gitconfig-private-author
+[includeIf "gitdir:~/envs/"]
+    path = ~/config/i/git/gitconfig-ptc-author
 [core]
     sshCommand = git-ssh-dispatch
     editor = nvim

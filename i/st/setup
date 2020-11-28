@@ -6,8 +6,6 @@ h=${0:a:h}
 ( # st
     cd $h/st
 
-    git config user.email 'dkuettel@gmail.com'
-
     ./setup-requirements.sh
     ./setup-git.sh
     ./install.sh

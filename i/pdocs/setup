@@ -3,8 +3,6 @@ set -eux -o pipefail
 
 cd ${0:a:h}/pdocs
 
-git config user.email 'dkuettel@gmail.com'
-
 # todo eventually have it in the right zshenv or so?
 export PIPENV_VENV_IN_PROJECT=1
 pipenv install
