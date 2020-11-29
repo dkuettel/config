@@ -103,35 +103,33 @@ def status_gpu():
     import pynvml as nv
 
     try:
-        try:
-            nv.nvmlInit()
-        except:
+        nv.nvmlInit()
+    except:
+
+        def status():
+            return None
+
+    else:
+        count = nv.nvmlDeviceGetCount()
+        if count > 0:
+            handle = nv.nvmlDeviceGetHandleByIndex(0)
+
+            def status():
+                # memory has .total, .used, .free; in bytes
+                memory = nv.nvmlDeviceGetMemoryInfo(handle)
+                # compute has .gpu, .memory; in percent
+                compute = nv.nvmlDeviceGetUtilizationRates(handle)
+                # using GiB=2**30 instead of GB=1e9, because thats also what nvidia-smi shows
+                return f"{compute.gpu:2}% {round(memory.used/2**30)}/{round(memory.total/2**30)}G"
+
+        else:
 
             def status():
                 return None
 
-        else:
-            count = nv.nvmlDeviceGetCount()
-            if count > 0:
-                handle = nv.nvmlDeviceGetHandleByIndex(0)
-
-                def status():
-                    # memory has .total, .used, .free; in bytes
-                    memory = nv.nvmlDeviceGetMemoryInfo(handle)
-                    # compute has .gpu, .memory; in percent
-                    compute = nv.nvmlDeviceGetUtilizationRates(handle)
-                    # using GiB=2**30 instead of GB=1e9, because thats also what nvidia-smi shows
-                    return f"{compute.gpu:2}% {round(memory.used/2**30)}/{round(memory.total/2**30)}G"
-
-            else:
-
-                def status():
-                    return None
-
-        yield status
-
-    finally:
         nv.nvmlShutdown()
+
+    yield status
 
 
 def main(interval=3):
