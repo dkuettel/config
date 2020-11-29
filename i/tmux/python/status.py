@@ -110,6 +110,8 @@ def status_gpu():
         def status():
             return None
 
+        yield status
+
     else:
         count = nv.nvmlDeviceGetCount()
         if count > 0:
@@ -128,9 +130,9 @@ def status_gpu():
             def status():
                 return None
 
-        nv.nvmlShutdown()
+        yield status
 
-    yield status
+        nv.nvmlShutdown()
 
 
 def main(interval=3):
