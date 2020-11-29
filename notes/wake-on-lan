@@ -3,6 +3,7 @@ but also the os must shutdown in a way that the network card stays in standby mo
 
 on ubuntu
     sudo ethtool -s INTERFACE wol g
+    (use, eg, ethtool enp5s0 to see current settings)
     for permanent setting see further down
     see https://www.techrepublic.com/article/how-to-enable-wake-on-lan-in-ubuntu-server-18-04/
     see https://help.ubuntu.com/community/WakeOnLan
