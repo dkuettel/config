@@ -16,8 +16,9 @@ def alert_diskspace():
                 free = psutil.disk_usage(folder).free / 2 ** 30
             except FileNotFoundError:
                 pass
-            if free < threshold:
-                alerts.append(f"{folder}@{round(free)}<{threshold}gb")
+            else:
+                if free < threshold:
+                    alerts.append(f"{folder}@{round(free)}<{threshold}gb")
         if len(alerts) == 0:
             return None
         else:
