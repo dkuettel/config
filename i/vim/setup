@@ -1,5 +1,7 @@
 #!/bin/zsh
 set -eux -o pipefail
 
-${0:a:h}/setup-vim
+# disable vim for now, not using it usually
+#${0:a:h}/setup-vim
+#
 ${0:a:h}/setup-nvim

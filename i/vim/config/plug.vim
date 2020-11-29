@@ -4,6 +4,7 @@
 " PlugClean remove unlisted plugins
 " PlugUpgrade upgrade Plug itself
 " PlugDiff shows changes of last update
+let g:plug_window="tab"
 if has('nvim')
     call plug#begin('~/.local/share/nvim/plugged')
 else
