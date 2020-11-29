@@ -9,25 +9,38 @@ alias lsdirs='ls -v -d */'
 alias lldirs='ls -vldh */'
 # function lrt { ls -hltrcF --color=always $@ | tail }
 
-## navigation
 # todo zsh supports .. and ... without aliases?
 #alias ..='cd ..'
 #alias ...='cd ../..'
-# go back to a parent folder (default first parent)
-.. () {
-    1=${1:-$(basename $(dirname $(pwd)))}
-    while [[ $(basename $(pwd)) != $1 ]]; do
+# go back to a named parent folder, or one up if no name given
+function .. {
+    if [[ -v 1 ]]; then
+        local x
+        x=$(pwd)
+        x=${x:h}
+        until [[ ${x:t} == $1 || $x == / ]]; do
+            x=${x:h}
+        done
+        if [[ $x == / ]]; then
+            echo 'cannot find a parent folder named' $1
+        else
+            cd $x
+        fi
+    else
         cd ..
-    done
+    fi
 }
-_complete_.. () {
+function _complete_.. {
     reply=$(pwd)
     reply=(${(s|/|)reply})
 }
 compctl -K _complete_.. ..
-cdl () { cd $1 && echo && echo 'lr of ' $(pwd) && echo && lr }
+
+function cdl { cd $1 && echo && echo 'lr of ' $(pwd) && echo && lr }
 compctl -/ cdl # only complete directories for cdl
-rcd () { cd $(pwd) } # reacquire inode when current path was recreated
+
+function rcd { cd $(pwd) } # reacquire inode when current path was recreated
+
 #alias d+='pushd .'
 #alias d-='popd'
 
