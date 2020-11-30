@@ -1,0 +1,8 @@
+#!/bin/zsh
+set -eux -o pipefail
+
+# this works, but is it the best way?
+# I expected it to be listed somewhere in systemd, but couldn't find it
+# https://askubuntu.com/questions/405442/how-can-i-disable-cloud-init
+sudo touch /etc/cloud/cloud-init.disabled
+# probably for a cloud instance I should not do that, it might become unavailable?
