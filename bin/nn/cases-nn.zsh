@@ -83,7 +83,8 @@ for arg in $@; do
                     #--trainset=s3://deep-learning-data/data/sets/SigmaTile/config
                     --trainset=s3://deep-learning-data/data/sets/SigmaTile-ManyStates/279/config
                     #--assemblies=lighthouse-100.viewpoint_front,lighthouse-110.viewpoint_front,lighthouse-160.viewpoint_front,lighthouse-180.viewpoint_front
-                    --n-viewpoints=1000
+                    #--n-viewpoints=1000
+                    --n-viewpoints=64
                     --prune
                     --output-dir=.
             )
