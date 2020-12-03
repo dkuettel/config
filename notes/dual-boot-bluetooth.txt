@@ -8,6 +8,8 @@ on linux:
 on windows:
     learned from https://github.com/LondonAppDev/dual-boot-bluetooth-pair
     view HKEY_LOCAL_MACHINE\SYSTEM\ControlSet001\Services\BTHPORT\Parameters\Keys in regedit
+    note you need to run regedit in privileged mode, "as admin" doesnt seem to work
+    I needed to use psexec (https://docs.microsoft.com/en-us/sysinternals/downloads/psexec), no built-in way to do that?!
     it contains the key in a similar fashion as linux
     in the device manager best change the bluetooth receiver's name to what it is in linux
     before you connect a device, so the names don't conflict
