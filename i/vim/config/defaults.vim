@@ -33,7 +33,8 @@ set incsearch " show search matches as you type
 nohl " no highlight at startup
 
 " completion in command mode
-set wildchar=<Tab> wildmenu wildmode=list:longest
+" in nvim longest:full is good, in vim I think list:longest was better?
+set wildchar=<Tab> wildmenu wildmode=longest:full
 
 set lazyredraw " redraw only when necessary (e.g. not when macros run, or similar things)
 
