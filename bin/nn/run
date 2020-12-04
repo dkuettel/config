@@ -34,7 +34,11 @@ args+=(--interactive --tty --rm --detach-keys 'ctrl-@,x,x')
 args+=(-v /var/run/docker.sock:/var/run/docker.sock)
 
 # x11 for rendering
-args+=(--env ${DISPLAY:-:0} -v=/tmp/.X11-unix:/tmp/.X11-unix:rw)
+args+=(
+    --env DISPLAY=${DISPLAY:-:0}
+    -v=/tmp/.X11-unix:/tmp/.X11-unix:rw
+    --pid=host
+)
 
 # aws
 args+=(
