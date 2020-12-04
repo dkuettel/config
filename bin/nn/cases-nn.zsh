@@ -25,8 +25,8 @@ for arg in $@; do
             cmd=(
                 python3 -m nn.rendering.viewer
                 trainset
-                #s3://e2e-benchmarking/training/AssemblyStates/lego-lighthouse-31051/all-shaded
-                s3://e2e-benchmarking/training/AssemblyStates/delonghi-coffee-machine/all-recolored
+                s3://e2e-benchmarking/training/AssemblyStates/lego-lighthouse-31051/all-shaded
+                #s3://e2e-benchmarking/training/AssemblyStates/delonghi-coffee-machine/all-recolored
             )
             ;;
 
@@ -77,14 +77,15 @@ for arg in $@; do
             cmd=(
                 #with-log docker.log
                 python3 -m nn.mtar360.eap1 state-clustering
-                    --yaml-config=/xp/src/nn/python/nn/mtar360/eap1/mt360-config-template.yaml
-                    #--trainset=s3://e2e-benchmarking/training/AssemblyStates/lego-lighthouse-31051/all-shaded
+                    #--yaml-config=/xp/src/nn/python/nn/mtar360/eap1/mt360-config-template.yaml
+                    --yaml-config=/xp/src/nn/python/nn/mtar360/eap1/mtar360c-cls-config-template.yaml
+                    --trainset=s3://e2e-benchmarking/training/AssemblyStates/lego-lighthouse-31051/all-shaded
                     #--trainset=s3://e2e-benchmarking/training/AssemblyStates/delonghi-coffee-machine/all-recolored
                     #--trainset=s3://deep-learning-data/data/sets/SigmaTile/config
-                    --trainset=s3://deep-learning-data/data/sets/SigmaTile-ManyStates/279/config
+                    #--trainset=s3://deep-learning-data/data/sets/SigmaTile-ManyStates/279/config
                     #--assemblies=lighthouse-100.viewpoint_front,lighthouse-110.viewpoint_front,lighthouse-160.viewpoint_front,lighthouse-180.viewpoint_front
-                    #--n-viewpoints=1000
-                    --n-viewpoints=64
+                    --n-viewpoints=1000
+                    #--n-viewpoints=64
                     --prune
                     --output-dir=.
             )
