@@ -48,7 +48,10 @@ args+=(
 )
 
 # s3 cache
-[[ -L $h/s3-cache ]] || (echo 's3-cache is not symlinked, maybe still project local?'; false)
+if [[ -e $h/s3-cache ]]; then
+    echo 'you might still have a project local s3-cache, we use a shared ~/envs/s3-cache now'
+    exit 1
+fi
 mkdir -p ~/envs/s3-cache
 mount ~/envs/s3-cache /xp/s3-cache
 args+=(
