@@ -17,6 +17,8 @@
     l = log --oneline
     lfp = log --oneline --first-parent
     lg = log --graph --simplify-by-decoration --all --pretty=tformat:'%Cblue%D [%h]%n %Cgreen%ar %Creset%s%n'
+    lt = log --oneline ..@{upstream}
+    lm = log --oneline @{upstream}..
     s = status
     b = branch -vv
     mb = branch -vv --list 'dk/*'
@@ -36,7 +38,6 @@
     sd = stash pop
     cp = cherry-pick
     d = diff
-    dno = diff --name-only
     dns = diff --name-status
     rc = rebase --continue
     sm = submodule
