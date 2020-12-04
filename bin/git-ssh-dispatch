@@ -9,6 +9,9 @@ set -eu -o pipefail
 # > ssh git@bitbucket.org git-receive-pack 'dkuettel/config.git' (push)
 # note: the last two elements (the command) come as one argument $2
 
+# additionally we validate that the author is set as expected
+# this only serves as a safety check and doesnt guarantee anything for previous commits
+
 if [[ $1 == '-G' && $# == 2 ]]; then
     ssh $@
     exit
@@ -24,13 +27,19 @@ target=$1:$match[2]
 case $target in
 
     (git@bitbucket.org:dkuettel/*)
-        key=private_git_id_rsa ;;
+        key=private_git_id_rsa
+        user="Daniel Kuettel dkuettel@gmail.com"
+        ;;
 
     (git@github.com:dkuettel/*)
-        key=private_git_id_rsa ;;
+        key=private_git_id_rsa
+        user="Daniel Kuettel dkuettel@gmail.com"
+        ;;
 
     (git@github.com:ThingWorx/*)
-        key=ptc_git_id_rsa ;;
+        key=ptc_git_id_rsa
+        user="Daniel Kuettel dkuettel@ptc.com"
+        ;;
 
     (*)
         echo 'no match for' $target >&2
@@ -38,6 +47,17 @@ case $target in
         ;;
 
 esac
+
+if [[ -e .git && -v user ]]; then
+    if ! actual="$(git config --get user.name) $(git config --get user.email)"; then
+        echo 'no git user is set instead of' $user >&2
+        exit 1
+    fi
+    if [[ $actual != $user ]]; then
+        echo 'git user is' $actual 'but expected' $user >&2
+        exit 1
+    fi
+fi
 
 echo $target '->' $key >&2
 ssh -i ~/.ssh/$key $@
