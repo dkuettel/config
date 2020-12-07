@@ -1,6 +1,3 @@
-#!/bin/zsh
-set -eu -o pipefail
-
 [[ -v h ]] || (echo 'env h is not set'; false)
 
 # prepare host folders
@@ -94,30 +91,6 @@ if [[ -d efs-models ]]; then
     mount efs-models /efs/hacharya/test_data/models
 fi
 
-# TODO good idea to route based on symlinked aliases?
-case ${0:t} in
-
-    (nn)
-        source ${0:a:h}/cases-nn.zsh
-        ;;
-
-    (flow)
-        source ${0:a:h}/cases-flow.zsh
-        ;;
-
-    (*)
-        echo 'unknown value:' ${0:t}
-        exit 1
-    ;;
-
-esac
-
-
-echo '** docker args:'
-echo $args
-echo
-echo '** command:'
-echo $cmd
-echo
-
-nvidia-docker run $args nn-dev:latest $cmd
+# TODO splitting up into nn and flow makes cases difficult
+# because there are some options that I wont in both
+# maybe the best solution in the end is to have just one entry point anyway
