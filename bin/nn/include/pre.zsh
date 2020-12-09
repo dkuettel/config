@@ -71,6 +71,8 @@ mount $out /xp/src/out
 args+=(--workdir=/xp/src/out)
 
 # ipython
+# TODO we need to map in config too, because symlinks go there, is that okay?
+id_mount ~/config
 mount ~/.ipython /home/dkuettel/.ipython
 
 # debuggers
