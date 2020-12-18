@@ -38,11 +38,13 @@ elif [[ $env == 'restricted' ]]; then
         chrome
         firefox
         ichrome
+        okular
         pavucontrol
         slack
         spotify
         sshot
         ssleep
+        teams
         todoist
         torrents
         use-bose
