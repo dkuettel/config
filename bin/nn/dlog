@@ -1,0 +1,4 @@
+#!/bin/zsh
+set -eux -o pipefail
+
+tail -F ---disable-inotify $1/docker.log

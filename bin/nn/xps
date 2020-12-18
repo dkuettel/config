@@ -1,0 +1,4 @@
+#!/bin/zsh
+set -eux -o pipefail
+
+while x jobs ls | less -K +G; do done
