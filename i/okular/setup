@@ -1,7 +1,11 @@
 #!/bin/zsh
 set -eux -o pipefail
 
-sudo apt-get -yqq install okular
+apts=(
+    okular
+    breeze-icon-theme  # okular needs it but doesnt have it as a dependency as of 2020-12-23
+)
+sudo apt-get -yqq install $apts
 
 ln -sfT \
     ~/config/i/okular/okularpartrc \
