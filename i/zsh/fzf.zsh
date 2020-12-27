@@ -8,7 +8,7 @@
 
 # key bindings
 # ctrl-t for adding files to current command
-# ctrl-r for searching history
+# ctrl-r for searching history TODO note that is currently later overwritten by one-shell-history, as desired
 # alt-c to cd to directory
 # and some/path/**<tab> finds file starting there
 # kill <tab>

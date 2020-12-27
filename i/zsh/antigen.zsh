@@ -14,7 +14,7 @@ antigen use oh-my-zsh
 
 # oh-my-zsh plugins (can be used without 'use oh-my-zsh')
 antigen bundle command-not-found
-antigen bundle per-directory-history
+#antigen bundle per-directory-history
 antigen bundle compleat # todo could be interesting to make completion for our xpman and co?
 
 # plugins from directly from git
@@ -29,11 +29,11 @@ antigen apply
 # configure
 
 # per-directory-history
-_per-directory-history-set-global-history # global by default
-bindkey -M vicmd ',g' per-directory-history-toggle-history
-bindkey -M viins '^xg' per-directory-history-toggle-history
-bindkey -M vicmd '^g' per-directory-history-toggle-history
-bindkey -M viins '^g' per-directory-history-toggle-history
+#_per-directory-history-set-global-history # global by default
+#bindkey -M vicmd ',g' per-directory-history-toggle-history
+#bindkey -M viins '^xg' per-directory-history-toggle-history
+#bindkey -M vicmd '^g' per-directory-history-toggle-history
+#bindkey -M viins '^g' per-directory-history-toggle-history
 
 # history-search-multi-word
 #bindkey -M vicmd '^r' history-search-multi-word
