@@ -10,7 +10,7 @@ ln -sfT $h/config/syntax ~/.config/nvim/syntax
 ln -sfT $h/config/ftdetect ~/.config/nvim/ftdetect
 
 # dependencies for vim plugins
-pip3 install black pynvim
+pip3 install black pynvim isort
 
 ( # nvim from git
     cd $h/nvim

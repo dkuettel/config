@@ -67,16 +67,22 @@ hi EasyMotionTarget2Second cterm=none ctermfg=4 ctermbg=none
 " its a bug see https://github.com/easymotion/vim-easymotion/issues/364
 
 
-""" black
+""" neoformat
 " todo make it per filetype
 " set equalprg=python3\ -m\ black\ --quiet\ -
 " nnoremap <leader>= mc:%!python3 -m black --quiet -<cr>`c
 "nnoremap == :Black<cr> " Plugin disabled currently, see above
-let g:neoformat_enabled_python = ['black']
+let g:neoformat_enabled_python = ['isort', 'black']
+let g:neoformat_run_all_formatters = 1
 let g:neoformat_try_formatprg = 1
 let g:neoformat_python_black = {
         \ 'exe': 'black',
-        \ 'args': ['-', '--quiet', '--target-version=py37'],
+        \ 'args': ['--quiet', '--target-version=py38', '-'],
+        \ 'stdin': 1,
+    \ }
+let g:neoformat_python_isort = {
+        \ 'exe': 'isort',
+        \ 'args': ['--profile=black', '-'],
         \ 'stdin': 1,
     \ }
 let g:neoformat_basic_format_align = 0
