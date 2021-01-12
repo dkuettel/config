@@ -7,7 +7,7 @@ set -eux -o pipefail
 
 pip3 install --upgrade awscli
 
-curl -o ~/bin/kubectl 'https://amazon-eks.s3.us-west-2.amazonaws.com/1.17.9/2020-08-04/bin/linux/amd64/kubectl'
+curl -o ~/bin/kubectl 'https://amazon-eks.s3.us-west-2.amazonaws.com/1.18.9/2020-11-02/bin/linux/amd64/kubectl'
 chmod +x ~/bin/kubectl
 ln -sfT ~/bin/kubectl ~/bin/k
 kubectl version --short --client
