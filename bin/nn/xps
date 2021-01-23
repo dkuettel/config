@@ -1,4 +1,8 @@
 #!/bin/zsh
 set -eux -o pipefail
 
+if [[ -v TMUX ]]; then
+    tmux rename-window xps
+fi
+
 while x jobs ls | less -K +G; do done
