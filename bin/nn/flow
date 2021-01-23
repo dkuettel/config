@@ -266,13 +266,14 @@ for arg in $@; do
             ;;
 
         (tflite)
+            cpfolder=/efs/dkuettel/flow-dwc/FlowXp/2284e73597ea4d32a7bb347d75186368
             cmd=(
                 python3 -m nn.flow.export
                 tflite
-                --checkpoint=/efs/dkuettel/flow/tf2-training-2-smaller/fixed-repr/classifier-now/0-vs-16to21/checkpoints/model-55000.h5
-                --out-folder=/efs/dkuettel/flow/tf2-training-2-smaller/fixed-repr/classifier-now/0-vs-16to21
-                #--resolution=192hx320w
-                --resolution=384hx384w
+                --checkpoint=$cpfolder/checkpoints/model-120000.h5
+                --out-folder=$cpfolder
+                --resolution=192hx320w
+                #--resolution=384hx384w
             )
             ;;
 
