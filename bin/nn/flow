@@ -41,6 +41,15 @@ for arg in $@; do
             )
             ;;
 
+        (raw-test-from-xps)
+            cmd=(
+                python3 -m
+                nn.flow.train raw-test-from-xps
+                --out-folder=.
+                --xps=/efs/dkuettel/flow/depthwise-convolution-xps/FlowEval/09f352f2040c491b8c6d9781caa742e5/xps.json
+            )
+            ;;
+
         (test-27)
             cmd=(
                 python3 ~/toys/vim-python-tracebacks/vimfix.py -im
@@ -165,13 +174,18 @@ for arg in $@; do
                 --downsamplers=DownsampleOriginal
                 #--downsamplers=DownsampleDepthAndPointwise
                 #--downsamplers=DownsampleSeparableConv2D
+                #--downsamplers=DownsampleSeparableConv2D_dm2
+                #--downsamplers=DownsampleSeparableConv2D_dm3
+                #--downsamplers=DownsampleSeparableConv2D@3
 
-                #--upsamplers=UpsampleOriginal
+                --upsamplers=UpsampleOriginal
+                #--upsamplers=UpsampleConv2D
+                #--upsamplers=UpsampleConv2D@2
                 #--upsamplers=UpsampleUpSampling2DAndSeparableConv2D
                 #--upsamplers=UpsamplePointwiseAndConv2DTranspose
                 #--upsamplers=UpsamplePointwiseAndStackedConv2DTranspose
                 #--upsamplers=UpsamplePointwiseAndUpSampling2DAndConv2DGrouped
-                --upsamplers=UpsamplePointwiseAndUpSampling2DAndDepthwise
+                #--upsamplers=UpsamplePointwiseAndUpSampling2DAndDepthwise
 
             )
             ;;
@@ -265,30 +279,15 @@ for arg in $@; do
             )
             ;;
 
-        (tflite)
-            cpfolder=/efs/dkuettel/flow-dwc/FlowXp/2284e73597ea4d32a7bb347d75186368
-            cmd=(
-                python3 -m nn.flow.export
-                tflite
-                --checkpoint=$cpfolder/checkpoints/model-120000.h5
-                --out-folder=$cpfolder
-                --resolution=192hx320w
-                #--resolution=384hx384w
-            )
-            ;;
-
         (sdk)
+            cpfolder=/efs/dkuettel/flow/depthwise-convolution-xps/FlowXp/f6ead1f6d89a435d9d77598b0d9a8f9f
             cmd=(
                 python3 -m nn.flow.export
                 create-sdk-dataset
-                --output-dir=/efs/dkuettel/flow/tf2-training-2-smaller/fixed-repr/classifier-now/0-vs-16to21/export
-                --input-channels=4
-                --output-flow-tensor=Identity_2
-                --output-flow-cov-tensor=Identity_7
-                --output-classifier-now-tensor=Identity
-                --output-classifier-next-tensor=Identity
-                --checkpoint=/efs/dkuettel/flow/tf2-training-2-smaller/fixed-repr/classifier-now/0-vs-16to21/checkpoints/model-55000.h5
-                #--input-resolution=?
+                --checkpoint=$cpfolder/checkpoints/model-120000.h5
+                --output-dir=$cpfolder
+                --input-resolution=192hx320w
+                #--resolution=384hx384w
             )
             ;;
 
