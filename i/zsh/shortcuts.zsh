@@ -95,7 +95,9 @@ alias ipy="ipython3 -c 'import numpy as np, tensorflow as tf, math' -i"
 
 function treel { tree -C $@ | less }
 
-alias sc=systemctl
+# playing around with systemd aliases
+alias sc='sudo systemctl'
+alias sc-status='sudo systemctl status'
 alias jc=journalctl
 
 # make vlc use the custom config from git
