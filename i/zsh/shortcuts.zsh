@@ -81,7 +81,13 @@ hcp () {
 function tb { tensorboard --logdir=${1:-.} }
 
 # jq with less and colors
-function jql { jq --color-output $@ | less }
+function jql {
+    if [[ $# == 1 ]]; then
+        ( echo 'assuming first argument .'; jq --color-output . $@ ) | less
+    else
+        jq --color-output $@ | less
+    fi
+}
 
 # todo for now assuming globally installed, could also use a canonical pipenv?
 # lets see if fast enough, tf might be heavy/slow to import everytime?
