@@ -44,6 +44,7 @@ elif [[ $env == 'restricted' ]]; then
         spotify
         sshot
         ssleep
+        steam
         teams
         todoist
         torrents
