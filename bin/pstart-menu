@@ -52,6 +52,7 @@ elif [[ $env == 'restricted' ]]; then
         use-headphones
         use-speakers
         virt-manager
+        vlc
     )
     ((for i in $curated; do echo $i; done) | $cmd_fzf > $out) || rm -f $out
 
