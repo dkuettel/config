@@ -47,30 +47,12 @@ set smarttab
 set autoindent
 set copyindent
 
-" specific filetype settings
 " note
-" indentexpr= should stop any automatic indendation (?)
-" indentkeys= should stop any reindentation when typing things like 'else:'
-
-autocmd FileType vim setlocal
-    \ tabstop=4 softtabstop=4 shiftwidth=4
-    \ expandtab smarttab autoindent copyindent
-    \ textwidth=0
-
-autocmd FileType python setlocal
-    \ tabstop=4 softtabstop=4 shiftwidth=4
-    \ expandtab smarttab autoindent copyindent
-    \ textwidth=0
-    \ indentexpr= indentkeys=
-"autocmd FileType python inoremap <buffer> ' "
-"autocmd FileType python inoremap <buffer> " '
-
-autocmd FileType yaml setlocal
-    \ tabstop=2 softtabstop=2 shiftwidth=2
-    \ expandtab smarttab autoindent copyindent
-    \ textwidth=0
-    \ indentexpr= indentkeys=
-
+" autocmd FileType python setlocal ...
+" sometimes works to overwrite settings
+" but some settings are applied after autocommand
+" so it's more robust to put it in ~/.config/nvim/after/[ftplugin|indent]/python.vim
+" both are symlinked because I'm not sure which part should happen when, just do it twice
 
 " command mode
 nnoremap ; :

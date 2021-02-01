@@ -4,10 +4,12 @@ set -eux -o pipefail
 h=${0:a:h}
 
 # config files
+# todo if the ~/.config/nvim folder never gets dirty we could just symlink the whole instead of individuals
 mkdir -p ~/.config/nvim
 ln -sfT $h/config/vimrc ~/.config/nvim/init.vim
 ln -sfT $h/config/syntax ~/.config/nvim/syntax
 ln -sfT $h/config/ftdetect ~/.config/nvim/ftdetect
+ln -sfT $h/config/after ~/.config/nvim/after
 
 # dependencies for vim plugins
 pip3 install black pynvim isort
