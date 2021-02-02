@@ -82,7 +82,7 @@ let g:neoformat_python_black = {
     \ }
 let g:neoformat_python_isort = {
         \ 'exe': 'isort',
-        \ 'args': ['--profile=black', '-'],
+        \ 'args': ['--profile=black', '--combine-as', '-'],
         \ 'stdin': 1,
     \ }
 let g:neoformat_basic_format_align = 0
