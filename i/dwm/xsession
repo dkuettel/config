@@ -98,7 +98,7 @@ function status {
 
         xsetroot -name $s
 
-        sleep 5s
+        sleep 0.5s  # TODO this causes a visible impact on dbus (~2%)
     done
 }
 
