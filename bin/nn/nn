@@ -161,6 +161,20 @@ for arg in $@; do
             )
             ;;
 
+        (rtod)
+            # start an example training copied from mt360 to eventually produce training data for rtod
+            cmd=(
+                #with-log docker.log
+                python3 -m nn.mtar360.eap1
+                train
+                    --config-folder=/xp/src/nn/example
+                    --out-folder=.
+                mt360
+                    --short-training=True
+                    --assemblies=e22d99b26b99481990eb306c398c0c80.viewpoint_0000
+            )
+            ;;
+
         (*)
             echo 'unknown value:' $arg
             exit 1
