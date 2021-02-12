@@ -97,4 +97,4 @@ command SelectImportFromFzf call SelectImportFromFzf()
 " similar ctrl-m and enter the same I think
 nmap <c-k> :Gi 
 nmap ,k :SelectImportFromFzf<cr>
-imap <c-k> <c-o>:Gi 
+imap <c-k> <c-o>:Gi <c-r><c-w>
