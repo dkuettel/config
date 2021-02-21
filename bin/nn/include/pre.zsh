@@ -59,8 +59,8 @@ args+=(
 args+=(--user $(id --user):$(id --group))
 
 # mounts
-if ! mountpoint /efs; then
-    echo '/efs is not a mountpoint, efs not yet mounted?'
+if ! mountpoint --quiet /efs; then
+    echo '/efs might not yet be mounted' >&2
     exit 1
 fi
 id_mount /efs
