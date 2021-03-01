@@ -63,8 +63,9 @@ compctl -c pwatch # complete commands
 
 # robust tail
 # -F = follow and retry
-# disable-inotify makes it never rely on any inode
-alias tailf='tail -F ---disable-inotify'
+# disable-inotify makes it never rely on any inode, but it means polling, so slower
+#alias tailf='tail -F ---disable-inotify'
+alias tailf='tail -F'
 
 # feh
 alias feh='feh --auto-zoom --scale-down --draw-filename --draw-tinted --font UbuntuMono-Bold/35 --fontpath ~/.fonts'
