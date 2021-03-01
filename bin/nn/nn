@@ -162,20 +162,16 @@ for arg in $@; do
             ;;
 
         (rtod)
-            # start an example training copied from mt360 to eventually produce training data for rtod
             cmd=(
                 #with-log docker.log
-                python3 -m nn.mtar360.eap1
-                train
-                    --config-folder=/xp/src/nn/example
-                    --out-folder=.
-                mt360
-                    --short-training=True
-                    --assemblies=e22d99b26b99481990eb306c398c0c80.viewpoint_0000
+                python3 -m nn.mtar360.rtod
+                train-from-models
+                --model-folder=/xp/src/nn/train_gltf
+                --output-dir=.
             )
             ;;
 
-        (td)
+        (dump)
             cmd=(
                 #with-log docker.log
                 #python3 -m nn.mtar360.eap1
@@ -183,8 +179,8 @@ for arg in $@; do
                 #--config-folder=/xp/src/nn/example
                 python3 -m nn.mtar360.rtod
                 dump-training-data-from-models
-                --model-folder=/xp/src/nn/direct
-                --count=1000
+                --model-folder=/xp/src/nn/train_gltf
+                --count=100
             )
             ;;
 
