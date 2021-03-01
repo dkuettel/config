@@ -10,6 +10,8 @@ prune=(
     -or -path ./i/vim/config/vimminent
     -or -path ./i/vim/nvim
     -or -path ./i/vim/vim
+    -or -path ./i/st/st
+    -or -path ./i/dwm/dwm
 )
 
 find . \( $prune \) -prune -or \( -type f -and -print \)
