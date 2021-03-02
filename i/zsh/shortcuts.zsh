@@ -79,7 +79,10 @@ hcp () {
 }
 
 # tensorboard
-function tb { tensorboard --logdir=${1:-.} }
+function tb {
+    set -x
+    tensorboard --bind_all --logdir=${1:-.}
+}
 
 # jq with less and colors
 function jql {
