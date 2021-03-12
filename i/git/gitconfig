@@ -41,3 +41,4 @@
     dns = diff --name-status
     rc = rebase --continue
     sm = submodule
+    co- = !git checkout $(fzf-branch)

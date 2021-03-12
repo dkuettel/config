@@ -1,0 +1,27 @@
+#!/bin/zsh
+set -eu -o pipefail
+
+# find and insert a branch name with fzf
+
+
+# use directly when typing like
+# > git merge $(fzf-branch)<tab>
+# to interactively build your command
+
+# or make an alias for convenience
+# in ~/.gitconfig under section [alias]
+# co- = !git checkout $(fzf-branch)
+# note:
+#   ctrl-c out of fzf will substitute the empty string
+#   this means you run 'git checkout' which does nothing
+#   but other commands might be more dangerous when you ctrl-c
+
+
+(
+    # local branches
+    git branch --format '%(refname:short)'
+    # remote branches that look like local branches
+    git branch --remotes --format '%(refname:lstrip=3)'
+    # remote branches
+    git branch --remotes --format '%(refname:short)'
+) | sort | uniq | fzf
