@@ -21,8 +21,8 @@ for arg in $@; do
                     --config-folder=s3://e2e-benchmarking/training/zurich-all-set/recolored
                     --out-folder=.
                     #--testsets=mtar360/all/recolored/v2
-                    mtar
-                    --short-training=True
+                    mtar-broken
+                    #--short-training=True
             )
             ;;
 
@@ -167,6 +167,7 @@ for arg in $@; do
                 python3 -m nn.mtar360.rtod
                 train-from-models
                 --model-folder=/xp/src/nn/train_gltf
+                #--model-folder=/xp/src/nn/train_gltf_small
                 --output-dir=.
             )
             ;;
