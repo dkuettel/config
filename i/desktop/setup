@@ -20,9 +20,11 @@ echo 'nvidia-smi wont work before restart'
 
 # apt installs (sorted)
 i=()
+i+=d-feet  # introspect d-bus
 i+=feh # note also .xsession uses feh, is that the only way?
 i+=firefox
 i+=geeqie # pulls in many dependencies because of kde
+i+=gpick # easy color picker from anything on the screen, useful when debugging terminal colors
 i+=gthumb # together with scrot
 i+=scrot # screenshots
 i+=transmission-gtk

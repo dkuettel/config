@@ -26,6 +26,7 @@ sudo timedatectl set-timezone Europe/Berlin
 # apt installs (sorted)
 i=()
 #i+=dtrx # easy and clean archive extraction  # todo gone?
+i+=apt-file # apt-file list [package] to see before you install (instead of manually apt-get download [package]; dpgk --contents [file])
 i+=bmon # bandwidth monitor
 i+=cmake
 i+=dkms
