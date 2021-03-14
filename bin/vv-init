@@ -1,0 +1,26 @@
+#!/bin/zsh
+set -eux -o pipefail
+
+# create a new virtualenv
+# - take care of pip.conf user setting
+# - install pip-tools
+
+if [[ -v VIRTUAL_ENV ]]; then
+    echo "a virtual env ($VIRTUAL_ENV) is already active"
+    exit 1
+fi
+
+folder=${1:-.venv}
+if [[ -d $folder ]]; then
+    echo "$folder already exists"
+    exit 1
+fi
+
+virtualenv $folder
+
+[[ ! -f $folder/pip.conf ]]
+echo '[global]\nuser = false' > $folder/pip.conf
+
+path=($folder/bin $path)
+export VIRTUAL_ENV=$folder
+pip install --upgrade pip-tools

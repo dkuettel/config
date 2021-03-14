@@ -25,7 +25,7 @@ setopt prompt_subst # expand $ in prompt at show time
 export PS1='
 %(?,,%F{1}%Sexit code = %?%s%f
 )
-%K{0}%F{14}%B%~%b%f $(zsh-prompt-git) %F{10}%* (%m)%f %(1j,%F{1}%j&%f,) %E%k
+%K{0}%F{14}%B%~%b%f $(zsh-prompt-git) %F{10}%* (%m)%f ${VIRTUAL_ENV:+%B=venv=%b} %(1j,%F{1}%j&%f,) %E%k
 ${${${KEYMAP:-main}/vicmd/N}/(main|viins)/I}> '
 function zle-keymap-select() {
     zle reset-prompt
