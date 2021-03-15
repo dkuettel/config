@@ -15,3 +15,5 @@ cd $target
 [[ $(git config --get user.email) == 'dkuettel@ptc.com' ]]
 
 ln -sfT ../../setup/pre-commit .git/hooks/pre-commit
+
+[[ -x $target/bin/pip-sync-wrapper ]] && $target/bin/pip-sync-wrapper
