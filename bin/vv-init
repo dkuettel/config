@@ -18,9 +18,6 @@ fi
 
 virtualenv $folder
 
-[[ ! -f $folder/pip.conf ]]
-echo '[global]\nuser = false' > $folder/pip.conf
-
 path=($folder/bin $path)
 export VIRTUAL_ENV=$folder
 pip install --upgrade pip-tools
