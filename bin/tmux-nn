@@ -1,10 +1,16 @@
 #!/bin/zsh
 set -eux -o pipefail
 
-folder=${${1:-.}:a}
+folder=${1:-.}
+folder=${folder:a}
+
 name=$(realpath --relative-base=$HOME $folder)
 
-PATH=$HOME/config/bin/nn:$folder/bin:$PATH
+path=(
+    ~/config/bin/nn
+    $folder/bin
+    $path
+)
 
 args=(
     new-session
