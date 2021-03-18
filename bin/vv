@@ -17,7 +17,7 @@ if [[ ! -d $folder ]]; then
     exit 1
 fi
 
-if ! grep --quiet "$folder" $folder/bin/activate; then
+if ! grep --quiet ${folder:A} $folder/bin/activate; then
     echo "$folder was probably originally in a different location"
     exit 1
 fi
