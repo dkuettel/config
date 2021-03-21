@@ -21,6 +21,7 @@ echo 'nvidia-smi wont work before restart'
 # apt installs (sorted)
 i=()
 i+=d-feet  # introspect d-bus
+i+=evince  # for the easier pdfs (when not using okular)
 i+=feh # note also .xsession uses feh, is that the only way?
 i+=firefox
 i+=geeqie # pulls in many dependencies because of kde
