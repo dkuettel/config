@@ -2,7 +2,7 @@
 set -eu -o pipefail
 
 out=${1:-/dev/stdout}
-env=${2:-restricted}
+env=${2:-list}
 
 cmd_fzf=(
     fzf
@@ -30,33 +30,8 @@ if [[ $env == 'all' ]]; then
     )
     ($cmd_find | sort --unique | $cmd_fzf > $out) || rm -f $out
 
-elif [[ $env == 'restricted' ]]; then
-    curated=(  # sorted
-        alacritty
-        bt-off
-        bt-on
-        bt-view
-        chrome
-        firefox
-        ichrome
-        kitty
-        okular
-        pavucontrol
-        slack
-        spotify
-        sshot
-        ssleep
-        steam
-        teams
-        todoist
-        torrents
-        use-bose
-        use-headphones
-        use-speakers
-        virt-manager
-        vlc
-    )
-    ((for i in $curated; do echo $i; done) | $cmd_fzf > $out) || rm -f $out
+elif [[ $env == 'from-list' ]]; then
+    $cmd_fzf < ${0:a:h}/list > $out || rm -rf $out
 
 else
     echo "unknown env=$env"
