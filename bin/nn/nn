@@ -35,7 +35,7 @@ for arg in $@; do
             )
             ;;
 
-        (bash)
+        (shell)
             cmd=(bash)
             ;;
 
