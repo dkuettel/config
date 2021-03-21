@@ -161,6 +161,14 @@ for arg in $@; do
             )
             ;;
 
+        (pytest)
+            # not sure if this is complete
+            cmd=(
+                pytest -svv modules
+            )
+            args+=(--workdir=/xp/src/nn/tests)
+            ;;
+
         (rtod)
             cmd=(
                 #with-log docker.log
