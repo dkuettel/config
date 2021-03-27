@@ -16,7 +16,7 @@ Host i-*
     ProxyCommand ssh-proxy-command-aws-start-and-ssm %h %p
     ServerAliveInterval 10
 
-Host boom
+Host Boom
     HostName 00.000.000.00
     User dkuettel
     Port 3437
