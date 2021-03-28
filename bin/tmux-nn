@@ -1,11 +1,18 @@
 #!/bin/zsh
 set -eux -o pipefail
 
+# new or attach to an nn session
+# name by first argument or current folder
+# setting path fitting an nn project
+
 folder=${1:-.}
 folder=${folder:a}
 
 name=$(realpath --relative-base=$HOME $folder)
 
+tmux attach-session -t $name && exit
+
+# TODO venv?
 path=(
     ~/config/bin/nn
     $folder/bin

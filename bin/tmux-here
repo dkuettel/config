@@ -1,0 +1,14 @@
+#!/bin/zsh
+set -eux -o pipefail
+
+# new or attach to session
+# name by first argument or current folder
+
+folder=${1:-.}
+folder=${folder:a}
+
+name=${folder:t}
+
+tmux attach-session -t $name && exit
+
+tmux new-session -s $name -c $folder -e h=$folder
