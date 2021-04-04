@@ -2,9 +2,9 @@
 set -eux -o pipefail
 
 # two options:
-# > xset dpms force standby
+# > xset dpms force off
 # > xset +dpms
 
-xset +dpms
+xset dpms force off
 slock
 xset -dpms

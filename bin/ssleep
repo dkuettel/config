@@ -2,7 +2,7 @@
 set -eux -o pipefail
 
 if [[ -v DISPLAY ]]; then
-    slock &
+    standby-lock &
     systemctl suspend
 else
     echo 'no display variable set, cant lock display'
