@@ -158,7 +158,7 @@ vnoremap yp y`>p
 function! AddQuickfixPylintDisabler()
     let idx = getqflist({'idx': 0}).idx
     let error = getqflist({'items': 0}).items[idx-1].text
-    let disabler = matchstr(error, '(\zs[^(]*\ze)$')
+    let disabler = matchstr(error, '\[\zs.*\ze\]')
     execute ':normal! A' . '  # pylint: disable=' . disabler
 endfunction
 nnoremap ,qfd :call AddQuickfixPylintDisabler()<enter>
