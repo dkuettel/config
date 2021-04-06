@@ -10,6 +10,9 @@ setlocal
 "autocmd FileType python inoremap <buffer> ' "
 "autocmd FileType python inoremap <buffer> " '
 
+" TODO should check if already set? this is run on every python file
+" mappings further down are buffer-local and need to be run everytime I think
+" but the drafty versions for functions maybe not
 
 function! s:add(args) abort
     let l:winview = winsaveview()
@@ -87,7 +90,7 @@ function! SelectImportFromFzf() abort
 endfunction
 
 
-" todo probably put it on a shorcut
+" todo probably put it on a shortcut
 " also for in insert mode?
 " dont forget cltr-f gives you vim power in edit line
 command -nargs=1 Gi call s:add("<args>")
@@ -95,6 +98,6 @@ command SelectImportFromFzf call SelectImportFromFzf()
 
 " todo ctrl-i is tab, cannot be distinguished
 " similar ctrl-m and enter the same I think
-nmap <c-k> :Gi 
-nmap ,k :SelectImportFromFzf<cr>
-imap <c-k> <c-o>:Gi <c-r><c-w>
+nmap <buffer> <c-k> :Gi 
+nmap <buffer> ,k :SelectImportFromFzf<cr>
+imap <buffer> <c-k> <c-o>:Gi <c-r><c-w>
