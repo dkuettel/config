@@ -1,0 +1,80 @@
+#!/bin/zsh
+set -eu -o pipefail
+
+# run nvim with pylint messages in quickfix
+# it will loop pylint&nvim until there are no more messages left
+# or you exit with non-zero code from nvim (eg, use :qc)
+#
+# some ad-hoc rules:
+# - if there is a ./pylint, use that one (nn repos)
+# - if not files are given, assume python folder is to be checked
+
+# overwrite some pytlintrc configuration (not changing any messages)
+args=(
+    --output-format=text
+    --reports=no
+    --msg-template="{path}:{line}:{column}:{C}: [{symbol}] {msg}"
+    --score=no
+    --jobs=0
+    --persistent=no
+)
+
+# ad-hoc rules
+if [[ -f ./pylint ]]; then
+    # use nn repo's ./pylint
+    [[ $# == 0 ]]
+    function run_pylint {
+        ./pylint $args
+    }
+else
+    # use pylint in virtualenv at ./.venv
+    # TODO pylint documentation says to reference modules, not files
+    # but then their examples use files, plus modules didnt always work for me
+    # very unclear
+    if [[ $# == 0 ]]; then
+        files=(
+            python
+        )
+    else
+        files=$@
+    fi
+    function run_pylint {
+        path=(.venv/bin $path) PYTHONPATH=python python -m pylint $args $files
+    }
+fi
+
+trap '[[ -v qfile ]] && rm $qfile' EXIT
+qfile=$(tempfile --prefix=vim-pylint-quickfix-)
+
+# TODO how to use a default pylint and/or configure by .vimminent/pylint or something?
+# especially also respecting .venv if any, only thru .vimminent or also a sane default?
+# use "ving" as name?
+
+# TODO how to make it also available for single files right inside vim ad-hoc?
+# a command to call that returns a tmp file to be loaded? or pipe for cleaner with makeprg?
+
+run_pylint > >(tee $qfile) && code=0 || code=$?
+tput bel
+
+if (( $code == 0 )); then
+    # no pylint error, no linting messages
+    echo 'no messages'
+    exit 0
+elif (( $code >= 32 )); then
+    # pylint error
+    exit $code
+else
+    # linting messages
+    if nvim -q $qfile -c 'nmap { :cp<enter>' -c 'nmap } :cn<enter>' -c 'copen'; then
+        $0 $@
+    else
+        exit $?
+    fi
+fi
+
+# notes
+# :cc for current problem
+# :cn and :cp for next and previous
+# currently mapped to { and } in the above call (just while pylinting)
+# also <enter> in quickfix jumps to position
+# (alternatively we could think about another mode that works from inside vim with makeprg)
