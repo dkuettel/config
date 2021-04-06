@@ -172,11 +172,23 @@ for arg in $@; do
         (rtod)
             cmd=(
                 #with-log docker.log
-                python3 -m nn.mtar360.rtod
+                python3 ~/toys/vtrace/vtrace.py run -m nn.mtar360.rtod
+                #python3 -m nn.mtar360.rtod
                 train-from-models
+                --output-dir=.
                 --model-folder=/xp/src/nn/train_gltf
                 #--model-folder=/xp/src/nn/train_gltf_small
-                --output-dir=.
+                --test-model-folder=/xp/src/nn/test_gltf
+                --limit-states=2
+                #--warmstart-from=/xp/src/nn/out-working/final_model.h5
+            )
+            ;;
+
+        (rtod-eval)
+            cmd=(
+                python3 ~/toys/vtrace/vtrace.py run -m nn.mtar360.rtod
+                #python3 -m nn.mtar360.rtod
+                evaluate
             )
             ;;
 

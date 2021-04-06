@@ -82,8 +82,9 @@ args+=(--env PYTHONBREAKPOINT='IPython.embed')
 # needs pip3 install web-pdb
 #args+=(--env PYTHONBREAKPOINT='web_pdb.set_trace' -p 5555:5555)
 
-# vimfix
-id_mount ~/toys/vim-python-tracebacks
+# vimfix and co
+#id_mount ~/toys/vim-python-tracebacks
+id_mount ~/toys/vtrace/vtrace.py
 
 # probably not needed anymore
 # args+=(--env NN_USER=kuettel)
