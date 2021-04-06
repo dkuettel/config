@@ -1,8 +1,26 @@
 #!/bin/zsh
 set -eux -o pipefail
 
+# see
+# https://wiki.debian.org/Keyboard
+# https://help.ubuntu.com/community/Custom%20keyboard%20layout%20definitions?action=show&redirect=Howto%3A+Custom+keyboard+layout+definitions
+
+sudo apt-get install -yqq keyboard-configuration console-setup
+
 sudo ln -sfT ~/config/i/keyboard/pointluck /usr/share/X11/xkb/symbols/pointluck
-sudo ln -sfT ~/config/i/keyboard/etc-default-keyboard /etc/default/keyboard
+
+config=~/config/i/keyboard/config-$(hostname)
+if [[ ! -f $config ]]; then
+    echo "warning: using default keyboard config, no config for host $(hostname) found"
+    config=~/config/i/keyboard/config
+fi
+sudo ln -sfT $config /etc/default/keyboard
+
 echo options hid_apple fnmode=2 | sudo tee -a /etc/modprobe.d/hid_apple.conf
+# TODO maybe not needed? makes it slow, but needs testing
 sudo update-initramfs -u -k all
-echo 'note: reboot to have apple keyboard F-keys working like normal F-keys'
+echo 'note: maybe reboot for apple F-keys to work like normal F-keys'
+
+# TODO maybe one of those applies changes without restart?
+sudo systemctl restart keyboard-setup.service
+udevadm trigger --subsystem-match=input --action=change
