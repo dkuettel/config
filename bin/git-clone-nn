@@ -9,11 +9,13 @@ target=${1:?arg 1: new target folder}
 
 git clone git@github.com:ThingWorx/neural-networks.git $target
 
-cd $target
+(
+    cd $target
 
-[[ $(git config --get user.name) == 'Daniel Kuettel' ]]
-[[ $(git config --get user.email) == 'dkuettel@ptc.com' ]]
+    [[ $(git config --get user.name) == 'Daniel Kuettel' ]]
+    [[ $(git config --get user.email) == 'dkuettel@ptc.com' ]]
 
-ln -sfT ../../setup/pre-commit .git/hooks/pre-commit
+    ln -sfT ../../setup/pre-commit .git/hooks/pre-commit
 
-[[ -x $target/bin/pip-sync-wrapper ]] && $target/bin/pip-sync-wrapper
+    bin/pip-sync-wrapper
+)
