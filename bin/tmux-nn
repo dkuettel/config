@@ -27,6 +27,7 @@ args=(
         -e PATH=$PATH
         notes
     \;
-    new-window -t :2 -n src
+    new-window -t :2 -n src \;
+    new-window -t :3 -n run -d
 )
 tmux $args
