@@ -13,13 +13,4 @@ ln -sfT $h/tmux.conf ~/.tmux.conf
     pipenv install
 )
 
-( # tmux from git
-    cd $h/tmux
-
-    sudo apt-get -yqq install git autoconf automake pkg-config libevent-dev libncurses5-dev byacc
-
-    sh autogen.sh
-    ./configure
-    make -j$(nproc)
-    sudo make install
-)
+$h/install
