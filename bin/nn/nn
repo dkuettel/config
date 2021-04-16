@@ -3,7 +3,8 @@ set -eu -o pipefail
 
 source ${0:a:h}/include/pre.zsh
 
-for arg in $@; do
+while [[ $# != 0 ]]; do
+    arg=$1; shift
     case $arg in
 
         (web-pdb)
