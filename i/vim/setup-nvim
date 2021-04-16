@@ -14,17 +14,7 @@ ln -sfT $h/config/after ~/.config/nvim/after
 # dependencies for vim plugins
 pip3 install black pynvim isort
 
-( # nvim from git
-    cd $h/nvim
-
-    sudo apt-get install -yqq ninja-build gettext libtool libtool-bin autoconf automake cmake g++ pkg-config unzip
-
-    # maybe to start fresh: make distclean
-    make CMAKE_BUILD_TYPE=Release
-    # todo any list of features like in vim?
-    sudo make install
-)
-
+./install
 
 if [[ ! -f ~/.local/share/nvim/site/autoload/plug.vim ]]; then
     curl --fail --location --create-dirs \
