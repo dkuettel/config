@@ -15,29 +15,55 @@ while [[ $# != 0 ]]; do
             )
             ;;
 
-        (train-mtar)
+        (train)
             cmd=(
-                with-log docker.log
-                python3 -m nn.mtar360.eap1 train
+                #with-log docker.log
+                #python3
+                python3 ~/toys/vtrace/vtrace.py run
+                -m nn.mtar360.eap1 train
+                    mt360
                     --config-folder=s3://e2e-benchmarking/training/zurich-all-set/recolored
+                    --assembly=ktm.Right
                     --out-folder=.
-                    #--testsets=mtar360/all/recolored/v2
-                    mtar-broken
                     #--short-training=True
+                    --testsets=mtar360/all/recolored/v2
             )
             ;;
 
         (viewer)
             cmd=(
-                python3 -m nn.rendering.viewer
+                #python3
+                python3 ~/toys/vtrace/vtrace.py run
+                -m nn.rendering.viewer
                 trainset
                 s3://e2e-benchmarking/training/AssemblyStates/lego-lighthouse-31051/all-shaded
                 #s3://e2e-benchmarking/training/AssemblyStates/delonghi-coffee-machine/all-recolored
             )
             ;;
 
+        (render-video)
+            cmd=(
+                #python3
+                python3 ~/toys/vtrace/vtrace.py run
+                -m nn.mtar360.utils.render_video
+                augmented
+                --testset=mtar360/all/recolored/v2:ktm.Right
+                --frame-period=10
+                --output-fps=10
+                --config-path=s3://e2e-benchmarking/training/zurich-all-set/recolored
+                --mt360=/efs/jaeschbacher/xps/full360/short/zh_recolored/ktm.Right/0/export/recalibrated_model
+                --draw-edges=gt,red
+                --draw-edges=pred,blue
+                --draw-label
+                --draw-refpoints
+                --output-path=./video.mp4
+            )
+            ;;
+
         (shell)
             cmd=(bash)
+            # TODO zsh is installed, but need to take care of configuration, just map in?
+            # probably map in only here, not always
             ;;
 
         (ipython)
@@ -210,6 +236,14 @@ while [[ $# != 0 ]]; do
                 #--model-folder=/xp/src/nn/train_gltf
                 --model-folder=/xp/src/nn/train_gltf_small
                 --count=100
+            )
+            ;;
+
+        (weights)
+            cmd=(
+                #python3
+                python3 ~/toys/vtrace/vtrace.py run
+                -m nn.backbones.mnasnet pb-weights-to-h5
             )
             ;;
 
