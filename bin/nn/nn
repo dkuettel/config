@@ -164,17 +164,23 @@ while [[ $# != 0 ]]; do
 
         (pytest)
             # not sure if this is complete
+            # from yves: nnrun pytest -v -s -m "not slow" tests
+            # and use "mtar360/test_errors.py::confusions" to run a specific test
+            # can we pass it thru $@?
             cmd=(
-                pytest -svv modules
+                pytest -svv -m 'not slow'
+                #pytest -svv 'mtar360/test_train_eval_runs.py::test_train_eval[mode_params2]'
             )
+            #@=()
             args+=(--workdir=/xp/src/nn/tests)
             ;;
 
         (rtod)
             cmd=(
                 #with-log docker.log
-                python3 ~/toys/vtrace/vtrace.py run -m nn.mtar360.rtod
-                #python3 -m nn.mtar360.rtod
+                #python3
+                python3 ~/toys/vtrace/vtrace.py run -m
+                nn.mtar360.rtod
                 train-from-models
                 --output-dir=.
                 --model-folder=/xp/src/nn/train_gltf
@@ -187,21 +193,22 @@ while [[ $# != 0 ]]; do
 
         (rtod-eval)
             cmd=(
-                python3 ~/toys/vtrace/vtrace.py run -m nn.mtar360.rtod
-                #python3 -m nn.mtar360.rtod
+                #python3
+                python3 ~/toys/vtrace/vtrace.py run -m
+                nn.mtar360.rtod
                 evaluate
             )
             ;;
 
-        (dump)
+        (rtod-dump)
             cmd=(
                 #with-log docker.log
-                #python3 -m nn.mtar360.eap1
-                #dump-training-data-from-mtt
-                #--config-folder=/xp/src/nn/example
-                python3 -m nn.mtar360.rtod
+                #python3
+                python3 ~/toys/vtrace/vtrace.py run -m
+                nn.mtar360.rtod
                 dump-training-data-from-models
-                --model-folder=/xp/src/nn/train_gltf
+                #--model-folder=/xp/src/nn/train_gltf
+                --model-folder=/xp/src/nn/train_gltf_small
                 --count=100
             )
             ;;
