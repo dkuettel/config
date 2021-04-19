@@ -52,11 +52,11 @@ bindkey '^h' backward-delete-char # make ctrl-h work after returning from comman
 #bindkey '^w' backward-kill-word
 #bindkey -M vicmd '^r' history-incremental-search-backward # disabled because we use an antigen plugin
 #bindkey -M viins '^r' history-incremental-search-backward # disabled because we use an antigen plugin
-bindkey '^xh' run-help
+# unbind ',' to use it as a vim-style leader
+bindkey -M vicmd -r ,
 bindkey -M vicmd ',h' run-help
 autoload edit-command-line
 zle -N edit-command-line # todo autoload and zle -N, what?
-bindkey '^xe' edit-command-line
 bindkey -M vicmd ',e' edit-command-line
 autoload insert-files
 zle -N insert-files
