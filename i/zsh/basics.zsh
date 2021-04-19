@@ -58,10 +58,12 @@ bindkey -M vicmd ',h' run-help
 autoload edit-command-line
 zle -N edit-command-line # todo autoload and zle -N, what?
 bindkey -M vicmd ',e' edit-command-line
+# shortcut and then type pattern, to preview and finally insert matches
 autoload insert-files
 zle -N insert-files
 bindkey '^xf' insert-files
-bindkey -M vicmd ',f' insert-files
+bindkey -M viins '^xf' insert-files
+bindkey -M vicmd '^xf' insert-files
 
 ## history
 # try to make it "forever" and shared
