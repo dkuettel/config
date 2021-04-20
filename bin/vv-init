@@ -1,9 +1,7 @@
 #!/bin/zsh
 set -eux -o pipefail
 
-# create a new virtualenv
-# - take care of pip.conf user setting
-# - install pip-tools
+# create a new virtualenv and install pip tools
 
 if [[ -v VIRTUAL_ENV ]]; then
     echo "a virtual env ($VIRTUAL_ENV) is already active"
@@ -16,8 +14,8 @@ if [[ -d $folder ]]; then
     exit 1
 fi
 
-virtualenv $folder
+virtualenv --python python3.8 $folder
 
 path=($folder/bin $path)
 export VIRTUAL_ENV=$folder
-pip install --upgrade pip-tools
+pip install --upgrade pip pip-tools
