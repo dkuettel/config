@@ -2,6 +2,7 @@
 set -eux -o pipefail
 
 h=${0:a:h}
+cd $h
 
 # config files
 # todo if the ~/.config/nvim folder never gets dirty we could just symlink the whole instead of individuals
