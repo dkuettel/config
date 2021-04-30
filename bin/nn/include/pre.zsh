@@ -42,7 +42,7 @@ args+=(
     --env AWS_ACCESS_KEY_ID=$(aws configure get aws_access_key_id)
     --env AWS_SECRET_ACCESS_KEY=$(aws configure get aws_secret_access_key)
     --env AWS_DEFAULT_REGION=eu-west-1
-)
+) || (echo 'cannot get aws credentials'; exit 1)
 
 # s3 cache
 if [[ -e $h/s3-cache ]]; then
@@ -94,7 +94,7 @@ args+=(-p 6006:6006)
 
 # TODO for speed mounting in local copy, but dangerous if out-of-date
 if [[ -d efs-models ]]; then
-    echo '*** NOTE: MOUNTING LOCAL EFS MODELS'
+    echo '*** NOTE: MOUNTING LOCAL EFS MODELS' >&2
     mount efs-models /efs/hacharya/test_data/models
 fi
 
