@@ -76,12 +76,12 @@ let g:neoformat_enabled_python = ['isort', 'black']
 let g:neoformat_run_all_formatters = 1
 let g:neoformat_try_formatprg = 1
 let g:neoformat_python_black = {
-        \ 'exe': 'vv-or-global black',
+        \ 'exe': 'black',
         \ 'args': ['--quiet', '--target-version=py38', '-'],
         \ 'stdin': 1,
     \ }
 let g:neoformat_python_isort = {
-        \ 'exe': 'vv-or-global isort',
+        \ 'exe': 'isort',
         \ 'args': ['--profile=black', '--combine-as', '-'],
         \ 'stdin': 1,
     \ }

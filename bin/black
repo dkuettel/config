@@ -1,0 +1,18 @@
+#!/bin/zsh
+set -eu -o pipefail
+
+# run black
+# prefer a local venv
+# or else from current environment
+
+folder=$(pwd)/.venv
+if [[ ! -v VIRTUAL_ENV && -d $folder ]]; then
+    if ! grep --quiet ${folder:A} $folder/bin/activate; then
+        echo "$folder was probably originally in a different location"
+        exit 1
+    fi
+    path=($folder/bin $path)
+    export VIRTUAL_ENV=$folder
+fi
+
+black $@
