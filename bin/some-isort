@@ -1,0 +1,10 @@
+#!/bin/zsh
+set -eux -o pipefail
+
+# run isort from .venv/bin/isort or else global path
+
+if [[ -f ./.venv/bin/isort ]]; then
+    ./.venv/bin/isort $@
+else
+    isort $@
+fi

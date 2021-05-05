@@ -1,0 +1,10 @@
+#!/bin/zsh
+set -eu -o pipefail
+
+# run black from .venv/bin/black or else from global path
+
+if [[ -f ./.venv/bin/black ]]; then
+    ./.venv/bin/black $@
+else
+    black $@
+fi
