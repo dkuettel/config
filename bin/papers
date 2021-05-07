@@ -3,4 +3,4 @@ set -eux -o pipefail
 
 [[ ! -v TMUX ]]
 
-tmux new-session -s papers -c ~/dbox/papers
+tmux new-session -s papers -A -c ~/dbox/papers
