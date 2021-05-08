@@ -3,12 +3,11 @@ set -eux -o pipefail
 
 # new or attach to session
 # name by first argument or current folder
+# note: can be a bit shaky if you are in a folder with a "well-known" name?
 
 folder=${1:-.}
 folder=${folder:a}
 
 name=${folder:t}
 
-tmux attach-session -t $name && exit
-
-tmux new-session -s $name -c $folder -e h=$folder
+tmux new-session -s $name -A -c $folder -e h=$folder
