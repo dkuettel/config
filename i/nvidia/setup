@@ -2,7 +2,7 @@
 set -eux -o pipefail
 
 # simple check to see if there is an nvidia gpu, might not be perfect
-if ! grep 'VGA.*NVIDIA'; then
+if ! lspci | grep 'VGA.*NVIDIA'; then
     echo 'no nvidia gpu found'
     exit 0
 fi
