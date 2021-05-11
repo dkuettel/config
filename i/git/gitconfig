@@ -3,7 +3,7 @@
 [includeIf "gitdir:~/envs/"]
     path = ~/config/i/git/gitconfig-ptc-author
 [core]
-    sshCommand = git-ssh-dispatch
+    sshCommand = ~/config/bin/git-ssh-dispatch
     editor = nvim
 [push]
     default = simple
