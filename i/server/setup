@@ -1,9 +1,10 @@
 #!/bin/bash
 set -eux -o pipefail
 
+$(dirname $0)/../zsh/setup
+
 # switch to zsh
 if [ -z ${ZSH_VERSION+1} ]; then
-    which zsh || $(dirname $0)/../zsh/setup
     exec zsh $0
 fi
 
