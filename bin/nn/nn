@@ -17,9 +17,8 @@ while [[ $# != 0 ]]; do
 
         (train)
             cmd=(
-                #with-log docker.log
-                #python3
-                python3 ~/toys/vtrace/vtrace.py run
+                with-log docker.log
+                python3
                 -m nn.mtar360.eap1 train
                     mt360
                     --config-folder=s3://e2e-benchmarking/training/zurich-all-set/recolored
@@ -27,6 +26,19 @@ while [[ $# != 0 ]]; do
                     --out-folder=.
                     #--short-training=True
                     --testsets=mtar360/all/recolored/v2
+            )
+            ;;
+
+        (train-short)
+            cmd=(
+                python3 ~/toys/vtrace/vtrace.py run
+                -m nn.mtar360.eap1 train
+                    mt360
+                    --config-folder=s3://e2e-benchmarking/training/zurich-all-set/recolored
+                    --assembly=ktm.Right
+                    --out-folder=.
+                    --short-training=True
+                    #--testsets=mtar360/all/recolored/v2
             )
             ;;
 
