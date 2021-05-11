@@ -15,7 +15,11 @@ git clone git@github.com:ThingWorx/neural-networks.git $target
     [[ $(git config --get user.name) == 'Daniel Kuettel' ]]
     [[ $(git config --get user.email) == 'dkuettel@ptc.com' ]]
 
-    ln -sfT ../../setup/pre-commit .git/hooks/pre-commit
+    if [[ -e setup/install-hooks ]]; then
+        setup/install-hooks
+    else
+        ln -sfT ../../setup/pre-commit .git/hooks/pre-commit
+    fi
 
     bin/pip-sync-wrapper
 )
