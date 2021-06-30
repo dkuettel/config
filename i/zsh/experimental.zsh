@@ -14,7 +14,7 @@ alias ncal='ncal -bM'
 # nvim
 alias v=nvim
 
-# correct set of envs?
+# correct set of envs? shells usually try VISUAL first and then EDITOR
 export SUDO_EDITOR=nvim
 export VISUAL=nvim
 export EDITOR=nvim
