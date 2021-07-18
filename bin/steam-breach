@@ -1,0 +1,5 @@
+#!/bin/zsh
+set -eux -o pipefail
+
+cd ~/.local/share/Steam/steamapps/common/'Into the Breach'
+./Breach
