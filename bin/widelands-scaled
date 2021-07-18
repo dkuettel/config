@@ -1,0 +1,6 @@
+#!/bin/zsh
+set -eux -o pipefail
+
+xrandr --output DP-0 --mode 1920x1080 --rate 120
+widelands
+xrandr --output DP-0 --mode 3840x2160 --rate 120
