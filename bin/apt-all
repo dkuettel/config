@@ -2,6 +2,7 @@
 set -eux -o pipefail
 
 sudo apt update
-sudo apt upgrade
+sudo apt upgrade  # --autoremove does seem to do something, but not fully
 sudo apt autoremove
+
 sudo snap refresh
