@@ -1,5 +1,10 @@
 #!/bin/zsh
 set -eux -o pipefail
 
-cd ~/.local/share/Steam/steamapps/common/'Into the Breach'
-./Breach
+# this works nicely, but doesnt seem to track playing time
+# and achievements might only come (if at all) next time you start steam
+#cd ~/.local/share/Steam/steamapps/common/'Into the Breach'
+#./Breach
+
+# the app id you can find from, eg, the app url
+steam steam://run/590380
