@@ -62,11 +62,14 @@ vmap q; q:
 
 " visual indicators
 set listchars=tab:›\ ,trail:•,precedes:◂,extends:▸,nbsp:¿
-" set listchars=tab:›\ ,trail:•,precedes:↢,extends:↣,nbsp:¿
+"set listchars=tab:›\ ,trail:•,precedes:↢,extends:↣,nbsp:¿
 set list
-set breakindent " visual (not real) breaks
-let &showbreak='▸'
-" let &showbreak='↪'
+set breakindent
+set showbreak=▸
+"set showbreak=↪
+let &breakat=' '
+"let &breakat=' ^I!@*-+;:,./?'
+set linebreak
 set nowrap
 map ,w :set wrap!<cr>
 
