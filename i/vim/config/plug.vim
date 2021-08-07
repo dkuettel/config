@@ -14,7 +14,7 @@ endif
     Plug 'altercation/vim-colors-solarized'
     Plug 'easymotion/vim-easymotion'
     "Plug 'psf/black' " todo https://github.com/psf/black/pull/978 when merged could fix the view reset problems
-    Plug 'sbdchd/neoformat'
+    Plug 'sbdchd/neoformat' " alternative to psf/black above, also works for isort now
     Plug 'airblade/vim-gitgutter'
     Plug 'scrooloose/nerdcommenter'
 
@@ -68,21 +68,23 @@ hi EasyMotionTarget2Second cterm=none ctermfg=4 ctermbg=none
 
 
 """ neoformat
-" todo make it per filetype
-" set equalprg=python3\ -m\ black\ --quiet\ -
-" nnoremap <leader>= mc:%!python3 -m black --quiet -<cr>`c
 "nnoremap == :Black<cr> " Plugin disabled currently, see above
-let g:neoformat_enabled_python = ['isort', 'black']
-let g:neoformat_run_all_formatters = 1
-let g:neoformat_try_formatprg = 1
-let g:neoformat_python_black = {
-        \ 'exe': 'some-black',
-        \ 'args': ['--quiet', '--target-version=py38', '-'],
-        \ 'stdin': 1,
-    \ }
-let g:neoformat_python_isort = {
-        \ 'exe': 'some-isort',
-        \ 'args': ['--profile=black', '--combine-as', '-'],
+" neoformat is buggy:
+" - multiple formatters in a sequence can cut off the file at the end
+"   see https://github.com/sbdchd/neoformat/pull/235 and https://github.com/sbdchd/neoformat/issues/256
+" - the working directory is _changed_ to the file being formatted, that makes it hard to discover configurations or venvs
+"   see https://github.com/sbdchd/neoformat/issues/47 (merged unfortunately)
+" as a workaround:
+" - use a single executable that chains isort and black
+" - set a env variable when starting vim for the formatter to use to discover a venv or settings
+" TODO I dont get anymore a message about changes needed
+let g:neoformat_enabled_python = ['isort_and_black']
+let g:neoformat_only_msg_on_error = 0
+"let g:neoformat_try_formatprg = 1
+let $vim_project_folder = $PWD
+let g:neoformat_python_isort_and_black = {
+        \ 'exe': 'some-isort-and-black',
+        \ 'args': [],
         \ 'stdin': 1,
     \ }
 let g:neoformat_basic_format_align = 0

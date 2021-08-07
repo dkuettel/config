@@ -1,0 +1,25 @@
+#!/bin/zsh
+set -eu -o pipefail
+
+# run isort and black from:
+# 1) $vim_project_folder venv, if any
+# 2) from local folder venv, if any
+# 3) else, from global installation
+
+if [[ -v vim_project_folder && -f $vim_project_folder/.venv/bin/isort ]]; then
+    isort=$vim_project_folder/.venv/bin/isort
+elif [[ -f ./.venv/bin/isort ]]; then
+    isort=./.venv/bin/isort
+else
+    isort=isort
+fi
+
+if [[ -v vim_project_folder && -f $vim_project_folder/.venv/bin/black ]]; then
+    black=$vim_project_folder/.venv/bin/black
+elif [[ -f ./.venv/bin/black ]]; then
+    black=./.venv/bin/black
+else
+    black=black
+fi
+
+$isort --profile=black --combine-as - | $black --quiet --target-version=py39 -
