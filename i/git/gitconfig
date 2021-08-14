@@ -43,3 +43,8 @@
     rc = rebase --continue
     sm = submodule
     co- = !git checkout $(fzf-branch)
+    lost1 = reflog --date=relative
+    # inspired by https://stackoverflow.com/questions/89332/how-to-recover-a-dropped-stash-in-git
+    lost2 = !git log --graph --oneline --decorate $(git fsck --no-progress --no-reflog | awk '/dangling commit/ {print $3}')
+    lost3 = !git log --graph --oneline --decorate $(git fsck --no-progress --no-reflog --unreachable| awk '/unreachable commit/ {print $3}')
+    lost4 = !git show $(git fsck --no-progress --no-reflog --unreachable| awk '/unreachable commit/ {print $3}')
