@@ -27,9 +27,7 @@
     co = checkout
     c = commit
     cm = commit -m
-    f = fetch
-    fa = fetch --all
-    fp = fetch --prune
+    f = fetch --all --prune
     m = merge
     p = push
     pu = push -u origin HEAD
