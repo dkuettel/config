@@ -2,6 +2,7 @@
 set -eux -o pipefail
 
 # simple check to see if there is an nvidia gpu, might not be perfect
+# TODO this failed for A100 instances
 if ! lspci | grep 'VGA.*NVIDIA'; then
     echo 'no nvidia gpu found'
     exit 0
@@ -16,8 +17,11 @@ sudo apt-get install -yqq ubuntu-drivers-common
 
 # check what is the newest recommended version for nvidia
 latest=$(ubuntu-drivers list | awk '/^nvidia-driver-[0-9]+,/ {print substr($1, 0, length($1)-1)}' | sort | tail -n 1)
-expected=nvidia-driver-460
-# note: with my geforce 1080ti the 460 series sometimes flickers, seems to be a known problem, not sure if it will be fixed, 450 for now works
+expected=nvidia-driver-470
+# NOTE
+# with my geforce 1080ti the 460 series sometimes flickers
+# seems to be a known problem
+# not sure if it will be fixed, 450 for now works
 
 if [[ $latest != $expected ]]; then
     echo "expected $expected but found $latest"
@@ -30,3 +34,12 @@ sudo apt install -yqq $expected
 # > wget 'https://us.download.nvidia.com/XFree86/Linux-x86_64/410.78/NVIDIA-Linux-x86_64-410.78.run' -O nvidia.run
 # > sudo apt-get -yqq install dkms
 # > sudo sh nvidia.run -a -q -n -s --dkms
+
+# another alternative
+# https://launchpad.net/~graphics-drivers/+archive/ubuntu/ppa
+# might be fine too, sometimes slightly earlier with new versions
+
+# another alternative might be something like
+# > sudo ubuntu-drivers install [--gpgpu]
+# but it didnt work for me
+# (--gpgpu might be only for headless?)
