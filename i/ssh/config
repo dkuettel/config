@@ -4,6 +4,25 @@ Host efs
     ProxyCommand aws ssm start-session --target %h --document-name AWS-StartSSHSession --parameters 'portNumber=%p'
     ServerAliveInterval 10
 
+Host staging
+    HostName i-0ed102c1042488382
+    User dkuettel
+    ProxyCommand ssh-proxy-command-aws-start-and-ssm %h %p
+    ServerAliveInterval 10
+
+Host a100
+    HostName i-0bdfac6a69ad3f7db
+    User dkuettel
+    ProxyCommand ssh-proxy-command-aws-start-and-ssm %h %p
+    ServerAliveInterval 10
+
+Host nvidia
+    HostName i-0dc2b324ee6bfe806
+    User ubuntu
+    IdentityFile ~/.ssh/ubuntu.pem
+    ProxyCommand ssh-proxy-command-aws-start-and-ssm %h %p
+    ServerAliveInterval 10
+
 Host tb
     HostName i-0dfd0827fc547c5e3
     User dkuettel
