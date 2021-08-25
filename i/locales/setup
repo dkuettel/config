@@ -13,4 +13,7 @@ set -eux -o pipefail
 # can be annoying after some apt action when it regenerates
 
 sudo ln -sfT ~/config/i/locales/locale.gen /etc/locale.gen
+# see also https://help.ubuntu.com/community/Locale
+sudo ln -sfT ~/config/i/locales/default-locale /etc/default/locale
+
 sudo locale-gen
