@@ -6,5 +6,12 @@ set -eux -o pipefail
 #cd ~/.local/share/Steam/steamapps/common/'Into the Breach'
 #./Breach
 
-# the app id you can find from, eg, the app url
+# the app id you can find from, eg, the app url on the steam website
 steam steam://run/590380
+
+# note:
+# this starts steam (in the background), if it's not already started
+# if it was started already, it will return (on game exit, or immediately, didnt test)
+# if it wasn't, it wont return until you exit steam by 'steam' and then exit, so far
+# convenient, but also a bit annoying
+# 'pgrep steam' is easy to check if it is running in the backgrounds
