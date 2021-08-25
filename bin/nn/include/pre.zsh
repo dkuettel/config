@@ -60,8 +60,8 @@ args+=(--user $(id --user):$(id --group))
 
 # mounts
 if ! mountpoint --quiet /efs; then
-    echo '/efs might not yet be mounted' >&2
-    exit 1
+    echo '/efs might not yet be mounted, attempting to mount' >&2
+    sshfs-efs
 fi
 id_mount /efs
 nn_mount .
