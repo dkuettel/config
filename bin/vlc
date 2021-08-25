@@ -1,0 +1,4 @@
+#!/bin/zsh
+set -eux -o pipefail
+
+vlc --config ~/config/i/vlc/vlcrc

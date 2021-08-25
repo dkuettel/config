@@ -104,8 +104,5 @@ alias sc='sudo systemctl'
 alias sc-status='sudo systemctl status'
 alias jc=journalctl
 
-# make vlc use the custom config from git
-alias vlc='vlc --config ~/config/i/vlc/vlcrc'
-
 # docker kill
 alias dk='docker kill'
