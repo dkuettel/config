@@ -1,3 +1,4 @@
+echo
 echo '** docker args:'
 echo $args
 echo

@@ -90,7 +90,14 @@ id_mount ~/toys/vtrace/vtrace.py
 # args+=(--env NN_USER=kuettel)
 
 # for with-tb
-args+=(-p 6006:6006)
+# internally tb uses port 6006
+# externally we look for the next free one
+for i in $(seq 6006 6100); do
+    if lsof -i :$i; then continue; fi
+    echo "tensorboard mapped to port $i"
+    args+=(-p 6006:$i)
+    break
+done
 
 # TODO for speed mounting in local copy, but dangerous if out-of-date
 if [[ -d efs-models ]]; then
