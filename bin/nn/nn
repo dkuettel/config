@@ -7,6 +7,16 @@ while [[ $# != 0 ]]; do
     arg=$1; shift
     case $arg in
 
+        (liveness)
+            # test liveness probe
+            touch $out/liveness-docker-log
+            cmd=(
+                /xp/src/nn/bin/livenessProbe
+                /xp/src/out/liveness-docker-log
+                /xp/src/out/liveness-log
+            )
+            ;;
+
         (web-pdb)
             # needs pip3 install web-pdb in dockerfiles/nn-dev
             args+=(
@@ -17,15 +27,28 @@ while [[ $# != 0 ]]; do
 
         (train)
             cmd=(
-                with-log docker.log
+                #with-log docker.log
                 python3
                 -m nn.mtar360.eap1 train
                     mt360
-                    --config-folder=s3://e2e-benchmarking/training/zurich-all-set/recolored
-                    --assembly=ktm.Right
+                    #--config-folder=s3://e2e-benchmarking/training/zurich-all-set/recolored
+                    --config-folder=s3://e2e-benchmarking/training/zurich-all-set/recolored-full360
+                    #--assembly=ktm.Right
+                    --assembly=ferrari_488_red.viewpoint_0000
                     --out-folder=.
                     #--short-training=True
-                    --testsets=mtar360/all/recolored/v2
+                    #--testsets=mtar360/all/recolored/v2
+            )
+            ;;
+
+        (raw-train)
+            cmd=(
+                #with-log docker.log
+                python3
+                -m nn.mtar360.eap1 raw-train
+                --template-json="$(cat template.json)"
+                --style-json="$(cat style.json)"
+                --output-dir=.
             )
             ;;
 
@@ -205,11 +228,16 @@ while [[ $# != 0 ]]; do
             # from yves: nnrun pytest -v -s -m "not slow" tests
             # and use "mtar360/test_errors.py::confusions" to run a specific test
             # can we pass it thru $@?
-            cmd=(
-                pytest -svv -m 'not slow'
-                #pytest -svv 'mtar360/test_train_eval_runs.py::test_train_eval[mode_params2]'
-            )
-            #@=()
+            if [[ $# == 0 ]]; then
+                cmd=(
+                    pytest -svv -m 'not slow'
+                )
+            else
+                cmd=(
+                    pytest -svv $1
+                )
+                shift
+            fi
             args+=(--workdir=/xp/src/nn/tests)
             ;;
 
