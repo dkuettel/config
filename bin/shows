@@ -4,9 +4,6 @@ set -eux -o pipefail
 f=~/dbox/shows.todo
 [[ -e $f ]]
 
-if [[ -v TMUX ]]; then
-    tmux rename-window shows
-    tmux split-window -dh -l 66% -c ~/Downloads
-fi
+[[ -v TMUX_PANE ]] && tmux rename-window -t $TMUX_PANE shows
 
 nvim $f
