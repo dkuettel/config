@@ -15,6 +15,10 @@ if ! which google-chrome; then
         -O /tmp/google-chrome.deb
     sudo apt-get install -yqq /tmp/google-chrome.deb
     rm /tmp/google-chrome.deb
+
+    # NOTE: at this point apt has it in the index
+    # there is google-chrome-stable, google-chrome-beta, google-chrome-unstable
+
 fi
 
 apts=(
