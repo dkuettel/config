@@ -1,5 +1,15 @@
 " change case of previous word in insert mode
-imap <c-u> <esc>mmvB~`ma
+" first attempt: imap <c-u> <esc>mmvB~`ma, to be used after the fact
+" <-cu> by default actually deletes the whole line to the left, can be nice
+" next attempt, inspired by https://vim.fandom.com/wiki/Insert-mode_only_Caps_Lock
+for c in range(char2nr('A'), char2nr('Z'))
+  execute 'lnoremap ' . nr2char(c+32) . ' ' . nr2char(c)
+  execute 'lnoremap ' . nr2char(c) . ' ' . nr2char(c+32)
+endfor
+" use ctrl-^ in insert mode to toggle
+" note you see (lang) in the insert indicator at the bottom when in 'caps lock'
+" group so that it doesnt duplicate on multi-source?
+autocmd InsertLeave * set iminsert=0
 
 """ navigate splits
 " default vim <c-w> h/j/k/l
