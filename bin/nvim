@@ -1,0 +1,9 @@
+#!/bin/zsh
+set -eu -o pipefail
+
+# todo: hoping to catch the reason for slow exits sometimes in the log eventually
+
+mkdir -p ~/nvim-logs
+log=~/nvim-logs/$(date --iso-8601=seconds)-pid-$$
+/usr/local/bin/nvim -V>(ts -i '%.s' > $log) $@
+echo "see verbose $log" >&2
