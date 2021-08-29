@@ -30,3 +30,6 @@ alias watch-gpu='watch nvidia-smi pmon -c 1'
 
 # multipass, any name clashes like this?
 alias mp=multipass
+
+# make search case-insensitive if no capital letters in query
+alias less='less -i'
