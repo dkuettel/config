@@ -17,17 +17,30 @@ antigen bundle command-not-found
 #antigen bundle per-directory-history
 antigen bundle compleat # todo could be interesting to make completion for our xpman and co?
 
-# plugins from directly from git
-#antigen bundle psprint/history-search-multi-word # widget to search history
-antigen bundle zlsun/solarized-man # dark solarized colors for man
-antigen bundle zsh-users/zsh-syntax-highlighting # note: might have to be the last to import
-#antigen bundle Valiev/almostontop # always clear before new command (output always on top)
+# search history, now using one-shell history instead
+#antigen bundle psprint/history-search-multi-word
+
+# dark solarized colors for man
+antigen bundle zlsun/solarized-man
+
+# always clear before new command (output always on top)
+#antigen bundle Valiev/almostontop
+
+# syntax highlighting
+# as of 2021-08-29 at commit 6e0e950154a4c6983d9e077ed052298ad9126144
+# the original version is slow with efs and other slow file systems
+# even when blacklisting them, I could not find the exact cause
+# but my fork foregoes parsing as long as there are keys in the input queue
+#antigen bundle zsh-users/zsh-syntax-highlighting
+antigen bundle dkuettel/zsh-syntax-highlighting
+# note: should be the last to source, with antigen that is not so easily controlled
 
 antigen apply
 
 
-# configure
+### configure bundles
 
+# configure per-directory-history
 # per-directory-history
 #_per-directory-history-set-global-history # global by default
 #bindkey -M vicmd ',g' per-directory-history-toggle-history
@@ -35,10 +48,11 @@ antigen apply
 #bindkey -M vicmd '^g' per-directory-history-toggle-history
 #bindkey -M viins '^g' per-directory-history-toggle-history
 
-# history-search-multi-word
+# configure history-search-multi-word
 #bindkey -M vicmd '^r' history-search-multi-word
 #bindkey -M viins '^r' history-search-multi-word
 
-# zsh-syntax-highlighting
+# configure zsh-syntax-highlighting
 ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets)
 ZSH_HIGHLIGHT_DIRS_BLACKLIST+=(/efs)
+ZSH_HIGHLIGHT_MAXLENGTH=2000
