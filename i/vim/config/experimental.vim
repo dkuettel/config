@@ -10,6 +10,10 @@ endfor
 " note you see (lang) in the insert indicator at the bottom when in 'caps lock'
 " group so that it doesnt duplicate on multi-source?
 autocmd InsertLeave * set iminsert=0
+" also overwrite c-h in insert mode to switch (by default deletes character)
+" actually that's quite nice
+" instead set it to c-l? not sure what it does by default, documentation doesnt fit for me
+imap <c-l> <c-^>
 
 """ navigate splits
 " default vim <c-w> h/j/k/l
