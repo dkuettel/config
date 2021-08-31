@@ -1,0 +1,16 @@
+#!/bin/zsh
+set -eux -o pipefail
+
+echo 'not yet automatic' >&2
+exit 1
+
+# for the logitech pro C920
+
+sudo apt-get install -y v4l-utils
+
+v4l2-ctl --list-devices
+# assuming our device is /dev/video0
+
+v4l2-ctl -d /dev/video0 --list-ctrls
+
+v4l2-ctl -d /dev/video0 --set-ctrl=zoom_absolute=180
