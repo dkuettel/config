@@ -101,6 +101,7 @@ setopt always_to_end # move to end of word after completion
 setopt complete_in_word
 setopt long_list_jobs
 setopt noautocd # dont assume an implicit cd prefix for folder names
+setopt no_list_beep # dont beep on incomplete/ambiguous completion
 export SUDO_EDITOR=vim # for sudo -e or sudoedit
 export MANOPT='--no-justification --no-hyphenation'
 export PYTHONDONTWRITEBYTECODE=True # no .pyc files for python
