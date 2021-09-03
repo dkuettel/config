@@ -1,0 +1,47 @@
+by default I had it in /swap.img, from a more or less default ubuntu 20.04 server installation
+as defined in /etc/fstab
+
+usually not really needed so much anymore, could be none
+but for hibernate you need it, and should be large enough (?)
+I guess then it can be on a slower disk, not so important
+
+I dont think there is a way to make it "lazy" so it only uses the spaces when it actually does
+(lvm-based, but maybe not worth the hassle)
+
+commands to hot enable and disable
+> swapoff, mkswap, swapon
+> blkid /dev/sdb2 to get the uuid in fstab UUID= or swapon -U or so
+> blkid seems to give me different ones vs lsblk -f, but only at first, later it matched again ...
+but eventually needs to be in /etc/stab, something like
+> UUID=781957f6-85cc-4099-857f-eb4a1e3e69c5 none swap sw 0 0
+
+looking around on the web, quite mixed info
+    for hibernate grub or kernel start call has to know about the swap file?
+    or the "resume-from" file?
+    see https://wiki.archlinux.org/title/Power_management/Suspend_and_hibernate
+
+    If you want to use your swap for hibernating then you need to update the UUID in
+    /etc/initramfs-tools/conf.d/resume with this content RESUME=UUID=xxx.
+    Don't forget to > sudo update-initramfs -u.
+    above didnt work for me
+    see https://askubuntu.com/questions/6769/hibernate-and-resume-from-a-swap-file/1132154#1132154
+    really need to do that manually?
+
+did both changes now
+    in /etc/default/grub
+    > GRUB_CMD_LINE_LINUX_DEFAULT="resume=UUID=...."
+    & sudo update-grub
+    and in /etc/initramfs-tools/conf.d/resume
+    > RESUME=UUID=...
+    & update-initramfs -u -k all
+    a bit weird, should that really not be default then?
+    not sure if both are needed
+    but then it works
+    it also talks about swap-offset and changing the service files, but that seems to be old?
+
+still the machines starts right away, my problem?
+or change service files?
+
+could also test things inside multipass to understand what was really needed?
+(make sure to use 20.04, not 21.04 or something)
+plus if that one also restarts instead of stays down? probably not an issue there ...
