@@ -1,10 +1,12 @@
 #!/bin/zsh
-set -eux -o pipefail
+set -eu -o pipefail
 
 # two options:
 # > xset dpms force off
 # > xset +dpms
-
 xset dpms force off
+
+# TODO 'man slock' mentions other settings for maximum security
 slock
+
 xset -dpms

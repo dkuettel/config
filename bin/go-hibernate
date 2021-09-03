@@ -1,0 +1,21 @@
+#!/bin/zsh
+set -eu -o pipefail
+
+if [[ ! -v DISPLAY ]]; then
+    echo 'DISPLAY is not set' >&2
+    exit 1
+fi
+
+if grep 'enabled' /proc/acpi/wakeup; then
+    echo 'some wakeup signals are enabled' >&2
+    exit 1
+fi
+
+standby-lock &
+systemctl hibernate
+
+read '?Are you back? [enter]'
+(
+    xrandr | grep '\*'
+    journalctl --unit=systemd-suspend.service --boot --output=short-full | grep -B 1 'System resumed.' | tail -n 2
+) | less

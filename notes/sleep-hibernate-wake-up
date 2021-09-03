@@ -1,0 +1,12 @@
+
+sometimes it wakes up for no reason
+even from poweroff state
+is that from random wake-up packets?
+
+but more importantly maybe, the wakups from sleep or hibernate
+https://wiki.ubuntu.com/UnderstandingSuspend has some info
+still disabling all in /proc/acpi/wakeup I can use the usb keyboard to wakeup?!
+
+> tailf /var/log/syslog | less
+I dont find a mention of what deviced cause the restart
+not even the keyboard (when wanted) I see it mentioned
