@@ -12,15 +12,25 @@ args=(
     -f 'C64 Pro Mono:size=12:antialias=true:autohint=true'
     -C 2
     -g '50x50+1200+100'
-    -e ${0:a:h}/../i/pstart/menu $out $env
 )
 # TODO switch to alacritty?
-st $args
+st $args -e ${0:a:h}/../i/pstart/menu $out $env
 
 if [[ -f $out ]]; then
     selection=($(cat $out))
     rm $out
-    if [[ $selection[1] == 'enter' ]]; then
-        exec $selection[2]
-    fi
+    case $selection[1] in
+        (enter)
+            # we start in place, invisible, no terminal
+            exec $selection[2]
+            ;;
+        (ctrl-t)
+            # start in another foreground floating terminal to see the output of the command
+            st $args -e =zsh -c "$selection[2]; read"
+            ;;
+        (*)
+            echo 'unknown fzf selection:' $selection
+            exit 1
+            ;;
+    esac
 fi

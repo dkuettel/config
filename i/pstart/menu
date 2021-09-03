@@ -8,7 +8,7 @@ cmd_fzf=(
     fzf
     --preview='which -aS {}; echo; head $(which {})'
     --preview-window=down:10
-    --expect=enter
+    --expect=enter,ctrl-t
 )
 # ideas
 # could expect other keys apart from enter and then
