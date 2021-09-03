@@ -1,0 +1,15 @@
+#!/bin/zsh
+set -eux -o pipefail
+
+# see config/notes/sleep-hibernate-wake-up
+# and https://askubuntu.com/questions/152403/how-do-i-make-changes-to-proc-acpi-wakeup-permanent
+# might be old and not the best way anymore
+
+cd ${0:a:h}
+
+cat ./disable-acpi-wakeups.service \
+    | envsubst \
+    | sudo tee /etc/systemd/system/disable-acpi-wakeups.service
+
+sudo systemctl enable disable-acpi-wakeups
+sudo systemctl start disable-acpi-wakeups

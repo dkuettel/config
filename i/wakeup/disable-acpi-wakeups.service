@@ -1,0 +1,9 @@
+[Unit]
+Description=Disable all devices in /proc/acpi/wakeup
+
+[Service]
+ExecStart=$HOME/config/i/wakeup/disable-all
+Type=oneshot
+
+[Install]
+WantedBy=multi-user.target

@@ -1,0 +1,11 @@
+#!/bin/zsh
+set -eux -o pipefail
+
+# assuming run as root or someone else that can write to
+# /proc/acpi/wakeup
+
+for i in $(cat /proc/acpi/wakeup | tail -n +2 | grep enabled | awk '{print $1}'); do
+    echo $i > /proc/acpi/wakeup
+done
+
+cat /proc/acpi/wakeup
