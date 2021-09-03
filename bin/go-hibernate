@@ -6,16 +6,12 @@ if [[ ! -v DISPLAY ]]; then
     exit 1
 fi
 
-if grep 'enabled' /proc/acpi/wakeup; then
-    echo 'some wakeup signals are enabled' >&2
-    exit 1
-fi
-
 standby-lock &
 systemctl hibernate
 
 read '?Are you back? [enter]'
 (
-    xrandr | grep '\*'
+    grep 'enabled' /proc/acpi/wakeup || echo 'all /proc/acpi/wakeup is disabled'
+    xrandr | grep '\*' || echo 'no default xrandr profile found'
     journalctl --unit=systemd-suspend.service --boot --output=short-full | grep -B 1 'System resumed.' | tail -n 2
 ) | less
