@@ -14,7 +14,7 @@ if [[ -d $folder ]]; then
     exit 1
 fi
 
-virtualenv --python python3.8 $folder
+virtualenv --python python3.9 $folder
 
 path=($folder/bin $path)
 export VIRTUAL_ENV=$folder
