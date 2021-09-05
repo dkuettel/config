@@ -13,5 +13,5 @@ read '?Are you back? [enter]'
 (
     grep 'enabled' /proc/acpi/wakeup || echo 'all /proc/acpi/wakeup is disabled'
     xrandr | grep '\*' || echo 'no default xrandr profile found'
-    journalctl --unit=systemd-suspend.service --boot --output=short-full | grep -B 1 'System resumed.' | tail -n 2
+    journalctl --unit=systemd-hibernate.service --boot --output=short-full | grep -B 1 'System resumed.' | tail -n 2
 ) | less
