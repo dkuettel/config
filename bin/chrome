@@ -1,6 +1,18 @@
 #!/bin/zsh
 set -eux -o pipefail
 
+(
+    # somehow those field tests (encoded in variations_* keys?)
+    # break my todoist drag & drop
+    # the only way I found to fix it is to clear all that data before we start
+    # seems like field test / variations are disabled in the "first start"
+    # also in 'about:version" I dont see the identifiers, but as soon as they appear, it doesnt work anymore
+    # hopefully at some point I can disable that again
+    cd ~/.config/google-chrome
+    jq 'to_entries | map(select(.key | test("variations_.*") | not)) | from_entries' Local\ State \
+        | sponge Local\ State
+)
+
 google-chrome --force-device-scale-factor=1.5 $@
 
 # beta or unstable with same settings as stable
