@@ -1,7 +1,7 @@
 #!/bin/zsh
 set -eux -o pipefail
 
-(
+if ! pgrep google-chrome; then
     # somehow those field tests (encoded in variations_* keys?)
     # break my todoist drag & drop
     # the only way I found to fix it is to clear all that data before we start
@@ -11,7 +11,7 @@ set -eux -o pipefail
     cd ~/.config/google-chrome
     jq 'to_entries | map(select(.key | test("variations_.*") | not)) | from_entries' Local\ State \
         | sponge Local\ State
-)
+fi
 
 google-chrome --force-device-scale-factor=1.5 $@
 
