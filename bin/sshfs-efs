@@ -6,6 +6,11 @@ if [[ ! -d /efs ]]; then
     sudo chown dkuettel:dkuettel /efs
 fi
 
+if mountpoint /efs; then
+    echo 'something is already mounted at /efs' >&2
+    exit 1
+fi
+
 # maybe check https://serverfault.com/questions/6709/sshfs-mount-that-survives-disconnect
 # todo testing reconnect, will it work after sleep/suspend?
 # todo auto_cache working for hemanths big rendering files?
