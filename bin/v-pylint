@@ -53,6 +53,7 @@ qfile=$(tempfile --prefix=vim-pylint-quickfix-)
 # TODO how to make it also available for single files right inside vim ad-hoc?
 # a command to call that returns a tmp file to be loaded? or pipe for cleaner with makeprg?
 
+echo '\n\nrun pylint\n'
 run_pylint > >(tee $qfile) && code=0 || code=$?
 tput bel
 
