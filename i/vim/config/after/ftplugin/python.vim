@@ -7,8 +7,23 @@ setlocal
 " todo tried a local mapping
 " needs to be made local, and not autocommand
 " because here we are already in type file
+" wait is this file executed at startup once, or everytime for this file type?
 "autocmd FileType python inoremap <buffer> ' "
 "autocmd FileType python inoremap <buffer> " '
+"inoremap <buffer> ' "
+"inoremap <buffer> " '
+" both above are not super useful, because there are moments when you really want single-quote, like in "it's"
+" just very bumpy to use
+" instead trying the below, some kind of pair-insert
+inoremap <buffer> '' ""<Left>
+inoremap <buffer> ''' '''
+inoremap <buffer> """ """
+inoremap <buffer> (( ()<Left>
+inoremap <buffer> [[ []<Left>
+inoremap <buffer> {{ {}<Left>
+" now the question is how to easily exit over the closing pair?
+" ctrl-l is already something, but I'm not sure what
+inoremap <buffer> <c-l> <Right>
 
 " TODO should check if already set? this is run on every python file
 " mappings further down are buffer-local and need to be run everytime I think
