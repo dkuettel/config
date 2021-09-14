@@ -13,7 +13,7 @@ endif
 
     Plug 'altercation/vim-colors-solarized'
     Plug 'easymotion/vim-easymotion'
-    "Plug 'psf/black' " todo https://github.com/psf/black/pull/978 when merged could fix the view reset problems
+    "Plug 'psf/black' " should work, but we want custom combination of black and isort currently
     Plug 'sbdchd/neoformat' " alternative to psf/black above, also works for isort now
     Plug 'airblade/vim-gitgutter'
     Plug 'scrooloose/nerdcommenter'
@@ -90,7 +90,7 @@ let g:neoformat_python_isort_and_black = {
 let g:neoformat_basic_format_align = 0
 let g:neoformat_basic_format_retab = 1
 let g:neoformat_basic_format_trim = 1
-map == :Neoformat<cr>
+map == :Neoformat<enter>
 
 
 """ gitgutter
