@@ -1,17 +1,15 @@
 #!/bin/zsh
 set -eux -o pipefail
 
-# https://vuforia.atlassian.net/wiki/spaces/FOC/pages/1001959/Kubernetes+for+Deep+Learning+experiments#KubernetesforDeepLearningexperiments-Developmentquick-start
-# see also https://docs.aws.amazon.com/eks/latest/userguide/install-kubectl.html
-# there might be newer versions, I dont see a generic way to install the newest always
-
 pip3 install --upgrade awscli
 
-curl -o ~/bin/kubectl 'https://amazon-eks.s3.us-west-2.amazonaws.com/1.18.9/2020-11-02/bin/linux/amd64/kubectl'
-chmod +x ~/bin/kubectl
-ln -sfT ~/bin/kubectl ~/bin/k
+# see https://kubernetes.io/docs/tasks/tools/install-kubectl-linux/#install-using-other-package-management
+sudo snap install kubectl --classic
+sudo snap refresh kubectl
 kubectl version --short --client
 
 # we use the default profile in ~/.aws/config and ~/.aws/credentials
-aws --region eu-west-1 eks update-kubeconfig --name deeplearning
+# NOTE we assume there is a default profile with a region
+# otherwise add '--region eu-west-1' or something
+aws eks update-kubeconfig --name deeplearning
 kubectl get services

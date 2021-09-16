@@ -33,3 +33,5 @@ alias mp=multipass
 
 # make search case-insensitive if no capital letters in query
 alias less='less -i'
+
+alias k=kubectl
