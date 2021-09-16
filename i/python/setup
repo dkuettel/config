@@ -12,5 +12,3 @@ pip3 install ipython
 mkdir -p ~/.ipython/profile_default
 ln -sfT ~/config/i/python/ipython_config.py ~/.ipython/profile_default/ipython_config.py
 echo 'we link our own ipython_config.py and wont know if the template changes with new options'
-
-pip3 install --upgrade pipenv
