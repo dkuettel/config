@@ -11,7 +11,7 @@ sudo ln -sfT ~/config/i/keyboard/pointluck /usr/share/X11/xkb/symbols/pointluck
 
 config=~/config/i/keyboard/config-$(hostname)
 if [[ ! -f $config ]]; then
-    echo "warning: using default keyboard config, no config for host $(hostname) found"
+    echo "warning: using default keyboard config, no config for host $(hostname) found" >&2
     config=~/config/i/keyboard/config
 fi
 sudo ln -sfT $config /etc/default/keyboard
