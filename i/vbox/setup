@@ -11,10 +11,16 @@ if which virtualbox; then
     exit 0
 fi
 
+echo 'check script again, not sure its good'
+exit 1
+
 # see https://www.virtualbox.org/wiki/Linux_Downloads for newer versions
 # this one is for 19.10 and 20.04
-wget 'https://download.virtualbox.org/virtualbox/6.1.16/virtualbox-6.1_6.1.16-140961~Ubuntu~eoan_amd64.deb' -O /tmp/vbox.deb
+# TODO could probably make a 'curl ls' and find most recent, folder is viewable
+wget 'https://download.virtualbox.org/virtualbox/6.1.22/virtualbox-6.1_6.1.22-144080~Ubuntu~eoan_amd64.deb' -O /tmp/vbox.deb
 
 # note that this does not seem to install apt repositories, updates will not happen
 sudo apt-get install /tmp/vbox.deb
+# TODO ok weird, the output of apt-get told me that it is using virtualbxo-6.1 instead, so not actually using my download?
+# is that good enough anyway? but then trying that package it tells me not possible?! I dont understand
 rm /tmp/vbox.deb
