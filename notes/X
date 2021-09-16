@@ -1,0 +1,3 @@
+to startx (especially from remote) as non-console user
+set anybody in /etc/X11/Xwrapper.config
+not sure what that means for security
