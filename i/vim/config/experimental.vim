@@ -168,6 +168,7 @@ map ,cp ,cy`>p
 vnoremap yp y`>p
 
 
+" TODO take it to python type file
 " get pylint disabler from current quickfix entry
 function! AddQuickfixPylintDisabler()
     let idx = getqflist({'idx': 0}).idx
