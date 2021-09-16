@@ -1,5 +1,5 @@
 XKBMODEL="pc105"
 XKBLAYOUT="pointluck"
-XKBVARIANT="base"
+XKBVARIANT="base-logitech"
 XKBOPTIONS=""
 BACKSPACE="guess"
