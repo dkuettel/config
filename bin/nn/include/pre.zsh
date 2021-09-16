@@ -98,6 +98,10 @@ for i in $(seq 6006 6100); do
     args+=(-p 6006:$i)
     break
 done
+# TODO alternatively map it to a unix file socket?
+# then it's always clear where to point the browser, no search for a free port
+# docker run doesnt seem to support this currently
+# maybe tensorboard can be ain a unix file socket to begin with?
 
 # TODO for speed mounting in local copy, but dangerous if out-of-date
 if [[ -d efs-models ]]; then
