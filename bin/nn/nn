@@ -32,11 +32,13 @@ while [[ $# != 0 ]]; do
                 -m nn.mtar360.eap1 train
                     mt360
                     #--config-folder=s3://e2e-benchmarking/training/zurich-all-set/recolored
-                    --config-folder=s3://e2e-benchmarking/training/zurich-all-set/recolored-full360
+                    #--config-folder=s3://e2e-benchmarking/training/zurich-all-set/recolored-full360
+                    --config-folder=s3://e2e-benchmarking/training/Ender3DPrinter
                     #--assembly=ktm.Right
-                    --assembly=ferrari_488_red.viewpoint_0000
+                    #--assembly=ferrari_488_red.viewpoint_0000
+                    --assembly=Ender3DPrinter.viewpoint_0000
                     --out-folder=.
-                    #--short-training=True
+                    --short-training=True
                     #--testsets=mtar360/all/recolored/v2
             )
             ;;
