@@ -18,7 +18,15 @@ xkb_symbols "base" {
     key <LSGT> { [Escape, Escape] };
 };
 
-default  partial alphanumeric_keys modifier_keys
+xkb_symbols "base-logitech" {
+
+    include "us(basic)"
+    name[Group1]= "PointLuck (base, home desktop)";
+
+    key <LSGT> { [grave, asciitilde] };
+    key <TLDE> { [Escape, Escape] };
+};
+
 xkb_symbols "boom" {
 
     include "us(basic)"
