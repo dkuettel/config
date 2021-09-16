@@ -7,6 +7,9 @@ what does windows do?
 is the linux driver for my card or generic?
 
 https://www.freedesktop.org/wiki/Software/PulseAudio/Documentation/User/Audiophile/
+https://wiki.archlinux.org/index.php/PulseAudio/Examples
 
 https://medium.com/@gamunu/enable-high-quality-audio-on-linux-6f16f3fe7e1f
 roughly trying the above settings, not sure I feel a difference
+
+NOTE maybe pipewire is the better solution now
