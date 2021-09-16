@@ -11,7 +11,7 @@ rev+=(
     /snap/bin  # should be there from system settings?
     $HOME/.local/bin  # pip install puts executables here
     #$HOME/fzf/bin  # not needed anymore, installed with apt now
-    $HOME/.cargo/bin
+    $HOME/.cargo/bin  # for rust cargo stuff, eg, see i/alacritty/setup
     $HOME/bin
     $HOME/config/bin
 )
