@@ -1,13 +1,16 @@
 #!/bin/zsh
 set -eux -o pipefail
 
-# currently not in any repository, installing from git
-# NOTE snap has a version that is _not_ from the author
-# from https://github.com/alacritty/alacritty
-# install instructions might change (eg, dependencies change sometimes)
+base=${0:a:h}
+cd base
 
 (
-    cd ${0:a:h}/alacritty
+    # currently not in any repository, installing from git
+    # NOTE snap has a version that is _not_ from the author
+    # from https://github.com/alacritty/alacritty
+    # install instructions might change (eg, dependencies change sometimes)
+
+    cd $base/alacritty
 
     # NOTE paths are set already in i/zsh/path.zsh for rustup
     # TODO we might never update rustup?
@@ -37,7 +40,4 @@ set -eux -o pipefail
 
 # TODO the config file is copied from the template in ./alacritty/alacritty.yaml
 # sometimes check the diff to see if new features are there
-ln -sfT ${0:a:h}/alacritty.yml ~/.alacritty.yml
-# NOTE we cant execute the above 'ln' while pwd is the submodule
-# because ${0:a:h} will resolve to that folder and we link
-# the template yaml file instead
+ln -sfT $base/alacritty.yml ~/.alacritty.yml
