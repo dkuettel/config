@@ -28,3 +28,6 @@
 [submodule "i/alacritty/alacritty"]
 	path = i/alacritty/alacritty
 	url = https://github.com/alacritty/alacritty.git
+[submodule "i/dmenu/dmenu"]
+	path = i/dmenu/dmenu
+	url = git@bitbucket.org:dkuettel/dmenu.git

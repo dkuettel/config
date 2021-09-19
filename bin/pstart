@@ -1,30 +1,32 @@
 #!/bin/zsh
 set -eu -o pipefail
 
-# see https://medium.com/njiuko/using-fzf-instead-of-dmenu-2780d184753f
+(( # <= 1)) || { echo '0 or 1 arguments allowed' >&2; exit 1}
+from=${1:-sub}
 
-out=exe-selection
-env=${1:-from-list}
+interact=(dmenu -i -l 10 -p $from)
 
-alacritty \
-    --config-file ~/config/i/alacritty/pstart.yml \
-    --command ${0:a:h}/../i/pstart/menu $out $env
-
-if [[ -f $out ]]; then
-    selection=($(cat $out))
-    rm $out
-    case $selection[1] in
-        (enter)
-            # we start in place, invisible, no terminal
-            exec $selection[2]
-            ;;
-        (ctrl-t)
-            # start in another foreground floating terminal to see the output of the command
-            st $args -e =zsh -c "$selection[2]; read"
-            ;;
-        (*)
-            echo 'unknown fzf selection:' $selection
-            exit 1
-            ;;
-    esac
-fi
+case $from in
+    (all)
+        # other options to list commands:
+        # whence -pm '*', but it also seems to list some things that I cant use
+        # compgen -c, didnt test
+        generate=(
+            find
+            $path
+            -maxdepth 1
+            -type f,l
+            -executable
+            -printf '%f\n'
+        )
+        exec $($generate | sort --unique | $interact)
+        ;;
+    (sub)
+        # TODO for now keep this list, but maybe symlinks or something will be better?
+        exec $(ls ~/config/i/pstart/list | $interact)
+        ;;
+    (*)
+        echo 'unknown from' $from >&2
+        exit 1
+        ;;
+esac

@@ -1,0 +1,12 @@
+#!/bin/zsh
+set -eux -o pipefail
+
+base=${0:a:h}
+cd $base
+
+(
+    cd $base/dmenu
+
+    ./setup-git.sh
+    ./install.sh
+)
