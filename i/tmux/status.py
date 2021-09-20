@@ -1,4 +1,4 @@
-#!ltstatus
+#!/usr/bin/env ltstatus
 from pathlib import Path
 
 from ltstatus import RateLimitedMonitors, RegularGroupMonitor, StdoutStatus, monitors, indicators
