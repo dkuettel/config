@@ -67,6 +67,7 @@ setups=(
     python
     pdocs
     ptags
+    ltstatus
     tmux
     vim
 )

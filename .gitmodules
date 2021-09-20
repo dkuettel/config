@@ -31,3 +31,6 @@
 [submodule "i/dmenu/dmenu"]
 	path = i/dmenu/dmenu
 	url = git@bitbucket.org:dkuettel/dmenu.git
+[submodule "i/ltstatus/ltstatus"]
+	path = i/ltstatus/ltstatus
+	url = git@github.com:dkuettel/ltstatus.git

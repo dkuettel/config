@@ -1,0 +1,4 @@
+#!/bin/zsh
+set -eux -o pipefail
+
+# TODO need to set some user.name and mail in submodule?
