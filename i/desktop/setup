@@ -52,6 +52,7 @@ setups=(
     redshift
     keyboard # probably not doing the right thing in virtual box
     dwm # sometimes '/dev/fb0: Permission denied' with startx, but probably not with good nvidia-drivers?
+    dmenu
     alacritty # fonts might be missing here, ubuntu mono is probably always available
     sound
     chrome
