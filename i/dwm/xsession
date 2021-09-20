@@ -31,70 +31,11 @@ feh --no-fehbg --bg-fill ~/config/i/dwm/5_stripes_landscape.jpg
 # high dpi
 export GDK_SCALE=2
 
-function status {
-    while true; do
-        s=' '
-
-        # spotify
-        if window_id=$(xdotool search --onlyvisible --class spotify); then
-            s+="$(xdotool getwindowname $window_id) | "
-        fi
-
-        # redshift
-        s+=$(awk '
-            /Status/ {s=$4}
-            /Brightness/ {b=$4}
-            END {if (s=="Enabled") print "redshift@" b; else print "redshift off "}
-            ' .log-redshift)
-        s+=' | '
-
-        # bluetooth
-        if bluetoothctl show | grep 'Powered: yes' > /dev/null; then
-            count=$(for mac in $(bluetoothctl devices | awk '{print $2}'); do
-                if bluetoothctl info $mac | grep 'Connected: yes' > /dev/null; then
-                    echo $mac
-                fi
-            done | wc -l)
-            s+="bt @$count"
-        else
-            s+='bt off'
-        fi
-        s+=' | '
-
-        # sound
-        # TODO might only work for base, and looks only at currently default sink (maybe sources are connected non-default)
-        if s+=$(pacmd list-sinks | awk -v ORS='' '
-            /* index:/ {is_default=1}
-            /  index:/ {is_default=0}
-            /muted: yes/ {is_muted=1}
-            /muted: no/ {is_muted=0}
-            /\tvolume:/ {volume=$5}
-            /device.description/ {
-                match($0, "device.description = \"(.*)\"", m)
-                name=m[1]
-                if(is_default) {
-                    if(is_muted) {
-                        print name "#" volume " "
-                    } else {
-                        print name "=" volume " "
-                    }
-                }
-            }
-        '); then
-            s+='| '
-        fi
-
-        # date and time
-        s+=$(date '+%F %A %R')
-        s+=' '
-
-        xsetroot -name $s
-
-        sleep 0.5s  # TODO this causes a visible impact on dbus (~2%)
-    done
-}
-
-status >& .log-dwm-status &
+# TODO currently using the "example", maybe change that to a py file in dwm?
+# TODO would also be nice to use the bang approach, if it's in the path some day
+~/config/i/ltstatus/ltstatus/bin/ltstatus \
+    ~/config/i/ltstatus/ltstatus/examples/dwm-status.py \
+    >& .log-dwm-status &
 
 dwm
 
