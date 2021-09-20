@@ -1,4 +1,11 @@
 #!/bin/zsh
 set -eux -o pipefail
 
-# TODO need to set some user.name and mail in submodule?
+base=${0:a:h}
+cd $base
+
+(
+    cd $base/ltstatus
+    # TODO need to set some user.name and mail in submodule?
+    ./setup
+)
