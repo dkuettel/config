@@ -1,7 +1,0 @@
-
-tmux #(...) in status strings
-- it seems like when tmux is not visible it stops the background processes
-- try finally blocks seem to be called
-- says not update more than once a second (independent of status update value?)
-
-things we do here could also generically apply for the dwm top line status

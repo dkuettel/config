@@ -6,11 +6,4 @@ h=${0:a:h}
 # config file
 ln -sfT $h/tmux.conf ~/.tmux.conf
 
-( # prepare pipenv for tmux status line python code
-    cd $h/python
-    sudo apt-get -qq install -y python3-dev # psutil needs python3-dev
-    export PIPENV_VENV_IN_PROJECT=1
-    pipenv install
-)
-
 $h/install

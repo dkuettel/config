@@ -1,5 +1,0 @@
-#!/bin/zsh
-set -eu -o pipefail
-
-cd ${0:a:h}
-pipenv run python status.py
