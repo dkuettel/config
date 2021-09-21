@@ -3,7 +3,7 @@ default  partial alphanumeric_keys modifier_keys
 xkb_symbols "default" {
 
     include "us(basic)"
-    name[Group1]= "PointLuck (base, home desktop)";
+    name[Group1]= "PointLuck (default)";
 
     key <TLDE> { [grave, asciitilde] };
     key <LSGT> { [Escape, Escape] };

@@ -20,7 +20,9 @@ setterm --blank 0 --powerdown 0
 
 redshift -r -v |& ts '%F %T' >& .log-redshift &
 
+# NOTE we need this here because inet(evdev) is applied in xkb after our pointluck layout, see config/i/keyboard/setup
 xmodmap ~/config/i/keyboard/mods
+
 xset r rate 200 50  # keyboard repeat rate (delay ms, repeats per second)
 numlockx on
 
