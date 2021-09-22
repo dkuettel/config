@@ -2,7 +2,7 @@
 set -eux -o pipefail
 
 base=${0:a:h}
-cd base
+cd $base
 
 (
     # currently not in any repository, installing from git
@@ -12,9 +12,15 @@ cd base
 
     cd $base/alacritty
 
-    # NOTE paths are set already in i/zsh/path.zsh for rustup
-    # TODO we might never update rustup?
-    which rustup || (curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh)
+    if which rustup; then
+        # TODO we might never update rustup?
+        # see https://rust-lang.github.io/rustup/basics.html#keeping-rustup-up-to-date ?
+    else
+        curl --fail --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs -o ./install-rustup.sh
+        # NOTE paths are set already in i/zsh/path.zsh for rustup
+        sh install-rustup.sh -y --no-modify-path
+        rm install-rustup.sh
+    fi
     rustup override set stable
     rustup update stable
 
