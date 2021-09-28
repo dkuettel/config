@@ -1,4 +1,4 @@
-source ~/toys/ecopy/widget.zsh
+f=~/toys/ecopy/widget.zsh; [[ -e $f ]] && source $f
 
 # pipenv sanity as far as it is possible
 export PIPENV_COLORBLIND=yes
@@ -23,7 +23,7 @@ export EDITOR=nvim
 JQ_COLORS='2;30:2;30:2;30:2;30:0;32:1;39:1;39'
 
 # one-shell-history
-source ~/toys/one-shell-history/zsh/setup.zsh
+f=~/toys/one-shell-history/zsh/setup.zsh; [[ -e $f ]] && source $f
 
 # gpu usage per process
 alias watch-gpu='watch nvidia-smi pmon -c 1'
