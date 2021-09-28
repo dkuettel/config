@@ -3,7 +3,7 @@ set -eux -o pipefail
 
 # simple check to see if there is an nvidia gpu, might not be perfect
 # TODO this failed for A100 instances
-if ! lspci | grep 'VGA.*NVIDIA'; then
+if ! lspci | grep -e 'VGA.*NVIDIA' -e Tesla; then
     echo 'no nvidia gpu found'
     exit 0
 fi
