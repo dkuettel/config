@@ -84,7 +84,7 @@ args+=(--env PYTHONBREAKPOINT='ipdb.set_trace')
 
 # vimfix and co
 #id_mount ~/toys/vim-python-tracebacks
-id_mount ~/toys/vtrace/vtrace.py
+f=~/toys/vtrace/vtrace.py; [[ -e $f ]] && id_mount $f
 
 # probably not needed anymore
 # args+=(--env NN_USER=kuettel)
