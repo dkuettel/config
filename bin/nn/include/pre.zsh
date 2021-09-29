@@ -59,7 +59,7 @@ args+=(
 args+=(--user $(id --user):$(id --group))
 
 # mounts
-if ! mountpoint --quiet /efs; then
+if ! mountpoint --quiet /efs && ! mountpoint --quiet /efs/dkuettel; then
     echo '/efs might not yet be mounted, attempting to mount' >&2
     sshfs-efs
 fi
