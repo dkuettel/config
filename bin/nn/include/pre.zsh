@@ -93,6 +93,7 @@ f=~/toys/vtrace/vtrace.py; [[ -e $f ]] && id_mount $f
 # internally tb uses port 6006
 # externally we look for the next free one
 for i in $(seq 6006 6100); do
+    # TODO doesnt always work, because it might be mapped, but not yet used by the guest, and then it doesnt show up in lsof
     if lsof -i :$i; then continue; fi
     echo "tensorboard mapped to port $i"
     args+=(-p 6006:$i)
