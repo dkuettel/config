@@ -35,3 +35,7 @@ alias mp=multipass
 alias less='less -i'
 
 alias k=kubectl
+
+# try man in nvim
+# also nvim with :Man quite cool when editing a script, copy options right out of it
+export MANPAGER='nvim +Man!'
