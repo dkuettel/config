@@ -117,3 +117,6 @@ nmap <buffer> <c-k> :Gi
 " TODO completely forgot about ,k, starting using it more, make it faster
 nmap <buffer> ,k :SelectImportFromFzf<cr>
 imap <buffer> <c-k> <c-o>:Gi <c-r><c-w>
+
+" NOTE triggered with space, not tab
+iabbrev <buffer> ifmain if __name__ == "__main__":<enter>   
