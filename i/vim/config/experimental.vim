@@ -178,11 +178,22 @@ function! AddQuickfixPylintDisabler()
 endfunction
 nnoremap ,qfd :call AddQuickfixPylintDisabler()<enter>
 
+
 " highlight active window
 " todo could work, a bit aggressive?
 " with true color probably more useful, less stark change
 "highlight NormalNC ctermbg=0
 
+
 " save and exit all
 " note: Q is also ex-mode, gQ as well as an alternative
 nmap Q :xa<enter>
+
+
+" try 'bin/vs' together with this, save and load session
+function! SaveSession()
+    execute 'mksession!'
+endfunction
+if $vim_is_in_session
+    autocmd VimLeave * call SaveSession()
+endif
