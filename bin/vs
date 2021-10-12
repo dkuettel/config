@@ -1,6 +1,10 @@
 #!/bin/zsh
 set -eux -o pipefail
 
+if [[ -v TMUX ]]; then
+    tmux rename-window src
+fi
+
 export vim_is_in_session=1
 
 if [[ -f Session.vim ]]; then
