@@ -23,7 +23,8 @@ export EDITOR=nvim
 JQ_COLORS='2;30:2;30:2;30:2;30:0;32:1;39:1;39'
 
 # one-shell-history
-f=~/toys/one-shell-history/zsh/setup.zsh; [[ -e $f ]] && source $f
+#f=~/toys/one-shell-history/zsh/setup.zsh; [[ -e $f ]] && source $f
+f=~/sbox/osh-dev/zsh/setup.zsh; [[ -e $f ]] && source $f
 
 # gpu usage per process
 alias watch-gpu='watch nvidia-smi pmon -c 1'
