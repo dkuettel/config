@@ -13,20 +13,20 @@ export LC_ALL=en_US.UTF-8
 function zsh-prompt-git {
     sref=$(git symbolic-ref --short HEAD 2>/dev/null)
     if [[ $? == 0 ]]; then
-        echo -n '('$sref
+        echo -n '%F{3}('$sref
         stashed=$(git stash list 2>/dev/null | wc -l)
         if [[ $stashed != 0 ]]; then
-            echo -n ', %F{1}'$stashed'-stashed%f'
+            echo -n ', %F{1}'$stashed'-stashed%F{3}'
         fi
-        echo -n ')'
+        echo -n ')%f '
     fi
 }
 setopt prompt_subst # expand $ in prompt at show time
 export PS1='
 %(?,,%F{1}%Sexit code = %?%s%f
 )
-%K{0}%F{14}%B%~%b%f $(zsh-prompt-git) %F{10}%* (%m)%f ${VIRTUAL_ENV:+%B=venv=%b} %(1j,%F{1}%j&%f,) %E%k
-${${${KEYMAP:-main}/vicmd/N}/(main|viins)/I}> '
+%K{0}%F{4}%B%~%b%f $(zsh-prompt-git)%F{10}%*%f %F{5}(%m)%f %F{9}${VIRTUAL_ENV:+%B=venv=%b}%f %(1j,%F{1}%j&%f,) %E%k
+%F{15}${${${KEYMAP:-main}/vicmd/N}/(main|viins)/I}>%f '
 function zle-keymap-select() {
     zle reset-prompt
     zle -R
