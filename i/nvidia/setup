@@ -3,6 +3,7 @@ set -eux -o pipefail
 
 # simple check to see if there is an nvidia gpu, might not be perfect
 # TODO this failed for A100 instances
+# TODO 'ubuntu-drivers devices' could also be useful to check instead
 if ! lspci | grep -e 'VGA.*NVIDIA' -e Tesla; then
     echo 'no nvidia gpu found'
     exit 0
@@ -18,10 +19,6 @@ sudo apt-get install -yqq ubuntu-drivers-common
 # check what is the newest recommended version for nvidia
 latest=$(ubuntu-drivers list | awk '/^nvidia-driver-[0-9]+,/ {print substr($1, 0, length($1)-1)}' | sort | tail -n 1)
 expected=nvidia-driver-470
-# NOTE
-# with my geforce 1080ti the 460 series sometimes flickers
-# seems to be a known problem
-# not sure if it will be fixed, 450 for now works
 
 if [[ $latest != $expected ]]; then
     echo "expected $expected but found $latest"
