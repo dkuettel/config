@@ -1,0 +1,21 @@
+#!/bin/zsh
+set -eux -o pipefail
+
+# see
+# https://gitlab.freedesktop.org/pipewire/pipewire/-/wikis/Filter-Chain
+# https://github.com/Digitalone1/EasyEffects-Presets
+# https://github.com/wwmm/easyeffects
+
+sudo apt -yqq install flatpak
+flatpak remote-add --user --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
+flatpak install flathub com.github.wwmm.easyeffects
+
+# run with
+# > flatpak run com.github.wwmm.easyeffects
+
+# TODO
+# flatpak looks cool
+# but somehow the UI is a bit messed up of easyeffects
+# maybe go for manual install if I want a new version anyway
+# or maybe there is a minmal cli version to add the effects?
+# autogain, or compress, or limit, could all be fun, but maybe also not necessary
