@@ -6,12 +6,15 @@ set -eux -o pipefail
 # https://github.com/Digitalone1/EasyEffects-Presets
 # https://github.com/wwmm/easyeffects
 
+# TODO not all below is unattended yet, some ask for user input
 sudo apt -yqq install flatpak
 flatpak remote-add --user --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
 flatpak install flathub com.github.wwmm.easyeffects
 
 # run with
 # > flatpak run com.github.wwmm.easyeffects
+
+# TODO in general settings and presets and all are not managed yet within git, would be nice
 
 # TODO
 # flatpak looks cool
