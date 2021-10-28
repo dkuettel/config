@@ -41,6 +41,11 @@ case $target in
         user="Daniel Kuettel dkuettel@ptc.com"
         ;;
 
+    (git@github.com:ptc-*/*)
+        key=ptc_git_id_rsa
+        user="Daniel Kuettel dkuettel@ptc.com"
+        ;;
+
     (*)
         echo 'no match for' $target >&2
         exit 1
