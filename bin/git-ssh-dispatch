@@ -26,22 +26,12 @@ target=$1:$match[2]
 
 case $target in
 
-    (git@bitbucket.org:dkuettel/*)
+    (git@bitbucket.org:dkuettel/* | git@github.com:dkuettel/*)
         key=private_git_id_rsa
         user="Daniel Kuettel dkuettel@gmail.com"
         ;;
 
-    (git@github.com:dkuettel/*)
-        key=private_git_id_rsa
-        user="Daniel Kuettel dkuettel@gmail.com"
-        ;;
-
-    (git@github.com:ThingWorx/*)
-        key=ptc_git_id_rsa
-        user="Daniel Kuettel dkuettel@ptc.com"
-        ;;
-
-    (git@github.com:ptc-*/*)
+    (git@github.com:ThingWorx/* | git@github.com:ptc-*/*)
         key=ptc_git_id_rsa
         user="Daniel Kuettel dkuettel@ptc.com"
         ;;
