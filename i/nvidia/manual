@@ -1,0 +1,36 @@
+#!/bin/zsh
+set -eux -o pipefail
+
+# this installs "manually" (not thru apt) directly from nvidia.com
+# useful if you need the most recent version (especially from the beta branch)
+
+if apt list --installed 'nvidia-driver-*' | grep nvidia-driver; then
+    echo 'Looks like there are still managed drivers installed. Remove them first.' 2>&1
+    exit 1
+fi
+
+if [[ ! -e /etc/modprobe.d/blacklist-nvidia-nouveau.conf ]]; then
+    cat <<- 'EOF' > /etc/modprobe.d/blacklist-nvidia-nouveau.conf
+        blacklist nouveau
+        options nouveau modeset=0
+    EOF
+    # NOTE I dont know if that is needed
+    sudo update-initramfs -u
+fi
+
+if lsmod | grep nouveau; then
+    echo 'Nouveau is loaded. It should be blacklisted, restart and try again.' 2>&1
+    exit 1
+fi
+
+version=495.44
+
+rm -f /tmp/nvidia-run
+wget 'https://us.download.nvidia.com/XFree86/Linux-x86_64/495.44/NVIDIA-Linux-x86_64-'$version'.run' -O /tmp/nvidia.run
+
+sudo sh /tmp/nvidia.run -a -q -n -s --dkms
+rm -f /tmp/nvidia-run
+
+# NOTE
+# --uninstall can be done with the original installer, but I think also /usr/bin/nvidia-uninstall
+# --update might be useful to check if there is a newer one

@@ -1,6 +1,13 @@
 #!/bin/zsh
 set -eux -o pipefail
 
+# try to find out if there is a manual installation active
+# NOTE not well tested
+if which nvidia-uninstall; then
+    echo 'There seems to be a manual nvidia driver installation.' 2>&1
+    exit 1
+fi
+
 # simple check to see if there is an nvidia gpu, might not be perfect
 # TODO this failed for A100 instances
 # TODO 'ubuntu-drivers devices' could also be useful to check instead
@@ -27,16 +34,7 @@ fi
 
 sudo apt install -yqq $expected
 
-# alternatively get it from nvidia directly, something like
-# > wget 'https://us.download.nvidia.com/XFree86/Linux-x86_64/410.78/NVIDIA-Linux-x86_64-410.78.run' -O nvidia.run
-# > sudo apt-get -yqq install dkms
-# > sudo sh nvidia.run -a -q -n -s --dkms
-
-# another alternative
-# https://launchpad.net/~graphics-drivers/+archive/ubuntu/ppa
-# might be fine too, sometimes slightly earlier with new versions
-
-# another alternative might be something like
-# > sudo ubuntu-drivers install [--gpgpu]
-# but it didnt work for me
-# (--gpgpu might be only for headless?)
+# alternatives
+# - see ./manual
+# - https://launchpad.net/~graphics-drivers/+archive/ubuntu/ppa , maybe the same as ubuntu's own?
+# - sudo ubuntu-drivers install [--gpgpu] for server headless?
