@@ -29,6 +29,7 @@
     cm = commit -m
     f = fetch --all --prune
     fl = !git f && echo && git --no-pager lt
+    flm = !git f && echo && git lt && git m
     m = merge
     p = push
     pu = push -u origin HEAD
