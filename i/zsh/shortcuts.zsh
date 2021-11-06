@@ -1,12 +1,12 @@
 
 # ls
-alias ls='ls --color=auto'
-alias lr='ls -htrcFgG --time-style=iso'
-alias la='ls -lhFva'
-alias ll='ls -lhFv'
-function lll { ls -lhFv --color=yes $@ | less -R }
-alias lsdirs='ls -v -d */'
-alias lldirs='ls -vldh */'
+alias ls='ls -v --color=auto'
+alias lr='ls -cFGghrt --color=always'
+alias la='ls -aFhlv --color=always'
+alias ll='ls -Fhlv --color=always'
+function lll { ls -Fhlv --color=always $@ | less -R }
+alias lsd='ls -v -d */'
+alias lld='ls -hlv -d */'
 # function lrt { ls -hltrcF --color=always $@ | tail }
 
 # todo zsh supports .. and ... without aliases?
