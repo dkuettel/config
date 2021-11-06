@@ -107,6 +107,12 @@ export MANOPT='--no-justification --no-hyphenation'
 export PYTHONDONTWRITEBYTECODE=True # no .pyc files for python
 stty -ixon # disables flow control, for example ctrl-s (useful in vim)
 
+# --time-style for ls
+# line 1 is non-recent, older than 6 months
+# line 2 is recent
+export TIME_STYLE=+'[34m%F %R[0m
+[31m%F %R[0m'
+
 ## solarized colors for ls
 eval `dircolors ~/plugins/dircolors-solarized/dircolors.ansi-dark`
 
