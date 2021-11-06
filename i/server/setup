@@ -25,6 +25,7 @@ sudo apt-get upgrade -qqy
 # todo install and autoremove have some interactive popups that ask keep local or update (local seems ok)
 # (at least on ec2 ubuntu that happens), could make more unattended?
 sudo apt-get install -qqy --install-recommends linux-generic-hwe-20.04
+sudo apt-get remove -y linux-generic
 sudo apt-get autoremove -y
 
 sudo timedatectl set-timezone Europe/Berlin
