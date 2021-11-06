@@ -12,6 +12,8 @@ if which virtualbox; then
 fi
 
 echo 'check script again, not sure its good'
+echo 'especially it install many recommends, old linux kernels and stuff, all not very clean to use/do'
+echo 'when doing the next time, pay close attention to what it will install, maybe try with aptitude'
 exit 1
 
 # see https://www.virtualbox.org/wiki/Linux_Downloads for newer versions
