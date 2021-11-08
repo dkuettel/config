@@ -1,0 +1,5 @@
+#!/bin/zsh
+set -eux -o pipefail
+
+target=$(hostname)__$(date --iso-8601=minutes)
+aptitude search --display-format '%p @%v (%c%M) [%r]' '~i' --disable-columns > $target

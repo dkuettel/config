@@ -1,0 +1,18 @@
+#!/bin/zsh
+set -eux -o pipefail
+
+# list local installed state
+aptitude search --display-format '%p (@%v) %c%M' '~i' --disable-columns > installs-local
+
+#aptitude search --display-format '%p (@%v) %c%M %r' '~i' --disable-columns
+# %r lists inverse dependency count, maybe make not of installed stuff that noone depends on?
+
+touch installs-review
+touch installs-approved
+
+#sort --field-separator=' ' --key=1,1 --debug installs-review installs-approved > installs-expected
+sort --field-separator=' ' --key=1,1 --debug installs-review installs-approved | less
+exit
+
+# compare local<>expected, or have<>want
+diff -y installs-local installs-expected | less
