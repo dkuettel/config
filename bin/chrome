@@ -1,25 +1,25 @@
 #!/bin/zsh
 set -eux -o pipefail
 
-if ! pgrep google-chrome; then
-    # somehow chrome's field tests (encoded in variations_* keys of )
-    # break todoist drag & drop, and drag & drop in other places
-    # field test ids are saved in the 'variations_*' keys of '~/.config/google-chrome/Local State'
-    # field tests are partly random and partly per country
-    # see 'about:version' for your active field tests
-    # (a fresh chrome install on the first start has none, they will appear after the second start)
-    # by chrome's documentation '--reset-variation-state --disable-field-trial-config' should disable it
-    # but it doesnt, only if you call /opt/google/chrome/chrome directly with those arguments
-    # but then you bypass /opt/google/chrome/google-chrome which sets some envs and LD paths
-    # in fact the env that seems to make chrome ignore above switches is CHROME_VERSION_EXTRA=stable
-    # my current solution is to clear all 'variations_*' data before we start
-    # hopefully at some point I can disable that again
-    (
-        cd ~/.config/google-chrome
-        jq 'to_entries | map(select(.key | test("variations_.*") | not)) | from_entries' Local\ State \
-            | sponge Local\ State
-    )
-fi
+#if ! pgrep google-chrome; then
+#    # somehow chrome's field tests (encoded in variations_* keys of )
+#    # break todoist drag & drop, and drag & drop in other places
+#    # field test ids are saved in the 'variations_*' keys of '~/.config/google-chrome/Local State'
+#    # field tests are partly random and partly per country
+#    # see 'about:version' for your active field tests
+#    # (a fresh chrome install on the first start has none, they will appear after the second start)
+#    # by chrome's documentation '--reset-variation-state --disable-field-trial-config' should disable it
+#    # but it doesnt, only if you call /opt/google/chrome/chrome directly with those arguments
+#    # but then you bypass /opt/google/chrome/google-chrome which sets some envs and LD paths
+#    # in fact the env that seems to make chrome ignore above switches is CHROME_VERSION_EXTRA=stable
+#    # my current solution is to clear all 'variations_*' data before we start
+#    # hopefully at some point I can disable that again
+#    (
+#        cd ~/.config/google-chrome
+#        jq 'to_entries | map(select(.key | test("variations_.*") | not)) | from_entries' Local\ State \
+#            | sponge Local\ State
+#    )
+#fi
 
 google-chrome --force-device-scale-factor=1.5 $@
 
