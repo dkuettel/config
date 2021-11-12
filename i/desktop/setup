@@ -35,6 +35,7 @@ i+=usbmount # ubuntu-desktop has something on its own, but this works coming fro
 i+=xclip
 i+=xdotool # for xsession and spotify title
 i+=yaru-theme-icon # gnome apps currently seem to use that one and dont depend on it when installing, might change again
+#i+=kdenlive # seems ok for cutting videos
 sudo apt-get install -qqy $i
 
 # todo note above transmission gtk keep settings in
