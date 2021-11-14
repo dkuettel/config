@@ -27,12 +27,7 @@ antigen bundle zlsun/solarized-man
 #antigen bundle Valiev/almostontop
 
 # syntax highlighting
-# as of 2021-08-29 at commit 6e0e950154a4c6983d9e077ed052298ad9126144
-# the original version is slow with efs and other slow file systems
-# even when blacklisting them, I could not find the exact cause
-# but my fork foregoes parsing as long as there are keys in the input queue
-#antigen bundle zsh-users/zsh-syntax-highlighting
-antigen bundle dkuettel/zsh-syntax-highlighting
+antigen bundle zsh-users/zsh-syntax-highlighting
 # note: should be the last to source, with antigen that is not so easily controlled
 
 antigen apply
