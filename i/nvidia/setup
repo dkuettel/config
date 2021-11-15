@@ -2,9 +2,11 @@
 set -eux -o pipefail
 
 # try to find out if there is a manual installation active
-# NOTE not well tested
+# NOTE not doing it automatically, I didnt test if it works without reboot or anything
 if which nvidia-uninstall; then
     echo 'There seems to be a manual nvidia driver installation.' 2>&1
+    echo 'Try "sudo nvidia-uninstall" first.' 2>&1
+    echo 'Probably best outside X, and then restart and see if all is clean.' 2>&1
     exit 1
 fi
 
@@ -25,7 +27,7 @@ sudo apt-get install -yqq ubuntu-drivers-common
 
 # check what is the newest recommended version for nvidia
 latest=$(ubuntu-drivers list | awk '/^nvidia-driver-[0-9]+,/ {print substr($1, 0, length($1)-1)}' | sort | tail -n 1)
-expected=nvidia-driver-470
+expected=nvidia-driver-495
 
 if [[ $latest != $expected ]]; then
     echo "expected $expected but found $latest"
