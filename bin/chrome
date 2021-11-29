@@ -21,8 +21,8 @@ set -eux -o pipefail
 #    )
 #fi
 
-google-chrome --force-device-scale-factor=1.5 $@
+#google-chrome --force-device-scale-factor=1.5 $@
 
 # beta or unstable with same settings/profile as stable
 #google-chrome-beta --user-data-dir=$HOME/.config/google-chrome --force-device-scale-factor=1.5 $@
-#google-chrome-unstable --user-data-dir=$HOME/.config/google-chrome --force-device-scale-factor=1.5 $@
+google-chrome-unstable --user-data-dir=$HOME/.config/google-chrome --force-device-scale-factor=1.5 $@
