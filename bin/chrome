@@ -21,8 +21,14 @@ set -eux -o pipefail
 #    )
 #fi
 
-#google-chrome --force-device-scale-factor=1.5 $@
+args=(
+    # beta or unstable with same settings/profile as stable#
+    # default, but not for beta and unstable
+    --user-data-dir=$HOME/.config/google-chrome
+    --no-default-browser-check
+    --force-device-scale-factor=1.5
+)
 
-# beta or unstable with same settings/profile as stable
-#google-chrome-beta --user-data-dir=$HOME/.config/google-chrome --force-device-scale-factor=1.5 $@
-google-chrome-unstable --user-data-dir=$HOME/.config/google-chrome --force-device-scale-factor=1.5 $@
+#google-chrome $args $@
+#google-chrome-beta $args $@
+google-chrome-unstable $args $@
