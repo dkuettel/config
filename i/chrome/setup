@@ -19,30 +19,41 @@ if ! which google-chrome; then
     # NOTE: at this point apt has it in the index
     # there is google-chrome-stable, google-chrome-beta, google-chrome-unstable
 
+    apts=(
+        jq # parse json to change preferences
+        moreutils # for sponge
+        fonts-stix # some math pages seem to need that (also useful for firefox or other browsers)
+    )
+    sudo apt-get -yqq install $apts
+
+    (
+        f=~/.config/google-chrome/Default/Preferences
+        if [[ ! -f $f ]]; then
+            if [[ -v DISPLAY ]]; then
+                echo 'start and exit chrome to intialize and adapt config files'
+                google-chrome
+            else
+                echo 'cant start chrome because no DISPLAY'
+                exit 1
+            fi
+        fi
+        while [[ ! -f $f ]]; do
+            sleep 1s
+            echo "waiting for chrome to initialize $f"
+        done
+        # system border works better with tiling window managers
+        jq '.browser.custom_chrome_frame=false' $f | sponge $f
+    )
+
 fi
 
-apts=(
-    jq # parse json to change preferences
-    moreutils # for sponge
-    fonts-stix # some math pages seem to need that (also useful for firefox or other browsers)
-)
-sudo apt-get -yqq install $apts
-
-(
-    f=~/.config/google-chrome/Default/Preferences
-    if [[ ! -f $f ]]; then
-        if [[ -v DISPLAY ]]; then
-            echo 'start and exit chrome to intialize and adapt config files'
-            google-chrome
-        else
-            echo 'cant start chrome because no DISPLAY'
-            exit 1
-        fi
-    fi
-    while [[ ! -f $f ]]; do
-        sleep 1s
-        echo "waiting for chrome to initialize $f"
-    done
-    # system border works better with tiling window managers
-    jq '.browser.custom_chrome_frame=false' $f | sponge $f
-)
+# make xdg use whatever is in bin/chrome
+cat >~/.local/share/applications/dkuettel-chrome.desktop <<- 'EOF'
+[Desktop Entry]
+Terminal=false
+Exec=chrome
+EOF
+xdg-settings set default-web-browser dkuettel-chrome.desktop
+xdg-settings set default-url-scheme-handler http dkuettel-chrome.desktop
+xdg-settings set default-url-scheme-handler https dkuettel-chrome.desktop
+xdg-settings set default-url-scheme-handler mailto dkuettel-chrome.desktop
