@@ -7,6 +7,9 @@
         <device id="5DWDMZT-FGHPSFY-UTNB3RS-CDT3UTB-MCXCVZB-KJVYY74-37HY2RV-UOS5CQP" introducedBy="">
             <encryptionPassword></encryptionPassword>
         </device>
+        <device id="ZUPMEBR-EEFGEA4-NWK2NR4-BCG5NUA-LK2MY3H-XEUNNX7-T6NXAZJ-52XALA6" introducedBy="">
+            <encryptionPassword></encryptionPassword>
+        </device>
         <minDiskFree unit="%">1</minDiskFree>
         <versioning>
             <cleanupIntervalS>3600</cleanupIntervalS>
@@ -44,6 +47,9 @@
             <encryptionPassword></encryptionPassword>
         </device>
         <device id="5DWDMZT-FGHPSFY-UTNB3RS-CDT3UTB-MCXCVZB-KJVYY74-37HY2RV-UOS5CQP" introducedBy="">
+            <encryptionPassword></encryptionPassword>
+        </device>
+        <device id="ZUPMEBR-EEFGEA4-NWK2NR4-BCG5NUA-LK2MY3H-XEUNNX7-T6NXAZJ-52XALA6" introducedBy="">
             <encryptionPassword></encryptionPassword>
         </device>
         <minDiskFree unit="%">1</minDiskFree>
@@ -104,6 +110,16 @@
         <untrusted>false</untrusted>
         <remoteGUIPort>0</remoteGUIPort>
     </device>
+    <device id="ZUPMEBR-EEFGEA4-NWK2NR4-BCG5NUA-LK2MY3H-XEUNNX7-T6NXAZJ-52XALA6" name="staging" compression="metadata" introducer="false" skipIntroductionRemovals="false" introducedBy="">
+        <address>dynamic</address>
+        <paused>false</paused>
+        <autoAcceptFolders>false</autoAcceptFolders>
+        <maxSendKbps>0</maxSendKbps>
+        <maxRecvKbps>0</maxRecvKbps>
+        <maxRequestKiB>0</maxRequestKiB>
+        <untrusted>false</untrusted>
+        <remoteGUIPort>0</remoteGUIPort>
+    </device>
     <gui enabled="true" tls="false" debugging="false">
         <address>127.0.0.1:8384</address>
         <user>dkuettel</user>
@@ -127,8 +143,6 @@
         <natLeaseMinutes>60</natLeaseMinutes>
         <natRenewalMinutes>30</natRenewalMinutes>
         <natTimeoutSeconds>10</natTimeoutSeconds>
-        <urAccepted>3</urAccepted>
-        <urSeen>3</urSeen>
         <urURL>https://data.syncthing.net/newdata</urURL>
         <urPostInsecurely>false</urPostInsecurely>
         <urInitialDelayS>1800</urInitialDelayS>
