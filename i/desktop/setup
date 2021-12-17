@@ -61,7 +61,6 @@ setups=(
     spotify
     dropbox
     okular
-    syncthing
     slack
     vlc
 )
