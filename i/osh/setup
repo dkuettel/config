@@ -5,21 +5,19 @@ base=${0:a:h}
 
 if [[ ! -d ~/.osh ]]; then
 
-    target=~/sbox/osh-data
-    if [[ ! -d $target ]]; then
-        echo "cannot find $target" >&2
-    fi
-
     mkdir -p ~/.osh
     cd ~/.osh
 
-    ln -sfT $target/archive archive
-    ln -sfT $target/active active
-    ln -sfT $target/event-filters.yaml event-filters.yaml
-
-    ln -sfT active/$(hostname).osh local.osh
-    touch local.osh
-
+    target=~/sbox/osh-data
+    if [[ ! -d $target ]]; then
+        echo "cannot find $target" >&2
+    else
+        ln -sfT $target/archive archive
+        ln -sfT $target/active active
+        ln -sfT $target/event-filters.yaml event-filters.yaml
+        ln -sfT active/$(hostname).osh local.osh
+        touch local.osh
+    fi
 fi
 
 cd $base/osh
