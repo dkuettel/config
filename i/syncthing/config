@@ -1,0 +1,25 @@
+#!/bin/zsh
+set -eux -o pipefail
+
+# just look at diff and move things whichever way is useful
+# commit a new shared-config.xml if there are changes
+
+# notes
+# SIGHUP makes it re-read the config file (?), or systemd restart is a better option now?
+# (yes, restart also makes it reload the configuration)
+# ~/.config/syncthing/config.xml
+# there is also cert.pem (public) and key.pem (private)
+# cannot include xml stuff
+# cannot give more than one xml file
+# cannot fully share the full config file, some things are local
+# plus some things I'm not sure if it's okay to be public, like the rest api key
+# lets take a semi-automatic approach
+# a diff to a prototype config file, manually opened and copied things around
+# can be used in both directions, plus eventually could be automatized if needed
+
+base=${0:a:h}
+cd $base
+
+nvim -d shared-config.xml ~/.config/syncthing/config.xml
+
+sudo systemctl restart syncthing@$USER.service
