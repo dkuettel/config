@@ -11,15 +11,19 @@ export LC_ALL=en_US.UTF-8
 # todo could use 'timeout --kill-after=0.01s 0.01s cmd' to stop git info when it takes too long on a slow filesystem
 # todo checkout vcs info from zsh (see yves)
 function zsh-prompt-git {
-    sref=$(git symbolic-ref --short HEAD 2>/dev/null)
-    if [[ $? == 0 ]]; then
-        echo -n '%F{3}('$sref
-        stashed=$(git stash list 2>/dev/null | wc -l)
-        if [[ $stashed != 0 ]]; then
-            echo -n ', %F{1}'$stashed'-stashed%F{3}'
-        fi
-        echo -n ')%f '
+    if [[ $(realpath .) == /efs/* ]]; then
+        # note: above takes any pattern, so something|otherhing|morestuff works instead of a list
+        echo '(~slow~) '
+        exit
     fi
+    sref=$(git symbolic-ref --short HEAD 2>/dev/null)
+    [[ $? == 0 ]] || exit
+    echo -n '%F{3}('$sref
+    stashed=$(git stash list 2>/dev/null | wc -l)
+    if [[ $stashed != 0 ]]; then
+        echo -n ', %F{1}'$stashed'-stashed%F{3}'
+    fi
+    echo -n ')%f '
 }
 setopt prompt_subst # expand $ in prompt at show time
 export PS1='
