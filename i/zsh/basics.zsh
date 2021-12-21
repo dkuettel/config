@@ -16,8 +16,7 @@ function zsh-prompt-git {
         echo '(~slow~) '
         exit
     fi
-    sref=$(git symbolic-ref --short HEAD 2>/dev/null)
-    [[ $? == 0 ]] || exit
+    sref=$(git symbolic-ref --quiet --short HEAD 2>/dev/null || git rev-parse --short HEAD 2>/dev/null) || exit
     echo -n '%F{3}('$sref
     stashed=$(git stash list 2>/dev/null | wc -l)
     if [[ $stashed != 0 ]]; then
