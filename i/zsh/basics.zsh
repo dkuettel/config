@@ -126,6 +126,7 @@ export TIME_STYLE=+'[0m%F %R[0m
 eval `dircolors ~/plugins/dircolors-solarized/dircolors.ansi-dark`
 
 ## easier output for when using 'set -x'
-# todo if there was an "after ps4" we could use another color and undo it
-# we show "location depth> context state" with inverted coloring for easy spotting
-export PS4='%S%x:%I %e> %N:%i %_%s '
+# we show "location depth> context state" with faint color and on its own line
+# this way it should be easy to skip/ignore and understand what is the actual output
+export PS4='%K{0}%F{10}[%x:%I %e> %N:%i %_]%f%k
+'
