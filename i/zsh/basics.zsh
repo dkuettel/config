@@ -21,6 +21,9 @@ function zsh-prompt-git {
     if [[ $(git status --porcelain=v1 | wc -l) != 0 ]]; then
         echo -n ', +changes'
     fi
+    if git branch -v | grep '\[ahead' >/dev/null; then
+        echo -n ', +unpushed'
+    fi
     stashed=$(git stash list 2>/dev/null | wc -l)
     if [[ $stashed != 0 ]]; then
         echo -n ', %F{1}'$stashed'-stashed%F{3}'
