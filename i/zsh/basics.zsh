@@ -18,6 +18,9 @@ function zsh-prompt-git {
     fi
     sref=$(git symbolic-ref --quiet --short HEAD 2>/dev/null || git rev-parse --short HEAD 2>/dev/null) || exit
     echo -n '%F{3}('$sref
+    if [[ $(git status --porcelain=v1 | wc -l) != 0 ]]; then
+        echo -n ', +changes'
+    fi
     stashed=$(git stash list 2>/dev/null | wc -l)
     if [[ $stashed != 0 ]]; then
         echo -n ', %F{1}'$stashed'-stashed%F{3}'
