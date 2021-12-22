@@ -126,7 +126,10 @@ export TIME_STYLE=+'[0m%F %R[0m
 eval `dircolors ~/plugins/dircolors-solarized/dircolors.ansi-dark`
 
 ## easier output for when using 'set -x'
-# we show "location depth> context state" with faint color and on its own line
+# we show "[context/trace]" with faint color and on its own line
+# and then indented the expanded line
 # this way it should be easy to skip/ignore and understand what is the actual output
-export PS4='%K{0}%F{10}[%x:%I %e> %N:%i %_]%f%k
-'
+# but we cannot color the actual expansion :/ because there is no PS4_after or similar
+# '[%x:%I %e]' might sometimes be more useful? not sure when it's different from the more default below
+export PS4='%K{0}%F{10}[%N:%i %_]%f%k
+  > '
