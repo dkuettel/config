@@ -1,9 +1,1 @@
-#!/bin/zsh
-set -eu -o pipefail
-
-if [[ -v TMUX ]]; then
-    tmux rename-window pdocs
-fi
-
-cd ${0:a:h}/../i/pdocs/pdocs
-./run $@
+../i/pdocs/pdocs/bin/pdocs

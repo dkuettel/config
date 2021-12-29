@@ -1,12 +1,22 @@
 #!/bin/zsh
 set -eux -o pipefail
 
-cd ${0:a:h}/pdocs
+base=${0:a:h}
 
-# todo eventually have it in the right zshenv or so?
-export PIPENV_VENV_IN_PROJECT=1
-pipenv install
+ln -sfT $base ~/.pdocs
 
-# something in my pdocs_config usually needs tkinter
+# something in my usual env needs tkinter
 # seems cannot be installed with pipenv
 sudo apt-get -yqq install python3-tk
+
+(
+    cd $base
+
+    if [[ ! -d .venv ]]; then
+        vv-init
+    fi
+
+    vv pip-sync
+
+    vv python build_index.py
+)

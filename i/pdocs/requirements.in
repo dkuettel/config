@@ -1,0 +1,9 @@
+boto3
+click
+ipdb
+ipython
+numpy
+pandas
+pyyaml
+scikit-image
+tensorflow
