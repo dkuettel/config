@@ -30,7 +30,7 @@ endif
     Plug 'tpope/vim-fugitive'
 
     Plug '~/config/i/vim/config/vimminent'
-    Plug '~/config/i/pdocs/pdocs'
+    Plug '~/config/i/pdocs/pdocs/nvim'
 
 call plug#end()
 
