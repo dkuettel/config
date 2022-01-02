@@ -11,9 +11,22 @@ sudo apt-get -q install -y openssh-server
 # disable password login
 echo 'PasswordAuthentication no' | sudo tee /etc/ssh/sshd_config.d/disable-password
 echo 'maybe that will disconnect ssh'
-sudo systemctl restart ssh sshd  # seems like ssh is actually the server?
+sudo systemctl restart ssh
 
 mkdir -p ~/.ssh
 ln -sfT \
     ~/config/i/ssh/config \
     ~/.ssh/config
+
+# check if the usual keys are here
+expected_keys=(
+    id_rsa id_rsa.pub
+    private_git_id_rsa private_git_id_rsa.pub
+    ptc_git_id_rsa ptc_git_id_rsa.pub
+)
+for key in $expected_keys; do
+    if [[ ! -e ~/.ssh/$key ]]; then
+        echo "~/.ssh/$key is missing" >&2
+        exit 1
+    fi
+done
