@@ -39,8 +39,24 @@ endif
     " interferes with :mks, and also with syntax checking I think
     "Plug 'romgrk/nvim-treesitter-context'
 
+    " TODO trying out
+    " https://github.com/arnar/vim-matchopen
+    " simple enough, and useful without 'typing for me'
+    " if it works, maybe incorporate without plugin, seems small and simple to do? some regex?
+    " lets see how it goes, maybe useful to show innermost? doesnt work well now with
+    " both matchparen shower and the matchhighlighter while editing
+    "Plug 'arnar/vim-matchopen'
+
 call plug#end()
 
+""" vim-matchopen
+"highlight MatchOpen cterm=reverse
+"hi link MatchOpen Error
+"hi MatchOpen cterm=NONE ctermfg=4 ctermbg=4
+"didnt work when I set my own colors
+"[( [{ and ]) ]} and co are interesting here (default vim)
+"see https://stackoverflow.com/questions/3893585/vimscript-find-last-open-parenthese-or-bracket
+"or maybe look at searchpair()
 
 """ solarized
 " note do this before later we change specific colors, otherwise they are overwritten
