@@ -32,6 +32,8 @@ endif
     Plug '~/config/i/vim/config/vimminent'
     Plug '~/config/i/pdocs/pdocs/nvim'
 
+    Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
+
 call plug#end()
 
 
