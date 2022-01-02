@@ -2,7 +2,7 @@
 set -eux -o pipefail
 
 # ubuntu 20.04 has a recent version of docker
-sudo apt-get -yqq install docker.io
+sudo apt-get -yqq install --no-install-recommends docker.io
 
 # test
 sudo docker run hello-world

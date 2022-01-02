@@ -28,6 +28,12 @@ sudo apt-get install -qqy --install-recommends linux-generic-hwe-20.04
 sudo apt-get remove -y linux-generic
 sudo apt-get autoremove -y
 
+# NOTE
+# maybe think about if I want to keep the --install-recommends everywhere? installs more than needed usually
+# for most okay, but vbox install kernels, that makes updates slow, really needed? I only need one, or two, kernels
+# also docker seems to have some kernel install from recommends or suggests or so
+# aptitude also seems a bit cleaner than apt-get? remove for example does autoremove in one go if necessary
+
 sudo timedatectl set-timezone Europe/Berlin
 
 # apt installs (sorted)

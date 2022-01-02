@@ -22,7 +22,7 @@ exit 1
 wget 'https://download.virtualbox.org/virtualbox/6.1.22/virtualbox-6.1_6.1.22-144080~Ubuntu~eoan_amd64.deb' -O /tmp/vbox.deb
 
 # note that this does not seem to install apt repositories, updates will not happen
-sudo apt-get install /tmp/vbox.deb
+sudo apt-get install --no-install-recommends /tmp/vbox.deb
 # TODO ok weird, the output of apt-get told me that it is using virtualbxo-6.1 instead, so not actually using my download?
 # is that good enough anyway? but then trying that package it tells me not possible?! I dont understand
 rm /tmp/vbox.deb
