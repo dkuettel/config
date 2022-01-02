@@ -115,7 +115,8 @@ command SelectImportFromFzf call SelectImportFromFzf()
 " similar ctrl-m and enter the same I think
 nmap <buffer> <c-k> :Gi 
 " TODO completely forgot about ,k, starting using it more, make it faster
-nmap <buffer> ,k :SelectImportFromFzf<cr>
+" TODO currently trying it from pdocs
+"nmap <buffer> ,k :SelectImportFromFzf<cr>
 imap <buffer> <c-k> <c-o>:Gi <c-r><c-w>
 
 " NOTE triggered with space, not tab
