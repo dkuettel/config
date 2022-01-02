@@ -10,6 +10,12 @@ fi
 
 cd ${0:a:h}
 
+# see that we also checked out all submodules
+if (git submodule | grep '^-'); then
+    echo 'Some submodules are not checked out.' >&2
+    exit 1
+fi
+
 # pip3 needs this, after setup it's in the zsh config
 export PATH=$HOME/.local/bin:$PATH
 
