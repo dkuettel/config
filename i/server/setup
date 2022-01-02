@@ -84,4 +84,4 @@ for i in $setups; do
     ../$i/setup
 done
 
-echo 'todo: needs restart here?'
+# TODO maybe a restart is needed for everything to be ready
