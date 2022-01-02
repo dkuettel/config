@@ -34,6 +34,11 @@ endif
 
     Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 
+    " TODO trying out from https://github.com/romgrk/nvim-treesitter-context
+    " but I would prefer something that shows me the context stack on demand only
+    " interferes with :mks, and also with syntax checking I think
+    "Plug 'romgrk/nvim-treesitter-context'
+
 call plug#end()
 
 
