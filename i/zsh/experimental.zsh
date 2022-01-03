@@ -23,7 +23,12 @@ export EDITOR=nvim
 JQ_COLORS='2;30:2;30:2;30:2;30:0;32:1;39:1;39'
 
 # one-shell-history
-f=~/config/i/osh/osh/zsh/setup.zsh; [[ -e $f ]] && source $f
+if [[ -v OSH_TESTING ]]; then
+    f=$OSH_TESTING/zsh/setup.zsh; [[ -e $f ]] && source $f
+    path=($OSH_TESTING/bin $path)
+else
+    f=~/config/i/osh/osh/zsh/setup.zsh; [[ -e $f ]] && source $f
+fi
 
 # gpu usage per process
 alias watch-gpu='watch nvidia-smi pmon -c 1'
