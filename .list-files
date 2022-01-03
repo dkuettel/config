@@ -2,16 +2,13 @@
 set -eu -o pipefail
 
 prune=(
-    -path ./.git
-    -or -path ./i/pdocs/pdocs
-    -or -path ./i/ptags/ptags
-    -or -path ./i/tmux/tmux
-    -or -path ./i/tmux/python
-    -or -path ./i/vim/config/vimminent
-    -or -path ./i/vim/nvim
-    -or -path ./i/vim/vim
-    -or -path ./i/st/st
-    -or -path ./i/dwm/dwm
+    -type d -name '.?*'  # all dot-folders
+    -or -path ./i/pdocs/pages  # the pdocs local index
 )
+
+# all submodules
+for i in $(git submodule foreach --quiet 'echo $sm_path'); do
+    prune+=(-or -path ./$i)
+done
 
 find . \( $prune \) -prune -or \( -type f -and -print \)
