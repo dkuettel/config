@@ -119,6 +119,7 @@ nmap <buffer> <c-k> :Gi
 "nmap <buffer> ,k :SelectImportFromFzf<cr>
 imap <buffer> <c-k> <c-o>:Gi <c-r><c-w>
 
-" NOTE triggered with space, not tab
+" NOTE triggered as soon as typing an non-keyword character (see iskeyword), not tab or something
 iabbrev <buffer> ifmain if __name__ == "__main__":
 iabbrev <buffer> nie() NotImplementedError()
+iabbrev <buffer> ## # TODO
