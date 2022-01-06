@@ -24,10 +24,10 @@ JQ_COLORS='2;30:2;30:2;30:2;30:0;32:1;39:1;39'
 
 # one-shell-history
 if [[ -v OSH_TESTING ]]; then
-    f=$OSH_TESTING/zsh/setup.zsh; [[ -e $f ]] && source $f
+    f=$OSH_TESTING/shells/zsh; [[ -e $f ]] && source $f
     path=($OSH_TESTING/bin $path)
 else
-    f=~/config/i/osh/osh/zsh/setup.zsh; [[ -e $f ]] && source $f
+    f=~/config/i/osh/osh/shells/zsh; [[ -e $f ]] && source $f
 fi
 
 # gpu usage per process
