@@ -1,3 +1,5 @@
+from pathlib import Path
+
 import numpy as np
 import skimage
 from tabulate import tabulate
@@ -6,7 +8,7 @@ from tabulate import tabulate
 # see http://www.easyrgb.com/en/math.php
 # http://www.brucelindbloom.com/index.html?ColorCalculator.html
 # see http://misc.flogisoft.com/bash/tip_colors_and_formatting
-# see http://ethanschoonover.com/solarized
+# see https://github.com/altercation/solarized
 
 
 def show_256_colors():
@@ -177,6 +179,15 @@ def hex_to_rgb(hex):
     return (r, g, b)
 
 
+def hex_from_rgb(rgb):
+    return hex_from_rgb_byte((rgb * 255).round().astype(int))
+
+
+def hex_from_rgb_byte(rgb):
+    r, g, b = rgb
+    return (r << 16) + (g << 8) + (b << 0)
+
+
 def hex_to_sgr(hex):
     r, g, b = hex_to_rgb(hex)
     return f"{r};{g};{b}"
@@ -232,7 +243,6 @@ def hex_to_lab(hex):
     return lab
 
 
-# TODO why not rgb_from_lab(lab)
 def lab_to_rgb(lab):
     lab = np.array(lab).astype(float)  # row vector
     xyz = skimage.color.lab2xyz(lab, illuminant="D50", observer="2")
@@ -247,7 +257,11 @@ def lab_to_rgb(lab):
     )
     xyz = xyz @ von_kries_D50_to_D65.T
     rgb = skimage.color.xyz2rgb(xyz)
-    return rgb * 255.0
+    return rgb
+
+
+# TODO why not all like this?
+rgb_from_lab = lab_to_rgb
 
 
 solarized_dark_named_labs = dict(
@@ -268,15 +282,18 @@ solarized_dark_named_labs = dict(
     cyan=(60, -35, -5),
     green=(60, -20, 65),
 )
+solarized_light_named_labs = dict(solarized_dark_named_labs)
+for i in range(4):
+    solarized_light_named_labs[f"base{i}"] = solarized_dark_named_labs[f"base0{i}"]
+    solarized_light_named_labs[f"base0{i}"] = solarized_dark_named_labs[f"base{i}"]
 
 
 def sgr_from_lab(lab):
-    # r, g, b = (lab_to_rgb(lab) * 255).round().astype(int)
-    r, g, b = (lab_to_rgb(lab)).round().astype(int)
+    r, g, b = (lab_to_rgb(lab) * 255).round().astype(int)
     return f"{r};{g};{b}"
 
 
-def testing_solarized(
+def derive_solarized(
     named_colors=solarized_dark_named_colors, named_labs=solarized_dark_named_labs
 ):
 
@@ -292,27 +309,6 @@ def testing_solarized(
 
     print()
     print("test solarized derivation")
-
-    print(
-        tabulate(
-            [
-                (
-                    c,
-                    f"0x{named_colors[c]:06x}",
-                    *zip(tuple(hex_to_lab(named_colors[c]).round().astype(int)), lab),
-                    # *zip(hex_to_rgb(named_colors[c]), tuple(lab_to_rgb(lab))),
-                    "<->",
-                    *zip(
-                        hex_to_rgb(named_colors[c]),
-                        # tuple(lab_to_rgb(hex_to_lab(named_colors[c]))),
-                        tuple(lab_to_rgb(lab).round().astype(int)),
-                    ),
-                )
-                for c, lab in named_labs.items()
-            ],
-            headers=("name", "hex", "L*", "a*", "b*", "<->", "r", "g", "b"),
-        )
-    )
 
     print()
     bases = ["base03", "base02", "base01", "base00", "base0", "base1", "base2", "base3"]
@@ -350,9 +346,73 @@ def testing_solarized(
     )
 
 
+def get_randomized_solarized_dark():
+    # TODO not sure if anywhere I rely on the order of the keys
+    theme = dict(
+        # base03=(15, -12, -12),
+        # base02=(20, -12, -12),
+        # base01=(45, -7, -7),
+        # base00=(50, -7, -7),
+        # base0=(60, -6, -3),
+        # base1=(65, -5, -2),
+        # base2=(92, -0, 10),
+        # base3=(97, 0, 10),
+        yellow=(60, 10, 65),
+        orange=(50, 50, 55),
+        red=(50, 65, 45),
+        magenta=(50, 65, -5),
+        violet=(50, 15, -45),
+        blue=(55, -10, -45),
+        cyan=(60, -35, -5),
+        green=(60, -20, 65),
+    )
+
+    # TODO first considering only dark, so it doesnt have to overlap to make 5+5=8 with light
+    start_l = np.random.randint(0, 30)  # 15
+    end_l = np.random.randint(50, 80)  # 65
+    contrasts = (1, 6, 9, 10)
+    assert contrasts[-1] == max(contrasts)
+    step = (end_l - start_l) / contrasts[-1]
+
+    theme["base03"] = (start_l, -12, -12)
+    theme["base02"] = (start_l + round(contrasts[0] * step), -12, -12)
+    theme["base01"] = (start_l + round(contrasts[1] * step), -7, -7)
+    theme["base0"] = (start_l + round(contrasts[2] * step), -6, -3)
+    theme["base1"] = (start_l + round(contrasts[3] * step), -5, -2)
+
+    theme["base00"] = solarized_dark_named_labs["base3"]
+    theme["base2"] = solarized_dark_named_labs["base3"]
+    theme["base3"] = solarized_dark_named_labs["base3"]
+
+    # TODO another way to generically dim or light is to just use the origin lab values and scale or shift?
+    # especially dim works well, we have -15 space, light is difficult, only 3 left there, if we want to keep the highest
+
+    return theme
+
+
+def dim_theme(named_labs):
+    space = min(l for l, _, _ in named_labs.values())
+    assert space > 14, space
+    dimmed = {name: (l - space, a, b) for name, (l, a, b) in named_labs.items()}
+    return dimmed
+
+
+def make_tmux_source(
+    file=Path("./tmux-theme"),
+    named_labs=solarized_dark_named_labs,
+    named_indices=solarized_dark_named_indices,
+):
+    with file.open("wt") as f:
+        for name, lab in named_labs.items():
+            index = named_indices[name]
+            rgb = rgb_from_lab(lab)
+            f.write(f"set -p -t .2 'pane-colors[{index}]' '#{hex_from_rgb(rgb):06x}'\n")
+
+
 # TODO also see if we can reproduce the colors using CIELAB as described?
 # from there, can we produce variations, or dimmed versions, for focus in tmux?
 # or for randomization
+# NOTE it seems like in solarized the basecolors are invertible yes, but you always use only 5 out of 8 there, wasteful?
 # then check base16 if that convention there works, to have access to more themes easily
 
 # TODO use tabulate for easier layouts? does it work with escape codes?
@@ -364,5 +424,8 @@ if __name__ == "__main__":
     # show_16_colors()
     # show_24bit_colors()
     # show_attributes()
-    validate_solarized()
-    testing_solarized()
+    # validate_solarized()
+    # derive_solarized()
+    # derive_solarized(named_labs=get_randomized_solarized_dark())
+    # derive_solarized(named_labs=dim_theme(solarized_dark_named_labs))
+    make_tmux_source(named_labs=dim_theme(solarized_light_named_labs))
