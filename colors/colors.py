@@ -108,9 +108,9 @@ def show_attributes():
     )
     p(3, "italic")
     p(4, "underline")
-    # TODO : vs ; ? I thought it's the same, but it doesnt give the same result, 4;3 is +italic, as it should be
-    p("4:3", "curly underline", "using 4:3, not sure from documentation")
-    p("4;3", "curly underline", "using 4;3, not sure from documentation")
+    # NOTE for modern codes, colon is needed, those are subcodes, semicolons is just legacy from a wide misunderstanding of the standard
+    # see https://github.com/terminalguide/terminalguide/issues/9
+    p("4:3", "curly underline")
     p(5, "blink")
     p(6, "fast blink")
     p(7, "inverse")
