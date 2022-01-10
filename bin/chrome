@@ -29,6 +29,6 @@ args=(
     --force-device-scale-factor=1.5
 )
 
-#google-chrome $args $@
+google-chrome $args $@
 #google-chrome-beta $args $@
-google-chrome-unstable $args $@
+#google-chrome-unstable $args $@
