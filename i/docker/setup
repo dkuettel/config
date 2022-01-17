@@ -25,6 +25,7 @@ if [[ which nvidia-smi >/dev/null ]]; then
     sudo service docker restart
 
     # could also pull latest potentially
+    # TODO docker run --gpus all also works now, profile is needed, but nvidia-docker probably not anymore
     sudo nvidia-docker run --rm nvidia/cuda:9.0-cudnn7-runtime nvidia-smi
 
 fi
