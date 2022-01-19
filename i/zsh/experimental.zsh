@@ -44,3 +44,17 @@ alias k=kubectl
 # try man in nvim
 # also nvim with :Man quite cool when editing a script, copy options right out of it
 export MANPAGER='nvim +Man!'
+
+# generically run python with some debug settings
+function debug {
+    (
+        case $1 in
+            (interactive|i) export PYTHONBREAKPOINT='ipdb.set_trace';;
+            (embed|e) export PYTHONBREAKPOINT='IPython.embed';;
+            (web|w) export PYTHONBREAKPOINT='web_pdb.set_trace';;
+            (*) echo "$1 is unknown" >&2; exit 1;;
+        esac
+        echo "  > using $PYTHONBREAKPOINT\n"
+        $@[2,-1]
+    )
+}
