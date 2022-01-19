@@ -36,7 +36,7 @@ while [[ $# != 0 ]]; do
                 #with-log docker.log
                 python3
                 -m nn.mtar360.eap1 train
-                    mt360
+                    mt360vis
                     --config-folder=s3://e2e-benchmarking/training/zurich-all-set/recolored
                     #--config-folder=s3://e2e-benchmarking/training/zurich-all-set/recolored-full360
                     #--config-folder=s3://e2e-benchmarking/training/Ender3DPrinter
@@ -111,23 +111,6 @@ while [[ $# != 0 ]]; do
 
         (ipython)
             cmd=(ipython3)
-            ;;
-
-        (ci)
-            exit 1  # todo
-            #args+=(--workdir=/xp/src/nn)
-            #cmd=(pytest -v -s tests)
-            # note -m "not slow" seems to include slow?! not sure
-            # note, on kubernetes would be 'xpman start-pytest --output-folder=some/path'
-            # note: pytest -vv -k "train_eval_mtar360" to run specific test when you are trying to fix it
-            #args+=(--workdir=/xp/src/nn/tests)
-            #cmd=(pytest -v -s)
-
-            #cmd=(pytest -vv -k 'test_low_recognition_quality')
-            #cmd=(python3 -m pytest -vv -k 'test_template_parsing')
-
-            #args+=(--workdir=/xp/src/nn/tests)
-            #cmd=(pytest -vv 'mtar360/test_errors.py::test_low_recognition_quality[mode_params1]')
             ;;
 
         (variations)
