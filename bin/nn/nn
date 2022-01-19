@@ -25,6 +25,12 @@ while [[ $# != 0 ]]; do
             )
             ;;
 
+        (embed)
+            args+=(
+                --env PYTHONBREAKPOINT='IPython.embed'
+            )
+            ;;
+
         (train)
             cmd=(
                 #with-log docker.log
