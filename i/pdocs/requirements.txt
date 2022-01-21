@@ -8,10 +8,18 @@ absl-py==1.0.0
     # via
     #   tensorboard
     #   tensorflow
+argon2-cffi==21.3.0
+    # via notebook
+argon2-cffi-bindings==21.2.0
+    # via argon2-cffi
 astunparse==1.6.3
     # via tensorflow
+attrs==21.4.0
+    # via jsonschema
 backcall==0.2.0
     # via ipython
+bleach==4.1.0
+    # via nbconvert
 boto3==1.20.26
     # via -r requirements.in
 botocore==1.23.26
@@ -22,16 +30,30 @@ cachetools==4.2.4
     # via google-auth
 certifi==2021.10.8
     # via requests
+cffi==1.15.0
+    # via argon2-cffi-bindings
 charset-normalizer==2.0.9
     # via requests
 click==8.0.3
     # via -r requirements.in
+cycler==0.11.0
+    # via matplotlib
+debugpy==1.5.1
+    # via ipykernel
 decorator==5.1.0
     # via
     #   ipdb
     #   ipython
+defusedxml==0.7.1
+    # via nbconvert
+entrypoints==0.3
+    # via
+    #   jupyter-client
+    #   nbconvert
 flatbuffers==2.0
     # via tensorflow
+fonttools==4.28.5
+    # via matplotlib
 gast==0.4.0
     # via tensorflow
 google-auth==2.3.3
@@ -56,39 +78,103 @@ importlib-metadata==4.10.0
     # via markdown
 ipdb==0.13.9
     # via -r requirements.in
+ipykernel==6.7.0
+    # via
+    #   ipywidgets
+    #   notebook
 ipython==7.30.1
     # via
     #   -r requirements.in
     #   ipdb
+    #   ipykernel
+    #   ipywidgets
+ipython-genutils==0.2.0
+    # via
+    #   ipywidgets
+    #   nbformat
+    #   notebook
+ipywidgets==7.6.5
+    # via -r requirements.in
 jedi==0.18.1
     # via ipython
+jinja2==3.0.3
+    # via
+    #   nbconvert
+    #   notebook
 jmespath==0.10.0
     # via
     #   boto3
     #   botocore
+jsonschema==4.4.0
+    # via nbformat
+jupyter-client==7.1.1
+    # via
+    #   ipykernel
+    #   nbclient
+    #   notebook
+jupyter-core==4.9.1
+    # via
+    #   jupyter-client
+    #   nbconvert
+    #   nbformat
+    #   notebook
+jupyterlab-pygments==0.1.2
+    # via nbconvert
+jupyterlab-widgets==1.0.2
+    # via ipywidgets
 keras==2.7.0
     # via tensorflow
 keras-preprocessing==1.1.2
     # via tensorflow
+kiwisolver==1.3.2
+    # via matplotlib
 libclang==12.0.0
     # via tensorflow
 markdown==3.3.6
     # via tensorboard
+markupsafe==2.0.1
+    # via jinja2
+matplotlib==3.5.1
+    # via seaborn
 matplotlib-inline==0.1.3
-    # via ipython
+    # via
+    #   ipykernel
+    #   ipython
+mistune==0.8.4
+    # via nbconvert
+nbclient==0.5.10
+    # via nbconvert
+nbconvert==6.4.0
+    # via notebook
+nbformat==5.1.3
+    # via
+    #   ipywidgets
+    #   nbclient
+    #   nbconvert
+    #   notebook
+nest-asyncio==1.5.4
+    # via
+    #   ipykernel
+    #   jupyter-client
+    #   nbclient
+    #   notebook
 networkx==2.6.3
     # via scikit-image
+notebook==6.4.7
+    # via widgetsnbextension
 numpy==1.21.5
     # via
     #   -r requirements.in
     #   h5py
     #   imageio
     #   keras-preprocessing
+    #   matplotlib
     #   opt-einsum
     #   pandas
     #   pywavelets
     #   scikit-image
     #   scipy
+    #   seaborn
     #   tensorboard
     #   tensorflow
     #   tifffile
@@ -97,9 +183,16 @@ oauthlib==3.1.1
 opt-einsum==3.3.0
     # via tensorflow
 packaging==21.3
-    # via scikit-image
+    # via
+    #   bleach
+    #   matplotlib
+    #   scikit-image
 pandas==1.3.5
-    # via -r requirements.in
+    # via
+    #   -r requirements.in
+    #   seaborn
+pandocfilters==1.5.0
+    # via nbconvert
 parso==0.8.3
     # via jedi
 pexpect==4.8.0
@@ -109,7 +202,10 @@ pickleshare==0.7.5
 pillow==8.4.0
     # via
     #   imageio
+    #   matplotlib
     #   scikit-image
+prometheus-client==0.12.0
+    # via notebook
 prompt-toolkit==3.0.24
     # via ipython
 protobuf==3.19.1
@@ -117,20 +213,33 @@ protobuf==3.19.1
     #   tensorboard
     #   tensorflow
 ptyprocess==0.7.0
-    # via pexpect
+    # via
+    #   pexpect
+    #   terminado
 pyasn1==0.4.8
     # via
     #   pyasn1-modules
     #   rsa
 pyasn1-modules==0.2.8
     # via google-auth
+pycparser==2.21
+    # via cffi
 pygments==2.10.0
-    # via ipython
+    # via
+    #   ipython
+    #   jupyterlab-pygments
+    #   nbconvert
 pyparsing==3.0.6
-    # via packaging
+    # via
+    #   matplotlib
+    #   packaging
+pyrsistent==0.18.1
+    # via jsonschema
 python-dateutil==2.8.2
     # via
     #   botocore
+    #   jupyter-client
+    #   matplotlib
     #   pandas
 pytz==2021.3
     # via pandas
@@ -138,6 +247,10 @@ pywavelets==1.2.0
     # via scikit-image
 pyyaml==6.0
     # via -r requirements.in
+pyzmq==22.3.0
+    # via
+    #   jupyter-client
+    #   notebook
 requests==2.26.0
     # via
     #   requests-oauthlib
@@ -151,11 +264,18 @@ s3transfer==0.5.0
 scikit-image==0.19.1
     # via -r requirements.in
 scipy==1.7.3
-    # via scikit-image
+    # via
+    #   scikit-image
+    #   seaborn
+seaborn==0.11.2
+    # via -r requirements.in
+send2trash==1.8.0
+    # via notebook
 six==1.16.0
     # via
     #   absl-py
     #   astunparse
+    #   bleach
     #   google-auth
     #   google-pasta
     #   grpcio
@@ -176,14 +296,32 @@ tensorflow-io-gcs-filesystem==0.23.1
     # via tensorflow
 termcolor==1.1.0
     # via tensorflow
+terminado==0.12.1
+    # via notebook
+testpath==0.5.0
+    # via nbconvert
 tifffile==2021.11.2
     # via scikit-image
 toml==0.10.2
     # via ipdb
+tornado==6.1
+    # via
+    #   ipykernel
+    #   jupyter-client
+    #   notebook
+    #   terminado
 traitlets==5.1.1
     # via
+    #   ipykernel
     #   ipython
+    #   ipywidgets
+    #   jupyter-client
+    #   jupyter-core
     #   matplotlib-inline
+    #   nbclient
+    #   nbconvert
+    #   nbformat
+    #   notebook
 typing-extensions==4.0.1
     # via tensorflow
 urllib3==1.26.7
@@ -192,6 +330,8 @@ urllib3==1.26.7
     #   requests
 wcwidth==0.2.5
     # via prompt-toolkit
+webencodings==0.5.1
+    # via bleach
 werkzeug==2.0.2
     # via tensorboard
 wheel==0.37.1
@@ -199,6 +339,8 @@ wheel==0.37.1
     #   astunparse
     #   tensorboard
     #   tensorflow
+widgetsnbextension==3.5.2
+    # via ipywidgets
 wrapt==1.13.3
     # via tensorflow
 zipp==3.6.0

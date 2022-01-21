@@ -2,8 +2,10 @@ boto3
 click
 ipdb
 ipython
+ipywidgets
 numpy
 pandas
 pyyaml
 scikit-image
+seaborn
 tensorflow

@@ -39,6 +39,7 @@ import botocore
 import click
 import numpy as np
 import pandas as pd
+import seaborn as sns
 import skimage.io
 import skimage.transform
 import tensorflow as tf
