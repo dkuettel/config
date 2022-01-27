@@ -58,3 +58,19 @@ function debug {
         $@[2,-1]
     )
 }
+
+function temps {
+    case ${1:-} in
+        (-r)
+            watch -n 0.5 zsh -c 'sensors; nvidia-smi'
+            ;;
+        ('')
+            sensors
+            nvidia-smi
+            ;;
+        (*)
+            echo "unknown options: $@" >&2
+            exit 1
+            ;;
+    esac
+}
