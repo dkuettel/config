@@ -52,6 +52,7 @@ function debug {
             (interactive|i) export PYTHONBREAKPOINT='ipdb.set_trace';;
             (embed|e) export PYTHONBREAKPOINT='IPython.embed';;
             (web|w) export PYTHONBREAKPOINT='web_pdb.set_trace';;
+            (0) export PYTHONBREAKPOINT='0';;
             (*) echo "$1 is unknown" >&2; exit 1;;
         esac
         echo "  > using $PYTHONBREAKPOINT\n"
