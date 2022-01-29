@@ -1,0 +1,5 @@
+#!/bin/zsh
+set -eu -o pipefail
+
+sensors | grep 'Tctl'
+nvidia-smi -q | grep 'GPU Current Temp'
