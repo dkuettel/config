@@ -9,32 +9,35 @@ export LC_ALL=en_US.UTF-8
 #   http://www.zovirl.com/2011/07/22/solarized_cheat_sheet/
 # todo see 'man zshzle' for reporting the current vim mode
 # todo could use 'timeout --kill-after=0.01s 0.01s cmd' to stop git info when it takes too long on a slow filesystem
-# todo checkout vcs info from zsh (see yves)
-function zsh-prompt-git {
+function _git_status_for_prompt {
     if [[ $(realpath .) == /efs/* ]]; then
         # note: above takes any pattern, so something|otherhing|morestuff works instead of a list
         echo '(~slow~) '
         exit
     fi
-    sref=$(git symbolic-ref --quiet --short HEAD 2>/dev/null || git rev-parse --short HEAD 2>/dev/null) || exit
-    echo -n '%F{3}('$sref
-    if [[ $(git status --porcelain=v1 | wc -l) != 0 ]]; then
-        echo -n ', +changes'
-    fi
-    if git branch -v | grep '\[ahead' >/dev/null; then
-        echo -n ', +unpushed'
-    fi
-    stashed=$(git stash list 2>/dev/null | wc -l)
-    if [[ $stashed != 0 ]]; then
-        echo -n ', %F{1}'$stashed'-stashed%F{3}'
-    fi
-    echo -n ')%f '
+    (git status --show-stash |& awk -v ORS='' '
+        BEGIN { flags=1 }
+        /^fatal: not a git repository/ { has_git=0 }
+        /^On branch / { print "%F{3}(" $3; has_git=1 }
+        /^HEAD detached at / { print "%F{3}(detached"; has_git=1 }
+        /^Your branch is up to date with / { }
+        /^Your branch is ahead of / { print "↑" }
+        /^Your branch is behind / { print "↓" }
+        /^Your branch and .+ have diverged/ { print "↕" }
+        /^nothing to commit, working tree clean/ { print " ✓" }
+        /^Unmerged paths:/ { if (flags>0) {print " %F{10}conflicts"; flags--} }
+        /^Changes to be committed:/ { if (flags>0) {print " %F{10}uncommited"; flags--} }
+        /^Changes not staged for commit:/ { if (flags>0) {print " %F{10}unstaged"; flags--} }
+        /^Untracked files:/ { if (flags>0) {print " %F{10}untracked"; flags--} }
+        /^Your stash currently has / { print " %F{1}stash" }
+        END { if (has_git) print "%F{3})%f " }
+    ') || true
 }
 setopt prompt_subst # expand $ in prompt at show time
 export PS1='
 %(?,,%F{1}%Sexit code = %?%s%f
 )
-%K{0}%F{4}%B %~%b%f $(zsh-prompt-git)%F{10}%*%f %F{5}(%m)%f %F{9}${VIRTUAL_ENV:+%B=venv=%b}%f %(1j,%F{1}%j&%f,) %E%k
+%K{0}%F{4}%B %~%b%f $(_git_status_for_prompt)%F{10}%*%f %F{5}(%m)%f %F{9}${VIRTUAL_ENV:+%B=venv=%b}%f %(1j,%F{1}%j&%f,) %E%k
 %F{15}${${${KEYMAP:-main}/vicmd/N}/(main|viins)/I}>%f '
 function zle-keymap-select() {
     zle reset-prompt
