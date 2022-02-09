@@ -113,7 +113,6 @@ setopt noautocd # dont assume an implicit cd prefix for folder names
 setopt no_list_beep # dont beep on incomplete/ambiguous completion
 export SUDO_EDITOR=vim # for sudo -e or sudoedit
 export MANOPT='--no-justification --no-hyphenation'
-export PYTHONDONTWRITEBYTECODE=True # no .pyc files for python
 stty -ixon # disables flow control, for example ctrl-s (useful in vim)
 
 # --time-style for ls
