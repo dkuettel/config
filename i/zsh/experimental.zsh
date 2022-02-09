@@ -14,11 +14,6 @@ alias ncal='ncal -bM3'
 # nvim
 alias v=nvim
 
-# correct set of envs? shells usually try VISUAL first and then EDITOR
-export SUDO_EDITOR=nvim
-export VISUAL=nvim
-export EDITOR=nvim
-
 # jql colors
 JQ_COLORS='2;30:2;30:2;30:2;30:0;32:1;39:1;39'
 
