@@ -1,0 +1,9 @@
+#!/bin/zsh
+set -eux -o pipefail
+
+# convert all arguments to "internet-sized" jpegs
+# every "folder/file.ext" becomes "folder/file.jpg" and might override itself
+
+for i in $@; do
+    convert $i -resize 800000@ -compress JPEG -quality 80 ${i:r}.jpg
+done
