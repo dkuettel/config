@@ -4,23 +4,15 @@ setlocal
     \ textwidth=0
     \ indentexpr= indentkeys=
 
-" todo tried a local mapping
-" needs to be made local, and not autocommand
-" because here we are already in type file
-" wait is this file executed at startup once, or everytime for this file type?
-"autocmd FileType python inoremap <buffer> ' "
-"autocmd FileType python inoremap <buffer> " '
-"inoremap <buffer> ' "
-"inoremap <buffer> " '
-" both above are not super useful, because there are moments when you really want single-quote, like in "it's"
-" just very bumpy to use
-" instead trying the below, some kind of pair-insert
-inoremap <buffer> '' ""<Left>
-inoremap <buffer> ''' '''
-inoremap <buffer> """ """
-inoremap <buffer> (( ()<Left>
-inoremap <buffer> [[ []<Left>
-inoremap <buffer> {{ {}<Left>
+" trying some kind of pair-insert
+" the idea is that the 'j-modifier means you want to go edit inside'
+inoremap <buffer> ''j ''<Left>
+inoremap <buffer> '''j ''''''<Left><Left><Left>
+inoremap <buffer> ""J ""<Left>
+inoremap <buffer> """J """"""<Left><Left><Left>
+inoremap <buffer> ((J ()<Left>
+inoremap <buffer> [[j []<Left>
+inoremap <buffer> {{J {}<Left>
 " now the question is how to easily exit over the closing pair?
 " ctrl-l is already something, but I'm not sure what
 inoremap <buffer> <c-l> <Right>
