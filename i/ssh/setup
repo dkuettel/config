@@ -11,9 +11,13 @@ sudo apt-get -q install -y openssh-server
 #   /etc/ssh/sshd_config.d/* (takes precedence)
 
 # disable password login
+# NOTE this might disconnect a user
 echo 'PasswordAuthentication no' | sudo tee /etc/ssh/sshd_config.d/disable-password
-echo 'maybe that will disconnect ssh'
 sudo systemctl restart ssh
+if ! (sudo sshd -T | grep 'passwordauthentication no'); then
+    echo 'password login for ssh  is still enabled' >&2
+    exit 1
+fi
 
 mkdir -p ~/.ssh
 ln -sfT \
