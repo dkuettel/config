@@ -1,2 +1,2 @@
-map f <c-f>
-map b <c-b>
+map <buffer> f <c-f>
+map <buffer> b <c-b>
