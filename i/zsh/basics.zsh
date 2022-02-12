@@ -33,11 +33,18 @@ function _git_status_for_prompt {
         END { if (has_git) print "%F{3})%f " }
     ') || true
 }
-setopt prompt_subst # expand $ in prompt at show time
+function _prompt_sudo {
+    # indicate if sudo currently has cached authentication
+    # NOTE this resets the timeout everytime, maybe not useful, or use 'sudo -k' manually? let's see how it goes.
+    sudo -nv &>/dev/null || exit
+    echo '%F{1}sudo%f'
+}
+setopt prompt_subst  # in prompt, apply typical expansions, like for: $, ${, $(, ((, ...
+setopt prompt_percent  # in prompt, apply expansions for "%"
 export PS1='
 %(?,,%F{1}%Sexit code = %?%s%f
 )
-%K{0}%F{4}%B %~%b%f $(_git_status_for_prompt)%F{10}%*%f %F{5}(%m)%f %F{9}${VIRTUAL_ENV:+%B=venv=%b}%f %(1j,%F{1}%j&%f,) %E%k
+%K{0}%F{4}%B %~%b%f $(_git_status_for_prompt)%F{10}%*%f %F{5}(%m)%f %F{9}${VIRTUAL_ENV:+%B=venv=%b}%f %(1j,%F{1}%j&%f,) $(_prompt_sudo) %E%k
 %F{15}${${${KEYMAP:-main}/vicmd/N}/(main|viins)/I}>%f '
 function zle-keymap-select() {
     zle reset-prompt
