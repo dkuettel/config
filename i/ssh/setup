@@ -1,6 +1,8 @@
 #!/bin/zsh
 set -eux -o pipefail
 
+base=${0:a:h}
+
 sudo apt-get -q install -y openssh-server
 
 # server configuration is at
@@ -30,3 +32,8 @@ for key in $expected_keys; do
         exit 1
     fi
 done
+
+# install message of the day
+sudo chmod -x /etc/update-motd.d/*
+sudo ln -sfT $base/motd /etc/update-motd.d/99-$USER
+sudo chmod +x /etc/update-motd.d/99-$USER

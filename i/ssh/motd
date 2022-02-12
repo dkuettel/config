@@ -1,0 +1,24 @@
+#!/bin/zsh
+set -eu -o pipefail
+
+echo
+uname -snompi
+uname -rv
+
+echo
+df -h -t ext4
+
+# inspired by ubuntu's original motds at /etc/update-motd.d/*
+cat /var/lib/update-notifier/updates-available || true
+/usr/share/unattended-upgrades/update-motd-unattended-upgrades || true
+/usr/lib/update-notifier/update-motd-reboot-required || true
+
+echo
+uptime -p
+
+echo
+who
+
+echo
+# TODO I dont know what are all the messages for failed login attempts
+(journalctl --boot=-1 --unit=ssh.service; journalctl --boot=-0 --unit=ssh.service) | grep -F 'Connection closed by authenticating user ' || true
