@@ -2,56 +2,6 @@
 # todo not sure about the right way to handle it
 export LC_ALL=en_US.UTF-8
 
-## prompt
-# see http://zsh.sourceforge.net/Doc/Release/Prompt-Expansion.html
-# for colors:
-#   http://ethanschoonover.com/solarized
-#   http://www.zovirl.com/2011/07/22/solarized_cheat_sheet/
-# todo see 'man zshzle' for reporting the current vim mode
-# todo could use 'timeout --kill-after=0.01s 0.01s cmd' to stop git info when it takes too long on a slow filesystem
-function _git_status_for_prompt {
-    if [[ $(realpath .) == /efs/* ]]; then
-        # note: above takes any pattern, so something|otherhing|morestuff works instead of a list
-        echo '(~slow~) '
-        exit
-    fi
-    (git status --show-stash |& awk -v ORS='' '
-        BEGIN { flags=1 }
-        /^fatal: not a git repository/ { has_git=0 }
-        /^On branch / { print "%F{3}(" $3; has_git=1 }
-        /^HEAD detached at / { print "%F{3}(detached"; has_git=1 }
-        /^Your branch is up to date with / { }
-        /^Your branch is ahead of / { print "↑" }
-        /^Your branch is behind / { print "↓" }
-        /^Your branch and .+ have diverged/ { print "↕" }
-        /^nothing to commit, working tree clean/ { print " ✓" }
-        /^Unmerged paths:/ { if (flags>0) {print " %F{10}conflicts"; flags--} }
-        /^Changes to be committed:/ { if (flags>0) {print " %F{10}uncommited"; flags--} }
-        /^Changes not staged for commit:/ { if (flags>0) {print " %F{10}unstaged"; flags--} }
-        /^Untracked files:/ { if (flags>0) {print " %F{10}untracked"; flags--} }
-        /^Your stash currently has / { print " %F{1}stash" }
-        END { if (has_git) print "%F{3})%f " }
-    ') || true
-}
-function _prompt_sudo {
-    # indicate if sudo currently has cached authentication
-    # NOTE this resets the timeout everytime, maybe not useful, or use 'sudo -k' manually? let's see how it goes.
-    sudo -nv &>/dev/null || exit
-    echo '%F{1}sudo%f'
-}
-setopt prompt_subst  # in prompt, apply typical expansions, like for: $, ${, $(, ((, ...
-setopt prompt_percent  # in prompt, apply expansions for "%"
-export PS1='
-%(?,,%F{1}%Sexit code = %?%s%f
-)
-%K{0}%F{4}%B %~%b%f $(_git_status_for_prompt)%F{10}%*%f %F{5}(%m)%f %F{9}${VIRTUAL_ENV:+%B=venv=%b}%f %(1j,%F{1}%j&%f,) $(_prompt_sudo) %E%k
-%F{15}${${${KEYMAP:-main}/vicmd/N}/(main|viins)/I}>%f '
-function zle-keymap-select() {
-    zle reset-prompt
-    zle -R
-}
-zle -N zle-keymap-select
-
 ## vim-mode for zsh line editing
 # see 'man zshzle'
 bindkey -v

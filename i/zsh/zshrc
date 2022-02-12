@@ -1,6 +1,7 @@
 base=~/config/i/zsh
 source $base/antigen.zsh
 source $base/path.zsh
+source $base/prompt.zsh
 source $base/basics.zsh
 source $base/fzf.zsh
 source $base/shortcuts.zsh
