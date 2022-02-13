@@ -18,10 +18,10 @@ function _git_status_for_prompt {
         /^On branch / { print " %F{3}(" $3; has_git=1 }
         /^HEAD detached at / { print " %F{3}(detached"; has_git=1 }
         /^Your branch is up to date with / { }
-        /^Your branch is ahead of / { print "↑" }
-        /^Your branch is behind / { print "↓" }
-        /^Your branch and .+ have diverged/ { print "↕" }
-        /^nothing to commit, working tree clean/ { print "✓ " }
+        /^Your branch is ahead of / { print " ↑ " }
+        /^Your branch is behind / { print " ↓ " }
+        /^Your branch and .+ have diverged/ { print " ↕ " }
+        /^nothing to commit, working tree clean/ { print " ✓ " }
         /^Unmerged paths:/ { if (flags>0) {print " %F{10}conflicts"; flags--} }
         /^Changes to be committed:/ { if (flags>0) {print " %F{10}uncommited"; flags--} }
         /^Changes not staged for commit:/ { if (flags>0) {print " %F{10}unstaged"; flags--} }
