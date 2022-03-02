@@ -18,6 +18,17 @@ endif
     Plug 'airblade/vim-gitgutter'
     Plug 'scrooloose/nerdcommenter'
 
+    " https://github.com/jiangmiao/auto-pairs
+    " inserts closing pairs and also skips over closing pairs
+    " TODO there is a good chance for my subset it could be done with just mappings
+    Plug 'jiangmiao/auto-pairs'
+
+    " https://github.com/tpope/vim-surround
+    " some nice operators to work with pairs
+    " like 'S)' to surround a visual selection
+    " plus much more
+    Plug 'tpope/vim-surround'
+
     if has('nvim')
         Plug 'numirias/semshi', {'do': ':UpdateRemotePlugins'}
     else
@@ -38,14 +49,6 @@ endif
     " but I would prefer something that shows me the context stack on demand only
     " interferes with :mks, and also with syntax checking I think
     "Plug 'romgrk/nvim-treesitter-context'
-
-    " TODO trying out
-    " https://github.com/arnar/vim-matchopen
-    " simple enough, and useful without 'typing for me'
-    " if it works, maybe incorporate without plugin, seems small and simple to do? some regex?
-    " lets see how it goes, maybe useful to show innermost? doesnt work well now with
-    " both matchparen shower and the matchhighlighter while editing
-    "Plug 'arnar/vim-matchopen'
 
 call plug#end()
 
@@ -229,3 +232,16 @@ let g:vimminent_default_mappings = 1
 
 """ pdocs
 let g:pdocs_default_mappings = 1
+
+
+""" auto-pairs
+let g:AutoPairsShortcutToggle = ''
+let g:AutoPairsShortcutFastWrap = ''
+let g:AutoPairsShortcutJump = ''
+" conflicts with iabbrev because it remaps <enter>
+let g:AutoPairsMapBS = 0
+let g:AutoPairsMapCh = 0
+let g:AutoPairsMapCR = 0
+let g:AutoPairsCenterLine = 0
+let g:AutoPairsShortcutBackInsert = ''
+let g:AutoPairsMoveCharacter = ''

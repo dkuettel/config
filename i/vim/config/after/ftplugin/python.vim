@@ -4,19 +4,6 @@ setlocal
     \ textwidth=0
     \ indentexpr= indentkeys=
 
-" trying some kind of pair-insert
-" the idea is that the 'j-modifier means you want to go edit inside'
-inoremap <buffer> ''j ''<Left>
-inoremap <buffer> '''j ''''''<Left><Left><Left>
-inoremap <buffer> ""J ""<Left>
-inoremap <buffer> """J """"""<Left><Left><Left>
-inoremap <buffer> ((J ()<Left>
-inoremap <buffer> [[j []<Left>
-inoremap <buffer> {{J {}<Left>
-" now the question is how to easily exit over the closing pair?
-" ctrl-l is already something, but I'm not sure what
-inoremap <buffer> <c-l> <Right>
-
 " TODO should check if already set? this is run on every python file
 " mappings further down are buffer-local and need to be run everytime I think
 " but the drafty versions for functions maybe not
@@ -112,6 +99,7 @@ nmap <buffer> <c-k> :Gi
 imap <buffer> <c-k> <c-o>:Gi <c-r><c-w>
 
 " NOTE triggered as soon as typing an non-keyword character (see iskeyword), not tab or something
+" NOTE if it stops working, it could be something remapped <enter>
 iabbrev <buffer> ifmain if __name__ == "__main__":
 iabbrev <buffer> nie() NotImplementedError()
 iabbrev <buffer> ## # TODO
