@@ -103,3 +103,4 @@ imap <buffer> <c-k> <c-o>:Gi <c-r><c-w>
 iabbrev <buffer> ifmain if __name__ == "__main__":
 iabbrev <buffer> nie() NotImplementedError()
 iabbrev <buffer> ## # TODO
+iabbrev <buffer> definit def __init__(self):<enter><tab>super().__init__()
