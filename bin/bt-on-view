@@ -1,0 +1,5 @@
+#!/bin/zsh
+set -eux -o pipefail
+
+bt-on
+bt-view
