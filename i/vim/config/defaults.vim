@@ -25,7 +25,8 @@ set hidden " allow unsaved buffers
 set textwidth=0 wrapmargin=0 " no autowrap
 set scrolloff=8 " always keep some context lines visible
 set sidescrolloff=5
-set showmatch " highlight matching braces
+" showmatch actually briefly _jumps_ to the matching pair? not the same as highlighting, can interfere with things
+set noshowmatch
 set backspace=indent,eol,start " allow backspacing over everything in insert mode
 
 set hlsearch " highlight search terms
