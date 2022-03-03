@@ -93,16 +93,16 @@ f=~/toys/vtrace/vtrace.py; [[ -e $f ]] && id_mount $f
 # internally tb uses port 6006
 # externally we look for the next free one
 for i in $(seq 6006 6100); do
-    # TODO doesnt always work, because it might be mapped, but not yet used by the guest, and then it doesnt show up in lsof
+    if [[ $i == 6100 ]]; then
+        echo 'Cannot find a free port for tensorboard.' >&2
+        exit 1
+    fi
     if lsof -i :$i; then continue; fi
-    echo "tensorboard mapped to port $i"
-    args+=(-p 6006:$i)
+    if docker ps | grep -F -- $i'->'; then continue; fi
+    echo "Tensorboard mapped to port $i."
+    args+=(-p $i:6006)
     break
 done
-# TODO alternatively map it to a unix file socket?
-# then it's always clear where to point the browser, no search for a free port
-# docker run doesnt seem to support this currently
-# maybe tensorboard can be ain a unix file socket to begin with?
 
 # TODO for speed mounting in local copy, but dangerous if out-of-date
 if [[ -d efs-models ]]; then
