@@ -206,3 +206,16 @@ iabbrev <expr> today+1<< strftime("%F", localtime() + 1*24*60*60)
 iabbrev <expr> today+2<< strftime("%F", localtime() + 2*24*60*60)
 iabbrev <expr> today+3<< strftime("%F", localtime() + 3*24*60*60)
 iabbrev <expr> today+4<< strftime("%F", localtime() + 4*24*60*60)
+
+
+" execute a command from the current line
+" starting at the first :, ignoring all content before
+function! RunLineNormalMode()
+    let line = getline('.')
+    let at = match(line, ":")
+    if at == -1
+        return
+    endif
+    execute line[at+1:]
+endfunction
+nmap ,ee :call RunLineNormalMode()<enter>
