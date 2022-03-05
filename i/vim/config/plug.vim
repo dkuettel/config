@@ -44,6 +44,7 @@ endif
     Plug '~/config/i/pdocs/pdocs/nvim'
 
     Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
+    Plug 'nvim-treesitter/playground'
 
     " TODO trying out from https://github.com/romgrk/nvim-treesitter-context
     " but I would prefer something that shows me the context stack on demand only
@@ -245,3 +246,129 @@ let g:AutoPairsMapCR = 0
 let g:AutoPairsCenterLine = 0
 let g:AutoPairsShortcutBackInsert = ''
 let g:AutoPairsMoveCharacter = ''
+
+function StartHi()
+    lua << done
+    require'nvim-treesitter.configs'.setup {
+      -- One of "all", "maintained" (parsers with maintainers), or a list of languages
+      ensure_installed = "maintained",
+
+      -- Install languages synchronously (only applied to `ensure_installed`)
+      sync_install = false,
+
+      -- List of parsers to ignore installing
+      ignore_install = { "javascript" },
+
+      highlight = {
+        -- `false` will disable the whole extension
+        enable = true,
+
+        -- list of language that will be disabled
+        disable = { "c", "rust" },
+
+        -- Setting this to true will run `:h syntax` and tree-sitter at the same time.
+        -- Set this to `true` if you depend on 'syntax' being enabled (like for indentation).
+        -- Using this option may slow down your editor, and you may see some duplicate highlights.
+        -- Instead of true it can also be a list of languages
+        additional_vim_regex_highlighting = false,
+      },
+      playground = {
+        enable = true,
+        disable = {},
+        updatetime = 25, -- Debounced time for highlighting nodes in the playground from source code
+        persist_queries = false, -- Whether the query persists across vim sessions
+        keybindings = {
+          toggle_query_editor = 'o',
+          toggle_hl_groups = 'i',
+          toggle_injected_languages = 't',
+          toggle_anonymous_nodes = 'a',
+          toggle_language_display = 'I',
+          focus_language = 'f',
+          unfocus_language = 'F',
+          update = 'R',
+          goto_node = '<cr>',
+          show_help = '?',
+        },
+      },
+    }
+done
+    call PlayHiRefresh()
+endfunction
+
+function PlayHiRefreshBuffer()
+    if &filetype != 'python'
+        return
+    endif
+    edit
+    " Semshi disable doesnt work reliably
+    " so we just make it invisible
+    hi clear pythonComment
+    hi clear pythonStatement
+    hi clear pythonFunction
+    hi clear pythonInclude
+    hi clear pythonString
+    hi clear pythonQuotes
+    hi clear pythonOperator
+    hi clear pythonKeyword
+    hi clear pythonConditional
+    hi clear pythonDecorator
+    hi clear pythonDecoratorName
+    hi clear semshiLocal
+    hi clear semshiGlobal
+    hi clear semshiImported
+    hi clear semshiParameter
+    "hi clear semshiParameterUnused
+    hi semshiParameterUnused cterm=strikethrough
+    hi clear semshiFree
+    hi clear semshiBuiltin
+    hi clear semshiAttribute
+    hi clear semshiSelf
+    hi clear semshiUnresolved
+    hi clear semshiSelected
+    hi clear semshiErrorSign
+    hi clear semshiErrorChar
+endfunction
+
+function PlayHiRefresh()
+    let b = bufnr('%')
+    bufdo call PlayHiRefreshBuffer()
+    execute 'buffer '.b
+endfunction
+
+function PlayHiUpdateScm()
+    let queries = join(getline(1, '$'), "\n")
+    call v:lua.vim.treesitter.set_query('python', 'highlights', queries)
+    call PlayHiRefresh()
+endfunction
+
+function PlayHiUpdateVim()
+    source
+    call PlayHiRefresh()
+endfunction
+
+function PlayHi()
+    nmap H :TSHighlightCapturesUnderCursor<enter>
+    tabedit ~/config/i/vim/treesitter/test.scm
+    nmap <buffer> S :call PlayHiUpdateScm()<enter>
+    call PlayHiUpdateScm()
+    vsplit ~/config/i/vim/treesitter/test.vim
+    nmap <buffer> S :call PlayHiUpdateVim()<enter>
+    call PlayHiUpdateVim()
+endfunction
+
+function StopHi()
+    lua << done
+    require'nvim-treesitter.configs'.setup {
+      highlight = {
+        enable = false,
+      },
+      playground = {
+        enable = false,
+      },
+    }
+done
+endfunction
+
+command StartHi call StartHi()
+command PlayHi call PlayHi()
+command StopHi call StopHi()
