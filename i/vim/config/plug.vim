@@ -239,9 +239,9 @@ let g:pdocs_default_mappings = 1
 let g:AutoPairsShortcutToggle = ''
 let g:AutoPairsShortcutFastWrap = ''
 let g:AutoPairsShortcutJump = ''
-" conflicts with iabbrev because it remaps <enter>
 let g:AutoPairsMapBS = 0
 let g:AutoPairsMapCh = 0
+" conflicts with iabbrev because it remaps <enter>
 let g:AutoPairsMapCR = 0
 let g:AutoPairsCenterLine = 0
 let g:AutoPairsShortcutBackInsert = ''
