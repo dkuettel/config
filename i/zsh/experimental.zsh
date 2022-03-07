@@ -13,6 +13,9 @@ alias ncal='ncal -bM3'
 
 # nvim
 alias v=nvim
+# nvim with alternative configuration
+# removing runtime paths very aggressively for now
+alias V='XDG_CONFIG_HOME=~/revim/config XDG_CONFIG_DIRS= XDG_DATA_HOME=~/revim/data XDG_DATA_DIRS= nvim'
 
 # jql colors
 JQ_COLORS='2;30:2;30:2;30:2;30:0;32:1;39:1;39'
