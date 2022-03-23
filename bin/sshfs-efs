@@ -18,7 +18,7 @@ fi
 case $(hostname) in
     (boom)
         # NOTE direct ip is much faster, aws ssm is only meant for admin ssh, not for data
-        sshfs -o allow_root,reconnect -o auto_cache yineichen@00.000.000.00:/efs /efs
+        sshfs -o allow_root,reconnect -o auto_cache efs@00.000.000.00:/efs /efs
         ;;
     (base)
         sshfs -o allow_root,reconnect -o auto_cache efs:/efs /efs

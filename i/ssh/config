@@ -11,8 +11,8 @@ Host chbeck2
     ServerAliveInterval 10
 
 Host efs
-    HostName i-0166a4352bf931761
-    User yineichen
+    HostName i-099c3d939c5680d79
+    User efs
     ProxyCommand aws ssm start-session --target %h --document-name AWS-StartSSHSession --parameters 'portNumber=%p'
     ServerAliveInterval 10
 
