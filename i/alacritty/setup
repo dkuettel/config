@@ -5,6 +5,17 @@ base=${0:a:h}
 cd $base
 
 (
+    # use nerdfonts
+    # see https://www.nerdfonts.com/font-downloads
+    mkdir -p ~/.fonts/nerdfonts
+    target=~/.fonts/nerdfonts/'Ubuntu Mono Nerd Font Complete Mono.ttf'
+    if [[ ! -f $target ]]; then
+        wget -O $target https://github.com/ryanoasis/nerd-fonts/raw/master/patched-fonts/UbuntuMono/Regular/complete/Ubuntu%20Mono%20Nerd%20Font%20Complete%20Mono.ttf
+        fc-cache
+    fi
+)
+
+(
     # currently not in any repository, installing from git
     # NOTE snap has a version that is _not_ from the author
     # from https://github.com/alacritty/alacritty
