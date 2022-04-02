@@ -1,4 +1,4 @@
 #!/bin/zsh
 set -eux -o pipefail
 
-geeqie ~/sprint/vlt
+geeqie ~/sprint/vlt-light
