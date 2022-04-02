@@ -7,9 +7,6 @@
 [submodule "i/vim/nvim"]
 	path = i/vim/nvim
 	url = https://github.com/neovim/neovim.git
-[submodule "i/vim/config/vimminent"]
-	path = i/vim/config/vimminent
-	url = git@github.com:dkuettel/vimminent.git
 [submodule "i/pdocs/pdocs"]
 	path = i/pdocs/pdocs
 	url = git@github.com:dkuettel/pdocs.git

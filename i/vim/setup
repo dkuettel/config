@@ -4,35 +4,22 @@ set -eux -o pipefail
 h=${0:a:h}
 cd $h
 
-# config files
-# TODO if the ~/.config/nvim folder never gets dirty we could just symlink the whole instead of individuals
-mkdir -p ~/.config/nvim
-ln -sfT $h/config/vimrc ~/.config/nvim/init.vim
-ln -sfT $h/config/syntax ~/.config/nvim/syntax
-ln -sfT $h/config/ftdetect ~/.config/nvim/ftdetect
-ln -sfT $h/config/after ~/.config/nvim/after
+# main config ~/.config/nvim is completely in git, nvim keeps that folder clean
+mkdir -p ~/.config
+ln -sfT $h/config ~/.config/nvim
 
-# dependencies for vim plugins
-# TODO rethink with plugins submodules now
-pip3 install black pynvim isort
+(
+    # there is also ~/.local/share/nvim which contains transient data
+    # but there should not be too much, especially from an old installiation
+    # since things are sourced by nvim
+    mkdir -p ~/.local/share/nvim
+    cd ~/.local/share/nvim
+    accept=(rplugin.vim shada swap telescope_history)
+    for i in *; do
+        (( ${accept[(i)$i]} <= ${#accept} ))
+    done
+)
 
-./install
+./install-nvim
 
-if [[ ! -f ~/.local/share/nvim/site/autoload/plug.vim ]]; then
-    curl --fail --location --create-dirs \
-        --output ~/.local/share/nvim/site/autoload/plug.vim \
-        https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-
-    log=$(tempfile)
-    nvim -c PlugInstall -c "w $log" -c qa
-
-    # hacky check if any plugin failed to install
-    # (the output of plug starts with an "x" on a failed item)
-    if egrep '^x' $log; then
-        cat $log
-        exit 1
-    fi
-
-    rm $log
-
-fi
+./install-plugins

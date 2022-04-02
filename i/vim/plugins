@@ -1,0 +1,23 @@
+#!/bin/zsh
+set -eux -o pipefail
+
+h=${0:a:h}
+
+# dependencies for some plugins
+pip3 install black pynvim isort black
+
+( # treesitter
+    cd $h/config/pack/plugins/opt/nvim-treesitter
+    # TODO it's not unattended, it stops and waits for user input :/
+    nvim -c 'TSUpdateSync' -c 'TSInstallSync all' -c qa
+)
+
+( # telescope & co
+    cd $h/config/pack/plugins/opt/telescope.nvim
+    sudo apt-get -y install fd-find
+    cd $h/config/pack/plugins/opt/telescope-fzf-native.nvim
+    make
+)
+
+# regenerate helptags
+nvim -c 'helptags ALL' -c qa
