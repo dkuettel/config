@@ -7,5 +7,4 @@ sudo apt-get install -yqq ninja-build gettext libtool libtool-bin autoconf autom
 
 make distclean
 make CMAKE_BUILD_TYPE=Release
-# todo any list of features like in vim?
 sudo make install

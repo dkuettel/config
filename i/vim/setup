@@ -1,7 +1,38 @@
 #!/bin/zsh
 set -eux -o pipefail
 
-# disable vim for now, not using it usually
-#${0:a:h}/setup-vim
-#
-${0:a:h}/setup-nvim
+h=${0:a:h}
+cd $h
+
+# config files
+# TODO if the ~/.config/nvim folder never gets dirty we could just symlink the whole instead of individuals
+mkdir -p ~/.config/nvim
+ln -sfT $h/config/vimrc ~/.config/nvim/init.vim
+ln -sfT $h/config/syntax ~/.config/nvim/syntax
+ln -sfT $h/config/ftdetect ~/.config/nvim/ftdetect
+ln -sfT $h/config/after ~/.config/nvim/after
+
+# dependencies for vim plugins
+# TODO rethink with plugins submodules now
+pip3 install black pynvim isort
+
+./install
+
+if [[ ! -f ~/.local/share/nvim/site/autoload/plug.vim ]]; then
+    curl --fail --location --create-dirs \
+        --output ~/.local/share/nvim/site/autoload/plug.vim \
+        https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+
+    log=$(tempfile)
+    nvim -c PlugInstall -c "w $log" -c qa
+
+    # hacky check if any plugin failed to install
+    # (the output of plug starts with an "x" on a failed item)
+    if egrep '^x' $log; then
+        cat $log
+        exit 1
+    fi
+
+    rm $log
+
+fi
