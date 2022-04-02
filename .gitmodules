@@ -37,3 +37,84 @@
 [submodule "i/osh/osh"]
 	path = i/osh/osh
 	url = git@github.com:dkuettel/one-shell-history.git
+[submodule "i/vim/config/pack/plugins/opt/AutoSave.nvim"]
+	path = i/vim/config/pack/plugins/opt/AutoSave.nvim
+	url = https://github.com/Pocco81/AutoSave.nvim.git
+[submodule "i/vim/config/pack/plugins/opt/Comment.nvim"]
+	path = i/vim/config/pack/plugins/opt/Comment.nvim
+	url = https://github.com/numToStr/Comment.nvim.git
+[submodule "i/vim/config/pack/plugins/opt/LuaSnip"]
+	path = i/vim/config/pack/plugins/opt/LuaSnip
+	url = https://github.com/L3MON4D3/LuaSnip
+[submodule "i/vim/config/pack/plugins/opt/cmp-buffer"]
+	path = i/vim/config/pack/plugins/opt/cmp-buffer
+	url = https://github.com/hrsh7th/cmp-buffer
+[submodule "i/vim/config/pack/plugins/opt/cmp-cmdline"]
+	path = i/vim/config/pack/plugins/opt/cmp-cmdline
+	url = https://github.com/hrsh7th/cmp-cmdline
+[submodule "i/vim/config/pack/plugins/opt/cmp-nvim-lsp"]
+	path = i/vim/config/pack/plugins/opt/cmp-nvim-lsp
+	url = https://github.com/hrsh7th/cmp-nvim-lsp
+[submodule "i/vim/config/pack/plugins/opt/cmp-nvim-lua"]
+	path = i/vim/config/pack/plugins/opt/cmp-nvim-lua
+	url = https://github.com/hrsh7th/cmp-nvim-lua
+[submodule "i/vim/config/pack/plugins/opt/cmp-path"]
+	path = i/vim/config/pack/plugins/opt/cmp-path
+	url = https://github.com/hrsh7th/cmp-path
+[submodule "i/vim/config/pack/plugins/opt/cmp_luasnip"]
+	path = i/vim/config/pack/plugins/opt/cmp_luasnip
+	url = https://github.com/saadparwaiz1/cmp_luasnip
+[submodule "i/vim/config/pack/plugins/opt/diffview.nvim"]
+	path = i/vim/config/pack/plugins/opt/diffview.nvim
+	url = https://github.com/sindrets/diffview.nvim.git
+[submodule "i/vim/config/pack/plugins/opt/everforest"]
+	path = i/vim/config/pack/plugins/opt/everforest
+	url = https://github.com/sainnhe/everforest.git
+[submodule "i/vim/config/pack/plugins/opt/gitsigns.nvim"]
+	path = i/vim/config/pack/plugins/opt/gitsigns.nvim
+	url = https://github.com/lewis6991/gitsigns.nvim.git
+[submodule "i/vim/config/pack/plugins/opt/gruvbox"]
+	path = i/vim/config/pack/plugins/opt/gruvbox
+	url = https://github.com/morhetz/gruvbox
+[submodule "i/vim/config/pack/plugins/opt/hop.nvim"]
+	path = i/vim/config/pack/plugins/opt/hop.nvim
+	url = https://github.com/phaazon/hop.nvim.git
+[submodule "i/vim/config/pack/plugins/opt/lspkind-nvim"]
+	path = i/vim/config/pack/plugins/opt/lspkind-nvim
+	url = https://github.com/onsails/lspkind-nvim
+[submodule "i/vim/config/pack/plugins/opt/lualine.nvim"]
+	path = i/vim/config/pack/plugins/opt/lualine.nvim
+	url = https://github.com/nvim-lualine/lualine.nvim
+[submodule "i/vim/config/pack/plugins/opt/neogit"]
+	path = i/vim/config/pack/plugins/opt/neogit
+	url = https://github.com/TimUntersberger/neogit.git
+[submodule "i/vim/config/pack/plugins/opt/null-ls.nvim"]
+	path = i/vim/config/pack/plugins/opt/null-ls.nvim
+	url = https://github.com/jose-elias-alvarez/null-ls.nvim.git
+[submodule "i/vim/config/pack/plugins/opt/nvim-cmp"]
+	path = i/vim/config/pack/plugins/opt/nvim-cmp
+	url = https://github.com/hrsh7th/nvim-cmp
+[submodule "i/vim/config/pack/plugins/opt/nvim-lspconfig"]
+	path = i/vim/config/pack/plugins/opt/nvim-lspconfig
+	url = https://github.com/neovim/nvim-lspconfig
+[submodule "i/vim/config/pack/plugins/opt/nvim-treesitter"]
+	path = i/vim/config/pack/plugins/opt/nvim-treesitter
+	url = https://github.com/nvim-treesitter/nvim-treesitter.git
+[submodule "i/vim/config/pack/plugins/opt/nvim-web-devicons"]
+	path = i/vim/config/pack/plugins/opt/nvim-web-devicons
+	url = https://github.com/kyazdani42/nvim-web-devicons
+[submodule "i/vim/config/pack/plugins/opt/plenary.nvim"]
+	path = i/vim/config/pack/plugins/opt/plenary.nvim
+	url = https://github.com/nvim-lua/plenary.nvim
+[submodule "i/vim/config/pack/plugins/opt/telescope.nvim"]
+	path = i/vim/config/pack/plugins/opt/telescope.nvim
+	url = https://github.com/nvim-telescope/telescope.nvim
+[submodule "i/vim/config/pack/plugins/opt/telescope-fzf-native.nvim"]
+	path = i/vim/config/pack/plugins/opt/telescope-fzf-native.nvim
+	url = https://github.com/nvim-telescope/telescope-fzf-native.nvim.git
+[submodule "i/vim/config/pack/plugins/opt/tokyonight.nvim"]
+	path = i/vim/config/pack/plugins/opt/tokyonight.nvim
+	url = https://github.com/folke/tokyonight.nvim
+[submodule "i/vim/config/pack/plugins/opt/vim-colors-solarized"]
+	path = i/vim/config/pack/plugins/opt/vim-colors-solarized
+	url = https://github.com/altercation/vim-colors-solarized
