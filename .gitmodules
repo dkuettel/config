@@ -1,9 +1,6 @@
 [submodule "i/tmux/tmux"]
 	path = i/tmux/tmux
 	url = https://github.com/tmux/tmux.git
-[submodule "i/vim/vim"]
-	path = i/vim/vim
-	url = https://github.com/vim/vim.git
 [submodule "i/vim/nvim"]
 	path = i/vim/nvim
 	url = https://github.com/neovim/neovim.git
