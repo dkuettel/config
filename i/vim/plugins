@@ -19,5 +19,19 @@ pip3 install black pynvim isort black
     make
 )
 
+( # npm and pyright for python lsp
+    if ! which npm; then
+        # loosely based on https://github.com/nodesource/distributions#installation-instructions
+        curl -fsSL https://deb.nodesource.com/gpgkey/nodesource.gpg.key | sudo apt-key add -
+        version=node_17.x
+        distro=$(lsb_release -s -c)
+        echo "deb https://deb.nodesource.com/$version $distro main\ndeb-src https://deb.nodesource.com/$version $distro main" | sudo tee /etc/apt/sources.list.d/nodesource.list
+        sudo apt-get -y install nodejs
+    fi
+    if ! which pyright-langserver; then
+        sudo npm install -g pyright
+    fi
+)
+
 # regenerate helptags
 nvim -c 'helptags ALL' -c qa
