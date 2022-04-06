@@ -21,7 +21,7 @@ pip3 install black pynvim isort black
 
 ( # pyright for python lsp
     if ! which pyright-langserver; then
-        sudo npm install -g pyright
+        npm install -g pyright
     fi
 )
 
