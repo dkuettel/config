@@ -14,30 +14,29 @@ for arg in $@; do
             )
             ;;
 
+        (embed)
+            args+=(
+                --env PYTHONBREAKPOINT='IPython.embed'
+            )
+            ;;
+
         (test)
-            #args+=(--env TF_FORCE_GPU_ALLOW_GROWTH=true)
             cmd=(
-                #with-log docker.log
-                #python3 ~/toys/vim-python-tracebacks/vimfix.py -im
                 python3 -m
                 nn.flow.train test
-                #--subset-random=100
-                --subset-subsample=16
-                #--num-refinement-steps=1
-                --num-refinement-steps=10
-                #--checkpoint=/efs/dkuettel/flow/tf2-training-2-smaller/variance/no-occlusion/noise-21/default/checkpoints/model-120000.h5
-                #--checkpoint='/efs/dkuettel/flow/tf2-training-2-smaller/variance/no-occlusion/noise-21/topology/[(1,3)]/checkpoints/model-120000.h5'
-                #--checkpoint='/efs/dkuettel/flow/tf2-training-2-smaller/variance/no-occlusion/noise-21/topology/[(64,7),(16,3),(1,3)]/checkpoints/model-120000.h5'
-                #--checkpoint='/efs/dkuettel/flow/tf2-training-2-smaller/variance/no-occlusion/noise-21/topology/[(64,3),(64,3),(64,3),(1,3)]/checkpoints/model-120000.h5'
-                #--checkpoint='/efs/dkuettel/flow/tf2-training-2-smaller/hit-50mm/classifier-now/pretrained-variance/first/checkpoints/model-120000.h5'
-                #--checkpoint='/efs/dkuettel/flow/tf2-training-2-smaller/fixed-repr/classifier-now/0-vs-16to21/checkpoints/model-55000.h5'
-                --checkpoint='/efs/dkuettel/flow/tf2-training-2-smaller/flow/192hx320w/checkpoints/model-120000.h5'
+                --subset-subsample=32
+                --num-refinement-steps=3
+                #--checkpoint='/xp/src/nn/trained-first/checkpoints/model-0.h5'
+                --checkpoint='/xp/src/nn/trained-new/checkpoints/model-0.h5'
                 --out-folder=.
-                #--variance-threshold=5.0
-                #--variance-visualization-count=100
-                #--classifier=baseline
-                #--objects=Mini_5Door.viewpoint_0000
                 --resolution=192hx320w
+            )
+            ;;
+
+        (debug)
+            cmd=(
+                python3 -m
+                nn.flow.train debug
             )
             ;;
 
@@ -171,6 +170,9 @@ for arg in $@; do
                 #--trainable
                 --losses=regularization,flow
 
+                --config-topology=MNasNetLike
+                #--backbone=MNasNetFlow
+
                 --downsamplers=DownsampleOriginal
                 #--downsamplers=DownsampleDepthAndPointwise
                 #--downsamplers=DownsampleSeparableConv2D
@@ -187,6 +189,34 @@ for arg in $@; do
                 #--upsamplers=UpsamplePointwiseAndUpSampling2DAndConv2DGrouped
                 #--upsamplers=UpsamplePointwiseAndUpSampling2DAndDepthwise
 
+            )
+            ;;
+
+        (train-first)
+            cmd=(
+                python3 -m nn.flow.train raw-train
+                --out-folder=.
+                --yaml64="$(base64 --wrap=0 first-mnasnet-config.yaml)"
+                --num-steps=50
+            )
+            ;;
+
+        (train-new)
+            cmd=(
+                python3 -m nn.flow.train raw-train
+                --out-folder=.
+                --yaml64="$(base64 --wrap=0 new-mnasnet-config.yaml)"
+                --num-steps=50
+            )
+            ;;
+
+        (train-toy)
+            cmd=(
+                python3 -m nn.flow.train raw-train
+                --out-folder=.
+                #--yaml64="$(base64 --wrap=0 toy-config.yaml)"
+                --json64="$(base64 --wrap=0 toy-config.json)"
+                --num-steps=50
             )
             ;;
 
@@ -300,5 +330,3 @@ for arg in $@; do
 done
 
 source ${0:a:h}/include/post.zsh
-
-ls -lh out/checkpoints
