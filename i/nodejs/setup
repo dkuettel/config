@@ -1,0 +1,10 @@
+#!/bin/zsh
+set -eux -o pipefail
+
+if [[ -e ~/bin/nodejs ]]; then
+    exit
+fi
+
+mkdir -p ~/bin/nodejs
+cd ~/bin/nodejs
+curl -sfLS install-node.vercel.app | bash -s -- --yes --prefix=$HOME/bin/nodejs
