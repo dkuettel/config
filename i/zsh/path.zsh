@@ -12,6 +12,7 @@ rev+=(
     $HOME/.local/bin  # pip install puts executables here
     #$HOME/fzf/bin  # not needed anymore, installed with apt now
     $HOME/.cargo/bin  # for rust cargo stuff, eg, see i/alacritty/setup
+    $HOME/bin/nodejs/bin
     $HOME/bin
     $HOME/config/bin
 )
