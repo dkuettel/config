@@ -8,8 +8,11 @@ pip3 install black pynvim isort black
 
 ( # treesitter
     cd $h/config/pack/plugins/opt/nvim-treesitter
-    # TODO it's not unattended, it stops and waits for user input :/
-    nvim -c 'TSUpdateSync' -c 'TSInstallSync all' -c qa
+    nvim -Es <<- 'EOF'
+        TSUpdateSync
+        TSInstallSync all
+        qa
+    EOF
 )
 
 ( # telescope & co
@@ -26,4 +29,7 @@ pip3 install black pynvim isort black
 )
 
 # regenerate helptags
-nvim -c 'helptags ALL' -c qa
+nvim -Es <<- 'EOF'
+    helptags ALL
+    qa
+EOF
