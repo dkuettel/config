@@ -154,10 +154,8 @@ function M.mappings(client, bufnr)
 end
 
 function M.setup_lua(capabilities)
-    -- TODO not part of setup script yet
-    -- downloaded LSP from https://github.com/sumneko/lua-language-server/releases
-    -- alternative language server
-    -- https://github.com/Alloyed/lua-lsp
+    -- using sumneko https://github.com/sumneko
+    -- alternative language server https://github.com/Alloyed/lua-lsp
 
     local runtime_path = vim.split(package.path, ";")
     table.insert(runtime_path, "lua/?.lua")
@@ -167,7 +165,7 @@ function M.setup_lua(capabilities)
     -- TODO probably that goes to individual config files or function, one per LSP?
     -- from https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#sumneko_lua
     require("lspconfig").sumneko_lua.setup({
-        cmd = { "/home/dkuettel/Downloads/lua-language-server/bin/lua-language-server" },
+        cmd = { os.getenv("HOME") .. "/bin/sumneko/bin/lua-language-server" },
         settings = {
             Lua = {
                 runtime = {

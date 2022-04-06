@@ -12,7 +12,7 @@ pip3 install black pynvim isort black
         TSUpdateSync
         TSInstallSync all
         qa
-    EOF
+EOF
 )
 
 ( # telescope & co
@@ -25,6 +25,27 @@ pip3 install black pynvim isort black
 ( # pyright for python lsp
     if ! which pyright-langserver; then
         npm install -g pyright
+    fi
+)
+
+( # stylua and sumneko for lua
+    # downloaded from https://github.com/JohnnyMorganz/StyLua/releases
+    # but how to detect or go and update to newer versions? or git?
+    if [[ ! -e ~/bin/stylua ]]; then
+        cd ~/bin
+        wget -O ~/bin/stylua.zip 'https://github.com/JohnnyMorganz/StyLua/releases/download/v0.13.0/stylua-linux.zip'
+        unzip stylua.zip stylua
+        rm stylua.zip
+    fi
+
+    # downloaded prebuilt from https://github.com/sumneko/lua-language-server/releases
+    # but how to detect or go and update to newer versions? or git?
+    if [[ ! -e ~/bin/sumneko ]]; then
+        mkdir -p ~/bin/sumneko
+        cd ~/bin/sumneko
+        wget -O lls.tar.gz 'https://github.com/sumneko/lua-language-server/releases/download/2.6.7/lua-language-server-2.6.7-linux-x64.tar.gz'
+        tar xzf lls.tar.gz
+        rm lls.tar.gz
     fi
 )
 
