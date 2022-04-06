@@ -7,10 +7,12 @@ cd $base
 (
     # use nerdfonts
     # see https://www.nerdfonts.com/font-downloads
-    mkdir -p ~/.fonts/nerdfonts
-    target=~/.fonts/nerdfonts/'Ubuntu Mono Nerd Font Complete Mono.ttf'
-    if [[ ! -f $target ]]; then
-        wget -O $target https://github.com/ryanoasis/nerd-fonts/raw/master/patched-fonts/UbuntuMono/Regular/complete/Ubuntu%20Mono%20Nerd%20Font%20Complete%20Mono.ttf
+    mkdir -p ~/.fonts
+    cd ~/.fonts
+    if [[ $(ls 'Ubuntu Mono'*'Nerd Font'* | wc -l) != 16 ]]; then
+        wget -O nerd-font.zip https://github.com/ryanoasis/nerd-fonts/releases/download/v2.1.0/UbuntuMono.zip
+        unzip nerd-font.zip
+        rm nerd-font.zip
         fc-cache
     fi
 )
