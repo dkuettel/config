@@ -14,7 +14,7 @@ pip3 install black pynvim isort black
 
 ( # telescope & co
     cd $h/config/pack/plugins/opt/telescope.nvim
-    sudo apt-get -y install fd-find
+    sudo apt-get -y install fd-find ripgrep
     cd $h/config/pack/plugins/opt/telescope-fzf-native.nvim
     make
 )
