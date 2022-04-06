@@ -32,6 +32,7 @@ while [[ $# != 0 ]]; do
             ;;
 
         (train)
+            # TODO with-log could be a log arg here and then it's generic, but also make cmd+=() or set flag?
             cmd=(
                 #with-log docker.log
                 python3
@@ -40,7 +41,8 @@ while [[ $# != 0 ]]; do
                     --config-folder=s3://e2e-benchmarking/training/zurich-all-set/recolored
                     #--config-folder=s3://e2e-benchmarking/training/zurich-all-set/recolored-full360
                     #--config-folder=s3://e2e-benchmarking/training/Ender3DPrinter
-                    --assembly=ktm.Right
+                    #--assembly=ktm.Right
+                    --assembly=continental.viewpoint_0000
                     #--assembly=ferrari_488_red.viewpoint_0000
                     #--assembly=Ender3DPrinter.viewpoint_0000
                     --out-folder=.
