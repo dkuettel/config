@@ -15,11 +15,11 @@ ln -sfT $h/config ~/.config/nvim
     mkdir -p ~/.local/share/nvim
     cd ~/.local/share/nvim
     accept=(rplugin.vim shada swap telescope_history)
-    for i in *; do
+    for i in $(ls); do
         (( ${accept[(i)$i]} <= ${#accept} ))
     done
 )
 
-./install-nvim
+./install
+./plugins
 
-./install-plugins
