@@ -123,6 +123,8 @@ function M.mappings()
     -- disable search highlights
     -- note: this makes a first '/' wait unless you type more, because it's not prefix-free
     map("n", "//", "<cmd>nohlsearch<enter>")
+    -- no highlights on startup
+    vim.cmd("nohlsearch")
 
     -- save all and exit
     -- 'Q' is also ex-mode, 'gQ' is an alternative for the same
