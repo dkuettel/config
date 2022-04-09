@@ -12,21 +12,27 @@ function M.setup()
         return "藍" .. vim.api.nvim_win_get_number(0)
     end
 
-    local U = require("lualine.utils.utils")
-
     -- zen low-flicker indication of file status (unsaved, saved, read-only)
+    local U = require("lualine.utils.utils")
+    local show_file_icons = { missing = "", modified = "", unmodified = "", read_only = "" }
     local function show_file()
+        local icon = nil
+        if vim.bo.modifiable then
+            if vim.fn.filereadable(vim.fn.expand("%")) == 1 then
+                if vim.bo.modified then
+                    icon = show_file_icons.modified
+                else
+                    icon = show_file_icons.unmodified
+                end
+            else
+                icon = show_file_icons.missing
+            end
+        else
+            icon = show_file_icons.read_only
+        end
         -- based on https://github.com/nvim-lualine/lualine.nvim/blob/master/lua/lualine/components/filename.lua
-        local f = vim.fn.expand("%:t")
-        f = U.stl_escape(f)
-        local icon = ""
-        if vim.bo.modified then
-            icon = ""
-        end
-        if not vim.bo.modifiable then
-            icon = ""
-        end
-        return icon .. " " .. f
+        local name = U.stl_escape(vim.fn.expand("%:t"))
+        return icon .. " " .. name
     end
 
     -- zen low-flicker indication of lsp activity (no lsp, busy lsp, idle lsp)
