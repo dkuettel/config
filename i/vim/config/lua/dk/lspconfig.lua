@@ -144,7 +144,8 @@ function M.mappings(client, bufnr)
     nmap("gr", b.references)
     -- TODO not sure when to use lsp formatter and when to use a separate thing
     -- used to have sbdchd/neoformat and then it's clear what we use
-    nmap("==", b.formatting)
+    -- TODO make visual indication when formatting has been executed, or failed
+    nmap("==", b.formatting_seq_sync)
     nmap(",ca", b.code_action)
     nmap(",rn", b.rename)
     nmap("gtd", b.type_definition)
