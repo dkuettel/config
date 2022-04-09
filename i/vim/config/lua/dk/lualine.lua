@@ -51,11 +51,11 @@ function M.setup()
         },
         sections = {
             lualine_a = { show_window, show_file },
-            lualine_b = { { "diagnostics", sources = { "nvim_lsp" }, colored = false } },
-            lualine_c = { { "diff", icon = "", colored = false } },
+            lualine_b = { { "diff", icon = "", colored = false } },
+            lualine_c = {},
             lualine_x = {},
-            lualine_y = { lsp_activity, { "filetype", icons_enabled = false } },
-            lualine_z = { "progress", { "location", icon = "" } },
+            lualine_y = { { "diagnostics", sources = { "nvim_lsp" }, colored = false } },
+            lualine_z = { lsp_activity, { "filetype", icons_enabled = false } },
         },
         inactive_sections = {
             lualine_a = { show_window, show_file },
@@ -63,7 +63,7 @@ function M.setup()
             lualine_c = {},
             lualine_x = {},
             lualine_y = {},
-            lualine_z = { "progress", { "location", icon = "" } },
+            lualine_z = {},
         },
         tabline = {
             lualine_a = { "tabs" },
