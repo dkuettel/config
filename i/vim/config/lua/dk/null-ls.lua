@@ -12,8 +12,9 @@ function M.setup()
         sources = {
             F.stylua,
             -- TODO target version will change, black doesnt read it from the venv
-            F.black.with({command="./.venv/bin/black", extra_args={"--target-version=py39"}}),
+            -- the order seems to be as configured here, so we want isort first
             F.isort.with({command="./.venv/bin/isort", extra_args={"--profile=black", "--combine-as"}}),
+            F.black.with({command="./.venv/bin/black", extra_args={"--target-version=py39"}}),
             --require("null-ls").builtins.diagnostics.eslint,
             --require("null-ls").builtins.completion.spell,
         },
