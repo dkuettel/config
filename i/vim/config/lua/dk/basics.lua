@@ -2,7 +2,7 @@
 -- no dependencies, no plugins
 local M = {}
 
-function M.config()
+function M.setup()
     M.options()
     M.mappings()
     M.cursorline()

@@ -1,6 +1,3 @@
--- break up into mappings and theme stuff?
-require("dk.basics").config()
-
 local themes = {
     s = "solarized",
     tn = "tokyonight",
@@ -15,10 +12,9 @@ local themes = {
     -- https://github.com/sainnhe/sonokai
 }
 
--- TODO basics would fit here the same as the others
--- more generic, and still indiviually usable
 local configs = {
     themes.tn,
+    "basics",
     -- "auto-pairs",
     -- "vim-surround",
     "autosave",
