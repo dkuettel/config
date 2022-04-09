@@ -1,33 +1,13 @@
 local M = {}
 
-function M.packer(use)
-    use({
-        -- https://github.com/folke/tokyonight.nvim
-        "folke/tokyonight.nvim",
-        commit = "8223c97",
-        setup = M.before,
-        config = M.after,
-    })
-end
-
-function M.setup()
-    M.before()
-    vim.cmd("packadd tokyonight.nvim")
-    M.after()
-end
-
-function M.before()
+function M.setup(background, style)
+    -- variants are (dark, storm), (dark, night), (light, day)
     vim.opt.termguicolors = true
-end
-
-function M.after()
-    local variant = { "dark", "storm" }
-    -- local variant = {'dark', 'night'}
-    -- local variant = {'light', 'day'}
-    vim.opt.background, vim.g.tokyonight_style = unpack(variant)
-
+    -- https://github.com/folke/tokyonight.nvim
+    vim.cmd("packadd tokyonight.nvim")
+    vim.opt.background = background or "dark"
+    vim.g.tokyonight_style = style or "storm"
     vim.g.tokyonight_day_brightness = 0.3
-
     vim.cmd("colorscheme tokyonight")
 end
 

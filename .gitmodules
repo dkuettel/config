@@ -109,6 +109,15 @@
 [submodule "i/vim/config/pack/plugins/opt/tokyonight.nvim"]
 	path = i/vim/config/pack/plugins/opt/tokyonight.nvim
 	url = https://github.com/folke/tokyonight.nvim
-[submodule "i/vim/config/pack/plugins/opt/vim-colors-solarized"]
-	path = i/vim/config/pack/plugins/opt/vim-colors-solarized
-	url = https://github.com/altercation/vim-colors-solarized
+[submodule "i/vim/config/pack/plugins/opt/lush.nvim"]
+	path = i/vim/config/pack/plugins/opt/lush.nvim
+	url = https://github.com/rktjmp/lush.nvim.git
+[submodule "i/vim/config/pack/plugins/opt/nord-vim"]
+	path = i/vim/config/pack/plugins/opt/nord-vim
+	url = https://github.com/arcticicestudio/nord-vim.git
+[submodule "i/vim/config/pack/plugins/opt/tender.vim"]
+	path = i/vim/config/pack/plugins/opt/tender.vim
+	url = https://github.com/jacoborus/tender.vim.git
+[submodule "i/vim/config/pack/plugins/opt/vim-solarized8"]
+	path = i/vim/config/pack/plugins/opt/vim-solarized8
+	url = https://github.com/lifepillar/vim-solarized8.git

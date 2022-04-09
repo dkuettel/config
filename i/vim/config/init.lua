@@ -1,24 +1,20 @@
-local themes = {
-    s = "solarized",
-    tn = "tokyonight",
-    gb = "gruvbox",
-    e = "everforest",
-    -- other options
-    -- maybe see https://vimcolorschemes.com/
-    -- https://github.com/LunarVim/Colorschemes
-    -- https://github.com/LunarVim/onedarker.nvim
-    -- https://github.com/LunarVim/darkplus.nvim
-    -- https://github.com/sainnhe/edge
-    -- https://github.com/sainnhe/sonokai
-}
-
 local function setup(name)
     -- TODO wrap it an let it fail to still have a functional vim?
     return require("dk." .. name).setup
 end
 
 setup("basics")()
-setup(themes.gb)()
+
+-- themes
+-- TODO themes also try to set cursor colors, but my alacritty, tmux, or term vim doesnt react to that?
+setup("gruvbox")("light")
+-- setup("tender")()
+-- setup("tokyonight")("dark")
+-- setup("everforest")("light")
+-- setup("tender")()
+-- setup("nord")()
+-- setup("solarized")("light")
+
 -- setup("auto-pairs")()
 -- setup("vim-surround")()
 setup("autosave")()
@@ -31,6 +27,7 @@ setup("hop")()
 setup("gitsigns")()
 setup("comment")()
 setup("neogit")()
+
 -- require("dk.basics").active_window()
 
 -- TODO doesnt quite work I think because
