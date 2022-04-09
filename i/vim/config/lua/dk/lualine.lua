@@ -66,7 +66,14 @@ function M.setup()
             lualine_z = {},
         },
         tabline = {
-            lualine_a = { "tabs" },
+            lualine_a = {
+                {
+                    "tabs",
+                    max_length = vim.o.columns,
+                    component_separators = { left = " " },
+                    section_separators = { left = "" },
+                },
+            },
         },
         extensions = {},
     })
