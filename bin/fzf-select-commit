@@ -1,0 +1,22 @@
+#!/bin/zsh
+set -eu -o pipefail
+
+# find and insert a commit hash
+
+
+# use directly when typing like
+# > git rebase -i $(fzf-select-commit)<tab>
+# to interactively build your command
+
+# or make an alias for convenience
+# in ~/.gitconfig under section [alias]
+# rbi- = !git rebase -i $(fzf-select-commit)
+# note:
+#   ctrl-c out of fzf will substitute the empty string
+#   this means you run 'git rebase -i' which goes back to the last merge point
+#   but other commands might be more dangerous when you ctrl-c
+
+
+git log --color=always --format='%Cblue%h%Creset %>(16,trunc)%ar %Cgreen%<(8,trunc)%al%Creset %C(auto)%d %s' \
+| fzf --phony --ansi --reverse --preview-window=up --preview='git diff --color=always {1}~1..{1}' \
+| cut -d ' ' -f 1

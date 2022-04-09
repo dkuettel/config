@@ -41,6 +41,7 @@
     d = diff
     dns = diff --name-status
     rbi = rebase -i
+    rbi- = !git rebase -i $(fzf-select-commit)
     rc = rebase --continue
     sm = submodule
     co- = !git checkout $(fzf-branch)
