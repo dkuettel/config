@@ -12,29 +12,25 @@ local themes = {
     -- https://github.com/sainnhe/sonokai
 }
 
-local configs = {
-    themes.tn,
-    "basics",
-    -- "auto-pairs",
-    -- "vim-surround",
-    "autosave",
-    "telescope",
-    "lualine",
-    -- "coc",
-    "null-ls",
-    "lspconfig",
-    "hop",
-    "gitsigns",
-    "comment",
-    "neogit",
-}
--- TODO above rename into more general names instead of plugin names?
--- sometimes it includes a set of plugins to make something happen, like git-handling
-
--- TODO make it so that it continues if one fails
-for _, config in ipairs(configs) do
-    require("dk." .. config).setup()
+local function setup(name)
+    -- TODO wrap it an let it fail to still have a functional vim?
+    return require("dk." .. name).setup
 end
+
+setup("basics")()
+setup(themes.gb)()
+-- setup("auto-pairs")()
+-- setup("vim-surround")()
+setup("autosave")()
+setup("telescope")()
+setup("lualine")()
+-- setup("coc")()
+setup("null-ls")()
+setup("lspconfig")()
+setup("hop")()
+setup("gitsigns")()
+setup("comment")()
+setup("neogit")()
 -- require("dk.basics").active_window()
 
 -- TODO doesnt quite work I think because
