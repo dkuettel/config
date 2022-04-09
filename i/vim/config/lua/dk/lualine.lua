@@ -14,6 +14,7 @@ function M.setup()
 
     local U = require("lualine.utils.utils")
 
+    -- zen low-flicker indication of file status (unsaved, saved, read-only)
     local function show_file()
         -- based on https://github.com/nvim-lualine/lualine.nvim/blob/master/lua/lualine/components/filename.lua
         local f = vim.fn.expand("%:t")
@@ -28,6 +29,18 @@ function M.setup()
         return icon .. " " .. f
     end
 
+    -- zen low-flicker indication of lsp activity (no lsp, busy lsp, idle lsp)
+    local lsp_activity_icons = { missing = "", busy = "", idle = "" }
+    local function lsp_activity()
+        if #vim.lsp.get_active_clients() == 0 then
+            return lsp_activity_icons.missing
+        end
+        if #vim.lsp.util.get_progress_messages() == 0 then
+            return lsp_activity_icons.idle
+        end
+        return lsp_activity_icons.busy
+    end
+
     require("lualine").setup({
         options = {
             theme = "auto", -- TODO how to keep in sync with themes?
@@ -37,20 +50,20 @@ function M.setup()
             globalstatus = false, -- true not working yet?
         },
         sections = {
-            lualine_a = { { show_window, separator = { left = "" } }, show_file },
+            lualine_a = { show_window, show_file },
             lualine_b = { { "diagnostics", sources = { "nvim_lsp" }, colored = false } },
             lualine_c = { { "diff", icon = "", colored = false } },
             lualine_x = {},
-            lualine_y = { { "filetype", icons_enabled = false } },
-            lualine_z = { "progress", { "location", icon = "", separator = { right = "" } } },
+            lualine_y = { lsp_activity, { "filetype", icons_enabled = false } },
+            lualine_z = { "progress", { "location", icon = "" } },
         },
         inactive_sections = {
-            lualine_a = { { show_window, separator = { left = "" } }, show_file },
+            lualine_a = { show_window, show_file },
             lualine_b = {},
             lualine_c = {},
             lualine_x = {},
             lualine_y = {},
-            lualine_z = { "progress", { "location", icon = "", separator = { right = "" } } },
+            lualine_z = { "progress", { "location", icon = "" } },
         },
         tabline = {
             lualine_a = { "tabs" },
