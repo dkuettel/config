@@ -15,7 +15,7 @@
     config = false
 [alias]
     l = log --oneline
-    ll = log --format='%>(12,trunc)%ar %Cgreen%h%Creset %<(12,trunc)%al %C(auto)%d %s'
+    ll = log --format='%Cblue%h%Creset %>(16,trunc)%ar %Cgreen%<(8,trunc)%al%Creset %C(auto)%d %s'
     lfp = log --oneline --first-parent
     lg = log --graph --simplify-by-decoration --all --pretty=tformat:'%Cblue%D [%h]%n %Cgreen%ar %Creset%s%n'
     lt = log --oneline ..@{upstream}
