@@ -83,7 +83,6 @@ function M.setup()
         },
         extensions = {},
     })
-    -- TODO in insert mode would be nice to not have the location info update nervously, replace with [insert] indicator?
 end
 
 return M
