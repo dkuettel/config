@@ -86,8 +86,8 @@ function M.after()
     map("n", ",.", bi.lsp_document_symbols)
     --map("n", ",.", bi.current_buffer_fuzzy_find) -- TODO cool when there is no LSP?
     --map("n", ",.", bi.treesitter) -- TODO other alternative if no LSP?
-    map("n", ",,", bi.lsp_workspace_symbols)
-    --map("n", ",,", bi.lsp_dynamic_workspace_symbols) -- TODO what is the difference?
+    -- TODO see https://github.com/nvim-telescope/telescope.nvim/pull/705
+    map("n", ",,", bi.lsp_dynamic_workspace_symbols)
 end
 
 return M
