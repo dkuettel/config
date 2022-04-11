@@ -14,6 +14,7 @@ setup("gruvbox")("light")
 -- setup("tender")()
 -- setup("nord")()
 -- setup("solarized")("light")
+-- setup("nightfox")("nordfox")
 
 -- setup("auto-pairs")()
 -- setup("vim-surround")()

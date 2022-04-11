@@ -121,3 +121,6 @@
 [submodule "i/vim/config/pack/plugins/opt/vim-solarized8"]
 	path = i/vim/config/pack/plugins/opt/vim-solarized8
 	url = https://github.com/lifepillar/vim-solarized8.git
+[submodule "i/vim/config/pack/plugins/opt/nightfox.vim"]
+	path = i/vim/config/pack/plugins/opt/nightfox.vim
+	url = https://github.com/oxalica/nightfox.vim.git
