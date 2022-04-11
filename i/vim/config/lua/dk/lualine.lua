@@ -27,7 +27,7 @@ function M.setup()
             lualine_c = {},
             lualine_x = {},
             lualine_y = { { "diagnostics", sources = { "nvim_lsp" }, colored = false } },
-            lualine_z = { M.show_lsp_activity, { "filetype", icons_enabled = false } },
+            lualine_z = { M.show_lsp_activity, { "filetype", icons_enabled = false }, M.show_progress },
         },
         inactive_sections = {
             lualine_a = { M.show_window, M.show_file },
@@ -87,6 +87,13 @@ function M.show_lsp_activity()
         return M.lsp_activity_icons.idle
     end
     return M.lsp_activity_icons.busy
+end
+
+-- zen low-flicker indicator of progress in file (location as percentage)
+M.progress_icons = { "█", "▇", "▆", "▅", "▄", "▃", "▂", "▁", " " }
+function M.show_progress()
+    local i = 1 + math.floor(vim.fn.line(".") / vim.fn.line("$") * (#M.progress_icons - 1))
+    return M.progress_icons[i]
 end
 
 return M
