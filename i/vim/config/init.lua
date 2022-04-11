@@ -28,7 +28,7 @@ setup("gitsigns")()
 setup("comment")()
 setup("neogit")()
 
--- require("dk.basics").active_window()
+require("dk.basics").active_window()
 
 -- TODO doesnt quite work I think because
 -- a) doesnt reload "requires"

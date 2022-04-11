@@ -163,23 +163,27 @@ function M.cursorline()
 end
 
 function M.active_window()
-    -- TODO experimental
-    -- same problem with background color priorities as cursorline
-    -- but with true color now more feasible, can make it only slightly darker
-    -- probably best revised when we are using lush
-    -- now it's hardcoded for gruvbox theme
-    -- maybe with active window we dont need the cursorline?
-    -- or show the cursorline in the sign column?
-    -- would be very cool to use the same color for cursorline and inactive, then cursorline disappears
-    -- TODO ok that is replaced later by application of a theme currently :/
-    -- so we call it last, but anyway should eventually go with the theme, because colors depend on it
-    -- and this file here should not theme around!
-    vim.cmd([[
-      highlight NormalNC guibg=#f5ebc2
-      highlight CursorLine guibg=#f5ebc2
-      highlight CursorColumn guibg=#f5ebc2
-    ]])
-    -- used https://www.developmenttools.com/color-picker/
+    local C = require("dk.hsluv")
+    local fg = C.hex_to_hsluv(string.format("#%06x", vim.api.nvim_get_hl_by_name("Normal", true).background))
+    local shade = {
+        fg[1] + (fg[1] < 50 and 1 or -1) * 0,
+        fg[2] + (fg[2] < 50 and 1 or -1) * 25,
+        fg[3] + (fg[3] < 50 and 1 or -1) * 2.5,
+    }
+    shade = C.hsluv_to_hex(shade)
+    -- manually I for gruvbox I chose #f5ebc2 which is 75.1, 46.9, 92.9
+    -- based on Normal on gruvbox as #fbf1c7 which is 75.4, 70.1, 95
+    vim.cmd(string.format(
+        [[
+      highlight NormalNC guibg=%s
+      highlight CursorLine guibg=%s
+      highlight CursorColumn guibg=%s
+    ]],
+        shade,
+        shade,
+        shade
+    ))
+    -- TODO some highlights overwrite background, so cursorline is not always nice
 end
 
 return M
