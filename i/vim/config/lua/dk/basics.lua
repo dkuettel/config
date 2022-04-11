@@ -176,6 +176,8 @@ function M.active_window()
     -- and this file here should not theme around!
     vim.cmd([[
       highlight NormalNC guibg=#f5ebc2
+      highlight CursorLine guibg=#f5ebc2
+      highlight CursorColumn guibg=#f5ebc2
     ]])
     -- used https://www.developmenttools.com/color-picker/
 end
