@@ -6,10 +6,10 @@ endif
 " now with 24bit colors could use fainter colors for more and more indentation?
 
 syntax match todoSection "\v^[^- ].*:$"
-syntax match todoTodo "\v^ *o .*$"
-syntax match todoDone "\v^ *x .*$"
-syntax match todoNow "\v^ *! .*$"
-syntax match todoRunning "\v^ *r .*$"
+syntax match todoTodo "\v^ *o \zs.*\ze$"
+syntax match todoDone "\v^ *x \zs.*\ze$"
+syntax match todoNow "\v^ *! \zs.*\ze$"
+syntax match todoRunning "\v^ *r \zs.*\ze$"
 
 if g:colors_name == "solarized"
     " original solarized (not 24bit)
