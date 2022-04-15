@@ -1,0 +1,14 @@
+window:
+  dynamic_padding: true
+
+bell:
+  animation: EaseOutExpo
+  duration: 70
+  color: '#909090'
+
+selection:
+  semantic_escape_chars: ",│`|:\"' ()[]{}<>\t┃"
+  save_to_clipboard: true
+
+mouse:
+  hide_when_typing: true

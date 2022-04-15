@@ -1,0 +1,61 @@
+themes:
+
+  solarized-light: &solarized-light
+    cursor:
+      #text: CellBackground
+      #cursor: '#002b36'
+      text: CellBackground
+      Cursor: CellForeground
+    primary:
+      background: '#fdf6e3'
+      foreground: '#657b83'
+    normal:
+      black:   '#eee8d5'
+      red:     '#dc322f'
+      green:   '#859900'
+      yellow:  '#b58900'
+      blue:    '#268bd2'
+      magenta: '#d33682'
+      cyan:    '#2aa198'
+      white:   '#073642'
+    bright:
+      black:   '#fdf6e3'
+      red:     '#cb4b16'
+      green:   '#93a1a1'
+      yellow:  '#839496'
+      blue:    '#657b83'
+      magenta: '#6c71c4'
+      cyan:    '#586e75'
+      white:   '#002b36'
+
+  solarized-dark: &solarized-dark
+    cursor:
+      #text: CellBackground
+      #cursor: '#002b36'
+      text: CellBackground
+      Cursor: CellForeground
+    primary:
+      background: '#002b36'
+      foreground: '#839496'
+    normal:
+      black:   '#073642'
+      red:     '#dc322f'
+      green:   '#859900'
+      yellow:  '#b58900'
+      blue:    '#268bd2'
+      magenta: '#d33682'
+      cyan:    '#2aa198'
+      white:   '#eee8d5'
+    bright:
+      black:   '#002b36'
+      red:     '#cb4b16'
+      green:   '#586e75'
+      yellow:  '#657b83'
+      blue:    '#839496'
+      magenta: '#6c71c4'
+      cyan:    '#93a1a1'
+      white:   '#fdf6e3'
+
+# some are at https://github.com/eendroroy/alacritty-theme
+
+colors: *solarized-light

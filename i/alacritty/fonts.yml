@@ -1,0 +1,13 @@
+font:
+  size: 13.5
+  normal:
+    #family: Ubuntu Mono
+    #family: "3270Narrow Nerd Font Mono"
+    #family: "agave Nerd Font Mono"
+    #family: "Anonymice Nerd Font Mono"
+    family: "UbuntuMono NerdFont Mono"
+  #bold:
+  #italic:
+    #family: "Anonymice Nerd Font Mono"
+  #bold_italic:
+    #family: "Anonymice Nerd Font Mono"
