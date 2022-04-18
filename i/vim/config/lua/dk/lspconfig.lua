@@ -33,6 +33,7 @@ function M.setup()
 
     M.setup_lua(capabilities)
     M.setup_python(capabilities)
+    -- M.setup_python_jedi(capabilities)
 end
 
 function M.setup_completion()
@@ -195,9 +196,7 @@ end
 
 function M.setup_python(capabilities)
     -- https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#pyright
-
     -- https://github.com/microsoft/pyright
-    -- sudo npm install -g pyright
 
     require("lspconfig").pyright.setup({
         on_attach = M.python_mappings,
@@ -286,6 +285,12 @@ function M.python_mappings()
     end)
     vim.keymap.set("n", ",,", ptags)
 end
+
+function M.setup_python_jedi(capabilities)
+    -- https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#jedi_language_server
+    -- pip installed https://github.com/pappasam/jedi-language-server
+    -- TODO pff same useless workspace symbol search
+    require("lspconfig").jedi_language_server.setup({
         on_attach = M.mappings,
         capabilities = capabilities,
     })
