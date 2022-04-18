@@ -102,7 +102,7 @@
 	url = https://github.com/nvim-lua/plenary.nvim
 [submodule "i/vim/config/pack/plugins/opt/telescope.nvim"]
 	path = i/vim/config/pack/plugins/opt/telescope.nvim
-	url = https://github.com/nvim-telescope/telescope.nvim
+	url = git@github.com:dkuettel/telescope.nvim.git
 [submodule "i/vim/config/pack/plugins/opt/telescope-fzf-native.nvim"]
 	path = i/vim/config/pack/plugins/opt/telescope-fzf-native.nvim
 	url = https://github.com/nvim-telescope/telescope-fzf-native.nvim.git
@@ -124,3 +124,6 @@
 [submodule "i/vim/config/pack/plugins/opt/nightfox.vim"]
 	path = i/vim/config/pack/plugins/opt/nightfox.vim
 	url = https://github.com/oxalica/nightfox.vim.git
+[submodule "i/vim/config/pack/plugins/opt/playground"]
+	path = i/vim/config/pack/plugins/opt/playground
+	url = https://github.com/nvim-treesitter/playground.git
