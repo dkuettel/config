@@ -200,6 +200,92 @@ function M.setup_python(capabilities)
     -- sudo npm install -g pyright
 
     require("lspconfig").pyright.setup({
+        on_attach = M.python_mappings,
+        capabilities = capabilities,
+        settings = {},
+    })
+end
+
+function M.python_mappings()
+    M.mappings()
+
+    -- pyright, jedi, and language servers in general dont seem to index project symbols fullly qualified
+    -- replace for python with pdocs instead of the original generic LSP call in lspconfig.lua
+    -- TODO builtin.treesitter() could be adapted to make things fully qualified?
+
+    local pickers = require("telescope.pickers")
+    local finders = require("telescope.finders")
+    local conf = require("telescope.config").values
+    local actions = require("telescope.actions")
+    local action_state = require("telescope.actions.state")
+
+    -- TODO function make_entry.gen_from_treesitter(opts) could be interesting for generic tags? if we collect parent identifiers
+
+    local function pdocs_entry_maker(raw_line)
+        local name, line, kind, file = string.match(raw_line, "^(.*)%z(.*)%z(.*)%z(.*)$")
+        line = tonumber(line)
+        return {
+            value = { name = name, line = line, kind = kine, file = file },
+            display = kind .. ": " .. name,
+            ordinal = kind .. ": " .. name,
+            path = file,
+            lnum = line,
+            col = 0,
+        }
+    end
+
+    local function ptags(sources, opts)
+        if not sources then
+            -- TODO for now no ./.pdocs or ./.list-symbols, just try to discover things
+            local Path = require("plenary.path")
+            if Path:new("python"):is_dir() then
+                sources = { "python" }
+            else
+                sources = { "." }
+            end
+        end
+        local pdocs_command = {
+            "ptags",
+            "--out=-",
+            "--fmt=vim-telescope",
+            "--quiet",
+            unpack(sources),
+        }
+        opts = opts or {}
+        pickers.new(opts, {
+            prompt_title = "ptags",
+            finder = finders.new_oneshot_job(pdocs_command, {
+                entry_maker = pdocs_entry_maker,
+            }),
+            -- attach_mappings = function(prompt_bufnr, map)
+            --     actions.select_default:replace(function()
+            --         actions.close(prompt_bufnr)
+            --         local selection = action_state.get_selected_entry()
+            --         -- print(vim.inspect(selection))
+            --         vim.api.nvim_put({ selection[1] }, "", false, true)
+            --     end)
+            --     return true
+            -- end,
+            sorter = conf.generic_sorter(opts),
+            -- see "~/config/i/vim/config/pack/plugins/opt/telescope.nvim/lua/telescope/builtin/lsp.lua" for config
+            -- and "~/config/i/vim/config/pack/plugins/opt/telescope.nvim/lua/telescope/make_entry.lua" for display
+            -- there is also some pre-sorter stuff, maybe for any->class->func and so on?
+            -- and displayer stuff to make it aligned? or shorten? coloring?
+            -- in general the lsp ones they wait for an answer from lsp before opening, fix?
+            -- TODO I dont see the difference between the previewers here
+            previewer = conf.grep_previewer(opts),
+            -- previewer = conf.qflist_previewer(opts),
+        }):find()
+    end
+
+    -- TODO long entries dont scroll left and right to the important parts, like fzf did?
+    -- maybe use dropdown or so, with full width?
+
+    vim.keymap.set("n", ",.", function()
+        ptags({ vim.fn.expand("%") })
+    end)
+    vim.keymap.set("n", ",,", ptags)
+end
         on_attach = M.mappings,
         capabilities = capabilities,
     })
