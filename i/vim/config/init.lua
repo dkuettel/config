@@ -7,7 +7,7 @@ setup("basics")()
 
 -- themes
 -- TODO themes also try to set cursor colors, but my alacritty, tmux, or term vim doesnt react to that?
-setup("gruvbox")("light")
+setup("gruvbox")("light") -- could gruvbox material be interesting?
 -- setup("tender")()
 -- setup("tokyonight")("dark")
 -- setup("everforest")("light")
@@ -19,6 +19,7 @@ setup("gruvbox")("light")
 -- setup("auto-pairs")()
 -- setup("vim-surround")()
 setup("autosave")()
+setup("treesitter")()
 setup("telescope")()
 setup("lualine")()
 -- setup("coc")()
