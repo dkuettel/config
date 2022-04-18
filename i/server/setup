@@ -54,6 +54,7 @@ i+=dkms
 i+=g++
 i+=gcp # like cp, but with progress bar among other features
 i+=git
+i+=gocryptfs
 i+=htop
 i+=jq # json query engine
 i+=libboost-dev
@@ -84,6 +85,7 @@ setups=(
     ptags
     ltstatus
     tmux
+    nodejs
     vim
 )
 for i in $setups; do

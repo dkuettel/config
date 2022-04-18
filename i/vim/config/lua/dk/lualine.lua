@@ -80,9 +80,10 @@ end
 -- zen low-flicker indication of lsp activity (no lsp, busy lsp, idle lsp)
 M.lsp_activity_icons = { missing = "", busy = "", idle = "" }
 function M.show_lsp_activity()
-    if #vim.lsp.get_active_clients() == 0 then
+    if #vim.lsp.buf_get_clients() == 0 then
         return M.lsp_activity_icons.missing
     end
+    -- TODO same here is it progress for the buffer or anything else? which LSP is it?
     if #vim.lsp.util.get_progress_messages() == 0 then
         return M.lsp_activity_icons.idle
     end

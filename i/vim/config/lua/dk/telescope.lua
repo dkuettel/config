@@ -69,6 +69,7 @@ function M.after()
                 },
             },
         },
+        -- TODO fzf setting is/has-to-be {}?
         extensions = { fzf = {} },
     })
 
