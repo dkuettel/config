@@ -113,6 +113,7 @@ function M.mappings()
     end
     map("n", "tl", "<cmd>tabmove +1<enter>")
     map("n", "th", "<cmd>tabmove -1<enter>")
+    map("n", "t-", "g<tab>")
 
     -- browse moves
     map("n", "<down>", "1<c-d>")
