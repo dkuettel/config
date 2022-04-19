@@ -57,23 +57,29 @@ end
 function M.before() end
 
 function M.after()
-    local T = require("telescope")
+    local telescope = require("telescope")
 
-    T.setup({
-        defaults = {
-            mappings = {
-                i = {
-                    ["<c-j>"] = "move_selection_next",
-                    ["<c-k>"] = "move_selection_previous",
-                    ["<c-s>"] = "select_horizontal",
-                },
-            },
+    local defaults = require("telescope.themes").get_dropdown()
+    defaults.layout_config.width = function(_, max_columns, _)
+        return math.min(max_columns, 120)
+    end
+    defaults.mappings = {
+        i = {
+            ["<c-j>"] = "move_selection_next",
+            ["<c-k>"] = "move_selection_previous",
+            ["<c-s>"] = "select_horizontal",
         },
-        -- TODO fzf setting is/has-to-be {}?
-        extensions = { fzf = {} },
-    })
+    }
+    defaults.path_display = { "truncate" }
 
-    T.load_extension("fzf")
+    telescope.setup({
+        defaults = defaults,
+        extensions = {
+            -- https://github.com/nvim-telescope/telescope-fzf-native.nvim#telescope-setup-and-configuration
+            fzf = {},
+        },
+    })
+    telescope.load_extension("fzf")
 
     local map = vim.keymap.set
     local bi = require("telescope.builtin")
