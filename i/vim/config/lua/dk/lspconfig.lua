@@ -215,18 +215,22 @@ function M.python_mappings()
     local pickers = require("telescope.pickers")
     local finders = require("telescope.finders")
     local conf = require("telescope.config").values
-    local actions = require("telescope.actions")
-    local action_state = require("telescope.actions.state")
 
-    -- TODO function make_entry.gen_from_treesitter(opts) could be interesting for generic tags? if we collect parent identifiers
+    -- TODO function make_entry.gen_from_treesitter(opts) could be interesting for generic tags? if we collect parent identifiers. and faster than the lsps probably, with fully qualified elements
 
+    local kinds = { ["function"] = " func", ["variable"] = "  var", ["class"] = "class" }
     local function pdocs_entry_maker(raw_line)
         local name, line, kind, file = string.match(raw_line, "^(.*)%z(.*)%z(.*)%z(.*)$")
         line = tonumber(line)
+        kind = kinds[kind]
+        if not kind then
+            kind = "???"
+        end
+        local display = kind .. ": " .. name
         return {
-            value = { name = name, line = line, kind = kine, file = file },
-            display = kind .. ": " .. name,
-            ordinal = kind .. ": " .. name,
+            value = { name = name, line = line, kind = kind, file = file },
+            display = display,
+            ordinal = display,
             path = file,
             lnum = line,
             col = 0,
@@ -256,24 +260,8 @@ function M.python_mappings()
             finder = finders.new_oneshot_job(pdocs_command, {
                 entry_maker = pdocs_entry_maker,
             }),
-            -- attach_mappings = function(prompt_bufnr, map)
-            --     actions.select_default:replace(function()
-            --         actions.close(prompt_bufnr)
-            --         local selection = action_state.get_selected_entry()
-            --         -- print(vim.inspect(selection))
-            --         vim.api.nvim_put({ selection[1] }, "", false, true)
-            --     end)
-            --     return true
-            -- end,
             sorter = conf.generic_sorter(opts),
-            -- see "~/config/i/vim/config/pack/plugins/opt/telescope.nvim/lua/telescope/builtin/lsp.lua" for config
-            -- and "~/config/i/vim/config/pack/plugins/opt/telescope.nvim/lua/telescope/make_entry.lua" for display
-            -- there is also some pre-sorter stuff, maybe for any->class->func and so on?
-            -- and displayer stuff to make it aligned? or shorten? coloring?
-            -- in general the lsp ones they wait for an answer from lsp before opening, fix?
-            -- TODO I dont see the difference between the previewers here
             previewer = conf.grep_previewer(opts),
-            -- previewer = conf.qflist_previewer(opts),
         }):find()
     end
 
