@@ -30,10 +30,14 @@ setup("gitsigns")()
 setup("comment")()
 setup("neogit")()
 
+-- TODO playing
+setup("funky-format")()
+vim.keymap.set("n", ",R", dofile("lua/dk/funky-format.lua").setup())
+
 require("dk.basics").active_window()
 
 -- TODO doesnt quite work I think because
 -- a) doesnt reload "requires"
 -- b) not sure if all plugin setup()s can be used more than once
-vim.cmd("command! Reload source $MYVIMRC | echo 'config reloaded'")
-vim.keymap.set("n", ",R", "<cmd>Reload<enter>")
+-- vim.cmd("command! Reload source $MYVIMRC | echo 'config reloaded'")
+-- vim.keymap.set("n", ",R", "<cmd>Reload<enter>")
