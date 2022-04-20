@@ -36,6 +36,7 @@ EOF
         wget -O ~/bin/stylua.zip 'https://github.com/JohnnyMorganz/StyLua/releases/download/v0.13.0/stylua-linux.zip'
         unzip stylua.zip stylua
         rm stylua.zip
+        chmod +x stylua
     fi
 
     # downloaded prebuilt from https://github.com/sumneko/lua-language-server/releases
