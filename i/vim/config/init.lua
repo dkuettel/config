@@ -35,7 +35,12 @@ setup("neogit")()
 -- TODO playing
 setup("funky-format")()
 -- TODO cannot use relative path
-vim.keymap.set("n", ",R", dofile("/home/dkuettel/config/i/vim/config/lua/dk/funky-format.lua").setup)
+vim.keymap.set(
+    "n",
+    ",R",
+    dofile("/home/dkuettel/config/i/vim/config/lua/dk/funky-format.lua").setup,
+    { desc = "reload funky formatter" }
+)
 
 require("dk.basics").active_window()
 

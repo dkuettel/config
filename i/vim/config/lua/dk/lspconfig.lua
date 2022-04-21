@@ -42,7 +42,7 @@ function M.setup_completion()
 
     local cmp = require("cmp")
 
-    vim.keymap.set("i", "<c-n>", cmp.complete)
+    vim.keymap.set("i", "<c-n>", cmp.complete, { desc = "completion" })
 
     cmp.setup({
         completion = { autocomplete = false },
@@ -107,12 +107,12 @@ function M.mappings(client, bufnr)
     vim.api.nvim_win_set_option(0, "signcolumn", "yes")
     -- TODO some of the coc recommended setting make sense here? updatetime or something?
 
-    local function nmap(lhs, rhs)
-        vim.keymap.set("n", lhs, rhs, { buffer = bufnr })
+    local function nmap(lhs, rhs, desc)
+        vim.keymap.set("n", lhs, rhs, { buffer = bufnr, desc = desc })
     end
 
-    local function imap(lhs, rhs)
-        vim.keymap.set("i", lhs, rhs, { buffer = bufnr })
+    local function imap(lhs, rhs, desc)
+        vim.keymap.set("i", lhs, rhs, { buffer = bufnr, desc = desc })
     end
 
     vim.cmd([[
@@ -123,10 +123,10 @@ function M.mappings(client, bufnr)
 
     -- See `:help vim.diagnostic.*` for documentation on any of the below functions
     local D = vim.diagnostic
-    nmap(",d", D.open_float)
-    nmap("[d", D.goto_prev)
-    nmap("]d", D.goto_next)
-    nmap(",q", D.setloclist)
+    nmap(",d", D.open_float, "diagnostics float")
+    nmap("[d", D.goto_prev, "diagnostics previous")
+    nmap("]d", D.goto_next, "diagnostics next")
+    nmap(",q", D.setloclist, "diagnostics loclist")
 
     -- Enable completion triggered by <c-x><c-o>
     -- vim.api.nvim_buf_set_option(bufnr, "omnifunc", "v:lua.vim.lsp.omnifunc")
@@ -136,20 +136,20 @@ function M.mappings(client, bufnr)
 
     -- See `:help vim.lsp.*` for documentation on any of the below functions
     local b = vim.lsp.buf
-    nmap("gD", b.declaration)
-    nmap("gd", b.definition)
-    nmap("K", b.hover)
-    nmap("gi", b.implementation)
-    nmap("<c-k>", b.signature_help)
-    imap("<c-k>", b.signature_help)
-    nmap("gr", b.references)
+    nmap("gD", b.declaration, "go to declaration")
+    nmap("gd", b.definition, "go to definition")
+    nmap("K", b.hover, "hover symbol")
+    nmap("gi", b.implementation, "go to implementation")
+    nmap("<c-k>", b.signature_help, "signature help")
+    imap("<c-k>", b.signature_help, "signature help")
+    nmap("gr", b.references, "find references")
     -- TODO not sure when to use lsp formatter and when to use a separate thing
     -- used to have sbdchd/neoformat and then it's clear what we use
     -- TODO make visual indication when formatting has been executed, or failed
-    nmap("==", b.formatting_seq_sync)
-    nmap(",ca", b.code_action)
-    nmap(",rn", b.rename)
-    nmap("gtd", b.type_definition)
+    nmap("==", b.formatting_seq_sync, "format using lsp")
+    nmap(",ca", b.code_action, "code action")
+    nmap(",rn", b.rename, "rename symbol")
+    nmap("gtd", b.type_definition, "go to type definition")
     --vim.api.nvim_buf_set_keymap(bufnr, 'n', '<space>wa', '<cmd>lua vim.lsp.buf.add_workspace_folder()<CR>', opts)
     --vim.api.nvim_buf_set_keymap(bufnr, 'n', '<space>wr', '<cmd>lua vim.lsp.buf.remove_workspace_folder()<CR>', opts)
     --vim.api.nvim_buf_set_keymap(bufnr, 'n', '<space>wl', '<cmd>lua print(vim.inspect(vim.lsp.buf.list_workspace_folders()))<CR>', opts)
@@ -270,8 +270,8 @@ function M.python_mappings(client, bufnr)
 
     vim.keymap.set("n", ",.", function()
         ptags({ vim.fn.expand("%") })
-    end, { buffer = bufnr })
-    vim.keymap.set("n", ",,", ptags, { buffer = bufnr })
+    end, { buffer = bufnr, desc = "ptags local symbols" })
+    vim.keymap.set("n", ",,", ptags, { buffer = bufnr, desc = "ptags workspace symbols" })
 end
 
 function M.setup_python_jedi(capabilities)

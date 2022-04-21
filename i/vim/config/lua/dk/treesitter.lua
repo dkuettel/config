@@ -50,7 +50,7 @@ function M.setup()
     -- could be cool
     -- nvim_treesitter#statusline(opts)
 
-    vim.keymap.set("n", ",ts", M.reload)
+    vim.keymap.set("n", ",ts", M.reload, {desc="treesitter reload"})
 end
 
 function M.reload()

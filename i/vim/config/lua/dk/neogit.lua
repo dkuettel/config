@@ -29,7 +29,7 @@ function M.setup()
         disable_commit_confirmation = true,
         disable_builtin_notifications = true,
     })
-    vim.keymap.set("n", ",GG", neogit.open)
+    vim.keymap.set("n", ",GG", neogit.open, { desc = "neogit open" })
 end
 
 return M

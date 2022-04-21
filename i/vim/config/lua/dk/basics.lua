@@ -70,7 +70,7 @@ function M.mappings()
     vim.g.mapleader = ","
     --vim.g.maplocalleader = '?'
 
-    --vim.keymap.set('i', 'jj', '<esc>')
+    --map('i', 'jj', '<esc>')
 
     -- command mode
     map({ "n", "v" }, ";", ":") -- originally used to repeat last ftFT commands
@@ -79,7 +79,7 @@ function M.mappings()
     -- wrap mode
     map("n", ",w", function()
         vim.o.wrap = not vim.o.wrap
-    end)
+    end, { desc = "toggle wrapping" })
 
     -- window navigation
     -- ',#' goes to window #
@@ -109,7 +109,7 @@ function M.mappings()
         map("n", "t" .. i, "<cmd>tabnext " .. i .. "<enter>")
         map("n", "tm" .. i, function()
             move_current_tab_to(i)
-        end)
+        end, {desc="move tab to "..i})
     end
     map("n", "tl", "<cmd>tabmove +1<enter>")
     map("n", "th", "<cmd>tabmove -1<enter>")

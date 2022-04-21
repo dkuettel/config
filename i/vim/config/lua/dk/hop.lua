@@ -10,8 +10,8 @@ function M.setup()
         char2_fallback_key = "<enter>",
     })
 
-    vim.keymap.set("n", "s", hop.hint_char1)
-    vim.keymap.set("n", "S", hop.hint_char2)
+    vim.keymap.set("n", "s", hop.hint_char1, {desc="hop char1"})
+    vim.keymap.set("n", "S", hop.hint_char2, {desc="hop char2"})
 end
 
 function M.legacy()
