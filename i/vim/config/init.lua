@@ -3,6 +3,8 @@ local function setup(name)
     return require("dk." .. name).setup
 end
 
+-- TODO put it in a load function, easier for reload
+
 setup("basics")()
 
 -- themes
@@ -32,7 +34,8 @@ setup("neogit")()
 
 -- TODO playing
 setup("funky-format")()
-vim.keymap.set("n", ",R", dofile("lua/dk/funky-format.lua").setup())
+-- TODO cannot use relative path
+vim.keymap.set("n", ",R", dofile("/home/dkuettel/config/i/vim/config/lua/dk/funky-format.lua").setup)
 
 require("dk.basics").active_window()
 
