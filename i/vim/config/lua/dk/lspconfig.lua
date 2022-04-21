@@ -205,8 +205,8 @@ function M.setup_python(capabilities)
     })
 end
 
-function M.python_mappings()
-    M.mappings()
+function M.python_mappings(client, bufnr)
+    M.mappings(client, bufnr)
 
     -- pyright, jedi, and language servers in general dont seem to index project symbols fullly qualified
     -- replace for python with pdocs instead of the original generic LSP call in lspconfig.lua
@@ -270,8 +270,8 @@ function M.python_mappings()
 
     vim.keymap.set("n", ",.", function()
         ptags({ vim.fn.expand("%") })
-    end)
-    vim.keymap.set("n", ",,", ptags)
+    end, { buffer = bufnr })
+    vim.keymap.set("n", ",,", ptags, { buffer = bufnr })
 end
 
 function M.setup_python_jedi(capabilities)
