@@ -127,3 +127,6 @@
 [submodule "i/vim/config/pack/plugins/opt/playground"]
 	path = i/vim/config/pack/plugins/opt/playground
 	url = https://github.com/nvim-treesitter/playground.git
+[submodule "i/vim/config/pack/plugins/opt/indent-blankline.nvim"]
+	path = i/vim/config/pack/plugins/opt/indent-blankline.nvim
+	url = https://github.com/lukas-reineke/indent-blankline.nvim.git

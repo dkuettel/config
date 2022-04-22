@@ -31,6 +31,7 @@ local function load()
     setup("gitsigns")()
     setup("comment")()
     setup("neogit")()
+    setup("indent-blankline")()
 
     -- TODO playing
     setup("funky-format")()
