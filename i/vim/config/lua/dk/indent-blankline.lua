@@ -3,7 +3,7 @@ local M = {}
 function M.setup()
     -- https://github.com/lukas-reineke/indent-blankline.nvim
     vim.cmd("packadd indent-blankline.nvim")
-    M.bands()
+    M.simple()
 end
 
 function M.simple()
