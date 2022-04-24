@@ -130,3 +130,6 @@
 [submodule "i/vim/config/pack/plugins/opt/indent-blankline.nvim"]
 	path = i/vim/config/pack/plugins/opt/indent-blankline.nvim
 	url = https://github.com/lukas-reineke/indent-blankline.nvim.git
+[submodule "i/vim/config/pack/plugins/opt/funky-formatter.nvim"]
+	path = i/vim/config/pack/plugins/opt/funky-formatter.nvim
+	url = git@github.com:dkuettel/funky-formatter.nvim.git
