@@ -25,15 +25,7 @@ cd $base
 
     cd $base/alacritty
 
-    if which rustup; then
-        # TODO we might never update rustup?
-        # see https://rust-lang.github.io/rustup/basics.html#keeping-rustup-up-to-date ?
-    else
-        curl --fail --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs -o ./install-rustup.sh
-        # NOTE paths are set already in i/zsh/path.zsh for rustup
-        sh install-rustup.sh -y --no-modify-path
-        rm install-rustup.sh
-    fi
+    # this sets stable only for the current direction and subdirectories, not globally
     rustup override set stable
     rustup update stable
 

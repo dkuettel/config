@@ -87,6 +87,7 @@ setups=(
     tmux
     nodejs
     vim
+    rust
 )
 for i in $setups; do
     ../$i/setup
