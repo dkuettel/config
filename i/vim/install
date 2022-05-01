@@ -8,3 +8,5 @@ sudo apt-get install -yqq ninja-build gettext libtool libtool-bin autoconf autom
 make distclean
 make CMAKE_BUILD_TYPE=Release
 sudo make install
+
+echo 'consider :TSUpdateSync and/or :TSInstallSync all'
