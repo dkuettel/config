@@ -7,14 +7,4 @@ cd $base
 # config file
 ln -sfT $base/tmux.conf ~/.tmux.conf
 
-( # install tmux from git
-
-    cd $base/tmux
-
-    sudo apt-get -yqq install git autoconf automake pkg-config libevent-dev libncurses5-dev byacc
-
-    sh autogen.sh
-    ./configure
-    make -j$(nproc)
-    sudo make install
-)
+./install
