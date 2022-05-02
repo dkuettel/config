@@ -14,12 +14,13 @@
     stash = false
     config = false
 [alias]
-    l = log --oneline
-    ll = log --format='%Cblue%h%Creset %>(16,trunc)%ar %Cgreen%<(8,trunc)%al%Creset %C(auto)%d %s'
-    lfp = log --oneline --first-parent
+    l = log --format='%C(auto)%h %d %s %Cblue(%al %ar)%C(auto)'
+    ll = log --format='%Cblue%<(10,trunc)%al %<(12,trunc)%ar%C(auto) %C(auto)%h %d %s'
+    lll = log --format='%C(auto)%h %s%n          %Cblue%al %ar%C(auto) %d'
+    lfp = l --first-parent
     lg = log --graph --simplify-by-decoration --all --pretty=tformat:'%Cblue%D [%h]%n %Cgreen%ar %Creset%s%n'
-    lt = log --oneline ..@{upstream}
-    lm = log --oneline @{upstream}..
+    lt = l ..@{upstream}
+    lm = l @{upstream}..
     s = status
     b = branch -vv
     mb = branch -vv --list 'dk/*'
