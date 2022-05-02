@@ -43,7 +43,8 @@
     dns = diff --name-status
     rbi = rebase -i
     rbi- = !git rebase -i $(fzf-select-commit)
-    rc = rebase --continue
+    rbc = rebase --continue
+    cpc = cherry-pick --continue
     sm = submodule
     co- = !git checkout $(fzf-branch)
     lost1 = reflog --date=relative
