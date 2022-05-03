@@ -32,6 +32,6 @@ xkb_symbols "boom" {
     include "us(basic)"
     name[Group1]= "PointLuck (boom, ptc office desktop)";
 
-    key <LSGT> { [grave, asciitilde] };
-    key <TLDE> { [Escape, Escape] };
+    key <TLDE> { [grave, asciitilde] };
+    key <LSGT> { [Escape, Escape] };
 };
