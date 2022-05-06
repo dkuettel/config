@@ -25,23 +25,21 @@ local function load()
     setup("telescope")()
     setup("lualine")()
     -- setup("coc")()
-    setup("null-ls")()
+    -- setup("null-ls")()  -- trying funky-formatter for now
     setup("lspconfig")()
     setup("hop")()
     setup("gitsigns")()
     setup("comment")()
     setup("neogit")()
     setup("indent-blankline")()
+    setup("funky-formatter")()
 
-    -- TODO playing
-    setup("funky-format")()
-    -- TODO cannot use relative path
-    vim.keymap.set(
-        "n",
-        ",R",
-        dofile("/home/dkuettel/config/i/vim/config/lua/dk/funky-format.lua").setup,
-        { desc = "reload funky formatter" }
-    )
+    -- vim.keymap.set(
+    --     "n",
+    --     ",R",
+    --     dofile("/home/dkuettel/config/i/vim/config/lua/dk/funky-formatter.lua").setup,
+    --     { desc = "reload funky formatter" }
+    -- )
 
     require("dk.basics").active_window()
 end

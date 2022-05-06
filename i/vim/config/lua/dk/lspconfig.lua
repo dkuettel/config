@@ -146,7 +146,7 @@ function M.mappings(client, bufnr)
     -- TODO not sure when to use lsp formatter and when to use a separate thing
     -- used to have sbdchd/neoformat and then it's clear what we use
     -- TODO make visual indication when formatting has been executed, or failed
-    nmap("==", b.formatting_seq_sync, "format using lsp")
+    -- nmap("==", b.formatting_seq_sync, "format using lsp") -- trying funky-formatter
     nmap(",ca", b.code_action, "code action")
     nmap(",rn", b.rename, "rename symbol")
     nmap("gtd", b.type_definition, "go to type definition")
