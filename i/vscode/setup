@@ -1,0 +1,13 @@
+#!/bin/zsh
+set -eux -o pipefail
+
+if which code; then
+    exit
+fi
+
+base=${0:h:a}
+cd $base
+
+wget 'https://code.visualstudio.com/sha/download?build=stable&os=linux-deb-x64' --output-document vscode.deb
+sudo apt-get install -y ./vscode.deb
+rm vscode.deb
