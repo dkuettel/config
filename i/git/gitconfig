@@ -25,7 +25,7 @@
     b = branch -vv
     mb = branch -vv --list 'dk/*'
     mrb = branch -rv --list 'origin/dk/*'
-    db = !function { git push --delete origin $1 && git branch -D $1 }
+    db = ! git push --delete origin $1 && git branch -D $1 && true
     co = checkout
     c = commit
     cm = commit -m
