@@ -41,14 +41,39 @@ while [[ $# != 0 ]]; do
                     --config-folder=s3://e2e-benchmarking/training/zurich-all-set/recolored
                     #--config-folder=s3://e2e-benchmarking/training/zurich-all-set/recolored-full360
                     #--config-folder=s3://e2e-benchmarking/training/Ender3DPrinter
-                    #--assembly=ktm.Right
-                    --assembly=continental.viewpoint_0000
+                    --assembly=ktm.Right
+                    #--assembly=continental.viewpoint_0000
                     #--assembly=ferrari_488_red.viewpoint_0000
                     #--assembly=Ender3DPrinter.viewpoint_0000
                     --out-folder=.
-                    --short-training=True
+                    --short-training
+                    --update-template batchnorm_convergence.num_batches 10
+                    --variable-length-training
+                    # --sample-count-multiplier=2
+                    # --gpu-count=4
+                    # --update-template training.batch_recycling '{"shuffle_buffer_size": 10, "repeat_count": 2}'
+                    # --integration-test
+                    # --fp16-quantization
                     #--testsets=mtar360/all/recolored/v2
             )
+            ;;
+
+        (integration-test)
+            # this is roughly how cristi runs it, but with a different config.json
+            cmd=(
+                #with-log docker.log
+                python3
+                -m nn.mtar360.eap1 train
+                    --config-folder=s3://e2e-benchmarking/training/zurich-all-set/recolored
+                    --out-folder=.
+                    --assemblies=ktm.Right
+                    --gpu-count=1
+                    --variable-length-training
+                    --integration-test
+                    --centroid-pooling
+                    --fp16-quantization
+                    mt360vis
+                )
             ;;
 
         (raw-train)
