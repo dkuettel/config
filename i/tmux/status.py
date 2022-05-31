@@ -1,37 +1,24 @@
 #!/usr/bin/env ltstatus
 from pathlib import Path
 
-from ltstatus import RateLimitedMonitors, RegularGroupMonitor, StdoutStatus, monitors, indicators
+from ltstatus import formats, monitors as m, outputs, run
 
-monitor = RateLimitedMonitors(
-    rate=1,
+diskspace_alerts = m.diskspace_alerts(
+    limits={
+        Path("/var/lib/docker"): 2.0,
+        Path("/"): 10.0,
+        Path("~"): 5.0,
+    },
+)
+
+run(
     monitors=[
-        monitors.nvidia.Monitor(),
-        monitors.dropbox.Monitor(),
-        RegularGroupMonitor(
-            interval=1,
-            monitors=[
-                monitors.cpu.Monitor(),
-                monitors.diskspace_alerts.Monitor(
-                    limits={
-                        Path("/var/lib/docker"): 2.0,
-                        Path("/"): 10.0,
-                        Path("~"): 5.0,
-                    },
-                ),
-            ],
-        ),
+        diskspace_alerts,
+        m.dropbox(),
+        m.cpu(),
+        m.nvidia(),
     ],
+    polling_interval=1,
+    format=formats.tmux(),
+    output=outputs.stdout(),
 )
-
-status = StdoutStatus(
-    monitor=monitor,
-    order=[
-        "diskspace-alerts",
-        "dropbox",
-        "cpu",
-        "nvidia",
-    ],
-)
-
-status.run()
