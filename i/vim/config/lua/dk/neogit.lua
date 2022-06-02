@@ -28,6 +28,8 @@ function M.setup()
         integrations = { diffview = true },
         disable_commit_confirmation = true,
         disable_builtin_notifications = true,
+        disable_insert_on_commit = false,
+        sections = { recent = { folded = false } },
     })
     vim.keymap.set("n", ",GG", neogit.open, { desc = "neogit open" })
 end
