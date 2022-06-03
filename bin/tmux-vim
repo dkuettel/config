@@ -1,0 +1,7 @@
+#!/bin/zsh
+set -eux -o pipefail
+
+# new or attach to an ~/config/i/vim/config session
+
+at=~/config/i/vim/config
+tmux new-session -s vim -A -c $at -e h=$at
