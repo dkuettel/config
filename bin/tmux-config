@@ -3,4 +3,5 @@ set -eux -o pipefail
 
 # new or attach to an ~/config session
 
-tmux new-session -s config -A -c ~/config -e h=$HOME/config
+at=~/config
+tmux new-session -s config -A -c $a -e h=$at
