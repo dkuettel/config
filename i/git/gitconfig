@@ -27,6 +27,7 @@
     mrb = branch -rv --list 'origin/dk/*'
     db = ! git push --delete origin $1 && git branch -D $1 && true
     co = checkout
+    co- = !git checkout $(fzf-branch)
     c = commit
     cm = commit -m
     f = fetch --all --prune
@@ -39,14 +40,13 @@
     su = stash push
     sd = stash pop
     cp = cherry-pick
+    cpc = cherry-pick --continue
     d = diff
     dns = diff --name-status
     rbi = rebase -i
     rbi- = !git rebase -i $(fzf-select-commit)
     rbc = rebase --continue
-    cpc = cherry-pick --continue
     sm = submodule
-    co- = !git checkout $(fzf-branch)
     lost1 = reflog --date=relative
     # inspired by https://stackoverflow.com/questions/89332/how-to-recover-a-dropped-stash-in-git
     lost2 = !git log --graph --oneline --decorate $(git fsck --no-progress --no-reflog | awk '/dangling commit/ {print $3}')
