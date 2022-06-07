@@ -21,7 +21,7 @@ echo 'nvidia-smi wont work before restart'
 # apt installs (sorted)
 i=()
 i+=cool-retro-term
-i+=d-feet  # introspect d-bus
+i+=d-feet  # introspect d-bus, dbus
 i+=evince  # for the easier pdfs (when not using okular)
 i+=feh # note also .xsession uses feh, is that the only way?
 i+=firefox
