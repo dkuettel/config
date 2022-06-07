@@ -11,7 +11,7 @@ set-option -g status-left ' #{?#{==:#{client_key_table},root},,#[fg=brightblack,
 
 set-option -g status-right-length 100
 set-option -g status-right-style 'fg=brightgreen,bg=black'
-set-option -g status-right ' #(~/config/i/tmux/status.py) '
+set-option -g status-right ' #(~/config/i/ltstatus/ltstatus/examples/tmux-status.py) '
 
 set-option -g status-justify left
 set-option -g status-style 'bg=brightgreen'

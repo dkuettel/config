@@ -34,9 +34,7 @@ feh --no-fehbg --bg-fill ~/config/i/dwm/5_stripes_landscape.jpg
 export GDK_SCALE=2
 
 function status {
-    # TODO currently using the "example", maybe change that to a py file in dwm?
-    # TODO would also be nice to use the bang approach, if it's in the path some day
-    ~/config/i/ltstatus/ltstatus/bin/ltstatus ~/config/i/ltstatus/ltstatus/examples/dwm-status.py
+    ~/config/i/ltstatus/ltstatus/examples/dwm-status.py
 }
 
 status >& .log-dwm-status &
