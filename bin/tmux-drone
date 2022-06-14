@@ -1,0 +1,11 @@
+#!/bin/zsh
+set -eux -o pipefail
+
+# setup or attach for ~/toys/drone
+
+folder=~/toys/drone
+name=${folder:t}
+
+path=($folder/bin $path)
+
+tmux new-session -s $name -A -c $folder -e h=$folder -e PATH=$PATH
