@@ -3,8 +3,8 @@ window:
 
 bell:
   animation: EaseOutExpo
-  duration: 70
-  color: '#909090'
+  duration: 300
+  color: '#D0D0D0'
 
 selection:
   semantic_escape_chars: ",│`|:\"' ()[]{}<>\t┃"
