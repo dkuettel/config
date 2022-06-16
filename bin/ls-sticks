@@ -1,0 +1,8 @@
+#!/bin/zsh
+set -eux -o pipefail
+
+# try to list possible usb sticks
+# to easy spot mounting points
+# would be nice to extend to also make a folder and mount
+
+lsblk -J -o NAME,SIZE,MOUNTPOINT,TRAN,FSTYPE,VENDOR | jq '.blockdevices[] | select(.tran=="usb")'
