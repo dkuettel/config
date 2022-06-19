@@ -16,6 +16,10 @@ fi
 
 virtualenv --python python3.9 $folder
 
+# TODO is there a better way? it still gets uploaded a bit before it takes effect
+# also it gets indexed it seems, so still "cpu cycles" wasted
+attr -s com.dropbox.ignored -V 1 $folder
+
 path=($folder/bin $path)
 export VIRTUAL_ENV=$folder
 pip install --upgrade pip pip-tools
