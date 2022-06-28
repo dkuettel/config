@@ -1,25 +1,35 @@
 #!/bin/zsh
 set -eux -o pipefail
 
-# create a new virtualenv and install pip tools
+# create a new virtualenv at ./.venv and install pip-tools
 
 if [[ -v VIRTUAL_ENV ]]; then
-    echo "a virtual env ($VIRTUAL_ENV) is already active"
+    echo "A virtual env at $VIRTUAL_ENV is already active." >&2
     exit 1
 fi
 
-folder=${1:-.venv}
-if [[ -d $folder ]]; then
-    echo "$folder already exists"
+if [[ -e .venv ]]; then
+    echo 'The folder .venv already exists.' >&2
     exit 1
 fi
 
-virtualenv --python python3.9 $folder
+function setup {
+    virtualenv --python python3.9 .venv
 
-# TODO is there a better way? it still gets uploaded a bit before it takes effect
-# also it gets indexed it seems, so still "cpu cycles" wasted
-attr -s com.dropbox.ignored -V 1 $folder
+    # ignored means not uploading data
+    # but unfortunately it still indexes everything (takes cpu time)
+    attr -s com.dropbox.ignored -V 1 .venv
 
-path=($folder/bin $path)
-export VIRTUAL_ENV=$folder
-pip install --upgrade pip pip-tools
+    path=($PWD/.venv/bin $path)
+    export VIRTUAL_ENV=$PWD/.venv
+    pip install --upgrade pip pip-tools
+}
+
+if systemctl is-active dropbox@$USER.service && [[ $(dbox filestatus .) != '.: unwatched' ]]; then
+    # TODO making dbox service as --user might be nicer, and probably good enough
+    # TODO I cant find out if this waits until actually stopped
+    sudo systemctl stop dropbox@$USER.service
+    { setup } always { sudo systemctl start dropbox@$USER.service }
+else
+    setup
+fi
