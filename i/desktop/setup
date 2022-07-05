@@ -75,7 +75,7 @@ setups=(
     spotify
     dropbox
     okular
-    slack
+    # slack  # dont really need it anymore as an app, browser is more versatile here
     vlc
 )
 for i in $setups; do
