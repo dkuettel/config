@@ -1,0 +1,7 @@
+#!/bin/zsh
+set -eux -o pipefail
+
+bluetoothctl <<'EOF'
+power on
+connect 90:9C:4A:DF:E0:1E
+EOF
