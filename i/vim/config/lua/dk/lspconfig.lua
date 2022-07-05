@@ -51,16 +51,18 @@ function M.setup_completion()
                 require("luasnip").lsp_expand(args.body)
             end,
         },
+        window = {
+            completion = cmp.config.window.bordered(),
+            documentation = cmp.config.window.bordered(),
+        },
+        preselect = cmp.PreselectMode.None,
         mapping = {
+            ["<c-j>"] = cmp.mapping.select_next_item(),
+            ["<c-k>"] = cmp.mapping.select_prev_item(),
             ["<c-b>"] = cmp.mapping(cmp.mapping.scroll_docs(-4), { "i", "c" }),
             ["<c-f>"] = cmp.mapping(cmp.mapping.scroll_docs(4), { "i", "c" }),
-            ["<c-space>"] = cmp.mapping(cmp.mapping.complete(), { "i", "c" }),
-            ["<c-y>"] = cmp.config.disable, -- Specify `cmp.config.disable` if you want to remove the default `<C-y>` mapping.
-            ["<c-e>"] = cmp.mapping({
-                i = cmp.mapping.abort(),
-                c = cmp.mapping.close(),
-            }),
-            ["<enter>"] = cmp.mapping.confirm({ select = true }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
+            ["<c-e>"] = cmp.mapping.abort(),
+            ["<c-n>"] = cmp.mapping.confirm({ select = true }),
         },
         -- see https://github.com/hrsh7th/nvim-cmp/wiki/List-of-sources
         -- TODO removed buffer as source, but still seems to be happening ...
