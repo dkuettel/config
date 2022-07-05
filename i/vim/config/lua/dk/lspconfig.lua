@@ -29,11 +29,20 @@ function M.setup()
     -- from https://github.com/hrsh7th/nvim-cmp/#setup
     -- that makes vim the client say it can accept more from the LS?
     local capabilities = require("cmp_nvim_lsp").update_capabilities(vim.lsp.protocol.make_client_capabilities())
+    M.setup_luasnip()
     M.setup_completion()
 
     M.setup_lua(capabilities)
     M.setup_python(capabilities)
     -- M.setup_python_jedi(capabilities)
+end
+
+function M.setup_luasnip()
+    -- see https://github.com/L3MON4D3/LuaSnip/blob/master/DOC.md
+    local ls = require("luasnip")
+    local s = ls.snippet
+    local t = ls.text_node
+    ls.add_snippets("all", { s("!class", { t("class") }) })
 end
 
 function M.setup_completion()
@@ -70,6 +79,8 @@ function M.setup_completion()
             { name = "nvim_lsp" },
             -- TODO should not be here for most filetypes, ah but I think it does it itself
             { name = "nvim_lua" },
+            -- TODO start trying, and see how to work with or combine with iabbrev?
+            { name = "luasnip" },
             --{name='buffer'},
         }),
         formatting = {
