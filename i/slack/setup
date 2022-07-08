@@ -17,3 +17,10 @@ wget \
     -O /tmp/slack-desktop.deb
 sudo apt-get install /tmp/slack-desktop.deb
 rm /tmp/slack-desktop.deb
+
+# NOTE not using it now because browser version is more versatile (tabs, for one)
+# remove like this:
+#   remove ~/config/bin/slack (now in git history)
+#   remove ~/config/i/pstart/list/slack
+#   sudo apt remove slack-desktop
+#   remove sources in /etc/apt/sources.list.d
