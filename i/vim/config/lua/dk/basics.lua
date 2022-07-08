@@ -6,6 +6,7 @@ function M.setup()
     M.options()
     M.mappings()
     M.cursorline()
+    M.iabbrevs()
     -- M.active_window()
 end
 
@@ -109,7 +110,7 @@ function M.mappings()
         map("n", "t" .. i, "<cmd>tabnext " .. i .. "<enter>")
         map("n", "tm" .. i, function()
             move_current_tab_to(i)
-        end, {desc="move tab to "..i})
+        end, { desc = "move tab to " .. i })
     end
     map("n", "tl", "<cmd>tabmove +1<enter>")
     map("n", "th", "<cmd>tabmove -1<enter>")
@@ -160,6 +161,16 @@ function M.cursorline()
         "    autocmd VimEnter,WinEnter,BufWinEnter * setlocal cursorline nocursorcolumn
         "    autocmd WinLeave * setlocal nocursorline nocursorcolumn
         "augroup END
+    ]])
+end
+
+function M.iabbrevs()
+    vim.cmd([[
+        iabbrev <expr> today<< strftime("%F")
+        iabbrev <expr> today+1<< strftime("%F", localtime() + 1*24*60*60)
+        iabbrev <expr> today+2<< strftime("%F", localtime() + 2*24*60*60)
+        iabbrev <expr> today+3<< strftime("%F", localtime() + 3*24*60*60)
+        iabbrev <expr> today+4<< strftime("%F", localtime() + 4*24*60*60)
     ]])
 end
 
@@ -266,14 +277,4 @@ map('i', '<c-l>', '<c-^>')
 -- for soft-capslock switch off language mapping when leaving
 -- but when using language mapping for its original use, then we probably dont want that
 autocommand('InsertLeave', {callback=function() vim.o.iminsert = 0 end})
-
--- insert dates
--- TODO no lua api yet
-vim.cmd([[
-    iabbrev <expr> today<< strftime("%F")
-    iabbrev <expr> today+1<< strftime("%F", localtime() + 1*24*60*60)
-    iabbrev <expr> today+2<< strftime("%F", localtime() + 2*24*60*60)
-    iabbrev <expr> today+3<< strftime("%F", localtime() + 3*24*60*60)
-    iabbrev <expr> today+4<< strftime("%F", localtime() + 4*24*60*60)
-]])
 --]=]
