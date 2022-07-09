@@ -1,0 +1,8 @@
+#!/bin/zsh
+set -eux -o pipefail
+
+sudo apt-get remove slack-desktop
+sudo rm -f /etc/apt/sources.list.d/slack.list /etc/apt/sources.list.d/slack.list.save
+
+# NOTE also removed from git (see history)
+# ~/config/bin/slack and ~/config/i/pstart/list/slack
