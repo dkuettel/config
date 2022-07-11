@@ -4,7 +4,8 @@ set -eux -o pipefail
 pip3 install --upgrade awscli
 
 # see https://kubernetes.io/docs/tasks/tools/install-kubectl-linux/#install-using-other-package-management
-sudo snap install kubectl --classic
+# NOTE using version 1.19 for now because our aws kubernetes cluster is a bit older
+sudo snap install kubectl --classic --channel=1.19/stable
 sudo snap refresh kubectl
 kubectl version --short --client
 
