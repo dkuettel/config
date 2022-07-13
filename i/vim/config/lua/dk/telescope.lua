@@ -84,6 +84,8 @@ function M.after()
     local map = vim.keymap.set
     local bi = require("telescope.builtin")
 
+    -- TODO find files is pretty generic now, for some projects we might want to be more explicit?
+    -- before had a .list-files in the root folder of those projects
     map("n", ",f", bi.find_files, { desc = "telescope find files" })
     map("n", ",g", bi.live_grep, { desc = "telescope live grep" })
     map("n", ",b", bi.buffers, { desc = "telescope buffers" })

@@ -253,12 +253,12 @@ function M.python_mappings(client, bufnr)
     local function ptags(sources, opts)
         if not sources then
             -- TODO for now no ./.pdocs or ./.list-symbols, just try to discover things
-            local Path = require("plenary.path")
-            if Path:new("python"):is_dir() then
-                sources = { "python" }
-            else
-                sources = { "." }
-            end
+            -- vim.pretty_print(vim.fn.glob("*", 0, 1))
+            sources = {
+                vim.fn.glob("python", false, true) or {"."},
+                vim.fn.glob("libs/*/python", false, true),
+            }
+            sources = vim.tbl_flatten(sources)
         end
         local pdocs_command = {
             "ptags",
