@@ -153,6 +153,32 @@ for arg in $@; do
             )
             ;;
 
+        (hemanth-read)
+            cmd=(
+                python3 -m
+                nn.flow config
+                --stream=pose-refinement/flow/training-data/test-port/3
+                --seed=0
+                --noise=21
+                #--noise-model=keypie
+                --resolution=384hx384w
+                #--resolution=384hx640w
+                # --resolution=192hx320w
+                --hypo-style=normals
+                --camera-style=recolored+background
+                --camera-grayscale
+                #--noise-distribution='0-vs-16to21'
+                #--classifier-now-data-hit-ratio=0.5
+                --negative-sample-ratio=0.4
+                #write-dataset
+                #--key=pose-refinement/flow/training-data/test-pose
+                #--worker-id=1
+                #--worker-count=2
+                #--resume
+                read-dataset
+            )
+            ;;
+
         (train)
             cmd=(
                 #with-log docker.log  # doesnt work with debugging

@@ -7,6 +7,11 @@ while [[ $# != 0 ]]; do
     arg=$1; shift
     case $arg in
 
+        (root)
+            args+=(--user 0:0)
+            cmd=(bash)
+            ;;
+
         (liveness)
             # test liveness probe
             touch $out/liveness-docker-log
@@ -34,7 +39,7 @@ while [[ $# != 0 ]]; do
         (train)
             # TODO with-log could be a log arg here and then it's generic, but also make cmd+=() or set flag?
             cmd=(
-                #with-log docker.log
+                # with-log docker.log
                 python3
                 -m nn.mtar360.eap1 train
                     mt360vis
@@ -47,7 +52,7 @@ while [[ $# != 0 ]]; do
                     #--assembly=Ender3DPrinter.viewpoint_0000
                     --out-folder=.
                     --short-training
-                    --update-template batchnorm_convergence.num_batches 10
+                    # --update-template batchnorm_convergence.num_batches 10
                     --variable-length-training
                     # --sample-count-multiplier=2
                     # --gpu-count=4
