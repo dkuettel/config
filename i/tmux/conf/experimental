@@ -14,3 +14,5 @@ bind-key C new-window -a -c "#{pane_current_path}"
 # kill whole session
 # not sure if that keeps some lingering stuff around
 bind-key X confirm-before -p "kill-session? (y/n)" kill-session
+
+bind-key P new-window -n pdocs pdocs
