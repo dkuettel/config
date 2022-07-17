@@ -1,9 +1,9 @@
 #!/bin/zsh
 set -eux -o pipefail
 
-# setup or attach for ~/toys/drone
+# setup or attach for ~/toys/drones
 
-folder=~/toys/drone
+folder=~/toys/drones
 name=${folder:t}
 
 path=($folder/bin $path)
