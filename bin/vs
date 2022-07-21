@@ -1,11 +1,24 @@
 #!/bin/zsh
 set -eux -o pipefail
 
-if [[ -v TMUX ]]; then
-    tmux rename-window src
-fi
+# open vim in "workspace mode"
+# ultimately using all the workspace_* env variables that apply
+# for now it just means a Session.vim and activate .venv if any is there
+# also maybe configure already to have pyright or whatever, not only just on first file?
+# and configure things like ,f for file search given what we like in the project?
 
+# TODO rename to workspace_* then
 export vim_is_in_session=1
+
+# TODO what about the python folder? add to python path?
+# or is it somehow coming with the venv?
+# sometimes I try to respect the .env thing
+if [[ -d .venv ]]; then
+    venv=$(realpath .venv)
+    [[ ! -v VIRTUAL_ENV ]] || exit 1
+    export VIRTUAL_ENV=$venv
+    export path=($venv/bin $path)
+end
 
 if [[ -f Session.vim ]]; then
     nvim -S Session.vim $@
