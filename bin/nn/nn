@@ -12,28 +12,14 @@ while [[ $# != 0 ]]; do
             cmd=(bash)
             ;;
 
-        (liveness)
-            # test liveness probe
-            touch $out/liveness-docker-log
-            cmd=(
-                /xp/src/nn/bin/livenessProbe
-                /xp/src/out/liveness-docker-log
-                /xp/src/out/liveness-log
-            )
+        (bash)
+            cmd=(bash)
+            # TODO zsh is installed, but need to take care of configuration, just map in?
+            # probably map in only here, not always
             ;;
 
-        (web-pdb)
-            # needs pip3 install web-pdb in dockerfiles/nn-dev
-            args+=(
-                --env PYTHONBREAKPOINT='web_pdb.set_trace'
-                -p 5555:5555
-            )
-            ;;
-
-        (embed)
-            args+=(
-                --env PYTHONBREAKPOINT='IPython.embed'
-            )
+        (ipython)
+            cmd=(ipython3)
             ;;
 
         (train)
@@ -64,7 +50,7 @@ while [[ $# != 0 ]]; do
             ;;
 
         (integration-test)
-            # this is roughly how cristi runs it, but with a different config.json
+            # NOTE this is roughly how cristi runs it, but with a different config.json
             cmd=(
                 #with-log docker.log
                 python3
@@ -79,30 +65,6 @@ while [[ $# != 0 ]]; do
                     --fp16-quantization
                     mt360vis
                 )
-            ;;
-
-        (raw-train)
-            cmd=(
-                #with-log docker.log
-                python3
-                -m nn.mtar360.eap1 raw-train
-                --template-json="$(cat template.json)"
-                --style-json="$(cat style.json)"
-                --output-dir=.
-            )
-            ;;
-
-        (train-short)
-            cmd=(
-                python3 ~/toys/vtrace/vtrace.py run
-                -m nn.mtar360.eap1 train
-                    mt360
-                    --config-folder=s3://e2e-benchmarking/training/zurich-all-set/recolored
-                    --assembly=ktm.Right
-                    --out-folder=.
-                    --short-training=True
-                    #--testsets=mtar360/all/recolored/v2
-            )
             ;;
 
         (viewer)
@@ -135,128 +97,17 @@ while [[ $# != 0 ]]; do
             )
             ;;
 
-        (shell)
-            cmd=(bash)
-            # TODO zsh is installed, but need to take care of configuration, just map in?
-            # probably map in only here, not always
-            ;;
-
-        (ipython)
-            cmd=(ipython3)
-            ;;
-
-        (variations)
-            # run mt360 with audi model(s)
-            cmd=(
-                with-log docker.log
-                python3 -m nn.mtar360.eap1 train
-                    #--config-folder=s3://e2e-benchmarking/training/AudiA4Multiview/recoloredWithDoors4EP
-                    #--config-folder=s3://e2e-benchmarking/training/AudiA4Multiview/simplified
-                    --config-folder=s3://e2e-benchmarking/training/AudiA4Multiview/dkuettel-audi-variations
-                    --out-folder=.
-                    #--testsets=audi_a4/interior_closeups/converted_InsideGeneralInspection:09c12a99bf5f426a95eed400e89e8946:cls_gt_4_EP
-                    mt360
-                    --short-training=True
-                    --coarse
-                    --assemblies=09c12a99bf5f426a95eed400e89e8946.viewpoint_0000,09c12a99bf5f426a95eed400e89e8947.viewpoint_0000
-                    #--representative=one
-            )
-            ;;
-
-        (cluster)
-            cmd=(
-                #with-log docker.log
-                python3 -m nn.mtar360.eap1 state-clustering
-                    #--yaml-config=/xp/src/nn/python/nn/mtar360/eap1/mt360-config-template.yaml
-                    --yaml-config=/xp/src/nn/python/nn/mtar360/eap1/mtar360c-cls-config-template.yaml
-                    --trainset=s3://e2e-benchmarking/training/AssemblyStates/lego-lighthouse-31051/all-shaded
-                    #--trainset=s3://e2e-benchmarking/training/AssemblyStates/delonghi-coffee-machine/all-recolored
-                    #--trainset=s3://deep-learning-data/data/sets/SigmaTile/config
-                    #--trainset=s3://deep-learning-data/data/sets/SigmaTile-ManyStates/279/config
-                    #--assemblies=lighthouse-100.viewpoint_front,lighthouse-110.viewpoint_front,lighthouse-160.viewpoint_front,lighthouse-180.viewpoint_front
-                    --n-viewpoints=1000
-                    #--n-viewpoints=64
-                    --prune
-                    --output-dir=.
-            )
-            ;;
-
-        (cluster-eval)
-            cmd=(
-                #with-log docker.log
-                python3 -m nn.mtar360.eap1 evaluate-mtar360c-clustered
-                    --testsets=AssemblyStates/lego-lighthouse-31051/v2/lighthouse-050-01:lighthouse-050.viewpoint_front,AssemblyStates/lego-lighthouse-31051/v2/lighthouse-050-02:lighthouse-050.viewpoint_front,AssemblyStates/lego-lighthouse-31051/v2/lighthouse-060-01:lighthouse-060.viewpoint_front,AssemblyStates/lego-lighthouse-31051/v2/lighthouse-060-02:lighthouse-060.viewpoint_front,AssemblyStates/lego-lighthouse-31051/v2/lighthouse-070-01:lighthouse-070.viewpoint_front,AssemblyStates/lego-lighthouse-31051/v2/lighthouse-070-02:lighthouse-070.viewpoint_front,AssemblyStates/lego-lighthouse-31051/v2/lighthouse-080-01:lighthouse-080.viewpoint_front,AssemblyStates/lego-lighthouse-31051/v2/lighthouse-080-02:lighthouse-080.viewpoint_front,AssemblyStates/lego-lighthouse-31051/v2/lighthouse-090-01:lighthouse-090.viewpoint_front,AssemblyStates/lego-lighthouse-31051/v2/lighthouse-090-02:lighthouse-090.viewpoint_front,AssemblyStates/lego-lighthouse-31051/v2/lighthouse-100-01:lighthouse-100.viewpoint_front,AssemblyStates/lego-lighthouse-31051/v2/lighthouse-100-02:lighthouse-100.viewpoint_front,AssemblyStates/lego-lighthouse-31051/v2/lighthouse-110-01:lighthouse-110.viewpoint_front,AssemblyStates/lego-lighthouse-31051/v2/lighthouse-110-02:lighthouse-110.viewpoint_front,AssemblyStates/lego-lighthouse-31051/v2/lighthouse-120-01:lighthouse-120.viewpoint_front,AssemblyStates/lego-lighthouse-31051/v2/lighthouse-120-02:lighthouse-120.viewpoint_front,AssemblyStates/lego-lighthouse-31051/v2/lighthouse-130-01:lighthouse-130.viewpoint_front,AssemblyStates/lego-lighthouse-31051/v2/lighthouse-130-02:lighthouse-130.viewpoint_front,AssemblyStates/lego-lighthouse-31051/v2/lighthouse-140-01:lighthouse-140.viewpoint_front,AssemblyStates/lego-lighthouse-31051/v2/lighthouse-140-02:lighthouse-140.viewpoint_front,AssemblyStates/lego-lighthouse-31051/v2/lighthouse-150-01:lighthouse-150.viewpoint_front,AssemblyStates/lego-lighthouse-31051/v2/lighthouse-150-02:lighthouse-150.viewpoint_front,AssemblyStates/lego-lighthouse-31051/v2/lighthouse-160-01:lighthouse-160.viewpoint_front,AssemblyStates/lego-lighthouse-31051/v2/lighthouse-160-02:lighthouse-160.viewpoint_front,AssemblyStates/lego-lighthouse-31051/v2/lighthouse-170-01:lighthouse-170.viewpoint_front,AssemblyStates/lego-lighthouse-31051/v2/lighthouse-170-02:lighthouse-170.viewpoint_front,AssemblyStates/lego-lighthouse-31051/v2/lighthouse-180-01:lighthouse-180.viewpoint_front,AssemblyStates/lego-lighthouse-31051/v2/lighthouse-180-02:lighthouse-180.viewpoint_front,AssemblyStates/lego-lighthouse-31051/v2/lighthouse-200-01:lighthouse-200.viewpoint_front,AssemblyStates/lego-lighthouse-31051/v2/lighthouse-200-02:lighthouse-200.viewpoint_front,AssemblyStates/lego-lighthouse-31051/v2/lighthouse-210-01:lighthouse-210.viewpoint_front,AssemblyStates/lego-lighthouse-31051/v2/lighthouse-210-02:lighthouse-210.viewpoint_front,AssemblyStates/lego-lighthouse-31051/v2/lighthouse-220-01:lighthouse-220.viewpoint_front,AssemblyStates/lego-lighthouse-31051/v2/lighthouse-220-02:lighthouse-220.viewpoint_front,AssemblyStates/lego-lighthouse-31051/v2/lighthouse-230-01:lighthouse-230.viewpoint_front,AssemblyStates/lego-lighthouse-31051/v2/lighthouse-230-02:lighthouse-230.viewpoint_front,AssemblyStates/lego-lighthouse-31051/v2/lighthouse-240-01:lighthouse-240.viewpoint_front,AssemblyStates/lego-lighthouse-31051/v2/lighthouse-240-02:lighthouse-240.viewpoint_front,AssemblyStates/lego-lighthouse-31051/v2/lighthouse-250-01:lighthouse-250.viewpoint_front,AssemblyStates/lego-lighthouse-31051/v2/lighthouse-250-02:lighthouse-250.viewpoint_front,AssemblyStates/lego-lighthouse-31051/v2/lighthouse-260-01:lighthouse-260.viewpoint_front,AssemblyStates/lego-lighthouse-31051/v2/lighthouse-260-02:lighthouse-260.viewpoint_front,AssemblyStates/lego-lighthouse-31051/v2/lighthouse-270-01:lighthouse-270.viewpoint_front,AssemblyStates/lego-lighthouse-31051/v2/lighthouse-270-02:lighthouse-270.viewpoint_front,AssemblyStates/lego-lighthouse-31051/v2/lighthouse-280-01:lighthouse-280.viewpoint_front,AssemblyStates/lego-lighthouse-31051/v2/lighthouse-280-02:lighthouse-280.viewpoint_front,AssemblyStates/lego-lighthouse-31051/v2/lighthouse-290-01:lighthouse-290.viewpoint_front,AssemblyStates/lego-lighthouse-31051/v2/lighthouse-290-02:lighthouse-290.viewpoint_front,AssemblyStates/lego-lighthouse-31051/v2/lighthouse-300-01:lighthouse-300.viewpoint_front,AssemblyStates/lego-lighthouse-31051/v2/lighthouse-300-02:lighthouse-300.viewpoint_front
-                    --output-dir=.
-                    --cls-model-dir=/efs/dkuettel/clustering/MtXp/9f8c0f0ddc5946e1aaf78fdec0a1f73f/nn-model-export
-                    --named-pe-model-dir lighthouse-010.viewpoint_front /efs/dkuettel/clustering/MtXp/e387e097180244b8b27d1d960939b008/nn-model-export
-                    --named-pe-model-dir lighthouse-020.viewpoint_front /efs/dkuettel/clustering/MtXp/e387e097180244b8b27d1d960939b008/nn-model-export
-                    --named-pe-model-dir lighthouse-030.viewpoint_front /efs/dkuettel/clustering/MtXp/a5679b0ba09047379b81af75402c051c/nn-model-export
-                    --named-pe-model-dir lighthouse-040.viewpoint_front /efs/dkuettel/clustering/MtXp/a5679b0ba09047379b81af75402c051c/nn-model-export
-                    --named-pe-model-dir lighthouse-050.viewpoint_front /efs/dkuettel/clustering/MtXp/57c6926ea5dd4f7eb7192a334549c84d/nn-model-export
-                    --named-pe-model-dir lighthouse-060.viewpoint_front /efs/dkuettel/clustering/MtXp/57c6926ea5dd4f7eb7192a334549c84d/nn-model-export
-                    --named-pe-model-dir lighthouse-070.viewpoint_front /efs/dkuettel/clustering/MtXp/8d54f955ff8042f993fa5e2a985ebc76/nn-model-export
-                    --named-pe-model-dir lighthouse-080.viewpoint_front /efs/dkuettel/clustering/MtXp/8d54f955ff8042f993fa5e2a985ebc76/nn-model-export
-                    --named-pe-model-dir lighthouse-090.viewpoint_front /efs/dkuettel/clustering/MtXp/8d54f955ff8042f993fa5e2a985ebc76/nn-model-export
-                    --named-pe-model-dir lighthouse-100.viewpoint_front /efs/dkuettel/clustering/MtXp/8d54f955ff8042f993fa5e2a985ebc76/nn-model-export
-                    --named-pe-model-dir lighthouse-110.viewpoint_front /efs/dkuettel/clustering/MtXp/8d54f955ff8042f993fa5e2a985ebc76/nn-model-export
-                    --named-pe-model-dir lighthouse-120.viewpoint_front /efs/dkuettel/clustering/MtXp/8d54f955ff8042f993fa5e2a985ebc76/nn-model-export
-                    --named-pe-model-dir lighthouse-130.viewpoint_front /efs/dkuettel/clustering/MtXp/8d54f955ff8042f993fa5e2a985ebc76/nn-model-export
-                    --named-pe-model-dir lighthouse-140.viewpoint_front /efs/dkuettel/clustering/MtXp/8d54f955ff8042f993fa5e2a985ebc76/nn-model-export
-                    --named-pe-model-dir lighthouse-150.viewpoint_front /efs/dkuettel/clustering/MtXp/8dffc44d868447a785a500b2e02eac2d/nn-model-export
-                    --named-pe-model-dir lighthouse-160.viewpoint_front /efs/dkuettel/clustering/MtXp/8dffc44d868447a785a500b2e02eac2d/nn-model-export
-                    --named-pe-model-dir lighthouse-170.viewpoint_front /efs/dkuettel/clustering/MtXp/8dffc44d868447a785a500b2e02eac2d/nn-model-export
-                    --named-pe-model-dir lighthouse-180.viewpoint_front /efs/dkuettel/clustering/MtXp/16d1794212c8471182e8c823f896a336/nn-model-export
-                    --named-pe-model-dir lighthouse-190.viewpoint_front /efs/dkuettel/clustering/MtXp/16d1794212c8471182e8c823f896a336/nn-model-export
-                    --named-pe-model-dir lighthouse-200.viewpoint_front /efs/dkuettel/clustering/MtXp/cee034c112af418cb423bb622369e599/nn-model-export
-                    --named-pe-model-dir lighthouse-210.viewpoint_front /efs/dkuettel/clustering/MtXp/cee034c112af418cb423bb622369e599/nn-model-export
-                    --named-pe-model-dir lighthouse-220.viewpoint_front /efs/dkuettel/clustering/MtXp/cee034c112af418cb423bb622369e599/nn-model-export
-                    --named-pe-model-dir lighthouse-230.viewpoint_front /efs/dkuettel/clustering/MtXp/cee034c112af418cb423bb622369e599/nn-model-export
-                    --named-pe-model-dir lighthouse-240.viewpoint_front /efs/dkuettel/clustering/MtXp/cee034c112af418cb423bb622369e599/nn-model-export
-                    --named-pe-model-dir lighthouse-250.viewpoint_front /efs/dkuettel/clustering/MtXp/054f8c1401ec4a2dba2a0bed7c482c88/nn-model-export
-                    --named-pe-model-dir lighthouse-260.viewpoint_front /efs/dkuettel/clustering/MtXp/054f8c1401ec4a2dba2a0bed7c482c88/nn-model-export
-                    --named-pe-model-dir lighthouse-270.viewpoint_front /efs/dkuettel/clustering/MtXp/054f8c1401ec4a2dba2a0bed7c482c88/nn-model-export
-                    --named-pe-model-dir lighthouse-280.viewpoint_front /efs/dkuettel/clustering/MtXp/275dc0bb6c3a4b58a4bb03dc95d3ade8/nn-model-export
-                    --named-pe-model-dir lighthouse-290.viewpoint_front /efs/dkuettel/clustering/MtXp/792ab90740504603b98483229e99b2cf/nn-model-export
-                    --named-pe-model-dir lighthouse-300.viewpoint_front /efs/dkuettel/clustering/MtXp/792ab90740504603b98483229e99b2cf/nn-model-export
-                    --named-pe-model-dir lighthouse-310.viewpoint_front /efs/dkuettel/clustering/MtXp/792ab90740504603b98483229e99b2cf/nn-model-export
-            )
-            ;;
-
-        (export-cl)
-            f=/efs/dkuettel/clustering/sigma_tile/MtXp/4691606d654341b98f04e5e2e15b4fc4
-            cmd=(
-                python3 -m nn.mtar360.eap1 export-network
-                    --template-path=$f/template.yaml
-                    --style-path=$f/style.yaml
-                    --model-path=$f/recalibrated_model.h5
-                    --output-dir=$f/export-stefan
-            )
-            ;;
-
-        (export-pe)
-            #f=/efs/dkuettel/clustering/sigma_tile/MtXp/27419f5d7f16409a8661b63478ea9845
-            #f=/efs/dkuettel/clustering/sigma_tile/MtXp/86c98321923b46fa846014d78d956058
-            f=/efs/dkuettel/clustering/sigma_tile/MtXp/b4faaaa4a1164e61b45a206597ad580c
-            cmd=(
-                python3 -m nn.mtar360.eap1 export-network
-                    --template-path=$f/template.yaml
-                    --style-path=$f/style.yaml
-                    --model-path=$f/ensemble_model.h5
-                    --output-dir=$f/export-stefan
-            )
-            ;;
-
         (pytest)
-            # not sure if this is complete
-            # from yves: nnrun pytest -v -s -m "not slow" tests
-            # and use "mtar360/test_errors.py::confusions" to run a specific test
-            # can we pass it thru $@?
+            # NOTE can also run on kubernetes using 'x start pytest ...'
             if [[ $# == 0 ]]; then
                 cmd=(
+                    # this is what CI runs
                     pytest -svv -m 'not slow'
                 )
             else
                 cmd=(
+                    # NOTE arg 1 can look like 'mtar360/test_train_eval_runs.py::test_train_eval[mt360-style1]'
+                    # that's what you get at the end of a summary for failed tests
                     pytest -svv $1
                 )
                 shift
@@ -264,49 +115,9 @@ while [[ $# != 0 ]]; do
             args+=(--workdir=/xp/src/nn/tests)
             ;;
 
-        (rtod)
+        (pytest-slow)
             cmd=(
-                #with-log docker.log
-                #python3
-                python3 ~/toys/vtrace/vtrace.py run -m
-                nn.mtar360.rtod
-                train-from-models
-                --output-dir=.
-                --model-folder=/xp/src/nn/train_gltf
-                #--model-folder=/xp/src/nn/train_gltf_small
-                --test-model-folder=/xp/src/nn/test_gltf
-                --limit-states=2
-                #--warmstart-from=/xp/src/nn/out-working/final_model.h5
-            )
-            ;;
-
-        (rtod-eval)
-            cmd=(
-                #python3
-                python3 ~/toys/vtrace/vtrace.py run -m
-                nn.mtar360.rtod
-                evaluate
-            )
-            ;;
-
-        (rtod-dump)
-            cmd=(
-                #with-log docker.log
-                #python3
-                python3 ~/toys/vtrace/vtrace.py run -m
-                nn.mtar360.rtod
-                dump-training-data-from-models
-                #--model-folder=/xp/src/nn/train_gltf
-                --model-folder=/xp/src/nn/train_gltf_small
-                --count=100
-            )
-            ;;
-
-        (weights)
-            cmd=(
-                #python3
-                python3 ~/toys/vtrace/vtrace.py run
-                -m nn.backbones.mnasnet pb-weights-to-h5
+                pytest -svv
             )
             ;;
 
