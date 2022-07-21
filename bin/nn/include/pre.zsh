@@ -77,10 +77,11 @@ mount ~/.ipython /home/dkuettel/.ipython
 
 # debuggers
 # TODO add to case as option below?
-args+=(--env PYTHONBREAKPOINT='ipdb.set_trace')
+# args+=(--env PYTHONBREAKPOINT='ipdb.set_trace')
 #args+=(--env PYTHONBREAKPOINT='IPython.embed')
 # needs pip3 install web-pdb
 #args+=(--env PYTHONBREAKPOINT='web_pdb.set_trace' -p 5555:5555)
+args+=(--env PYTHONBREAKPOINT)
 
 # vimfix and co
 #id_mount ~/toys/vim-python-tracebacks
