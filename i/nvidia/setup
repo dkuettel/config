@@ -27,7 +27,7 @@ sudo apt-get install -yqq ubuntu-drivers-common
 
 # check what is the newest recommended version for nvidia
 latest=$(ubuntu-drivers list | awk '/^nvidia-driver-[0-9]+,/ {print substr($1, 0, length($1)-1)}' | sort | tail -n 1)
-expected=nvidia-driver-495
+expected=nvidia-driver-515
 
 if [[ $latest != $expected ]]; then
     echo "expected $expected but found $latest"
