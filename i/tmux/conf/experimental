@@ -7,10 +7,6 @@ bind-key w choose-tree -Z
 bind-key -r < swap-window -d -t -1
 bind-key -r > swap-window -d -t +1
 
-# new window to the right, not last
-# note: default C is for customize-mode
-bind-key C new-window -a -c "#{pane_current_path}"
-
 # kill whole session
 # not sure if that keeps some lingering stuff around
 bind-key X confirm-before -p "kill-session? (y/n)" kill-session

@@ -130,9 +130,25 @@ set-option -g set-titles-string '#S'
 set-option -g allow-rename off
 
 # new windows/panes start in the current pane's directory
-bind-key c new-window -c "#{pane_current_path}"
-bind-key % split-window -h -c "#{pane_current_path}"
-bind-key '"' split-window -c "#{pane_current_path}"
+# NOTE
+# - "#{pane_current_path}" is already with symlinks dereferenced
+# - "#{pane_path}" comes from a escape code to inform the terminal of CWD
+# - we use that to inform tmux about the symlinked version of CWD
+# - this happens in zsh prompts everytime the CWD changes
+# - all the -c options also dereference things, unless PWD points to the same place
+# NOTE
+#   "#{pane_current_path}" is already with symlinks dereferenced, it comes from /proc/self/cwd
+#   "#{pane_path}" comes from an escape code to inform the terminal of CWD, unset unless you do it
+#   we set that in zsh's prompt everytime, it's local to the terminal, not tmux
+#   new-window -c still dereferences things
+#   unless PWD points to the same thing
+#   (this behavior is only half-documenten in tmux, very end of man page)
+bind-key c set-environment -F PWD "#{pane_path}" \; new-window -c "#{pane_path}"
+bind-key % set-environment -F PWD "#{pane_path}" \; split-window -h -c "#{pane_path}"
+bind-key '"' set-environment -F PWD "#{pane_path}" \; split-window -c "#{pane_path}"
+# new window to the right of current window, not appended at the end (as default)
+# note: default C is for customize-mode
+bind-key C set-environment -F PWD "#{pane_path}" \; new-window -a -c "#{pane_path}"
 
 # applications in tmux can receive focus events
 # (useful for eg vim and autosave)

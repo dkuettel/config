@@ -40,6 +40,15 @@ function _prompt_sudo {
 }
 
 
+function _send_cwd_for_tmux {
+    # sends the current working directory, without symlinks dereferenced
+    # so that tmux can open new terminals in the same symlinked locations
+    [[ ! -v TMUX ]] && exit
+    d=$(print -P '%d')
+    printf "\033]7;$d\033\\"
+}
+
+
 # enable expansions for prompts like PS1
 setopt prompt_subst  # apply typical expansions like: $, ${, $(, ((, ...
 setopt prompt_percent  # apply expansions for "%"
@@ -55,6 +64,7 @@ PS1+='%(?,,%F{1}%Sexit code = %?%s%f'$'\n'')'
 PS1+=$'\n'
 PS1+='%K{0}%F{4}%B'  # colors and bold
 PS1+=' %~%b%f'  # current folder
+PS1+='$(_send_cwd_for_tmux)'  # update tmux with current folder (silently)
 PS1+='$(_git_status_for_prompt)'  # git prompt
 PS1+=' %F{10}%*%f'  # time
 PS1+=' %F{5}(%m)%f'  # host
