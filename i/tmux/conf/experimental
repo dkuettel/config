@@ -11,4 +11,5 @@ bind-key -r > swap-window -d -t +1
 # not sure if that keeps some lingering stuff around
 bind-key X confirm-before -p "kill-session? (y/n)" kill-session
 
-bind-key P new-window -n pdocs pdocs
+# re-use or start a pdocs window
+bind-key P new-window -Sn pdocs pdocs
