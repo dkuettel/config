@@ -1,8 +1,7 @@
-base=~/config/i/zsh
-source $base/antigen.zsh
-source $base/path.zsh
-source $base/prompt.zsh
-source $base/basics.zsh
-source $base/fzf.zsh
-source $base/shortcuts.zsh
-source $base/experimental.zsh
+source ~/.zshrc.d/antigen.zsh
+source ~/.zshrc.d/path.zsh
+source ~/.zshrc.d/prompt.zsh
+source ~/.zshrc.d/basics.zsh
+source ~/.zshrc.d/fzf.zsh
+source ~/.zshrc.d/shortcuts.zsh
+source ~/.zshrc.d/experimental.zsh
