@@ -1,3 +1,4 @@
+source ~/.zshrc.d/preferred-paths.zsh
 source ~/.zshrc.d/antigen.zsh
 source ~/.zshrc.d/path.zsh
 source ~/.zshrc.d/prompt.zsh
