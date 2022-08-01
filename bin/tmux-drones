@@ -1,11 +1,26 @@
 #!/bin/zsh
 set -eux -o pipefail
 
-# setup or attach for ~/toys/drones
+# setup workspace for drones
 
-folder=~/toys/drones
-name=${folder:t}
+base=~/toys/drones
 
-path=($folder/bin $path)
+envs=(
+    # TODO not sure about the -E option, should we have it or not?
+    -e workspace_active=yes
+    -e workspace_home=$base
+    -e h=$base
+    # TODO ever any problem when the venv is not there yet?
+    -e PATH=$base/bin:$base/.venv/bin:$PATH
+    -e VIRTUAL_ENV=$base/.venv
+    -e PYTHONPATH=$base/python
+)
+# TODO are there more workspace_* settings we can use?
 
-tmux new-session -s $name -A -c $folder -e h=$folder -e PATH=$PATH
+# NOTE the initial command does not respect PATH (not sure if a bug)
+# all subsequent commands respect -e PATH=...
+# the initial command respects only PATH from the calling environment
+# plus sets this as the global tmux environment when it's the first session that also starts the server
+# we dont want that, so we make the first command a no-op
+
+tmux new-session -s drones -A -c $base $envs true \; new-window -n src V

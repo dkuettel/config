@@ -7,6 +7,7 @@ function M.setup()
     M.mappings()
     M.cursorline()
     M.iabbrevs()
+    M.session()
     -- M.active_window()
 end
 
@@ -196,6 +197,14 @@ function M.active_window()
         shade
     ))
     -- TODO some highlights overwrite background, so cursorline is not always nice
+end
+
+function M.session()
+    -- save session on exit when in "session mode"
+    -- TODO ideally there should ever be only one vim in session mode per location (similar to per workspace)
+    if os.getenv("vim_is_in_session") == "yes" then
+        vim.cmd("autocmd VimLeave * execute 'mksession!'")
+    end
 end
 
 return M

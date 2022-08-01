@@ -1,0 +1,18 @@
+#!/bin/zsh
+set -eux -o pipefail
+
+# open vim in workspace mode
+
+[[ $workspace_active == yes ]] || exit 1
+
+cd $workspace_home
+
+# TODO more workspace_* specific stuff
+# - where to ,f find files, maybe include specific files for that workspace
+# - start language server already? (can it be shared once and for all? start with tmux?)
+
+if [[ -f Session.vim ]]; then
+    vim_is_in_session=yes nvim -S Session.vim $@
+else
+    vim_is_in_session=yes nvim $@
+fi
