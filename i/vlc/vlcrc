@@ -1,5 +1,5 @@
 ﻿###
-###  vlc 3.0.12.1
+###  vlc 3.0.16
 ###
 
 ###
@@ -1424,7 +1424,7 @@ freetype-color=10066329
 #sout-avi-subject=
 
 # Encoder (string)
-#sout-avi-encoder=VLC Media Player - 3.0.12.1 Vetinari
+#sout-avi-encoder=VLC Media Player - 3.0.16 Vetinari
 
 # Keywords (string)
 #sout-avi-keywords=
@@ -2641,6 +2641,11 @@ sout-x264-tune=film
 
 # Force Profile (string)
 #sout-schro-force-profile=
+
+[libass] # Subtitle renderers using libass
+
+# Additional fonts directory (string)
+#ssa-fontsdir=
 
 [kate] # Kate overlay decoder
 
