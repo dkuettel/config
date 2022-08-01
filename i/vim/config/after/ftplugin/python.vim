@@ -13,3 +13,6 @@ iabbrev <buffer> #$ # NOTE
 " no tab for now because of auto indent, which not sure I want to keep
 iabbrev <buffer> definit def __init__(self):<enter>super().__init__()
 iabbrev <buffer> #i # pyright: ignore
+
+" TODO trying some shortcuts prefixed with shift-tab, shift-tab is never used, right?
+imap <buffer> <s-tab>o Optional[
