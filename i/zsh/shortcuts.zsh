@@ -109,3 +109,6 @@ alias dk='docker kill'
 
 # show only the "relevant" entries
 alias dfe='df -h -t ext4'
+
+# vlc restart file (even if opened before, no continue)
+alias vlc0='vlc --start-time 0'
