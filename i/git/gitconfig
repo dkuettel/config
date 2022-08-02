@@ -21,7 +21,7 @@
     lg = log --graph --simplify-by-decoration --all --pretty=tformat:'%Cblue%D [%h]%n %Cgreen%ar %Creset%s%n'
     lt = l ..@{upstream}
     lm = l @{upstream}..
-    s = status
+    s = -c advice.statusHints=false status
     b = branch -vv
     mb = branch -vv --list 'dk/*'
     mrb = branch -rv --list 'origin/dk/*'

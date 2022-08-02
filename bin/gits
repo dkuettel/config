@@ -1,0 +1,5 @@
+#!/bin/zsh
+set -eu -o pipefail
+
+git branch -vv
+git status --short
