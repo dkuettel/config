@@ -63,8 +63,7 @@ function M.setup()
     vim.cmd("packadd diffview.nvim")
     require("diffview").setup({
         file_panel = {
-            position = "right",
-            listing_style = "tree",
+            win_config = { position = "right" },
         },
     })
 
