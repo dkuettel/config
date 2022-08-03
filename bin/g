@@ -1,0 +1,12 @@
+#!/bin/zsh
+set -eu -o pipefail
+
+git branch -vv
+echo
+if (( $(git stash list | wc -l) > 0 )); then
+    git -c pager.log=false stash list
+    # TODO maybe use something like --pretty="%C(yellow)%h %>(14)%Cgreen%cr %C(blue)%gs"
+    # TODO not sure why in git config with have pager.stash=false, is that invalid?
+    echo
+fi
+git status --short
