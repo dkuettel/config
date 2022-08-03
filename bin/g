@@ -9,4 +9,4 @@ if (( $(git stash list | wc -l) > 0 )); then
     # TODO not sure why in git config with have pager.stash=false, is that invalid?
     echo
 fi
-git status --short
+git status --short $@
