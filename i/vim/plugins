@@ -8,9 +8,10 @@ pip3 install black pynvim isort black
 
 ( # treesitter
     cd $h/config/pack/plugins/opt/nvim-treesitter
+    # TODO used to have UpdateSync before InstallSync, not sure, seems more correct now (?)
     nvim -Es <<- 'EOF'
-        TSUpdateSync
         TSInstallSync all
+        TSUpdateSync
         qa
 EOF
 )
