@@ -5,14 +5,18 @@
 #   http://www.zovirl.com/2011/07/22/solarized_cheat_sheet/
 
 
+# NOTE small impact on speed, even when not in a git folder
 function _git_status_for_prompt {
     # could use 'timeout --kill-after=0.01s 0.01s cmd' to stop git info when it takes too long on a slow filesystem
-    if [[ $(realpath .) == /efs/* ]]; then
-        # note: above takes any pattern, so something|otherhing|morestuff works instead of a list
+    if [[ $(pwd -P) == /efs/* ]]; then
+        # NOTE above takes any pattern, so something|otherthing|morestuff works instead of a list
         echo '(~slow~) '
         exit
     fi
-    (git status --show-stash |& awk -v ORS='' '
+    # NOTE plain 'git status' with no arguments can be slow because it checks all submodules
+    # NOTE parsing like below is actually 2x faster than zsh's vcs_info
+    # NOTE --porcelain=v1 would be preferred, but then --show-stash is ignored
+    (git -c advice.statusHints=false status --branch --ignore-submodules=all --untracked-files=normal --ahead-behind --show-stash |& awk -v ORS='' '
         BEGIN { flags=1 }
         /^fatal: not a git repository/ { has_git=0 }
         /^On branch / { print " %F{3}(" $3; has_git=1 }
@@ -32,6 +36,7 @@ function _git_status_for_prompt {
 }
 
 
+# NOTE small impact on speed
 function _prompt_sudo {
     # indicate if sudo currently has cached authentication
     # NOTE this resets the timeout everytime, maybe not useful, or use 'sudo -k' manually? let's see how it goes.
@@ -45,6 +50,7 @@ setopt prompt_subst  # apply typical expansions like: $, ${, $(, ((, ...
 setopt prompt_percent  # apply expansions for "%"
 
 
+# NOTE generally anything that needs subshells slows down the prompt
 # TODO the PS1 string is hard to read, plus it doesnt handle spaces between flags quite right, can we split it up?
 
 # new line
@@ -55,12 +61,12 @@ PS1+='%(?,,%F{1}%Sexit code = %?%s%f'$'\n'')'
 PS1+=$'\n'
 PS1+='%K{0}%F{4}%B'  # colors and bold
 PS1+=' %~%b%f'  # current folder
-PS1+='$(_git_status_for_prompt)'  # git prompt
+PS1+='$(_git_status_for_prompt)'
 PS1+=' %F{10}%*%f'  # time
 PS1+=' %F{5}(%m)%f'  # host
 PS1+='%F{9}${VIRTUAL_ENV:+%B =venv=%b}%f'  # virtual env
 PS1+='%(1j,%F{1} %j&%f,)'  # background jobs
-PS1+='$(_prompt_sudo)'  # sudo indicator
+# PS1+='$(_prompt_sudo)'
 PS1+=$'%E%k\n'  # fill to end of line
 # input line
 PS1+='%F{15}${${${KEYMAP:-main}/vicmd/N}/(main|viins)/I}>%f '
