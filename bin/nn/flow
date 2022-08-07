@@ -218,6 +218,17 @@ for arg in $@; do
             )
             ;;
 
+        (raw-train)
+            at=/efs/dkuettel/flom/FlowXp/cb70977aaf14426eb1f6f95466314423
+            cmd=(
+                python3 -m nn.flow.train raw-train
+                --out-folder=.
+                --json64="$(base64 --wrap=0 $at/config.json)"
+                --num-steps=50
+            )
+            ;;
+
+
         (train-first)
             cmd=(
                 python3 -m nn.flow.train raw-train
