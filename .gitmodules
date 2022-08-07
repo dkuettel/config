@@ -133,3 +133,9 @@
 [submodule "i/vim/config/pack/plugins/opt/funky-formatter.nvim"]
 	path = i/vim/config/pack/plugins/opt/funky-formatter.nvim
 	url = git@github.com:dkuettel/funky-formatter.nvim.git
+[submodule "i/zsh/plugins/omz"]
+	path = i/zsh/plugins/omz
+	url = https://github.com/ohmyzsh/ohmyzsh.git
+[submodule "i/zsh/plugins/zsh-syntax-highlighting"]
+	path = i/zsh/plugins/zsh-syntax-highlighting
+	url = https://github.com/zsh-users/zsh-syntax-highlighting.git

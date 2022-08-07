@@ -18,22 +18,5 @@ sudo apt-get install -qqy $i
 # todo doesn't seem to take effect in the current session (tmux session?)
 sudo chsh -s $(which zsh) $(whoami)
 
-# antigen
-if [[ -d ~/antigen ]]; then
-    git -C ~/antigen pull
-else
-    # todo another option is to get a fixed version, so we know it will work the way we expect? submodule? especially if I start to have my own changes
-    git clone https://github.com/zsh-users/antigen.git ~/antigen
-fi
-
 ln -sfT $base/zshrc ~/.zshrc
 ln -sfT $base ~/.zshrc.d
-
-[[ -d ~/plugins ]] || mkdir -p ~/plugins
-
-# ls colors
-if [[ -e ~/plugins/dircolors-solarized ]]; then
-    git -C ~/plugins/dircolors-solarized pull
-else
-    git clone https://github.com/seebi/dircolors-solarized.git ~/plugins/dircolors-solarized
-fi

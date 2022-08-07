@@ -41,6 +41,7 @@ alias k=kubectl
 # try man in nvim
 # also nvim with :Man quite cool when editing a script, copy options right out of it
 export MANPAGER='nvim +Man!'
+# NOTE used to have https://github.com/zlsun/solarized-man for colors when not in vim
 
 # generically run python with some debug settings
 function debug {
@@ -55,4 +56,10 @@ function debug {
         echo "  > using $PYTHONBREAKPOINT\n"
         $@[2,-1]
     )
+}
+
+function take {
+    # mkdir and go there
+    mkdir -p $1
+    cd $1
 }

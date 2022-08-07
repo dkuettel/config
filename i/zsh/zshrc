@@ -1,8 +1,36 @@
-source ~/.zshrc.d/preferred-paths.zsh
-source ~/.zshrc.d/antigen.zsh
-source ~/.zshrc.d/path.zsh
-source ~/.zshrc.d/prompt.zsh
-source ~/.zshrc.d/basics.zsh
-source ~/.zshrc.d/fzf.zsh
-source ~/.zshrc.d/shortcuts.zsh
-source ~/.zshrc.d/experimental.zsh
+
+# NOTE zshenv vs zshrc
+# zshenv also applies in non-interactive
+# if you set, eg, paths there, scripts can use them
+# sofar didnt have a use-case yet
+
+# NOTE zcompile could help with slow stuff, last time I tried no big difference
+
+alias src='source'
+# alias src='source ~/.zshrc.d/timed-source.zsh'
+
+src ~/.zshrc.d/preferred-paths.zsh
+
+# NOTE omz deactivated and trying to replace, but not feature parity yet
+# src ~/.zshrc.d/omz.zsh
+src ~/.zshrc.d/completion.zsh
+# TODO seems super simple, omz needed for that? and the next one as well?
+src ~/.zshrc.d/plugins/omz/plugins/command-not-found/command-not-found.plugin.zsh
+# TODO not sure if it was doing anything? just glue to the actual thing, and is that one even installed?
+# pretty cool https://github.com/mbrubeck/compleat , use for xpman? and others?
+src ~/.zshrc.d/plugins/omz/plugins/compleat/compleat.plugin.zsh
+
+src ~/.zshrc.d/path.zsh
+src ~/.zshrc.d/prompt.zsh
+src ~/.zshrc.d/basics.zsh
+src ~/.zshrc.d/fzf.zsh
+src ~/.zshrc.d/shortcuts.zsh
+src ~/.zshrc.d/experimental.zsh
+src ~/.zshrc.d/syntax.zsh  # NOTE needs to be sourced last
+
+unalias src
+
+if [[ -v _source_total ]]; then
+    printf "%5.1fms in total\n" $_source_total
+    unset _source_total
+fi

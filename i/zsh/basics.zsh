@@ -69,6 +69,7 @@ setopt rm_star_silent # no confirmation anymore for "rm *"-like
 setopt always_to_end # move to end of word after completion
 setopt complete_in_word
 setopt long_list_jobs
+setopt interactive_comments # allow comments in interactive use
 setopt noautocd # dont assume an implicit cd prefix for folder names
 setopt no_list_beep # dont beep on incomplete/ambiguous completion
 export MANOPT='--no-justification --no-hyphenation'
@@ -86,7 +87,8 @@ export TIME_STYLE=+'[0m%F %R[0m
 [3m%F %R[0m'
 
 ## solarized colors for ls
-eval `dircolors ~/plugins/dircolors-solarized/dircolors.ansi-dark`
+# taken from https://github.com/seebi/dircolors-solarized
+eval $(dircolors ~/.zshrc.d/dircolors.ansi-dark)
 
 ## easier output for when using 'set -x'
 # we show "[context/trace]" with faint color and on its own line
