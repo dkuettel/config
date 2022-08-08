@@ -12,17 +12,26 @@ alias src='source'
 src ~/.zshrc.d/preferred-paths.zsh
 
 # NOTE omz deactivated and trying to replace, but not feature parity yet
-# src ~/.zshrc.d/omz.zsh
-src ~/.zshrc.d/completion.zsh
-# TODO seems super simple, omz needed for that? and the next one as well?
-src ~/.zshrc.d/plugins/omz/plugins/command-not-found/command-not-found.plugin.zsh
-# TODO not sure if it was doing anything? just glue to the actual thing, and is that one even installed?
-# pretty cool https://github.com/mbrubeck/compleat , use for xpman? and others?
-src ~/.zshrc.d/plugins/omz/plugins/compleat/compleat.plugin.zsh
+if false; then
+    # NOTE compare manual vs omz
+    # use diff on 'setopts'
+    # use diff on 'zstyle'
+    # and potentially other stuff, env?
+    src ~/.zshrc.d/omz.zsh
+else
+    src ~/.zshrc.d/omz-misc.zsh
+    src ~/.zshrc.d/completion.zsh
+    # TODO seems super simple, omz needed for that? and the next one as well?
+    src ~/.zshrc.d/plugins/omz/plugins/command-not-found/command-not-found.plugin.zsh
+    # TODO not sure if it was doing anything? just glue to the actual thing, and is that one even installed?
+    # pretty cool https://github.com/mbrubeck/compleat , use for xpman? and others?
+    src ~/.zshrc.d/plugins/omz/plugins/compleat/compleat.plugin.zsh
+fi
 
 src ~/.zshrc.d/path.zsh
 src ~/.zshrc.d/prompt.zsh
 src ~/.zshrc.d/basics.zsh
+# TODO this one wraps around the completion system, not so nice, should integrate instead
 src ~/.zshrc.d/fzf.zsh
 src ~/.zshrc.d/shortcuts.zsh
 src ~/.zshrc.d/experimental.zsh
