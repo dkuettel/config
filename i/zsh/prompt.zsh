@@ -10,28 +10,28 @@ function _git_status_for_prompt {
     # could use 'timeout --kill-after=0.01s 0.01s cmd' to stop git info when it takes too long on a slow filesystem
     if [[ $(pwd -P) == /efs/* ]]; then
         # NOTE above takes any pattern, so something|otherthing|morestuff works instead of a list
-        echo '(~slow~) '
-        exit
+        return
     fi
     # NOTE plain 'git status' with no arguments can be slow because it checks all submodules
     # NOTE parsing like below is actually 2x faster than zsh's vcs_info
     # NOTE --porcelain=v1 would be preferred, but then --show-stash is ignored
-    (git -c advice.statusHints=false status --branch --ignore-submodules=all --untracked-files=normal --ahead-behind --show-stash |& awk -v ORS='' '
-        BEGIN { flags=1 }
-        /^fatal: not a git repository/ { has_git=0 }
-        /^On branch / { print " %F{3}(" $3; has_git=1 }
-        /^HEAD detached at / { print " %F{3}(detached"; has_git=1 }
+    local args=(--branch --ignore-submodules=all --untracked-files=normal --ahead-behind --show-stash)
+    (git -c advice.statusHints=false status $args |& awk -v ORS='' '
+        BEGIN { has=1; flags=0; print "%F{3}" }
+        /^fatal: not a git repository/ { has=0 }
+        /^On branch / { print " " $3 " " }
+        /^HEAD detached at / { print " " $4 " " }
         /^Your branch is up to date with / { }
-        /^Your branch is ahead of / { print " ↑ " }
-        /^Your branch is behind / { print " ↓ " }
-        /^Your branch and .+ have diverged/ { print " ↕ " }
-        /^nothing to commit, working tree clean/ { print " ✓ " }
-        /^Unmerged paths:/ { if (flags>0) {print " %F{10}conflicts"; flags--} }
-        /^Changes to be committed:/ { if (flags>0) {print " %F{10}uncommited"; flags--} }
-        /^Changes not staged for commit:/ { if (flags>0) {print " %F{10}unstaged"; flags--} }
-        /^Untracked files:/ { if (flags>0) {print " %F{10}untracked"; flags--} }
-        /^Your stash currently has / { print " %F{1}stash" }
-        END { if (has_git) print "%F{3})%f" }
+        /^Your branch is ahead of / { print ""; flags++ }
+        /^Your branch is behind / { print ""; flags++ }
+        /^Your branch and .+ have diverged/ { print ""; flags++ }
+        /^nothing to commit, working tree clean/ { }
+        /^Unmerged paths:/ { if (flags>0) {print ""; flags++} }
+        /^Changes to be committed:/ { print "ﭜ"; flags++ }
+        /^Changes not staged for commit:/ { print "ﱴ"; flags++ }
+        /^Untracked files:/ { print "ﬤ"; flags++ }
+        /^Your stash currently has / { print "" }
+        END { if (has==1 && flags==0) print ""; print "%F{3}%f" }
     ') || true
 }
 
