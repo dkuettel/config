@@ -65,6 +65,7 @@ export LESS
 
 ## other
 #setopt extended_glob # problematic because ^ has to be escaped
+# TODO but also nice for some globs, only annoying with git? is HEAD~ the same?
 setopt rm_star_silent # no confirmation anymore for "rm *"-like
 setopt always_to_end # move to end of word after completion
 setopt complete_in_word
@@ -73,7 +74,8 @@ setopt interactive_comments # allow comments in interactive use
 setopt noautocd # dont assume an implicit cd prefix for folder names
 setopt no_list_beep # dont beep on incomplete/ambiguous completion
 export MANOPT='--no-justification --no-hyphenation'
-stty -ixon # disables flow control, for example ctrl-s (useful in vim)
+# NOTE slight impact on startup speed
+stty -ixon # disables flow control, allows to use ctrl-s in, eg, vim
 
 # nvim as default editor
 export SUDO_EDITOR=nvim
@@ -88,4 +90,5 @@ export TIME_STYLE=+'[0m%F %R[0m
 
 ## solarized colors for ls
 # taken from https://github.com/seebi/dircolors-solarized
+# NOTE slight impact on startup speed
 eval $(dircolors ~/.zshrc.d/dircolors.ansi-dark)
