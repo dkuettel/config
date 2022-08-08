@@ -10,11 +10,13 @@ function _git_status_for_prompt {
     # could use 'timeout --kill-after=0.01s 0.01s cmd' to stop git info when it takes too long on a slow filesystem
     if [[ $(pwd -P) == /efs/* ]]; then
         # NOTE above takes any pattern, so something|otherthing|morestuff works instead of a list
+        echo '%F{3}%f'
         return
     fi
     # NOTE plain 'git status' with no arguments can be slow because it checks all submodules
     # NOTE parsing like below is actually 2x faster than zsh's vcs_info
     # NOTE --porcelain=v1 would be preferred, but then --show-stash is ignored
+    # NOTE some utf8 icons only worked when in tmux, double-check when using new ones
     local args=(--branch --ignore-submodules=all --untracked-files=normal --ahead-behind --show-stash)
     (git -c advice.statusHints=false status $args |& awk -v ORS='' '
         BEGIN { has=1; flags=0; print "%F{3}" }
@@ -22,16 +24,20 @@ function _git_status_for_prompt {
         /^On branch / { print " " $3 " " }
         /^HEAD detached at / { print " " $4 " " }
         /^Your branch is up to date with / { }
-        /^Your branch is ahead of / { print ""; flags++ }
-        /^Your branch is behind / { print ""; flags++ }
-        /^Your branch and .+ have diverged/ { print ""; flags++ }
+        /^Your branch is ahead of / { print ""; flags++ }
+        /^Your branch is behind / { print ""; flags++ }
+        /^Your branch and .+ have diverged/ { print ""; flags++ }
         /^nothing to commit, working tree clean/ { }
         /^Unmerged paths:/ { if (flags>0) {print ""; flags++} }
         /^Changes to be committed:/ { print "ﭜ"; flags++ }
         /^Changes not staged for commit:/ { print "ﱴ"; flags++ }
-        /^Untracked files:/ { print "ﬤ"; flags++ }
+        /^Untracked files:/ { print ""; flags++ }
         /^Your stash currently has / { print "" }
-        END { if (has==1 && flags==0) print ""; print "%F{3}%f" }
+        END {
+            if (has==0) print ""
+            if (has==1 && flags==0) print ""
+            print "%f"
+        }
     ') || true
 }
 
