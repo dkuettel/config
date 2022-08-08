@@ -20,6 +20,7 @@ alias v=nvim
 JQ_COLORS='2;30:2;30:2;30:2;30:0;32:1;39:1;39'
 
 # one-shell-history
+# NOTE impacts startup speed
 if [[ -v OSH_TESTING ]]; then
     f=$OSH_TESTING/shells/zsh; [[ -e $f ]] && source $f
     path=($OSH_TESTING/bin $path)
