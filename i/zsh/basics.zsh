@@ -37,8 +37,8 @@ bindkey -M viins '^xf' insert-files
 bindkey -M vicmd '^xf' insert-files
 
 ## history
-# try to make it "forever" and shared
-# todo doesn't seem to update "live" yet ?
+# try to make it "forever" and shared, but doesnt work very reliably
+# using one-shell-history now
 export HISTSIZE=1000000000
 export SAVEHIST=1000000000
 setopt append_history
@@ -53,7 +53,7 @@ setopt share_history
 
 ## less
 # default options
-# also used for man
+# also used for man (if not diverted to vim)
 LESS+='--status-column ' # mark matched lines on the left side
 LESS+='--HILITE-UNREAD ' # mark next unread line (not working with --status-column?)
 LESS+='--RAW-CONTROL-CHARS ' # pass ansi colors
