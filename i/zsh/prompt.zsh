@@ -68,7 +68,7 @@ function {
         '%F{10}%*%f'  # time
     )
     if [[ ! -v TMUX ]]; then
-        headers+=('%F{10}ﯱ%m%f')  # host
+        headers+=('%F{10}%m%f')  # host
     fi
     headers+=(
         '%F{9}${VIRTUAL_ENV:+%B%b}%f'  # virtual env
