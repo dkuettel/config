@@ -50,28 +50,29 @@ setopt prompt_subst  # apply typical expansions like: $, ${, $(, ((, ...
 setopt prompt_percent  # apply expansions for "%"
 
 
-# NOTE generally anything that needs subshells slows down the prompt
-# TODO the PS1 string is hard to read, plus it doesnt handle spaces between flags quite right, can we split it up?
-
-# new line
-PS1=$'\n'
-# exit code alert
-PS1+='%(?,,%F{1}%Sexit code = %?%s%f'$'\n'')'
-# header line elements
-PS1+=$'\n'
-PS1+='%K{0}%F{4}%B'  # colors and bold
-PS1+=' %~%b%f'  # current folder
-PS1+='$(_git_status_for_prompt)'
-PS1+=' %F{10}%*%f'  # time
-PS1+=' %F{5}(%m)%f'  # host
-PS1+='%F{9}${VIRTUAL_ENV:+%B =venv=%b}%f'  # virtual env
-PS1+='%(1j,%F{1} %j&%f,)'  # background jobs
-# PS1+='$(_prompt_sudo)'
-PS1+=$'%E%k\n'  # fill to end of line
-# input line
-PS1+='%F{15}${${${KEYMAP:-main}/vicmd/N}/(main|viins)/I}>%f '
-export PS1
-
+function {
+    # NOTE generally anything that needs subshells slows down the prompt
+    # get full timings using > time zsh -ic 'time ( print -P $PS1 )'
+    local n=$'\n'
+    local alerts='%(?,,%F{1}%Sexit code = %?'$n'%s%f)'
+    local headers=(
+        '%K{0}%F{4}%B'  # colors and bold
+        '%~%b%f'  # current folder
+        '$(_git_status_for_prompt)'
+        '%F{10}%*%f'  # time
+    )
+    if [[ ! -v TMUX ]]; then
+        headers+=('%F{10}ﯱ%m%f')  # host
+    fi
+    headers+=(
+        '%F{9}${VIRTUAL_ENV:+%B%b}%f'  # virtual env
+        '%(1j,%F{1} %j&%f,)'  # background jobs
+        # '$(_prompt_sudo)'
+        '%E%k'  # fill to end of line
+    )
+    local edit='%F{15}${${${KEYMAP:-main}/vicmd/N}/(main|viins)/I}>%f '
+    PS1=$n$alerts$n${(j/ /)headers}$n$edit
+}
 
 # see 'man zshzle' for reporting the current vim mode
 function zle-keymap-select() {
