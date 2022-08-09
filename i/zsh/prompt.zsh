@@ -71,7 +71,7 @@ function {
         headers+=('%F{10}%m%f')  # host
     fi
     headers+=(
-        '%F{9}${VIRTUAL_ENV:+%B%b}%f'  # virtual env
+        '%F{4}${VIRTUAL_ENV:+}%f'  # virtual env
         '%(1j,%F{1} %j&%f,)'  # background jobs
         # '$(_prompt_sudo)'
         '%E%k'  # fill to end of line
