@@ -56,6 +56,32 @@ end
 
 function M.before() end
 
+local function famous_entry_maker(line)
+    return {
+        value = line,
+        display = line,
+        ordinal = line,
+        path = line,
+    }
+end
+
+local function find_famous_files(opts)
+    local pickers = require("telescope.pickers")
+    local finders = require("telescope.finders")
+    local conf = require("telescope.config").values
+
+    local famous_command = { "find-famous-files" }
+    opts = opts or {}
+    pickers.new(opts, {
+        prompt_title = "famous files",
+        finder = finders.new_oneshot_job(famous_command, {
+            entry_maker = famous_entry_maker,
+        }),
+        sorter = conf.generic_sorter(opts),
+        previewer = conf.grep_previewer(opts),
+    }):find()
+end
+
 function M.after()
     local telescope = require("telescope")
 
@@ -87,6 +113,7 @@ function M.after()
     -- TODO find files is pretty generic now, for some projects we might want to be more explicit?
     -- before had a .list-files in the root folder of those projects
     map("n", ",f", bi.find_files, { desc = "telescope find files" })
+    map("n", ",F", find_famous_files, { desc = "telescope find famous files" })
     map("n", ",g", bi.live_grep, { desc = "telescope live grep" })
     map("n", ",b", bi.buffers, { desc = "telescope buffers" })
     map("n", ",h", bi.help_tags, { desc = "telescope help tags" })
