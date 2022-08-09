@@ -92,11 +92,11 @@ function M.after()
     map("n", ",h", bi.help_tags, { desc = "telescope help tags" })
     map("n", ",m", bi.man_pages, { desc = "telescope man pages" })
 
-    map("n", ",.", bi.lsp_document_symbols, {desc="telescope document symbols"})
+    map("n", ",.", bi.lsp_document_symbols, { desc = "telescope document symbols" })
     --map("n", ",.", bi.current_buffer_fuzzy_find) -- TODO cool when there is no LSP?
     --map("n", ",.", bi.treesitter) -- TODO other alternative if no LSP?
     -- TODO see https://github.com/nvim-telescope/telescope.nvim/pull/705
-    map("n", ",,", bi.lsp_dynamic_workspace_symbols, {desc="telescope workspace symbols"})
+    map("n", ",,", bi.lsp_dynamic_workspace_symbols, { desc = "telescope workspace symbols" })
 end
 
 return M
