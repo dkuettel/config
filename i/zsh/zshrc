@@ -8,6 +8,8 @@
 
 alias src='source'
 # alias src='source ~/.zshrc.d/timed-source.zsh'
+# 'time zsh -dfic true' should use no startup files
+# but this is 1ms, and when I manually return first line in zshrc it's 17ms
 
 src ~/.zshrc.d/preferred-paths.zsh
 
