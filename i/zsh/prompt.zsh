@@ -77,6 +77,13 @@ function {
         '%E%k'  # fill to end of line
     )
     local edit='%F{15}${${${KEYMAP:-main}/vicmd/N}/(main|viins)/I}>%f '
+    # NOTE it's nice do do it with the join operator, but it's not always correct
+    # eg VENV can be empty, and then should not have a space on both sides?
+    # also host could be done with ${:...} instead of an if?
+    # actually I'm not sure if join-expansion maybe can ignore empty entries
+    # to test that need to move the color escape _inside_ the ${:} so it's actually empty
+    # ah no, it's never empty, that's before the expansion :)
+    # so back to manual spaces, but a join with nothing?
     PS1=$n$alerts$n${(j/ /)headers}$n$edit
 }
 
