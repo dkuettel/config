@@ -28,7 +28,9 @@ else
     src ~/.zshrc.d/command-not-found.zsh
     # TODO not sure if it was doing anything? just glue to the actual thing, and is that one even installed?
     # pretty cool https://github.com/mbrubeck/compleat , use for xpman? and others?
-    src ~/.zshrc.d/plugins/omz/plugins/compleat/compleat.plugin.zsh
+    # indeed not installed, not doing anything right now, not sure if needed
+    # but seems like an easy one to try for xpman maybe? unless cli has an exporter for zsh comp
+    # src ~/.zshrc.d/plugins/omz/plugins/compleat/compleat.plugin.zsh
 fi
 
 src ~/.zshrc.d/path.zsh
