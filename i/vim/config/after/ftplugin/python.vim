@@ -1,5 +1,11 @@
 " TODO is this still the right thing to do? a) .vim, and b) in after?
 
+setlocal
+    \ tabstop=4 softtabstop=4 shiftwidth=4
+    \ expandtab smarttab autoindent copyindent
+    \ textwidth=0
+    \ indentexpr= indentkeys=
+
 " NOTE triggered as soon as typing an non-keyword character (see iskeyword), not tab or something
 " if it stops working, it could be something remapped <enter> or <space>
 " ctrl-] in insert mode triggers completion without <enter> or <space>
