@@ -4,7 +4,8 @@ setlocal
     \ tabstop=4 softtabstop=4 shiftwidth=4
     \ expandtab smarttab autoindent copyindent
     \ textwidth=0
-    \ indentexpr= indentkeys=
+    \ indentexpr= indentkeys= cinkeys=
+    \ formatoptions=
 
 " NOTE triggered as soon as typing an non-keyword character (see iskeyword), not tab or something
 " if it stops working, it could be something remapped <enter> or <space>
