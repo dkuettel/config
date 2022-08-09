@@ -74,8 +74,12 @@ setopt interactive_comments # allow comments in interactive use
 setopt noautocd # dont assume an implicit cd prefix for folder names
 setopt no_list_beep # dont beep on incomplete/ambiguous completion
 export MANOPT='--no-justification --no-hyphenation'
+
 # NOTE slight impact on startup speed
-stty -ixon # disables flow control, allows to use ctrl-s in, eg, vim
+# stty -ixon # disables flow control, ctrl-s freezes, ctrl-q continues
+# plus it doesnt seem to matter anymore
+# 'vim -u NONE' freezes
+# but 'nvim -u NONE' does not freeze anymore
 
 # nvim as default editor
 export SUDO_EDITOR=nvim
