@@ -24,7 +24,8 @@ else
     src ~/.zshrc.d/omz-misc.zsh
     src ~/.zshrc.d/completion.zsh
     # TODO seems super simple, omz needed for that? and the next one as well?
-    src ~/.zshrc.d/plugins/omz/plugins/command-not-found/command-not-found.plugin.zsh
+    # src ~/.zshrc.d/plugins/omz/plugins/command-not-found/command-not-found.plugin.zsh
+    src ~/.zshrc.d/command-not-found.zsh
     # TODO not sure if it was doing anything? just glue to the actual thing, and is that one even installed?
     # pretty cool https://github.com/mbrubeck/compleat , use for xpman? and others?
     src ~/.zshrc.d/plugins/omz/plugins/compleat/compleat.plugin.zsh
