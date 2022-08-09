@@ -75,8 +75,12 @@ alias ffeh='feh --fullscreen --draw-filename --draw-tinted --font UbuntuMono-Bol
 # rsync copy with progress
 # todo not sure about $1/ or $1 semantics
 hcp () {
-    rsync -ah -L -r --info=progress2 $1 $2
+    # rsync -ah -L -r --info=progress2 $@
+    # trying different from https://github.com/ohmyzsh/ohmyzsh/blob/master/plugins/cp/cp.plugin.zsh
+    rsync -pogbr -hhh --backup-dir="/tmp/rsync-${USERNAME}" -e /dev/null --progress $@
 }
+# TODO could define compdef for completion for hcp
+# compdef _files cpv
 
 # tensorboard
 function tb {
