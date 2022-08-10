@@ -71,16 +71,9 @@ alias tailf='tail -F'
 alias feh='feh --auto-zoom --scale-down --draw-filename --draw-tinted --font UbuntuMono-Bold/35 --fontpath ~/.fonts'
 alias ffeh='feh --fullscreen --draw-filename --draw-tinted --font UbuntuMono-Bold/35 --fontpath ~/.fonts'
 
-# "human cp"
-# rsync copy with progress
-# todo not sure about $1/ or $1 semantics
-hcp () {
-    # rsync -ah -L -r --info=progress2 $@
-    # trying different from https://github.com/ohmyzsh/ohmyzsh/blob/master/plugins/cp/cp.plugin.zsh
-    rsync -pogbr -hhh --backup-dir="/tmp/rsync-${USERNAME}" -e /dev/null --progress $@
-}
-# TODO could define compdef for completion for hcp
-# compdef _files cpv
+# "human sync" with progress, but slash/no-slash semantics are not very human
+# TODO looks like newer coreutils (maybe on ubuntu 20.04) have a progress switch
+alias hsync='rsync -ah -L -r --info=progress2'
 
 # tensorboard
 function tb {
