@@ -37,19 +37,23 @@ export MANPAGER='nvim +Man!'
 # NOTE used to have https://github.com/zlsun/solarized-man for colors when not in vim
 
 # generically run python with some debug settings
-function debug {
-    (
-        case $1 in
-            (interactive|i) export PYTHONBREAKPOINT='ipdb.set_trace';;
-            (embed|e) export PYTHONBREAKPOINT='IPython.embed';;
-            (web|w) export PYTHONBREAKPOINT='web_pdb.set_trace';;
-            (0) export PYTHONBREAKPOINT='0';;
-            (*) echo "$1 is unknown" >&2; exit 1;;
-        esac
-        echo "  > using $PYTHONBREAKPOINT\n"
-        $@[2,-1]
-    )
-}
+alias py-i='PYTHONBREAKPOINT=ipdb.set_trace'
+alias py-e='PYTHONBREAKPOINT=IPython.embed'
+alias py-w='PYTHONBREAKPOINT=web_pdb.set_trace'
+alias py-0='PYTHONBREAKPOINT=0'
+# function debug {
+#     (
+#         case $1 in
+#             (interactive|i) export PYTHONBREAKPOINT='ipdb.set_trace';;
+#             (embed|e) export PYTHONBREAKPOINT='IPython.embed';;
+#             (web|w) export PYTHONBREAKPOINT='web_pdb.set_trace';;
+#             (0) export PYTHONBREAKPOINT='0';;
+#             (*) echo "$1 is unknown" >&2; exit 1;;
+#         esac
+#         echo "  > using $PYTHONBREAKPOINT\n"
+#         $@[2,-1]
+#     )
+# }
 
 function take {
     # mkdir and go there
