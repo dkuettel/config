@@ -30,7 +30,7 @@
     co- = !git checkout $(fzf-branch)
     c = commit
     cm = commit -m
-    f = fetch --all --prune
+    f = fetch --all --tags --prune
     fs = !git f && echo && git s
     m = merge
     p = push
