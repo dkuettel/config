@@ -49,12 +49,6 @@ function M.setup()
 
     -- could be cool
     -- nvim_treesitter#statusline(opts)
-
-    vim.keymap.set("n", ",ts", M.reload, {desc="treesitter reload"})
-end
-
-function M.reload()
-    dofile("/home/dkuettel/config/i/vim/config/lua/dk/treesitter.lua").play()
 end
 
 function M.play()
