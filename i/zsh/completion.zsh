@@ -6,6 +6,8 @@ setopt complete_in_word
 setopt always_to_end
 setopt auto_remove_slash
 
+ZLE_SPACE_SUFFIX_CHARS=$'&|'
+
 zstyle ':completion:*' verbose yes
 # TODO * vs *:default, unclear, both should work?
 zstyle ':completion:*:default' menu select
