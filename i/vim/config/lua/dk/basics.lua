@@ -63,6 +63,9 @@ function M.options()
     -- fixed by now, but no reason to keep it enabled usually
     opt.modeline = false
     opt.modelines = 0
+
+    -- mouse
+    opt.mouse = ""
 end
 
 function M.mappings()
