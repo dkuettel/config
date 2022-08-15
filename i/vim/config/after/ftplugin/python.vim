@@ -16,9 +16,7 @@ iabbrev <buffer> ifmain if __name__ == "__main__":
 iabbrev <buffer> nie() NotImplementedError()
 iabbrev <buffer> ## # TODO
 iabbrev <buffer> #$ # NOTE
-"iabbrev <buffer> definit def __init__(self):<enter><tab>super().__init__()
-" no tab for now because of auto indent, which not sure I want to keep
-iabbrev <buffer> definit def __init__(self):<enter>super().__init__()
+iabbrev <buffer> definit def __init__(self):<enter><tab>super().__init__()
 iabbrev <buffer> #i # pyright: ignore
 
 " TODO trying some shortcuts prefixed with shift-tab, shift-tab is never used, right?
