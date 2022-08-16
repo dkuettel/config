@@ -3,6 +3,6 @@ set -eu -o pipefail
 
 git branch -vv
 echo
-git -c advice.statusHintes=false status
+git -c advice.statusHintes=false status $@
 echo
 git -c pager.log=false stash list
