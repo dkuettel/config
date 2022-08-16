@@ -14,7 +14,7 @@ if [[ -e .venv ]]; then
 fi
 
 function setup {
-    virtualenv --python python3.9 .venv
+    python3.9 -m venv .venv
 
     # ignored means not uploading data
     # but unfortunately it still indexes everything (takes cpu time)
