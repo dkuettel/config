@@ -34,13 +34,6 @@ local function load()
     setup("indent-blankline")()
     setup("funky-formatter")()
 
-    -- vim.keymap.set(
-    --     "n",
-    --     ",R",
-    --     dofile("/home/dkuettel/config/i/vim/config/lua/dk/funky-formatter.lua").setup,
-    --     { desc = "reload funky formatter" }
-    -- )
-
     require("dk.basics").active_window()
 end
 
