@@ -32,7 +32,7 @@ function _git_status_for_prompt {
         /^Changes to be committed:/ { print "ﭜ"; flags++ }
         /^Changes not staged for commit:/ { print "ﱴ"; flags++ }
         /^Untracked files:/ { print ""; flags++ }
-        /^Your stash currently has / { print "" }
+        /^Your stash currently has / { print ""; flags++ }
         END {
             if (has==0) print ""
             if (has==1 && flags==0) print ""
