@@ -6,7 +6,6 @@ function M.setup()
     funky_formatter.setup({
         formatters = {
             python = { command = { "some-isort-and-black" } },
-            -- TODO black has "--fast" but it makes no different, the majority is black (0.23) not isort (0.06s)
             lua = { command = { "stylua", "--config-path", "./stylua.toml", "-" } },
             json = { command = { "jq" } },
         },
