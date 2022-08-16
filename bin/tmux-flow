@@ -1,7 +1,7 @@
 #!/bin/zsh
 set -eux -o pipefail
 
-# setup workspace for nn
+# setup workspace for flow (nn + an additional PATH entry)
 # name by first argument or current folder
 
 base=${1:-.}
@@ -12,7 +12,7 @@ envs=(
     -e workspace_active=yes
     -e workspace_home=$base
     -e h=$base
-    -e PATH=$HOME/config/bin/nn:$base/bin:$base/.venv/bin:$PATH
+    -e PATH=$HOME/config/bin/nn/flow:$HOME/config/bin/nn:$base/bin:$base/.venv/bin:$PATH
     -e VIRTUAL_ENV=$base/.venv
     -e PYTHONPATH=$base/python
 )
