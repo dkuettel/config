@@ -1,0 +1,38 @@
+#!/bin/zsh
+set -eu -o pipefail
+
+cmd=(
+    with-tb
+    #with-log docker.log  # doesnt work with debugging
+    #python3 ~/toys/vim-python-tracebacks/vimfix.py -im
+    python3 -m
+    nn.flow.train train
+    --out-folder=.
+    #--stream=pose-refinement/flow/training-data/test-port/3
+    #--stream=pose-refinement/flow/training-data/test-pose
+    --stream=pose-refinement/flow/training-data/classifier-now/0-vs-16to21
+    --channel-scale=0.5
+    --batchnorm
+    --no-batchnorm-predict-flow
+    --weight-decay=0.0002
+    --predict-variance=1d
+    --variance-1d-topology='[(64,3),(64,3),(64,3),(1,3)]'
+    --variance-1d-loss=ll-2d-gaussian
+    --weights-from=/efs/dkuettel/flow/tf2-training-2-smaller/grayscale-stream/training/variance/checkpoints/model-120000.h5
+
+    --predict-classifier-now
+    --classifier-now-topology=first
+    --losses=regularization,classifier_now
+    --trainable=classifier_now
+
+    #--predict-classifier-next
+    #--classifier-next-topology=first
+    #--losses=regularization,classifier_next
+    #--trainable=classifier_next
+
+    #--predict-classifier-improve
+    #--losses=regularization,classifier_improve
+    #--trainable=classifier_improve
+)
+
+run $cmd

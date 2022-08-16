@@ -1,0 +1,18 @@
+#!/bin/zsh
+set -eu -o pipefail
+
+cmd=(
+    # with-log docker.log
+    python3 -u -m
+    nn.flow.train test
+    --objects=cooper
+    --out-folder=.
+    --num-refinement-steps=3
+    --resolution="320wx192h"
+    --pose-solver="pnp"
+    --subset-subsample 16
+    --no-parallel-hack
+    --checkpoint=/efs/dkuettel/flom/FlowClassifierXp/d79149e35ef34b1790b54291102f019a/checkpoints/model-120000.h5
+)
+
+run $cmd

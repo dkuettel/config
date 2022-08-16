@@ -1,0 +1,139 @@
+#!/bin/zsh
+set -eu -o pipefail
+
+# we expect $h to be set in our current workspace tmux
+if [[ ! -v h ]]; then
+    echo 'env h is not set' >&2
+    exit 1
+fi
+
+# prepare host folders
+out=$(realpath out)
+[[ -d $out ]] && rm -r $out
+mkdir -p $out
+
+# docker arguments
+args=()
+
+# mount
+function mount {
+    args+=(--mount type=bind,source=${1:a},destination=$2)
+}
+
+# mount an nn relative path to /xp/src/nn
+function nn_mount  {
+    mount $h/$1 /xp/src/nn/$1
+}
+
+# "identity" mount a folder (meaning same path on host and in container)
+function id_mount {
+    mount ${1:a} ${1:a}
+}
+
+# interactive
+args+=(--interactive --tty --rm --detach-keys 'ctrl-@,x,x')
+#args+=(--env TERM --env SHELL)
+
+# docker in docker
+args+=(-v /var/run/docker.sock:/var/run/docker.sock)
+
+# x11 for rendering
+args+=(
+    --env DISPLAY=${DISPLAY:-:0}
+    -v=/tmp/.X11-unix:/tmp/.X11-unix:rw
+    --pid=host
+)
+
+# aws
+args+=(
+    --env AWS_ACCESS_KEY_ID=$(aws configure get aws_access_key_id)
+    --env AWS_SECRET_ACCESS_KEY=$(aws configure get aws_secret_access_key)
+    --env AWS_DEFAULT_REGION=eu-west-1
+) || (echo 'cannot get aws credentials'; exit 1)
+
+# s3 cache
+if [[ -e $h/s3-cache ]]; then
+    echo 'you might still have a project local s3-cache, we use a shared ~/envs/s3-cache now'
+    exit 1
+fi
+mkdir -p ~/envs/s3-cache
+mount ~/envs/s3-cache /xp/s3-cache
+args+=(
+    --env NN_S3_CACHE=/xp/s3-cache
+)
+
+# user
+args+=(--user $(id --user):$(id --group))
+
+# mounts
+if ! mountpoint --quiet /efs && ! mountpoint --quiet /efs/dkuettel; then
+    echo '/efs might not yet be mounted, attempting to mount' >&2
+    sshfs-efs
+fi
+id_mount /efs
+nn_mount .
+
+# out dir
+mount $out /xp/src/out
+args+=(--workdir=/xp/src/out)
+
+# ipython
+# TODO we need to map in config too, because symlinks go there, is that okay?
+id_mount ~/config
+mount ~/.ipython /home/dkuettel/.ipython
+
+# debuggers
+# TODO add to case as option below?
+# args+=(--env PYTHONBREAKPOINT='ipdb.set_trace')
+#args+=(--env PYTHONBREAKPOINT='IPython.embed')
+# needs pip3 install web-pdb
+#args+=(--env PYTHONBREAKPOINT='web_pdb.set_trace' -p 5555:5555)
+args+=(--env PYTHONBREAKPOINT)
+
+# vimfix and co
+#id_mount ~/toys/vim-python-tracebacks
+f=~/toys/vtrace/vtrace.py; [[ -e $f ]] && id_mount $f
+
+# probably not needed anymore
+# args+=(--env NN_USER=kuettel)
+
+# for with-tb
+# internally tb uses port 6006
+# externally we look for the next free one
+for i in $(seq 6006 6100); do
+    if [[ $i == 6100 ]]; then
+        echo 'Cannot find a free port for tensorboard.' >&2
+        exit 1
+    fi
+    if lsof -i :$i; then continue; fi
+    if docker ps | grep -F -- $i'->'; then continue; fi
+    echo "Tensorboard mapped to port $i."
+    args+=(-p $i:6006)
+    break
+done
+
+# TODO for speed mounting in local copy, but dangerous if out-of-date
+if [[ -d efs-models ]]; then
+    echo '*** NOTE: MOUNTING LOCAL EFS MODELS' >&2
+    mount efs-models /efs/hacharya/test_data/models
+fi
+
+if [[ -v more_args ]]; then
+    args+=($=more_args)
+fi
+
+if [[ $# == 0 ]]; then
+    cmd=(bash)
+else
+    cmd=($@)
+fi
+
+echo
+echo '** docker args:'
+echo $args
+echo
+echo '** command:'
+echo $cmd
+echo
+
+nvidia-docker run $args nn-dev:latest $cmd

@@ -1,0 +1,13 @@
+#!/bin/zsh
+set -eu -o pipefail
+
+at=${1:-/efs/dkuettel/flow/depthwise-convolution-xps/FlowEval/09f352f2040c491b8c6d9781caa742e5/xps.json}
+
+cmd=(
+    python3 -m
+    nn.flow.train raw-test-from-xps
+    --out-folder=.
+    --xps=$at
+)
+
+run $cmd

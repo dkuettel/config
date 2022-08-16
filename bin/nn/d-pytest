@@ -1,0 +1,19 @@
+#!/bin/zsh
+set -eu -o pipefail
+
+# NOTE can also run on kubernetes using 'x start pytest ...'
+if [[ $# == 0 ]]; then
+    cmd=(
+        # this is what CI runs
+        pytest -svv -m 'not slow'
+    )
+else
+    cmd=(
+        # NOTE arg 1 can look like 'mtar360/test_train_eval_runs.py::test_train_eval[mt360-style1]'
+        # that's what you get at the end of a summary for failed tests
+        pytest -svv $1
+    )
+    shift
+fi
+
+more_args='--workdir=/xp/src/nn/tests' run $cmd

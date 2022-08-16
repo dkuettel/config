@@ -1,0 +1,6 @@
+#!/bin/zsh
+set -eu -o pipefail
+
+# NOTE can also run on kubernetes using 'x start pytest ...'
+
+more_args='--workdir=/xp/src/nn/tests' run pytest -svv

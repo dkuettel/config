@@ -1,0 +1,42 @@
+#!/bin/zsh
+set -eu -o pipefail
+
+cmd=(
+    #with-log docker.log  # doesnt work with debugging
+    python3 -m
+    nn.flow.train train
+    --out-folder=.
+    #--stream=pose-refinement/flow/training-data/hemanth/occlusions/curriculum-none/hypo-normals/camera-grayscale/384s/noise-21/0
+    #--stream=pose-refinement/flow/training-data/test-pose
+    #--stream=pose-refinement/flow/training-data/dk/flow/noise-21-192hx230w
+    --stream=pose-refinement/flow/training-data/test-port/3
+    --channel-scale=0.5
+    --num-steps=50
+
+    #--predict-variance=1d
+
+    #--trainable
+    --losses=regularization,flow
+
+    --config-topology=MNasNetLike
+    #--backbone=MNasNetFlow
+
+    --downsamplers=DownsampleOriginal
+    #--downsamplers=DownsampleDepthAndPointwise
+    #--downsamplers=DownsampleSeparableConv2D
+    #--downsamplers=DownsampleSeparableConv2D_dm2
+    #--downsamplers=DownsampleSeparableConv2D_dm3
+    #--downsamplers=DownsampleSeparableConv2D@3
+
+    --upsamplers=UpsampleOriginal
+    #--upsamplers=UpsampleConv2D
+    #--upsamplers=UpsampleConv2D@2
+    #--upsamplers=UpsampleUpSampling2DAndSeparableConv2D
+    #--upsamplers=UpsamplePointwiseAndConv2DTranspose
+    #--upsamplers=UpsamplePointwiseAndStackedConv2DTranspose
+    #--upsamplers=UpsamplePointwiseAndUpSampling2DAndConv2DGrouped
+    #--upsamplers=UpsamplePointwiseAndUpSampling2DAndDepthwise
+
+)
+
+run $cmd

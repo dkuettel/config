@@ -1,0 +1,13 @@
+#!/bin/zsh
+set -eu -o pipefail
+
+cmd=(
+    #python3
+    python3 ~/toys/vtrace/vtrace.py run
+    -m nn.rendering.viewer
+    trainset
+    s3://e2e-benchmarking/training/AssemblyStates/lego-lighthouse-31051/all-shaded
+    #s3://e2e-benchmarking/training/AssemblyStates/delonghi-coffee-machine/all-recolored
+)
+
+run $cmd

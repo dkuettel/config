@@ -1,0 +1,14 @@
+#!/bin/zsh
+set -eu -o pipefail
+
+at=${1:-/efs/dkuettel/flom/FlowXp/cb70977aaf14426eb1f6f95466314423}
+
+cmd=(
+    python -m
+    nn.flow.train raw-train
+    --out-folder=.
+    --json64="$(base64 --wrap=0 $at/config.json)"
+    --num-steps=50
+)
+
+run $cmd

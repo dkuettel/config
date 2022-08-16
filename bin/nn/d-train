@@ -1,0 +1,29 @@
+#!/bin/zsh
+set -eu -o pipefail
+
+# TODO with-log could be a log arg here and then it's generic, but also make cmd+=() or set flag?
+cmd=(
+    # with-log docker.log
+    python3
+    -m nn.mtar360.eap1 train
+        mt360vis
+        --config-folder=s3://e2e-benchmarking/training/zurich-all-set/recolored
+        #--config-folder=s3://e2e-benchmarking/training/zurich-all-set/recolored-full360
+        #--config-folder=s3://e2e-benchmarking/training/Ender3DPrinter
+        --assembly=ktm.Right
+        #--assembly=continental.viewpoint_0000
+        #--assembly=ferrari_488_red.viewpoint_0000
+        #--assembly=Ender3DPrinter.viewpoint_0000
+        --out-folder=.
+        --short-training
+        # --update-template batchnorm_convergence.num_batches 10
+        --variable-length-training
+        # --sample-count-multiplier=2
+        # --gpu-count=4
+        # --update-template training.batch_recycling '{"shuffle_buffer_size": 10, "repeat_count": 2}'
+        # --integration-test
+        # --fp16-quantization
+        #--testsets=mtar360/all/recolored/v2
+)
+
+run $@

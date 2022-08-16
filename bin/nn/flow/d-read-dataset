@@ -1,0 +1,31 @@
+#!/bin/zsh
+set -eu -o pipefail
+
+cmd=(
+    python -m
+    nn.flow config
+    # --stream=pose-refinement/flow/training-data/test-port/3
+    # --stream=pose-refinement/flow/training-data/yi/negative-training-streams/noise-21/rms-extrinsics-matcher-negative-sample-ratio-0.2
+    --stream=pose-refinement/flow/training-data/hemanth/multiple_models/mm_ratio_1.0
+    --seed=0
+    --noise=21
+    #--noise-model=keypie
+    --resolution=384hx384w
+    #--resolution=384hx640w
+    # --resolution=192hx320w
+    --hypo-style=normals
+    --camera-style=recolored+background
+    --camera-grayscale
+    #--noise-distribution='0-vs-16to21'
+    #--classifier-now-data-hit-ratio=0.5
+    --negative-sample-ratio=0.4
+    #write-dataset
+    #--key=pose-refinement/flow/training-data/test-pose
+    #--worker-id=1
+    #--worker-count=2
+    #--resume
+    read-dataset
+    --out-folder=.
+)
+
+run $cmd

@@ -1,0 +1,20 @@
+#!/bin/zsh
+set -eu -o pipefail
+
+# NOTE this is roughly how cristi runs it, but with a different config.json
+cmd=(
+    #with-log docker.log
+    python3
+    -m nn.mtar360.eap1 train
+        --config-folder=s3://e2e-benchmarking/training/zurich-all-set/recolored
+        --out-folder=.
+        --assemblies=ktm.Right
+        --gpu-count=1
+        --variable-length-training
+        --integration-test
+        --centroid-pooling
+        --fp16-quantization
+        mt360vis
+    )
+
+run $cmd

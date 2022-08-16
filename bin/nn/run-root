@@ -1,0 +1,4 @@
+#!/bin/zsh
+set -eu -o pipefail
+
+more_args='--user 0:0' run $@
