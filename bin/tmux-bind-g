@@ -1,0 +1,5 @@
+#!/bin/zsh
+set -eux -o pipefail
+
+cmd=$@" ; read"
+tmux bind-key g split-window -h -c "#{pane_current_path}" zsh -ic $cmd
