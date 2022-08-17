@@ -17,25 +17,28 @@ function _git_status_for_prompt {
     # NOTE parsing like below is actually 2x faster than zsh's vcs_info
     # NOTE --porcelain=v1 would be preferred, but then --show-stash is ignored
     # NOTE some utf8 icons only worked when in tmux, double-check when using new ones
+    # theme:    ﭜ  
+    # theme:   ﯁﮾   
     local args=(--branch --ignore-submodules=all --untracked-files=normal --ahead-behind --show-stash)
     (git -c advice.statusHints=false status $args |& awk -v ORS='' '
-        BEGIN { has=1; flags=0; print " %F{3}" }
+        BEGIN { has=1; flags=0; stashed=0; print " %F{3}" }
         /^fatal: not a git repository/ { has=0 }
         /^On branch / { print " " $3 " " }
         /^HEAD detached at / { print " " $4 " " }
         /^Your branch is up to date with / { }
-        /^Your branch is ahead of / { print ""; flags++ }
-        /^Your branch is behind / { print ""; flags++ }
-        /^Your branch and .+ have diverged/ { print ""; flags++ }
+        /^Your branch is ahead of / { print " "; flags++ }
+        /^Your branch is behind / { print " "; flags++ }
+        /^Your branch and .+ have diverged/ { print " "; flags++ }
         /^nothing to commit, working tree clean/ { }
         /^Unmerged paths:/ { if (flags>0) {print ""; flags++} }
-        /^Changes to be committed:/ { print "ﭜ"; flags++ }
-        /^Changes not staged for commit:/ { print "ﱴ"; flags++ }
+        /^Changes to be committed:/ { print ""; flags++ }
+        /^Changes not staged for commit:/ { print "ﭜ"; flags++ }
         /^Untracked files:/ { print ""; flags++ }
-        /^Your stash currently has / { print ""; flags++ }
+        /^Your stash currently has / { stashed=1 }
         END {
             if (has==0) print ""
             if (has==1 && flags==0) print ""
+            if (has==1 && stashed==1) print " "
             print "%f"
         }
     ') || true
