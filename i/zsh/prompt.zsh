@@ -10,7 +10,7 @@ function _git_status_for_prompt {
     # could use 'timeout --kill-after=0.01s 0.01s cmd' to stop git info when it takes too long on a slow filesystem
     if [[ $(pwd -P) == /efs/* ]]; then
         # NOTE above takes any pattern, so something|otherthing|morestuff works instead of a list
-        echo '%F{3}%f'
+        echo ' %F{3}%f'
         return
     fi
     # NOTE plain 'git status' with no arguments can be slow because it checks all submodules
@@ -19,7 +19,7 @@ function _git_status_for_prompt {
     # NOTE some utf8 icons only worked when in tmux, double-check when using new ones
     local args=(--branch --ignore-submodules=all --untracked-files=normal --ahead-behind --show-stash)
     (git -c advice.statusHints=false status $args |& awk -v ORS='' '
-        BEGIN { has=1; flags=0; print "%F{3}" }
+        BEGIN { has=1; flags=0; print " %F{3}" }
         /^fatal: not a git repository/ { has=0 }
         /^On branch / { print " " $3 " " }
         /^HEAD detached at / { print " " $4 " " }
@@ -63,28 +63,22 @@ function {
     local alerts='%(?,,%F{1}%Sexit code = %?'$n'%s%f)'
     local headers=(
         '%K{0}'  # background color for the header line
-        '%F{4}%B%40<…<%~%<<%b%f'  # current folder (truncated if long)
+        ' %F{4}%B%40<…<%~%<<%b%f'  # current folder (truncated if long)
         '$(_git_status_for_prompt)'
-        '%F{10}%*%f'  # time
+        ' %F{10}%*%f'  # time
     )
     if [[ ! -v TMUX ]]; then
-        headers+=('%F{10}%m%f')  # host
+        # tmux shows host in the left bottom
+        headers+=(' %F{10}%m%f')  # host
     fi
     headers+=(
-        '%F{4}${VIRTUAL_ENV:+}%f'  # virtual env
-        '%(1j,%F{1} %j&%f,)'  # background jobs
+        '%F{4}${VIRTUAL_ENV:+ }%f'  # virtual env
+        '%(1j, %F{1}%j&%f,)'  # background jobs
         # '$(_prompt_sudo)'
         '%E%k'  # fill to end of line
     )
     local edit='%F{15}${${${KEYMAP:-main}/vicmd/N}/(main|viins)/I}>%f '
-    # NOTE it's nice do do it with the join operator, but it's not always correct
-    # eg VENV can be empty, and then should not have a space on both sides?
-    # also host could be done with ${:...} instead of an if?
-    # actually I'm not sure if join-expansion maybe can ignore empty entries
-    # to test that need to move the color escape _inside_ the ${:} so it's actually empty
-    # ah no, it's never empty, that's before the expansion :)
-    # so back to manual spaces, but a join with nothing?
-    PS1=$n$alerts$n${(j/ /)headers}$n$edit
+    PS1=$n$alerts$n${(j//)headers}$n$edit
 }
 
 
