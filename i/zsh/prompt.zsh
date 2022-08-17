@@ -62,8 +62,8 @@ function {
     local n=$'\n'
     local alerts='%(?,,%F{1}%Sexit code = %?'$n'%s%f)'
     local headers=(
-        '%K{0}%F{4}%B'  # colors and bold
-        '%~%b%f'  # current folder
+        '%K{0}'  # background color for the header line
+        '%F{4}%B%40<…<%~%<<%b%f'  # current folder (truncated if long)
         '$(_git_status_for_prompt)'
         '%F{10}%*%f'  # time
     )
