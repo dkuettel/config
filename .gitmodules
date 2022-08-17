@@ -139,3 +139,6 @@
 [submodule "i/zsh/plugins/zsh-syntax-highlighting"]
 	path = i/zsh/plugins/zsh-syntax-highlighting
 	url = https://github.com/zsh-users/zsh-syntax-highlighting.git
+[submodule "i/vim/config/pack/plugins/opt/vim-fugitive"]
+	path = i/vim/config/pack/plugins/opt/vim-fugitive
+	url = https://github.com/tpope/vim-fugitive.git
