@@ -1,6 +1,10 @@
 local M = {}
 
 local function callback(context)
+    if vim.bo.buftype ~= "" then
+        -- special buffers (help, terminal, popups, ...) dont need saving
+        return
+    end
     if string.find(context.file, "^/efs/") ~= nil then
         return
     end
