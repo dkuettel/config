@@ -5,7 +5,7 @@ function M.setup()
     local funky_formatter = require("funky-formatter")
     funky_formatter.setup({
         formatters = {
-            python = { command = { "some-isort-and-black" } },
+            python = { command = { "isort-and-black" } },
             lua = { command = { "stylua", "--config-path", "./stylua.toml", "-" } },
             json = { command = { "jq" } },
         },

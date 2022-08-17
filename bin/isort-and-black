@@ -1,0 +1,8 @@
+#!/bin/zsh
+set -eu -o pipefail
+
+# run isort and black
+# usually used with an active venv, but not strictly needed
+# TODO black has "--fast" but it makes no difference, the majority is black (0.23s) not isort (0.06s)
+
+isort --profile=black --combine-as - | black --quiet --target-version=py39 -
