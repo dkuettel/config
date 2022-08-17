@@ -1,4 +1,4 @@
 #!/bin/zsh
 set -eu -o pipefail
 
-fdfind . ${0:A:h}
+fdfind . ~/dbox/notes
