@@ -8,8 +8,9 @@ local function callback(context)
     if string.find(context.file, "^/efs/") ~= nil then
         return
     end
-    -- update() only saves if the file has been modified, no-op otherwise
-    vim.cmd.update()
+    -- :update only saves if the file has been modified, no-op otherwise
+    -- :silent prevents "xyz bytes write" from popping up everytime, but also hides error messages
+    vim.cmd("silent update")
 end
 
 function M.setup()
