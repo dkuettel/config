@@ -5,6 +5,11 @@ local function callback(context)
         -- special buffers (help, terminal, popups, ...) dont need saving
         return
     end
+    if vim.bo.filetype == "NeogitCommitMessage" then
+        -- for some reason autosave there causes git's temporary
+        -- comments below the message to be included in the final message
+        return
+    end
     if string.find(context.file, "^/efs/") ~= nil then
         return
     end
