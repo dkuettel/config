@@ -56,7 +56,14 @@ function M.show_window()
 end
 
 -- zen low-flicker indication of file status (unsaved, saved, read-only)
-M.file_icons = { missing = "", modified = "", unmodified = "", read_only = "" }
+M.file_icons = {
+    missing = "",
+    modified = "",
+    unmodified = "",
+    read_only = "",
+    autosave = "",
+    no_autosave = "",
+}
 function M.show_file()
     local icon = nil
     if vim.bo.modifiable then
@@ -72,9 +79,15 @@ function M.show_file()
     else
         icon = M.file_icons.read_only
     end
+    local autosave = nil
+    if vim.b.autosave == true then
+        autosave = M.file_icons.autosave
+    else
+        autosave = M.file_icons.no_autosave
+    end
     -- based on https://github.com/nvim-lualine/lualine.nvim/blob/master/lua/lualine/components/filename.lua
     local name = require("lualine.utils.utils").stl_escape(vim.fn.expand("%:t"))
-    return icon .. " " .. name
+    return icon .. autosave .. " " .. name
 end
 
 -- zen low-flicker indication of lsp activity (no lsp, busy lsp, idle lsp)
