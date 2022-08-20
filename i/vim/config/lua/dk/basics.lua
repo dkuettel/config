@@ -50,6 +50,10 @@ function M.options()
     opt.listchars = { tab = "› ", trail = "•", precedes = "◂", extends = "▸", nbsp = "¿" }
     opt.list = true
 
+    -- fillchars for diff
+    -- NOTE that's not a normal forward slash, but a tile-able one
+    opt.fillchars:append({diff=""})
+
     -- wrapped lines
     opt.wrap = false
     opt.linebreak = true
