@@ -57,24 +57,19 @@ end
 
 -- zen low-flicker indication of file status (unsaved, saved, read-only)
 M.file_icons = {
-    missing = "",
     modified = "",
     unmodified = "",
     read_only = "",
-    autosave = "",
-    no_autosave = "",
+    autosave = "",
+    no_autosave = " ",
 }
 function M.show_file()
     local icon = nil
     if vim.bo.modifiable then
-        if vim.fn.filereadable(vim.fn.expand("%")) == 1 then
-            if vim.bo.modified then
-                icon = M.file_icons.modified
-            else
-                icon = M.file_icons.unmodified
-            end
+        if vim.bo.modified then
+            icon = M.file_icons.modified
         else
-            icon = M.file_icons.missing
+            icon = M.file_icons.unmodified
         end
     else
         icon = M.file_icons.read_only
