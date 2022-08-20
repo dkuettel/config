@@ -1,6 +1,8 @@
 #!/bin/zsh
 set -eux -o pipefail
 
+# NOTE ubuntu 20.04 default git version was around 2.25.1
+sudo add-apt-repository -yu ppa:git-core/ppa
 sudo apt-get install -yqq git
 
 ln -sfT ~/config/i/git/gitconfig ~/.gitconfig
