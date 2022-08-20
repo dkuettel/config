@@ -58,9 +58,6 @@
 [submodule "i/vim/config/pack/plugins/opt/cmp_luasnip"]
 	path = i/vim/config/pack/plugins/opt/cmp_luasnip
 	url = https://github.com/saadparwaiz1/cmp_luasnip
-[submodule "i/vim/config/pack/plugins/opt/diffview.nvim"]
-	path = i/vim/config/pack/plugins/opt/diffview.nvim
-	url = https://github.com/sindrets/diffview.nvim.git
 [submodule "i/vim/config/pack/plugins/opt/everforest"]
 	path = i/vim/config/pack/plugins/opt/everforest
 	url = https://github.com/sainnhe/everforest.git
@@ -79,9 +76,6 @@
 [submodule "i/vim/config/pack/plugins/opt/lualine.nvim"]
 	path = i/vim/config/pack/plugins/opt/lualine.nvim
 	url = https://github.com/nvim-lualine/lualine.nvim
-[submodule "i/vim/config/pack/plugins/opt/neogit"]
-	path = i/vim/config/pack/plugins/opt/neogit
-	url = https://github.com/TimUntersberger/neogit.git
 [submodule "i/vim/config/pack/plugins/opt/null-ls.nvim"]
 	path = i/vim/config/pack/plugins/opt/null-ls.nvim
 	url = https://github.com/jose-elias-alvarez/null-ls.nvim.git

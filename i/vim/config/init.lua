@@ -30,7 +30,6 @@ local function load()
     setup("hop")()
     setup("gitsigns")()
     setup("comment")()
-    -- setup("neogit")()  -- trying fugitive again
     setup("fugitive")()
     setup("indent-blankline")()
     setup("funky-formatter")()
