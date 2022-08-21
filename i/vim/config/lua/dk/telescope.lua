@@ -122,6 +122,7 @@ function M.after()
     map("n", ",b", bi.buffers, { desc = "telescope buffers" })
     map("n", ",h", bi.help_tags, { desc = "telescope help tags" })
     map("n", ",m", bi.man_pages, { desc = "telescope man pages" })
+    map("n", ",cc", bi.commands, { desc = "telescope vim commands" })
 
     map("n", ",.", bi.lsp_document_symbols, { desc = "telescope document symbols" })
     --map("n", ",.", bi.current_buffer_fuzzy_find) -- TODO cool when there is no LSP?
