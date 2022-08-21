@@ -1,12 +1,9 @@
 local M = {}
 
 function M.setup()
-    -- dependencies
-    do
-        -- https://github.com/kyazdani42/nvim-web-devicons
-        -- also requires patched fonts, like nerdfonts
-        vim.cmd("packadd nvim-web-devicons")
-    end
+    -- https://github.com/kyazdani42/nvim-web-devicons
+    -- also requires patched fonts, like nerdfonts
+    vim.cmd("packadd nvim-web-devicons")
 
     -- https://github.com/nvim-lualine/lualine.nvim
     vim.cmd("packadd lualine.nvim")
@@ -19,7 +16,7 @@ function M.setup()
             icons_enabled = true,
             component_separators = "",
             section_separators = { left = "", right = "" },
-            globalstatus = false, -- could be cool, but looks broken when I try it
+            globalstatus = false, -- doesnt really save space
         },
         sections = {
             lualine_a = { M.show_window, M.show_file },
@@ -63,6 +60,7 @@ M.file_icons = {
     autosave = "",
     no_autosave = " ",
 }
+
 function M.show_file()
     local icon = nil
     if vim.bo.modifiable then
@@ -74,15 +72,44 @@ function M.show_file()
     else
         icon = M.file_icons.read_only
     end
+
     local autosave = nil
     if vim.b.autosave == true then
         autosave = M.file_icons.autosave
     else
         autosave = M.file_icons.no_autosave
     end
-    -- based on https://github.com/nvim-lualine/lualine.nvim/blob/master/lua/lualine/components/filename.lua
-    local name = require("lualine.utils.utils").stl_escape(vim.fn.expand("%:t"))
-    return icon .. autosave .. " " .. name
+
+    local name = vim.api.nvim_buf_get_name(0)
+    local protocol = string.match(name, "^(.+)://")
+    if protocol == nil then
+    elseif protocol == "fugitive" then
+        -- fugitive:///home/dkuettel/config/.git// (fugitive summary)
+        local summary = string.match(name, "git//$")
+        -- fugitive:///home/dkuettel/config/.git//3a345fe9e565ba14ed8967927cd4f991af2fe9e3/i/git/setup (at commit)
+        -- fugitive:///home/dkuettel/config/.git//0/i/git/setup (thats always [index] in a diff?)
+        local at = string.match(name, "git//(%w+)/")
+        if summary ~= nil then
+            protocol = protocol .. "@summary"
+        elseif at ~= nil then
+            protocol = protocol .. "@" .. string.sub(at, 1, 7)
+        else
+            protocol = protocol .. "@?"
+        end
+    else
+        protocol = protocol .. "?"
+    end
+
+    if protocol == nil then
+        protocol = ""
+    else
+        protocol = protocol .. "://"
+    end
+
+    -- NOTE we might have to escape things that we dont control
+    -- like require("lualine.utils.utils").stl_escape(vim.fn.expand("%:t"))
+    -- TODO but wondering if lualine is even necessary, statusline gives enough control already
+    return icon .. autosave .. " " .. protocol .. "%t"
 end
 
 -- zen low-flicker indication of lsp activity (no lsp, busy lsp, idle lsp)
