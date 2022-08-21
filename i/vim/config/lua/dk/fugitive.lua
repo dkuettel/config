@@ -9,7 +9,7 @@ function M.setup()
     -- https://github.com/TimUntersberger/neogit but not very mature, yet?
     -- https://github.com/sindrets/diffview.nvim but only for viewing, not staging?
 
-    vim.keymap.set("n", "<space>g", ":tab Git<enter>")
+    vim.keymap.set("n", ",gs", ":tab Git<enter>")
 
     -- NOTE shortcuts to remember or maybe remap if easier to remember
     -- in summary git status overview
