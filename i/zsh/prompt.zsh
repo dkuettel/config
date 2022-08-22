@@ -26,9 +26,9 @@ function _git_status_for_prompt {
         /^On branch / { print " " $3 " " }
         /^HEAD detached at / { print " " $4 " " }
         /^Your branch is up to date with / { }
-        /^Your branch is ahead of / { print " "; flags++ }
-        /^Your branch is behind / { print " "; flags++ }
-        /^Your branch and .+ have diverged/ { print " "; flags++ }
+        /^Your branch is ahead of / { print " " }
+        /^Your branch is behind / { print " " }
+        /^Your branch and .+ have diverged/ { print " " }
         /^nothing to commit, working tree clean/ { }
         /^Unmerged paths:/ { if (flags>0) {print ""; flags++} }
         /^Changes to be committed:/ { print ""; flags++ }
