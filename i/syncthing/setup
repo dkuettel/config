@@ -1,6 +1,9 @@
 #!/bin/zsh
 set -eux -o pipefail
 
+echo 'currently not using syncthing' 1>&2
+exit 1
+
 # https://docs.syncthing.net/intro/getting-started.html
 # ubuntu repo has a very old version
 # snap seems pretty up-to-date versions but doesn't correctly setup a systemd service for me
