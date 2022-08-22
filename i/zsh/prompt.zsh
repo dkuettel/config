@@ -30,7 +30,7 @@ function _git_status_for_prompt {
         /^Your branch is behind / { print " " }
         /^Your branch and .+ have diverged/ { print " " }
         /^nothing to commit, working tree clean/ { }
-        /^Unmerged paths:/ { if (flags>0) {print ""; flags++} }
+        /^Unmerged paths:/ { print ""; flags++ }
         /^Changes to be committed:/ { print ""; flags++ }
         /^Changes not staged for commit:/ { print "ﭜ"; flags++ }
         /^Untracked files:/ { print ""; flags++ }
