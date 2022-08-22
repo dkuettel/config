@@ -129,6 +129,11 @@ function M.after()
     --map("n", ",.", bi.treesitter) -- TODO other alternative if no LSP?
     -- TODO see https://github.com/nvim-telescope/telescope.nvim/pull/705
     map("n", ",,", bi.lsp_dynamic_workspace_symbols, { desc = "telescope workspace symbols" })
+
+    -- TODO check slow finder regression again
+    -- map("n", ",s", function(opts)
+    --     find_from_command({ "test-telescope" }, "test slow", opts)
+    -- end, { desc = "test slow" })
 end
 
 return M
