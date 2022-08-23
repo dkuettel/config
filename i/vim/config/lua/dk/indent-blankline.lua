@@ -9,8 +9,13 @@ end
 function M.simple()
     vim.opt.list = true
     -- vim.opt.listchars:append("eol:↴")
+    vim.cmd([[highlight IndentBlanklineIndent1 guifg=#d5c4a1 gui=nocombine]])
     require("indent_blankline").setup({
         show_end_of_line = false,
+        char = "",
+        char_highlight_list = {
+            "IndentBlanklineIndent1",
+        },
     })
 end
 
@@ -82,6 +87,27 @@ function M.with_context()
         space_char_blankline = " ",
         show_current_context = true,
         show_current_context_start = true,
+    })
+end
+
+function M.with_blocks()
+    vim.opt.termguicolors = true
+    vim.cmd([[
+        highlight IndentBlanklineIndent1 guibg=#f9f5d7 gui=nocombine
+        highlight IndentBlanklineIndent2 guibg=#f2e5bc gui=nocombine
+    ]])
+
+    require("indent_blankline").setup({
+        char = "",
+        char_highlight_list = {
+            "IndentBlanklineIndent1",
+            "IndentBlanklineIndent2",
+        },
+        space_char_highlight_list = {
+            "IndentBlanklineIndent1",
+            "IndentBlanklineIndent2",
+        },
+        show_trailing_blankline_indent = false,
     })
 end
 
