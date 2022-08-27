@@ -8,6 +8,7 @@ function M.setup()
     M.cursorline()
     M.iabbrevs()
     M.session()
+    M.new_zsh()
     -- M.active_window()
 end
 
@@ -212,6 +213,23 @@ function M.session()
     if os.getenv("vim_is_in_session") == "yes" then
         vim.cmd("autocmd VimLeave * execute 'mksession!'")
     end
+end
+
+local function cmd_new_zsh(args)
+    local reply = vim.fn.system({ "new-zsh", args.args })
+    if vim.v.shell_error ~= 0 then
+        print("new-zsh failed: " .. reply)
+    else
+        vim.cmd("edit + " .. args.args)
+    end
+end
+
+function M.new_zsh()
+    vim.api.nvim_create_user_command(
+        "NewZsh",
+        cmd_new_zsh,
+        { nargs = 1, complete = "file", desc = "Create an executable zsh script and open for editing." }
+    )
 end
 
 return M
