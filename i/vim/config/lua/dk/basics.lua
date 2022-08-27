@@ -53,7 +53,7 @@ function M.options()
 
     -- fillchars for diff
     -- NOTE that's not a normal forward slash, but a tile-able one
-    opt.fillchars:append({diff=""})
+    opt.fillchars:append({ diff = "" })
 
     -- wrapped lines
     opt.wrap = false
