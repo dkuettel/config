@@ -1,0 +1,13 @@
+#!/bin/zsh
+set -eux -o pipefail
+
+# run a quick temporary multipass instance
+# delete it when exiting
+
+name=test-$(date '+%F-%Hh%Mm%Ss')
+version=22.04
+
+multipass launch --name $name $version
+multipass shell $name
+multipass delete $name
+multipass purge
