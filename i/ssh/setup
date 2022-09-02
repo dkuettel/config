@@ -24,19 +24,6 @@ ln -sfT \
     ~/config/i/ssh/config \
     ~/.ssh/config
 
-# check if the usual keys are here
-expected_keys=(
-    id_rsa id_rsa.pub
-    private_git_id_rsa private_git_id_rsa.pub
-    ptc_git_id_rsa ptc_git_id_rsa.pub
-)
-for key in $expected_keys; do
-    if [[ ! -e ~/.ssh/$key ]]; then
-        echo "~/.ssh/$key is missing" >&2
-        exit 1
-    fi
-done
-
 # install message of the day
 sudo chmod -x /etc/update-motd.d/*
 sudo ln -sfT $base/motd /etc/update-motd.d/99-$USER
