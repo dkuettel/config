@@ -26,19 +26,14 @@ target=$1:$match[2]
 
 case $target in
 
-    (git@bitbucket.org:dkuettel/* | git@github.com:dkuettel/*)
-        key=private_git_id_rsa
-        user="Daniel Kuettel dkuettel@gmail.com"
-        ;;
-
     (git@github.com:ThingWorx/* | git@github.com:ptc-*/*)
         key=ptc_git_id_rsa
         user="Daniel Kuettel dkuettel@ptc.com"
         ;;
 
     (*)
-        echo 'no match for' $target >&2
-        exit 1
+        key=id_rsa
+        user="Daniel Kuettel dkuettel@gmail.com"
         ;;
 
 esac
@@ -54,5 +49,5 @@ if [[ -e .git && -v user ]]; then
     fi
 fi
 
-echo $target '->' $key >&2
+# echo $target '->' $key >&2
 ssh -i ~/.ssh/$key $@
