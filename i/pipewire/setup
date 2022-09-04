@@ -8,15 +8,22 @@ set -eux -o pipefail
 # so eventually it might be working
 # not yet as of 2021-08-28 and version 13.99.1
 
+# TODO 22.04 uses pipewire by default? should it then be in the official repo?
 sudo add-apt-repository -y ppa:pipewire-debian/pipewire-upstream
 sudo apt update
-sudo apt install -y pipewire
-sudo apt install -y libspa-0.2-bluetooth
-sudo apt install -y pipewire-audio-client-libraries
+apts=(
+    pavucontrol  # gui
+    blueman  # bluetooth
+    pulseaudio-utils  # pacmd
+    pipewire
+    libspa-0.2-bluetooth
+    pipewire-audio-client-libraries
+)
+sudo apt install -qy $apts
 
 systemctl --user daemon-reload
-systemctl --user --now disable pulseaudio.service pulseaudio.socket
-systemctl --user mask pulseaudio
+systemctl --user --now disable pulseaudio.service pulseaudio.socket || true
+systemctl --user mask pulseaudio || true
 systemctl --user --now enable pipewire-media-session.service
 
 if apt list --installed | grep 'ofono'; then
