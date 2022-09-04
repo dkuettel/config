@@ -1,19 +1,14 @@
-#!/bin/bash
+#!/bin/zsh
 set -eux -o pipefail
-
-# switch to zsh
-if [ -z ${ZSH_VERSION+1} ]; then
-    which zsh || sudo apt-get install -qqy zsh
-    exec zsh $0
-fi
 
 base=${0:a:h}
 
 i=(
+    zsh # technically, but of course it's already installed
     zsh-doc # gnu info and html formats? maybe not needed
     git # git info in prompt
 )
-sudo apt-get install -qqy $i
+sudo apt-get install -qy $i
 
 # todo doesn't seem to take effect in the current session (tmux session?)
 sudo chsh -s $(which zsh) $(whoami)
