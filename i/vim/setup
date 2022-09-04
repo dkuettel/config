@@ -8,7 +8,7 @@ cd $h
 mkdir -p ~/.config
 ln -sfT $h/config ~/.config/nvim
 
-(
+( # make sure no old left-overs from previous nvims with plugin managers
     # there is also ~/.local/share/nvim which contains transient data
     # but there should not be too much, especially from an old installiation
     # since things are sourced by nvim
@@ -20,6 +20,75 @@ ln -sfT $h/config ~/.config/nvim
     done
 )
 
-./install
-./plugins
+( # compile and install nvim
+    cd $h/nvim
 
+    sudo apt-get install -yqq ninja-build gettext libtool libtool-bin autoconf automake cmake g++ pkg-config unzip
+
+    make distclean
+    make CMAKE_BUILD_TYPE=Release
+    sudo make install
+)
+
+( # plugins and other dependencies
+
+    # dependencies for some plugins
+    pip3 install black pynvim isort black
+
+    ( # treesitter
+        # cd $h/config/pack/plugins/opt/nvim-treesitter
+    )
+
+    ( # telescope & co
+        cd $h/config/pack/plugins/opt/telescope.nvim
+        sudo apt-get -y install fd-find ripgrep
+        cd $h/config/pack/plugins/opt/telescope-fzf-native.nvim
+        make
+    )
+
+    ( # pyright for python lsp
+        if ! which pyright-langserver; then
+            npm install -g pyright
+        fi
+    )
+
+    ( # stylua and sumneko for lua
+        # downloaded from https://github.com/JohnnyMorganz/StyLua/releases
+        # but how to detect or go and update to newer versions? or git?
+        if [[ ! -e ~/bin/stylua ]]; then
+            cd ~/bin
+            wget -O ~/bin/stylua.zip 'https://github.com/JohnnyMorganz/StyLua/releases/download/v0.13.0/stylua-linux.zip'
+            unzip stylua.zip stylua
+            rm stylua.zip
+            chmod +x stylua
+        fi
+
+        # downloaded prebuilt from https://github.com/sumneko/lua-language-server/releases
+        # but how to detect or go and update to newer versions? or git?
+        if [[ ! -e ~/bin/sumneko ]]; then
+            mkdir -p ~/bin/sumneko
+            cd ~/bin/sumneko
+            wget -O lls.tar.gz 'https://github.com/sumneko/lua-language-server/releases/download/2.6.7/lua-language-server-2.6.7-linux-x64.tar.gz'
+            tar xzf lls.tar.gz
+            rm lls.tar.gz
+        fi
+    )
+
+)
+
+# ex commands to finalize plugins and vim config
+# NOTE treesitter installs take long, some might fail with "xyz not a gzip"
+# this is because gitlab or others could be in maintenance or down
+# but nvim-treesitter just downloads whatever it gets, even the error page
+# and then tar complains that it's not gzip data
+# I dont have a good way to work around that, it will fail
+# would be nice if we could install that stuff outside vim anyway
+# also 'TSInstallSync!' forces reinstall, but in turn doesnt ask yes/no questions, so it might be more scripty?
+# TODO would be nice if we somehow at least before the below make a check if gitlab or others are down to make the error less cryptic
+# see https://status.gitlab.com/
+nvim -V1 -es <<- 'EOF'
+    lua require("dk.treesitter").setup()
+    TSInstallSync all
+    TSUpdateSync
+    helptags ALL
+EOF
