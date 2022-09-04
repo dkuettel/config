@@ -1,4 +1,4 @@
 #!/bin/zsh
 set -eux -o pipefail
 
-/snap/bin/vlc --config ~/config/i/vlc/vlcrc $@
+/usr/bin/vlc --config ~/config/i/vlc/vlcrc $@

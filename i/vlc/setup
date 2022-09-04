@@ -1,7 +1,14 @@
 #!/bin/zsh
 set -eux -o pipefail
 
-sudo snap install vlc
+# NOTE 'sudo snap install vlc' provides usually a newer version
+# but snaps just dont work so nicely sometimes, slow startup and maybe other things
+# the apt version is new enough
+# on https://wiki.videolan.org/Documentation:Installing_VLC/
+# there is a repository but it doesnt seem updated and/or secure
 
-# TODO we start vlc with the --config option, symlinking doesnt work, vlc replaces the symlink
-# config by default is in ~/snap/vlc/common/vlcrc
+sudo apt-get install -qy vlc
+
+# NOTE we start vlc with the --config option to use our config
+# symlinking a config doesnt work, because vlc replaces the symlink
+# snap config by default was in ~/snap/vlc/common/vlcrc
