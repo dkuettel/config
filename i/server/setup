@@ -1,12 +1,5 @@
-#!/bin/bash
+#!/bin/zsh
 set -eux -o pipefail
-
-$(dirname $0)/../zsh/setup
-
-# switch to zsh
-if [ -z ${ZSH_VERSION+1} ]; then
-    exec zsh $0
-fi
 
 cd ${0:a:h}
 
@@ -16,21 +9,26 @@ if (git submodule | grep '^-'); then
     exit 1
 fi
 
-# pip3 needs this, after setup it's in the zsh config
-export PATH=$HOME/.local/bin:$PATH
+../zsh/setup
+source ../zsh/path.zsh
 
 # do this early so we dont get LC_* warnings and slow regeneration
 ../locales/setup
-export LANG=en_US.UTF-8
-export LC_ALL=
+# TODO or just source zshrc or something? split op zshrc in things that I want to reuse here?
+export LC_ALL=en_US.UTF-8
+# export LANG=en_US.UTF-8
+# export LC_ALL=
 
-# switch to HWE for ubuntu 20.04
-# https://wiki.ubuntu.com/Kernel/LTSEnablementStack
+export DEBIAN_FRONTEND=noninteractive
+export NEEDRESTART_MODE=a
+
 sudo apt-get update
-sudo apt-get upgrade -qqy
-# todo install and autoremove have some interactive popups that ask keep local or update (local seems ok)
-# (at least on ec2 ubuntu that happens), could make more unattended?
-sudo apt-get install -qqy --install-recommends linux-generic-hwe-20.04
+sudo apt-get upgrade -qy
+
+# switch to hwe kernels (rolling updates)
+# see https://wiki.ubuntu.com/Kernel/LTSEnablementStack
+# linux-generic is fixed stable kernel, linux-generic-hwe-* is rolling kernel, *-edge is preview rolling kernel
+sudo apt-get install -qy --install-recommends linux-generic-hwe-$(lsb_release --short --release)
 sudo apt-get remove -y linux-generic
 sudo apt-get autoremove -y
 
@@ -43,35 +41,37 @@ sudo apt-get autoremove -y
 sudo timedatectl set-timezone Europe/Zurich
 
 # apt installs (sorted)
-i=()
-#i+=dtrx # easy and clean archive extraction  # todo gone?
-#i+=lm-sensors # check hardware temperatures
-#i+=git-filter-repo # https://github.com/newren/git-filter-repo/blob/main/INSTALL.md should be there with ubuntu 22.04
-i+=apt-file # apt-file list [package] to see before you install (instead of manually apt-get download [package]; dpgk --contents [file])
-i+=aptitude # 'aptitude why package' is quite cool, there might be more
-i+=bmon # bandwidth monitor
-i+=cmake
-i+=dkms
-i+=g++
-i+=gcp # like cp, but with progress bar among other features
-i+=git
-i+=gocryptfs
-i+=htop
-i+=jq # json query engine
-i+=libboost-dev
-i+=lnav # log file viewer
-i+=markdown # for my ptc notes standup.markdown
-i+=mlocate # quickly find files in the full system
-i+=moreutils # sponge
-i+=mosh # ssh robust for unstable connections
-i+=openssh-server
-i+=pv # monitor data progress thru a pipe
-i+=sshfs
-i+=suckless-tools
-i+=sysstat
-i+=tree
-i+=unzip
-i+=zip
+i=(
+    #dtrx # easy and clean archive extraction  # todo gone?
+    #lm-sensors # check hardware temperatures
+    #git-filter-repo # https://github.com/newren/git-filter-repo/blob/main/INSTALL.md should be there with ubuntu 22.04
+    apt-file # apt-file list [package] to see before you install (instead of manually apt-get download [package]; dpgk --contents [file])
+    aptitude # 'aptitude why package' is quite cool, there might be more
+    attr # set extended file attributes, like 'attr -s com.dropbox.ignored -V 1 .venv'
+    bmon # bandwidth monitor
+    cmake
+    dkms
+    g++
+    gcp # like cp, but with progress bar among other features
+    git
+    gocryptfs
+    htop
+    jq # json query engine
+    libboost-dev
+    lnav # log file viewer
+    markdown # for my ptc notes standup.markdown
+    mlocate # quickly find files in the full system
+    moreutils # sponge
+    mosh # ssh robust for unstable connections
+    openssh-server
+    pv # monitor data progress thru a pipe
+    sshfs
+    suckless-tools
+    sysstat
+    tree
+    unzip
+    zip
+)
 sudo apt-get install -qqy $i
 
 # ordered list of custom setups
@@ -81,6 +81,7 @@ setups=(
     fzf
     top
     htop
+    locales
     python
     pdocs
     ptags
@@ -89,9 +90,15 @@ setups=(
     nodejs
     vim
     rust
+    osh
+    aws
+    docker
+    kvm
+    nodejs
+    nvidia
 )
 for i in $setups; do
     ../$i/setup
 done
 
-# TODO maybe a restart is needed for everything to be ready
+# NOTE usually a restart is needed at the end to boot into new kernels and modules
