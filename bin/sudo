@@ -1,0 +1,4 @@
+#!/bin/zsh
+set -eu -o pipefail
+
+/usr/bin/sudo --preserve-env=DEBIAN_FRONTEND,NEEDRESTART_MODE $@
