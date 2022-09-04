@@ -8,10 +8,10 @@ sudo apt-get -yqq install --no-install-recommends docker.io
 sudo docker run hello-world
 
 # to use it without sudo
-sudo usermod -A -G docker $USER
+sudo usermod -aG docker $USER
 echo 'use of docker without sudo only takes effect after new login, ssh localhost, su --login $USER, new tmux server, ...'
 
-if [[ which nvidia-smi >/dev/null ]]; then
+if which nvidia-smi >/dev/null; then
 
     curl -s -L https://nvidia.github.io/nvidia-docker/gpgkey | \
         sudo apt-key add -
