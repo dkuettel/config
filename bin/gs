@@ -1,7 +1,7 @@
 #!/bin/zsh
 set -eu -o pipefail
 
-git -c advice.statusHintes=false status $@
+git -c advice.statusHints=false status $@
 echo
 git -c pager.log=false stash list
 echo
