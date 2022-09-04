@@ -1,16 +1,19 @@
 #!/bin/zsh
 set -eux -o pipefail
 
-sudo apt-get install -yq python3.9 python3.9-dev build-essential
+# NOTE should work for any 3.x version
+python=python3.9
 
+# https://launchpad.net/~deadsnakes/+archive/ubuntu/ppa
+sudo add-apt-repository -yu ppa:deadsnakes/ppa
+# NOTE python3-pip allows to bootstrap pip into the actual python version package site later
+sudo apt-get install -yq $python $python-venv $python-dev $python-distutils $python-tk python3-pip build-essential
+
+# TODO this is actually empty now, recheck what are the settings, if nothing, remove
 mkdir -p ~/.config/pip
 ln -sfT ~/config/i/python/pip.conf ~/.config/pip/pip.conf
 
-# NOTE
-# even though there can be multiple more pythons installed
-# after the below, virtualenv and ipython commands point at this python version install
-# I'm not sure, but I think whatever python version pip did it last determines what's available globally
-python3.9 -m pip install --upgrade pip virtualenv ipython
+$python -m pip install --upgrade pip virtualenv ipython
 
 # ipython
 # TODO also see how to make it autoreload stuff, especially in debug mode
