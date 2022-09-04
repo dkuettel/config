@@ -4,21 +4,31 @@ set -eux -o pipefail
 base=${0:a:h}
 
 if [[ ! -d ~/.osh ]]; then
+    (
+        mkdir -p ~/.osh
+        cd ~/.osh
 
-    mkdir -p ~/.osh
-    cd ~/.osh
+        # NOTE ultimately we want things on dropbox
+        # but at this point we are not guaranteed to have dropbox setup
+        # so we use another indirection to easily move it once we do
+        if [[ -d ~/Dropbox ]]; then
+            mkdir ~/Dropbox/osh-data ~/Dropbox/osh-data/archive ~/Dropbox/osh-data/active
+            ln -sfT ~/Dropbox/osh-data data
+        else
+            mkdir data data/archive data/active
+        fi
 
-    target=~/sbox/osh-data
-    if [[ ! -d $target ]]; then
-        echo "cannot find $target" >&2
-    else
-        ln -sfT $target/archive archive
-        ln -sfT $target/active active
-        ln -sfT $target/event-filters.yaml event-filters.yaml
+        ln -sfT data/archive archive
+        ln -sfT data/active active
+        ln -sfT data/event-filters.yaml event-filters.yaml
         ln -sfT active/$(hostname).osh local.osh
+
+        touch event-filters.yaml
         touch local.osh
-    fi
+    )
 fi
 
-cd $base/osh
-./install
+(
+    cd $base/osh
+    ./install
+)

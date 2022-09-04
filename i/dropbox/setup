@@ -32,3 +32,8 @@ journalctl --follow --unit=dropbox@$USER.service || true
 
 ln -sfT ~/Dropbox ~/dbox
 ln -sfT ~/Dropbox/toys ~/toys
+
+if [[ realpath ~/.osh/data != ~/Dropbox/osh-data ]]; then
+    echo 'Maybe ~/.osh/data should point at ~/Dropbox/osh-data.'
+    # NOTE not sure if I should do it scripted, it might not be synced yet here anyway
+fi
