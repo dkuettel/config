@@ -1,43 +1,43 @@
 #!/bin/zsh
 set -eux -o pipefail
 
-# switch to HWE for ubuntu 20.04
-# https://wiki.ubuntu.com/Kernel/LTSEnablementStack
-#sudo apt-get update
-#sudo apt-get upgrade -qqy
-# todo hwe-20.04 not there (yet)
-#sudo apt-get install -qqy --install-recommends xserver-xorg-hwe-20.04
-echo 'note: xserver-xorg-hwe-20.04 might be ready now, did not exist on 2020-11-28'
+cd ${0:a:h}
 
-sudo apt-get install -yqq xinit # for startx
-# this installed a gretter already
-sudo systemctl disable gdm.service
-sudo systemctl stop gdm.service
+source ../zsh/path.zsh
+
+# NOTE starting with 20.04 there seem to be no more xserver-xorg-hwe-xx.xx
+# see https://ubuntu.com/kernel/lifecycle
+# sudo apt-get install -qy --install-recommends xserver-xorg-hwe-20.04
+
+sudo apt-get install -qqy xinit # for startx
+
+# this run-target should prevent greeters from appearing
 sudo systemctl set-default multi-user.target
+# but to be sure disabling greeting as well (if they exist)
+sudo systemctl disable gdm.service || true
+sudo systemctl stop gdm.service || true
 
-${0:a:h}/../nvidia/setup
-echo 'nvidia-smi wont work before restart'
 
 # apt installs (sorted)
-i=()
-i+=cool-retro-term
-i+=d-feet  # introspect d-bus, dbus
-i+=evince  # for the easier pdfs (when not using okular)
-i+=feh # note also .xsession uses feh, is that the only way?
-i+=firefox
-i+=geeqie # pulls in many dependencies because of kde
-i+=gnome-sushi # nautilus plugin for preview on space-key
-i+=gpick # easy color picker from anything on the screen, useful when debugging terminal colors
-i+=gthumb # together with scrot
-i+=nautilus # filemanager gui
-i+=scrot # screenshots
-i+=transmission-gtk
-i+=usbmount # ubuntu-desktop has something on its own, but this works coming from a server setup
-i+=xclip
-i+=xdotool # for xsession and spotify title
-i+=yaru-theme-icon # gnome apps currently seem to use that one and dont depend on it when installing, might change again
-#i+=kdenlive # seems ok for cutting videos
-sudo apt-get install -qqy $i
+i=(
+    cool-retro-term
+    d-feet  # introspect d-bus, dbus
+    evince  # for the easier pdfs (when not using okular)
+    feh # note also .xsession uses feh, is that the only way?
+    firefox # NOTE in 22.04 this actually installs a snap
+    geeqie # pulls in many dependencies because of kde
+    gnome-sushi # nautilus plugin for preview on space-key
+    gpick # easy color picker from anything on the screen, useful when debugging terminal colors
+    gthumb # together with scrot
+    nautilus # filemanager gui
+    scrot # screenshots
+    transmission-gtk # NOTE keeps seetings in ~/.config/transmission/settings.json; could be configured if not specific for machine
+    xclip
+    xdotool # for xsession and spotify title
+    yaru-theme-icon # gnome apps currently seem to use that one and dont depend on it when installing, might change again
+    #kdenlive # seems ok for cutting videos
+)
+sudo apt-get install -qy $i
 
 # nautilus, and probably other things, install the "tracker-miner-fs" stuff, indexing files for a quick search
 # sometimes this service delayed the shutdown, but also I'm not really using it
@@ -50,36 +50,42 @@ tracker_units=(
     # tracker v3
     tracker-extract-3.service tracker-miner-fs-3.service tracker-miner-rss-3.service tracker-writeback-3.service tracker-xdg-portal-3.service tracker-miner-fs-control-3.service
 )
-systemctl --user mask $tracker_units
-systemctl --user stop $tracker_units
+systemctl --user mask $tracker_units || true
+systemctl --user stop $tracker_units || true
 
-# todo note above transmission gtk keep settings in
-# /home/dkuettel/.config/transmission/settings.json
-# add to config? not sure if all settings there are independent of machine
-# also maybe dont install it by default? only at home?
-
-# sorted list of snaps for desktop
-#i=()
-#i+=something
-#sudo snap install $i
+# snap installs (sorted)
+# i=(
+# )
+# sudo snap install $i
 
 # ordered list of custom setups
+# NOTE currently disabled below all that are not unattended
 setups=(
     redshift
     keyboard # probably not doing the right thing in virtual box
     dwm # sometimes '/dev/fb0: Permission denied' with startx, but probably not with good nvidia-drivers?
     dmenu
-    alacritty # fonts might be missing here, ubuntu mono is probably always available
-    sound
-    chrome
-    spotify
-    dropbox
+    bluetooth
+    alacritty
+    # st  # NOTE alacritty instead
+    # steam
+    # sound # NOTE using pipewire now
+    pipewire # NOTE isnt 22.04 now with this default?
+    # chrome
+    # spotify
+    # dropbox
+    # syncthing # NOTE dropbox instead
+    # todoist # NOTE web version is better
     okular
     # slack  # dont really need it anymore as an app, browser is more versatile here
     vlc
+    ltstatus
+    pstart
+    # vbox
+    # vscode
+    # wakeup
+    # webcam
 )
 for i in $setups; do
-    ${0:a:h}/../$i/setup
+    ../$i/setup
 done
-
-# todo maybe some of the above need to be added as interactive? or just on demand? not all are fully unattended
