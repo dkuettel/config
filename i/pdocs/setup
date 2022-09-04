@@ -5,10 +5,6 @@ base=${0:a:h}
 
 ln -sfT $base ~/.pdocs
 
-# something in my usual env needs tkinter
-# seems cannot be installed with pipenv
-sudo apt-get -yqq install python3-tk
-
 (
     cd $base
 
