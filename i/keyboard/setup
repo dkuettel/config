@@ -26,7 +26,7 @@ echo 'note: maybe reboot for apple F-keys to work like normal F-keys'
 
 # TODO maybe one of those applies changes without restart?
 sudo systemctl restart keyboard-setup.service
-udevadm trigger --subsystem-match=input --action=change
+sudo udevadm trigger --subsystem-match=input --action=change
 
 if [[ -v DISPLAY ]]; then
     # NOTE this probably works without restart
