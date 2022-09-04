@@ -4,6 +4,10 @@ set -eux -o pipefail
 # make sure bluetooth is powered off by default on startup
 # (we dont stop the service, just power off the hardware, if any)
 
+if [[ ! -f /etc/bluetooth/main.conf ]]; then
+    exit
+fi
+
 function adapt {
     awk '
     /^AutoEnable=true$/ {$0="AutoEnable=false"; found=1}
