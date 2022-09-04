@@ -1,0 +1,7 @@
+#!/bin/zsh
+set -eux -o pipefail
+
+base=${0:a:h}
+
+pip3 install --upgrade awscli
+$base/ssm/setup
