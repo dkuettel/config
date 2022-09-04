@@ -1,0 +1,75 @@
+#!/bin/zsh
+set -eux -o pipefail
+
+# use to debug the setup
+# in order to focus more on problems
+# than then manual part of bootstrapping
+# compared to full bootstrapping, here we
+# - use the hosts ssh keys
+# - and cache apt, pip, and snap to minimize bandwidth
+
+base=${0:a:h}
+name=bootstrap-multipass-debug-$(date '+%F-%Hh-%Mm-%Ss')
+image=22.04  # 20.04, 22.04
+
+cd $base
+
+( # check that we have only one level of submodules
+    # NOTE multiple levels can work, but the submodule url rewrite currently doesnt support that
+    cd $base/..
+    diff <(git sm foreach) <(git sm foreach --recursive)
+)
+
+( # caches
+    mkdir -p $base/caches/apt
+    mkdir -p $base/caches/pip/http
+    mkdir -p $base/caches/snapd/cache
+)
+
+# NOTE --cloud-init init.yaml is nice to start with a different user at 1000:1000
+# but multipass currently is quite fixed on using ubuntu, it's possible, but too much hassle
+# multipass is considering respecting cloud-init default user settings, we can revisit then
+# see https://github.com/canonical/multipass/issues/929
+
+opts=(
+    --name $name
+    --cpus $(nproc --all)  # NOTE 1 cpu makes logs more stable
+    --mem 16G  # TODO depend on host's memory
+    --disk 30G
+    # NOTE we map in things to /context and use it similar to docker contexts
+    # there is also 'multipass transfer host-path name:guest-path' to copy things directly
+    --mount ~/config:/context/config
+    --mount ~/.ssh:/context/ssh
+    # NOTE caches are mapped directly to the right place so they persist between debug iterations
+    # dont forget to delete $base/cache in the host if you want a "clean start"
+    # a fresh installation transferred 1.5gb, from cache 0.4gb
+    # (there are still operations that dont use apt, pip, or snapd)
+    --mount $base/caches/apt:/var/cache/apt
+    --mount $base/caches/pip/http:/home/ubuntu/.cache/pip/http
+    # NOTE the snap cache is more complicated
+    # it needs to be on the same device as the snap runtime
+    # because it hardlinks stuff around for efficiency
+    # so we need to copy things in, and then out at the end
+    --mount $base/caches/snapd:/context/snapd
+)
+
+multipass launch $opts $image
+
+# NOTE only if we use --cloud-init in launch
+# multipass exec $name -- cloud-init status --wait
+
+# TODO 'multipass exec' documentation is annoyingly unclear about
+# what happens with --working-directory & co
+# see https://multipass.run/docs/exec-command
+multipass exec $name -- sudo apt-get install -qy zsh
+mkdir -p $base/logs
+if multipass exec $name -- /context/config/bootstrap/multipass/run |& tee $base/logs/$name; then
+    print -P '%F{4}%Ssuccess%s%f'
+else
+    print -P '%F{1}%Sexit code = '$?'%s%f'
+fi
+
+if multipass shell $name; then
+    multipass delete $name
+    multipass purge
+fi

@@ -1,0 +1,25 @@
+#!/bin/zsh
+set -eux -o pipefail
+
+# use for a full test of bootstrapping
+# unlike ./debug it bootstraps from github
+# so all changes need to be pushed
+
+name=bootstrap-multipass-test-$(date '+%F-%Hh-%Mm-%Ss')
+image=22.04  # 20.04, 22.04
+
+opts=(
+    --name $name
+    --cpus 24
+    --mem 16G
+    --disk 30G
+)
+
+multipass launch $opts $image
+multipass exec $name -- sudo apt-get install -qy zsh
+multipass exec $name -- zsh -c 'curl -sfLS https://raw.githubusercontent.com/dkuettel/config/master/bootstrap/run | zsh -s -- test'
+multipass shell $name
+multipass delete $name
+multipass purge
+
+# TODO a fuller test (desktop-like) will be with virt-manager? scriptable?

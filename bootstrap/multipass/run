@@ -1,0 +1,46 @@
+#!/bin/zsh
+set -eux -o pipefail
+
+# NOTE from a clean multipass run can get the expected
+# list of apt packages and compare with an actual instance
+
+# NOTE looking at diff between runs' logs works well to spot differences
+# setting the cpu count of an instance to 1 makes parallel compilations predictable
+
+# TODO some way to test individual i/*/setup's?
+
+# TODO does 'apt update' only contact the server if the data is "old"?
+
+( # ssh keys
+    cd /context/ssh
+    cp id_rsa id_rsa.pub ptc_git_id_rsa ptc_git_id_rsa.pub ~/.ssh
+)
+
+( # snap cache
+    sudo mkdir -p /var/lib/snapd
+    sudo rm -rf /var/lib/snapd/cache
+    sudo cp -r /context/snapd/cache /var/lib/snapd/cache
+)
+
+( # clone config from local source, including submodules, no remote server are used
+    git clone /context/config ~/config
+    cd /context/config
+    # NOTE use --recursive if we work with more than one level of submodules
+    git submodule foreach --quiet 'git -C ~/config submodule set-url $sm_path /context/config/.git/modules/$sm_path'
+    cd ~/config
+    git submodule update --init
+    # NOTE we could look at staged or uncommited changes and carry over a patch
+    # but it's messy, and need to recurse into submodules, plus untracked un-ignored files are not in the diff
+    # so for now, just keep on amending a WIP commit, or work on branch while debugging, and then cleanup at the end
+    # the upside is that we are actually cloning so it's very close to "the real thing"
+)
+
+function TRAPEXIT {
+    # snap cache
+    sudo rm -rf /context/snapd/cache
+    sudo cp -r /var/lib/snapd/cache /context/snapd/cache
+}
+
+cd ~/config
+~/config/i/server/setup
+~/config/i/desktop/setup
