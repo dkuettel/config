@@ -5,17 +5,14 @@ base=${0:a:h}
 
 sudo apt-get -q install -y openssh-server
 
-# server configuration is at
-#   /etc/ssh/sshd_config
-# and
-#   /etc/ssh/sshd_config.d/* (takes precedence)
+# server configuration is at /etc/ssh/sshd_config and /etc/ssh/sshd_config.d/*
 
 # disable password login
 # NOTE this might disconnect a user
 echo 'PasswordAuthentication no' | sudo tee /etc/ssh/sshd_config.d/disable-password
 sudo systemctl restart ssh
 if ! (sudo sshd -T | grep 'passwordauthentication no'); then
-    echo 'password login for ssh  is still enabled' >&2
+    echo 'Password login for ssh is still enabled.' >&2
     exit 1
 fi
 
@@ -25,6 +22,7 @@ ln -sfT \
     ~/.ssh/config
 
 # install message of the day
+# TODO revisit, keep? i'm mostly interested in problems, memory, updates, failed ssh, and how long ago my last ssh was
 sudo chmod -x /etc/update-motd.d/*
 sudo ln -sfT $base/motd /etc/update-motd.d/99-$USER
 sudo chmod +x /etc/update-motd.d/99-$USER
