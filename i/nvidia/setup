@@ -1,8 +1,7 @@
 #!/bin/zsh
 set -eux -o pipefail
 
-# try to find out if there is a manual installation active
-# NOTE not doing it automatically, I didnt test if it works without reboot or anything
+# NOTE a previous manual nvidia driver installation doesnt work well with packaged drivers
 if which nvidia-uninstall; then
     echo 'There seems to be a manual nvidia driver installation.' 2>&1
     echo 'Try "sudo nvidia-uninstall" first.' 2>&1
@@ -10,33 +9,28 @@ if which nvidia-uninstall; then
     exit 1
 fi
 
-# simple check to see if there is an nvidia gpu, might not be perfect
-# TODO this failed for A100 instances
-# TODO 'ubuntu-drivers devices' could also be useful to check instead
-if ! lspci | grep -e 'VGA.*NVIDIA' -e Tesla; then
-    echo 'no nvidia gpu found'
+sudo apt-get install -qqy ubuntu-drivers-common
+latest=$(ubuntu-drivers list | awk '/^nvidia-driver-[0-9]+,/ {print substr($1, 0, length($1)-1)}' | sort | tail -n 1)
+
+# NOTE use 'ubuntu-drivers list'
+# to see what are the available options
+# to switch to a newer version eventually
+expected=nvidia-driver-515
+
+if [[ $latest == '' ]]; then
+    echo 'No nvidia device found.'
     exit 0
 fi
 
-# use
-# > ubuntu-drivers list
-# to see what are the available options
-# to switch to a newer version eventually
-
-sudo apt-get install -yqq ubuntu-drivers-common
-
-# check what is the newest recommended version for nvidia
-latest=$(ubuntu-drivers list | awk '/^nvidia-driver-[0-9]+,/ {print substr($1, 0, length($1)-1)}' | sort | tail -n 1)
-expected=nvidia-driver-515
-
 if [[ $latest != $expected ]]; then
-    echo "expected $expected but found $latest"
+    echo "Expected $expected but found $latest." 1>&2
     exit 1
 fi
 
-sudo apt install -yqq $expected
+sudo apt install -qqy $expected
+# NOTE 'nvidia-smi' wont work before a restart
 
-# alternatives
+# NOTE alternatives
 # - see ./manual
-# - https://launchpad.net/~graphics-drivers/+archive/ubuntu/ppa , maybe the same as ubuntu's own?
+# - https://launchpad.net/~graphics-drivers/+archive/ubuntu/ppa , same as ubunut's own?
 # - sudo ubuntu-drivers install [--gpgpu] for server headless?
