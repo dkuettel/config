@@ -79,7 +79,8 @@ function {
         '%K{0}'  # background color for the header line
         ' %F{4}%B%40<…<%~%<<%b%f'  # current folder (truncated if long)
         '$(_git_status_for_prompt)'
-        ' %F{10}%*%f'  # time
+        # NOTE instead of time could show runtime if "longer", just like exit_code is only shown if non-zero
+        # ' %F{10}%*%f'  # time
     )
     if [[ ! -v TMUX ]]; then
         # tmux shows host the same way in the left bottom
