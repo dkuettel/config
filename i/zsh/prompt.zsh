@@ -59,6 +59,17 @@ setopt prompt_subst  # apply typical expansions like: $, ${, $(, ((, ...
 setopt prompt_percent  # apply expansions for "%"
 
 
+if [[ ! -v TMUX && ! -v __is_this_virtual ]]; then
+    if hostnamectl status | grep Virtualization &>/dev/null; then
+        echo "This is virtual."
+        export __is_this_virtual=yes
+    else
+        echo "This is actual."
+        export __is_this_virtual=no
+    fi
+fi
+
+
 function {
     # NOTE generally anything that needs subshells slows down the prompt
     # get full timings using > time zsh -ic 'time ( print -P $PS1 )'
@@ -71,8 +82,12 @@ function {
         ' %F{10}%*%f'  # time
     )
     if [[ ! -v TMUX ]]; then
-        # tmux shows host in the left bottom
-        headers+=(' %F{10}%m%f')  # host
+        # tmux shows host the same way in the left bottom
+        if [[ $__is_this_virtual == 'no' ]]; then
+            headers+=(' %F{10}@%m%f')  # host
+        else
+            headers+=(' %F{10}@&%m%f')  # host
+        fi
     fi
     headers+=(
         '%F{4}${VIRTUAL_ENV:+ }%f'  # virtual env

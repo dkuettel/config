@@ -11,7 +11,12 @@ set-option -ga status-left '#[fg=brightgreen,bold,bg=black] '
 set-option -ga status-left '#{?#{==:#{client_key_table},root},,#[fg=brightblack,bg=blue]}' # blue if in prefix key table is active
 set-option -ga status-left '#{session_name}'
 set-option -ga status-left '#[fg=brightgreen,nobold,bg=black]'
-set-option -ga status-left ' @#{host_short} '
+%if "#{==:$__is_this_virtual,no}"
+    set-option -ga status-left ' @#{host_short} '
+%else
+    set-option -ga status-left ' @&#{host_short} '
+%endif
+#set-option -ga status-left ' @#{host_short} '
 set-option -ga status-left '#[bg=brightgreen] '
 
 set-option -g status-right-length 100
