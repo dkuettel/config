@@ -1,0 +1,22 @@
+#!/bin/zsh
+set -eux -o pipefail
+
+# setup workspace for notes
+
+base=~/dbox/notes
+name=notes
+
+envs=(
+    -e workspace_active=yes
+    -e workspace_home=$base
+    -e h=$base
+)
+
+cmds=(
+    new-session -s $name -A -c $base $envs true \;
+    bind-key V new-window -n src -c $base -bt 1 V \;
+    bind-key j new-window -n jobs x jobs ls -r \;
+    new-window -n src V
+)
+
+tmux $cmds
