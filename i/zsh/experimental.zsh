@@ -65,3 +65,7 @@ function take {
 # NOTE it doesnt propagate into scripts
 # TODO would be nice, but it brakes other things, like completion relies on failing
 # set -u -o pipefail
+
+# the current default pythons
+alias python-=python3.9
+alias pip-='python3.9 -m pip'
