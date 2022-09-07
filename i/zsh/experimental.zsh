@@ -63,4 +63,5 @@ function take {
 
 # generally makes sense in scripts, do we want it in interactive?
 # NOTE it doesnt propagate into scripts
-set -u -o pipefail
+# TODO would be nice, but it brakes other things, like completion relies on failing
+# set -u -o pipefail
