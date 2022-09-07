@@ -60,3 +60,7 @@ function take {
     mkdir -p $1
     cd $1
 }
+
+# generally makes sense in scripts, do we want it in interactive?
+# NOTE it doesnt propagate into scripts
+set -u -o pipefail
