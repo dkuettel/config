@@ -43,8 +43,8 @@ sudo timedatectl set-timezone Europe/Zurich
 # apt installs (sorted)
 i=(
     #dtrx # easy and clean archive extraction  # todo gone?
-    #lm-sensors # check hardware temperatures
     #git-filter-repo # https://github.com/newren/git-filter-repo/blob/main/INSTALL.md should be there with ubuntu 22.04
+    #lm-sensors # check hardware temperatures
     apt-file # apt-file list [package] to see before you install (instead of manually apt-get download [package]; dpgk --contents [file])
     aptitude # 'aptitude why package' is quite cool, there might be more
     attr # set extended file attributes, like 'attr -s com.dropbox.ignored -V 1 .venv'
@@ -64,6 +64,7 @@ i=(
     moreutils # sponge
     mosh # ssh robust for unstable connections
     openssh-server
+    partitionmanager # now also shows some of LVM
     pv # monitor data progress thru a pipe
     sshfs
     suckless-tools

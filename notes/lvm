@@ -1,3 +1,5 @@
 man lvm is a good overview
 > sudo lvm
 is an easier shell without needing sudo everytime
+> partitionmanager supports parts of lvm
+but I still dont know of an easy way to get an overview of the "topology"
