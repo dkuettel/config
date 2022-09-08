@@ -3,3 +3,7 @@ man lvm is a good overview
 is an easier shell without needing sudo everytime
 > partitionmanager supports parts of lvm
 but I still dont know of an easy way to get an overview of the "topology"
+
+filters in /etc/lvm/lvm.conf can prevent
+"/dev/sde no medium found"-like warnings
+eg, use filter = [ "r|/dev/sde|" ] to ignore that device
