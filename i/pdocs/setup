@@ -14,5 +14,5 @@ ln -sfT $base ~/.pdocs
 
     vv pip-sync
 
-    vv python build_index.py
+    PYTHONPATH=$base/pdocs vv python build_index.py
 )
