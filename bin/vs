@@ -1,0 +1,8 @@
+#!/bin/zsh
+set -eux -o pipefail
+
+if [[ -f Session.vim ]]; then
+    vim_is_in_session=yes nvim -S Session.vim $@
+else
+    vim_is_in_session=yes nvim $@
+fi
