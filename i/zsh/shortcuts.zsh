@@ -112,3 +112,7 @@ alias vlc0='vlc --start-time 0'
 
 # git
 alias g=git
+alias gl='git l'
+alias gf='git f'
+alias gp='git p'
+alias gd='git d'
