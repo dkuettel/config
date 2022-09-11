@@ -63,6 +63,7 @@ i=(
     mlocate # quickly find files in the full system
     moreutils # sponge
     mosh # ssh robust for unstable connections
+    nmap # 'nmap localhost' to see what is open, or check on other machines, nice to audit
     openssh-server
     partitionmanager # now also shows some of LVM
     pv # monitor data progress thru a pipe
