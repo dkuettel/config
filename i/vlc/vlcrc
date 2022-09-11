@@ -3965,7 +3965,7 @@ text-renderer=any
 #sub-autodetect-file=1
 
 # Subtitle autodetection fuzziness (integer)
-#sub-autodetect-fuzzy=3
+sub-autodetect-fuzzy=1
 
 # Subtitle autodetection paths (string)
 #sub-autodetect-path=./Subtitles, ./subtitles, ./Subs, ./subs
@@ -3995,7 +3995,7 @@ text-renderer=any
 #audio-language=
 
 # Subtitle language (string)
-#sub-language=
+sub-language=en, eng, english, English, us, uk
 
 # Menu language (string)
 #menu-language=
