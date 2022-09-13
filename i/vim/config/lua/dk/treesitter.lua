@@ -10,6 +10,12 @@ function M.setup()
         ensure_installed = "all",
         highlight = {
             enable = true,
+            disable = function(lang, bufnr)
+                if lang == "markdown" and string.sub(vim.api.nvim_buf_get_name(bufnr), -16) == "standup.markdown" then
+                    return true
+                end
+                return false
+            end,
             -- TODO I still see some old-fashioned highlights, for example python imports are gruvbox blue or so
             additional_vim_regex_highlighting = false,
         },
