@@ -2,19 +2,18 @@
 set -eu -o pipefail
 
 cmd=(
-    #python3
-    python3 ~/toys/vtrace/vtrace.py run
-    -m nn.mtar360.utils.render_video
-    augmented
-    --testset=mtar360/all/recolored/v2:ktm.Right
-    --frame-period=10
-    --output-fps=10
+    # python ~/toys/vtrace/vtrace.py run
+    python
+    -m nn.mtar360.utils.render_video augmented
+    --testset=mtar360/all/recolored/v2
+    --frame-period 1,0
+    # --output-fps=10
     --config-path=s3://e2e-benchmarking/training/zurich-all-set/recolored
-    --mt360=/efs/jaeschbacher/xps/full360/short/zh_recolored/ktm.Right/0/export/recalibrated_model
-    --draw-edges=gt,red
-    --draw-edges=pred,blue
-    --draw-label
-    --draw-refpoints
+    # --mt360=/efs/jaeschbacher/xps/full360/short/zh_recolored/ktm.Right/0/export/recalibrated_model
+    # --draw-edges=gt,red
+    # --draw-edges=pred,blue
+    # --draw-label
+    # --draw-refpoints
     --output-path=./video.mp4
 )
 

@@ -2,12 +2,12 @@
 set -eu -o pipefail
 
 cmd=(
-    #python3
-    python3 ~/toys/vtrace/vtrace.py run
-    -m nn.rendering.viewer
+    # python3 ~/toys/vtrace/vtrace.py run
+    python3
+    # -m nn.rendering.viewer  # for gltfs
+    -m nn.mtar360.utils.viewer  # for trainsets
     trainset
-    s3://e2e-benchmarking/training/AssemblyStates/lego-lighthouse-31051/all-shaded
-    #s3://e2e-benchmarking/training/AssemblyStates/delonghi-coffee-machine/all-recolored
+    s3://e2e-benchmarking/training/zurich-all-set/recolored/v2
 )
 
 run $cmd
