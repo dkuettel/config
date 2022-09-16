@@ -5,5 +5,5 @@ set -eux -o pipefail
 # meant to use dynamically for whatever is the current task
 
 cmd=$@' ; read -sq "?exit code = $?"'
-tmux bind-key g split-window -n g-bound -h -c "#{pane_current_path}" zsh -ic $cmd
+tmux bind-key g split-window -h -c "#{pane_current_path}" zsh -ic $cmd
 tmux bind-key G new-window -n g-bound -c "#{pane_current_path}" zsh -ic $cmd
