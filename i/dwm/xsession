@@ -13,10 +13,12 @@ set -eux -o pipefail
 exec > >(ts '%F %T' >& .log-dwm)
 exec 2>&1
 
-# monitor never off
-xset -dpms
+# monitor off [idle seconds]
+xset dpms 3600 3600 3600
+# never run screensaver
 xset s off
-setterm --blank 0 --powerdown 0
+# switch off monitor in virtual terminal [idle minutes]
+setterm --blank 20 --powerdown 20
 
 redshift -r -v |& ts '%F %T' >& .log-redshift &
 
