@@ -73,6 +73,9 @@ fi
 id_mount /efs
 nn_mount .
 
+# mount in current workspace
+id_mount $h
+
 # out dir
 mount $out /xp/src/out
 args+=(--workdir=/xp/src/out)
