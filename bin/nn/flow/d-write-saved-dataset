@@ -1,0 +1,21 @@
+#!/bin/zsh
+set -eu -o pipefail
+
+cmd=(
+    python -m
+    nn.flow config
+    --seed=0
+    --noise=21
+    --resolution=384hx384w
+    --hypo-style=normals
+    --camera-style=recolored+background
+    --camera-grayscale
+    write-saved-dataset
+    --path=$h/out-saved/dataset
+    --key=dkuettel/flow/test-saved-after
+    # TODO hack for before
+    # --key=dkuettel/flow/test-saved-before
+    # --count=100
+)
+
+run $cmd

@@ -1,0 +1,12 @@
+#!/bin/zsh
+set -eu -o pipefail
+
+cmd=(
+    python -m
+    nn.flow config
+    --stream=dkuettel/flow/test-stream
+    save-read-dataset
+    --path=./dataset
+)
+
+run $cmd
