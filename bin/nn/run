@@ -115,12 +115,6 @@ for i in $(seq 6006 6100); do
     break
 done
 
-# TODO for speed mounting in local copy, but dangerous if out-of-date
-if [[ -d efs-models ]]; then
-    echo '*** NOTE: MOUNTING LOCAL EFS MODELS' >&2
-    mount efs-models /efs/hacharya/test_data/models
-fi
-
 if [[ -v more_args ]]; then
     args+=($=more_args)
 fi
