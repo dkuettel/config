@@ -148,11 +148,13 @@ function M.mappings(client, bufnr)
     --vim.keymap.set("i", "<c-n>", "<c-x><c-o>", {buffer=bufnr})
 
     -- See `:help vim.lsp.*` for documentation on any of the below functions
+    -- TODO for now disabled some, in python declartion vs definition vs implementation is not so meaningful
     local b = vim.lsp.buf
-    nmap("gD", b.declaration, "go to declaration")
+    -- nmap("gD", b.declaration, "go to declaration")
     nmap("gd", b.definition, "go to definition")
+    nmap("gD", function() vim.cmd("tab split"); b.definition() end, "go to definition in a new tab")
     nmap("K", b.hover, "hover symbol")
-    nmap("gi", b.implementation, "go to implementation")
+    -- nmap("gi", b.implementation, "go to implementation")
     nmap("<c-k>", b.signature_help, "signature help")
     imap("<c-k>", b.signature_help, "signature help")
     nmap("gr", b.references, "find references")
@@ -162,7 +164,7 @@ function M.mappings(client, bufnr)
     -- nmap("==", b.formatting_seq_sync, "format using lsp") -- trying funky-formatter
     nmap(",ca", b.code_action, "code action")
     nmap(",rn", b.rename, "rename symbol")
-    nmap("gtd", b.type_definition, "go to type definition")
+    -- nmap("gtd", b.type_definition, "go to type definition")
     --vim.api.nvim_buf_set_keymap(bufnr, 'n', '<space>wa', '<cmd>lua vim.lsp.buf.add_workspace_folder()<CR>', opts)
     --vim.api.nvim_buf_set_keymap(bufnr, 'n', '<space>wr', '<cmd>lua vim.lsp.buf.remove_workspace_folder()<CR>', opts)
     --vim.api.nvim_buf_set_keymap(bufnr, 'n', '<space>wl', '<cmd>lua print(vim.inspect(vim.lsp.buf.list_workspace_folders()))<CR>', opts)
