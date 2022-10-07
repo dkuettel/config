@@ -60,3 +60,8 @@ Host blue
 Host Base
     Port 8347
     HostName somewhere
+
+Host blackhole
+    Port 3438
+    User yineichen
+    HostName 192.168.0.90
