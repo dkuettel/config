@@ -33,6 +33,7 @@ local function load()
     setup("fugitive")()
     setup("indent-blankline")()
     setup("funky-formatter")()
+    setup("context-stack")()
 
     require("dk.basics").active_window()
 end
