@@ -137,3 +137,6 @@
 [submodule "i/vim/config/pack/plugins/opt/vim-fugitive"]
 	path = i/vim/config/pack/plugins/opt/vim-fugitive
 	url = https://github.com/tpope/vim-fugitive.git
+[submodule "i/vim/config/pack/plugins/opt/funky-contexts.nvim"]
+	path = i/vim/config/pack/plugins/opt/funky-contexts.nvim
+	url = git@github.com:dkuettel/funky-contexts.nvim.git
