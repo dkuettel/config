@@ -36,6 +36,9 @@ function M.setup()
         },
         tabline = {
             lualine_a = {
+                M.show_context,
+            },
+            lualine_b = {
                 {
                     "tabs",
                     max_length = vim.o.columns,
@@ -50,6 +53,10 @@ end
 
 function M.show_window()
     return "藍" .. vim.api.nvim_win_get_number(0)
+end
+
+function M.show_context()
+    return "[" .. (vim.g.funky_context or "...") .. "]"
 end
 
 -- zen low-flicker indication of file status (unsaved, saved, read-only)
