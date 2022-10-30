@@ -15,6 +15,7 @@ envs=(
     -e PATH=$HOME/config/bin/nn/flow:$HOME/config/bin/nn:$base/bin:$base/.venv/bin:$PATH
     -e VIRTUAL_ENV=$base/.venv
     -e PYTHONPATH=$base/python
+    -e build_flow=yes  # for the bin/build script
 )
 
 cmds=(
