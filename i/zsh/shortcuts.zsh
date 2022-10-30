@@ -45,7 +45,7 @@ function rcd { cd $(pwd) } # reacquire inode when current path was recreated
 #alias d-='popd'
 
 # (a space at the end of an alias allows further aliases)
-alias watch='watch --color -n 1 '
+alias watch='watch --color -n 1'
 
 # poor man's watch
 # it uses stdout so colors are supported by default
