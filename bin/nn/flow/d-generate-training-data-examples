@@ -1,0 +1,11 @@
+#!/bin/zsh
+set -eux -o pipefail
+
+cmd=(
+    python -m
+    nn.flow
+    generate-training-data-examples
+    --config=$h/training-data.yaml
+)
+
+run $cmd
