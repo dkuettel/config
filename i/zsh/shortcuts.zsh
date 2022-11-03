@@ -116,3 +116,6 @@ alias gl='git l'
 alias gf='git f'
 alias gp='git p'
 alias gd='git d'
+
+# completion for tmux-bind-g
+compctl -c tmux-bind-g
