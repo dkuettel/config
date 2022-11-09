@@ -14,7 +14,7 @@ envs=(
     -e h=$base
     -e PATH=$HOME/config/bin/nn:$base/bin:$base/.venv/bin:$PATH
     -e VIRTUAL_ENV=$base/.venv
-    -e PYTHONPATH=$base/python
+    # NOTE .venv/**/nn.pth already contains PYTHONPATH=$base/python
 )
 
 cmds=(
