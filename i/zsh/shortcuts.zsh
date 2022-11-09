@@ -100,6 +100,10 @@ function treel { tree -C $@ | less }
 alias sc='sudo systemctl'
 alias sc-status='sudo systemctl status'
 alias jc=journalctl
+# show all log of current boot
+alias jc-this-boot='journalctl --boot=0'
+# show all log of last boot
+alias jc-last-boot='journalctl --boot=-1'
 
 # docker kill
 alias dk='docker kill'
