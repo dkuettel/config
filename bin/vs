@@ -1,8 +1,8 @@
 #!/bin/zsh
 set -eux -o pipefail
 
-if [[ -f Session.vim ]]; then
-    vim_is_in_session=yes nvim -S Session.vim $@
-else
-    vim_is_in_session=yes nvim $@
-fi
+touch Session.vim
+vim_is_in_session=yes nvim -S Session.vim $@
+
+# NOTE vim has a variable v:this_session that points at the last loaded session
+# but with an empty session (touch Session.vim) it doesnt work
