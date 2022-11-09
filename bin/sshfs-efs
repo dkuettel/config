@@ -11,23 +11,19 @@ if mountpoint /efs; then
     exit 1
 fi
 
-# maybe check https://serverfault.com/questions/6709/sshfs-mount-that-survives-disconnect
-# todo testing reconnect, will it work after sleep/suspend?
-# todo auto_cache working for hemanths big rendering files?
+opts='allow_root,reconnect,auto_cache'
+# NOTE maybe allow_other instead of allow_root if problems when mapping in to docker
 
 case $(hostname) in
     (boom)
         # NOTE direct ip is much faster, aws ssm is only meant for admin ssh, not for data
-        sshfs -o allow_root,reconnect -o auto_cache efs@00.000.000.00:/efs /efs
+        sshfs -o $opts efs@00.000.000.00:/efs /efs
         ;;
     (base)
-        sshfs -o allow_root,reconnect -o auto_cache efs:/efs /efs
+        sshfs -o $opts efs:/efs /efs
         ;;
     (*)
         echo "unknown local host $(hostname)" >&2
         exit 1
         ;;
 esac
-
-# alternative
-# sshfs -o auto_cache,reconnect -o Ciphers=aes128-ctr -o Compression=no -o allow_other efs:/efs /efs
