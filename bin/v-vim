@@ -1,5 +1,9 @@
 #!/bin/zsh
 set -eux -o pipefail
 
+# NOTE you can pass arguments,
+# but the working directory has changed
+# so be careful with paths
+
 cd ~/config/i/vim/config
-nvim init.lua
+nvim ${@:-init.lua}
