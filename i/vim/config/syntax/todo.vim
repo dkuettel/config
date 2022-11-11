@@ -6,6 +6,7 @@ endif
 " now with 24bit colors could use fainter colors for more and more indentation?
 
 syntax match todoSection "\v^[^- ].*:$"
+syntax match todoSectionDone "\v^[^- ].*;$"
 syntax match todoTodo "\v^ *o \zs.*\ze$"
 syntax match todoSide "\v^ *\~ \zs.*\ze$"
 syntax match todoDone "\v^ *x \zs.*\ze$"
@@ -22,6 +23,7 @@ if g:colors_name == "solarized"
 
 elseif g:colors_name == "gruvbox"
     highlight todoSection gui=underline,bold guifg=#3c3836 guibg=#ebdbb2
+    highlight todoSectionDone gui=underline,strikethrough,bold guifg=#3c3836 guibg=#ebdbb2
     highlight todoTodo gui=bold guifg=#3c3836
     highlight todoSide guifg=#928374
     highlight todoDone gui=strikethrough guifg=#928374
