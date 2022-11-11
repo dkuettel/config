@@ -88,11 +88,25 @@ function M.after()
     defaults.layout_config.width = function(_, max_columns, _)
         return math.min(max_columns, 120)
     end
+
+    local function at_top(action)
+        -- moves the current line to the top after "action" (usually action.select_*)
+        return function(prompt_bufnr)
+            action(prompt_bufnr)
+            vim.cmd("normal! zt")
+        end
+    end
+
+    local actions = require("telescope.actions")
     defaults.mappings = {
+        -- insert mode
         i = {
             ["<c-j>"] = "move_selection_next",
             ["<c-k>"] = "move_selection_previous",
-            ["<c-s>"] = "select_horizontal",
+            ["<enter>"] = at_top(actions.select_default),
+            ["<c-v>"] = at_top(actions.select_vertical),
+            ["<c-s>"] = at_top(actions.select_horizontal),
+            ["<c-t>"] = at_top(actions.select_tab),
         },
     }
     defaults.path_display = { "truncate" }
