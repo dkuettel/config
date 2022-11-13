@@ -8,6 +8,7 @@ base=${1:-.}
 base=${base:a}
 name=$(realpath --relative-base=$HOME $base)
 
+# TODO how to make -flow a superset of -nn?
 envs=(
     -e workspace_active=yes
     -e workspace_home=$base
@@ -15,6 +16,7 @@ envs=(
     -e PATH=$HOME/config/bin/nn/flow:$HOME/config/bin/nn:$base/bin:$base/.venv/bin:$PATH
     -e VIRTUAL_ENV=$base/.venv
     # NOTE .venv/**/nn.pth already contains PYTHONPATH=$base/python
+    -e NN_S3_CACHE=$HOME/envs/s3-cache
     -e build_flow=yes  # for the bin/build script
 )
 
