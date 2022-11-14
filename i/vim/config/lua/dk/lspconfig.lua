@@ -32,6 +32,8 @@ function M.setup()
     M.setup_luasnip()
     M.setup_completion()
 
+    -- TODO can we control the characters used for warning and error markers?  and others instead?
+
     M.setup_lua(capabilities)
     M.setup_python(capabilities)
     -- M.setup_python_jedi(capabilities)
@@ -53,18 +55,76 @@ function M.setup_completion()
 
     vim.keymap.set("i", "<c-n>", cmp.complete, { desc = "completion" })
 
+    -- TODO doesnt work, how to easily have the completion menu in normal mode? for autoimports?
+    -- TODO this is probably very specific for python, and not yet robust either
+    -- could we programatically go to insert mode, call complete, first element, and select?
+    -- we expect to be in normal mode after that, so we have to do it directly
+    -- we cannot wait, unless we can give an additional mapping into complete?
+    -- cmp.complete() does accept config, and cmp.ContextReason?, but config is the same config
+    -- where we can have a lot of control
+    -- TODO this works, poc, could we have virtual text for the guess import?
+    -- and then we just do ctrl-n in normal mode if we like that
+    vim.keymap.set("n", "<c-n>", function()
+        -- TODO we should go to the end of the word, plus one more character
+        -- at least for params, not necessarily for vim
+        -- TODO or instead we could use only the additionalTextEdits and ignore the current symbol edit
+        -- but still, it looks like the proposals are better when done at the end of the symbol
+        -- maybe there is an option fo the complete LSP call that gives a hint? no it doesnt
+        local params = vim.lsp.util.make_position_params()
+        local function handler(_, result, _, _)
+            -- full signature: err, result, ctx, config
+            for _, item in ipairs(result.items) do
+                if item.detail == "Auto-import" then
+                    vim.lsp.buf_request(0, "completionItem/resolve", item, function(_, result, ctx, _)
+                        -- full signature: err, result, ctx, config
+                        local offset_encoding = vim.lsp.get_client_by_id(ctx.client_id).offset_encoding
+                        if result.textEdit ~= nil then
+                            vim.lsp.util.apply_text_edits({ result.textEdit }, 0, offset_encoding)
+                        end
+                        if result.additionalTextEdits ~= nil then
+                            vim.lsp.util.apply_text_edits(result.additionalTextEdits, 0, offset_encoding)
+                        end
+                        if result.documentation ~= nil then
+                            -- TODO used to be there always in my tests, but not anymore?
+                            print(vim.split(result.documentation.value, "\n")[2])
+                        else
+                            vim.pretty_print(result)
+                        end
+                    end)
+                    return
+                end
+            end
+            print("Did not find any auto-import candidates.")
+        end
+        vim.lsp.buf_request(0, "textDocument/completion", params, handler)
+    end, { desc = "auto-import" })
+
     cmp.setup({
-        completion = { autocomplete = false },
+        -- completion = { autocomplete = false },
+        -- TODO definitely it seems very responsive, could have it in background always
+        -- and only show on ctrl-n?
+        -- or at least have it smaller, dont show 100 results! less flickery, just very few
+        -- kinda only useful if the top match is right, so maybe instead to virtual text?
+        -- and ctrl-n stays manual as it used to be? and tab is for ghost text
+        -- plus autocomplete is nice, but maybe not in comments?
+        -- check there was something that does virtual text completion for first hit I believe
+        -- or an easy quick hack to test it is to hardcode in nvim-cmp the result list to 1 or 5 or so, see how it feels
+        -- TODO with autocomplete tab is quite natural to execute it
+        completion = { autocomplete = { cmp.TriggerEvent.InsertEnter, cmp.TriggerEvent.TextChanged } },
         snippet = {
             expand = function(args)
                 require("luasnip").lsp_expand(args.body)
             end,
         },
+        -- TODO does lua do window.completion = {...}?
         window = {
-            completion = cmp.config.window.bordered(),
-            documentation = cmp.config.window.bordered(),
+            -- TODO btw, could we know the pid of the lsp and show the cpu usage for business?
+            -- TODO hm wait max_height is only for documentation, not for completion :/ ?
+            completion = vim.tbl_extend("force", cmp.config.window.bordered(), { max_height = 20 }),
+            documentation = vim.tbl_extend("force", cmp.config.window.bordered(), { max_height = 20 }),
         },
-        preselect = cmp.PreselectMode.None,
+        -- preselect = cmp.PreselectMode.None,
+        preselect = cmp.PreselectMode.Item,
         mapping = {
             ["<c-j>"] = cmp.mapping.select_next_item(),
             ["<c-k>"] = cmp.mapping.select_prev_item(),
@@ -72,6 +132,8 @@ function M.setup_completion()
             ["<c-f>"] = cmp.mapping(cmp.mapping.scroll_docs(4), { "i", "c" }),
             ["<c-e>"] = cmp.mapping.abort(),
             ["<c-n>"] = cmp.mapping.confirm({ select = true }),
+            -- TODO tab, just like terminal, c-space a good idea?
+            -- TODO tab especially very natural for cmp.complete_common_string() ?
         },
         -- see https://github.com/hrsh7th/nvim-cmp/wiki/List-of-sources
         -- TODO removed buffer as source, but still seems to be happening ...
@@ -147,12 +209,54 @@ function M.mappings(client, bufnr)
     -- anyway to use it fuzzy? maybe compare with coc from yves? complete I like, not autocomplete probably
     --vim.keymap.set("i", "<c-n>", "<c-x><c-o>", {buffer=bufnr})
 
-    -- See `:help vim.lsp.*` for documentation on any of the below functions
+    -- from looking at
+    --   nvim/runtime/lua/vim/lsp/buf.lua
+    --   nvim/runtime/lua/vim/lsp/handlers.lua
+    --   nvim/runtime/lua/vim/lsp/util.lua
+    -- all the lsp jumps are done async, but I need it sync
+    -- and there is no option to control this
+    -- I want: sync, optional splits or tabs before, move target line to the top (like "zt")
+    local function lsp_jumper(method, before)
+        -- methods
+        --   textDocument/definition
+        return function()
+            local params = vim.lsp.util.make_position_params()
+            local function handler(_, result, ctx, _)
+                -- full signature: err, result, ctx, config
+                local offset_encoding = vim.lsp.get_client_by_id(ctx.client_id).offset_encoding
+                if vim.tbl_islist(result) then
+                    -- TODO we only use the first result
+                    -- like the original, it would be better to open quickfix with options?
+                    result = result[1]
+                end
+                if before then
+                    vim.cmd(before)
+                end
+                vim.lsp.util.jump_to_location(result, offset_encoding, false)
+                vim.cmd("normal! zt")
+            end
+            -- TODO kinda works, but still async, user might get bored, switches buffer/windows, and then it gets weird
+            vim.lsp.buf_request(0, method, params, handler)
+        end
+    end
+
+    -- See `:help vim.lsp.*` for documentation on any of the functions below
     -- TODO for now disabled some, in python declartion vs definition vs implementation is not so meaningful
+    -- TODO ? document_highlight() wanna try? also the type inferred higlights in alexis VC could be cool to try
+    -- ? incoming_calls() *vim.lsp.buf.incoming_calls()*, and there is also outgoing_calls()
+    -- server_ready() *vim.lsp.buf.server_ready()* better for the busy indicator?
+    -- to make completion faster, is always-on good? or always-on, but only _show_ on demand, faster?
+    -- the whole codeaction thing would be nice too, imports, fast and clear? auto shortcut for import?
+    -- can we make signature help on every key, like enabled or disabled? so I see as I move from arg to arg?
+    -- also can it be formatted more helpfully?
     local b = vim.lsp.buf
-    -- nmap("gD", b.declaration, "go to declaration")
-    nmap("gd", b.definition, "go to definition")
-    nmap("gD", function() vim.cmd("tab split"); b.definition() end, "go to definition in a new tab")
+
+    nmap("gd", lsp_jumper("textDocument/definition"), "go to definition")
+    nmap("gD", lsp_jumper("textDocument/definition", "tab split"), "go to definition in a new tab")
+    nmap("gt", lsp_jumper("textDocument/definition", "tab split"), "go to definition in a new tab")
+    nmap("gv", lsp_jumper("textDocument/definition", "vsplit"), "go to definition in a new tab")
+    nmap("gs", lsp_jumper("textDocument/definition", "split"), "go to definition in a new tab")
+
     nmap("K", b.hover, "hover symbol")
     -- nmap("gi", b.implementation, "go to implementation")
     nmap("<c-k>", b.signature_help, "signature help")
@@ -168,6 +272,26 @@ function M.mappings(client, bufnr)
     --vim.api.nvim_buf_set_keymap(bufnr, 'n', '<space>wa', '<cmd>lua vim.lsp.buf.add_workspace_folder()<CR>', opts)
     --vim.api.nvim_buf_set_keymap(bufnr, 'n', '<space>wr', '<cmd>lua vim.lsp.buf.remove_workspace_folder()<CR>', opts)
     --vim.api.nvim_buf_set_keymap(bufnr, 'n', '<space>wl', '<cmd>lua print(vim.inspect(vim.lsp.buf.list_workspace_folders()))<CR>', opts)
+
+    -- TODO do it on every keypress in insert mode
+    -- or after every reply from the server only? max speed
+    -- hl-LspSignatureActiveParameter should show the current param, just not set for me?
+    -- generally, go for state-based, sig on, compl on? and then it stays on, until you disable it
+    -- right now, signatures disappears as soon as you type
+    -- vim.api.nvim_create_autocmd({ "TextChangedI" }, {
+    --     desc = "signature",
+    --     callback = function()
+    --         local params = vim.lsp.util.make_position_params()
+    --         local function sig(err, result, ctx, config)
+    --             vim.pretty_print(result)
+    --         end
+    --         -- vim.lsp.buf_request(0, "textDocument/signatureHelp", params, sig)
+    --         vim.lsp.buf_request(0, "textDocument/signatureHelp", params, vim.lsp.handlers.signature_help)
+    --         -- this works, but it moves, plus it doesnt highlight the current parameter still
+    --         -- TSHighlight... thing doesnt give any highlight groups, not sure if it would though in this window
+    --         -- there is highlighting obviously, but not hl groups
+    --     end,
+    -- })
 end
 
 function M.setup_lua(capabilities)
@@ -257,7 +381,7 @@ function M.python_mappings(client, bufnr)
             -- TODO for now no ./.pdocs or ./.list-symbols, just try to discover things
             -- vim.pretty_print(vim.fn.glob("*", 0, 1))
             sources = {
-                vim.fn.glob("python", false, true) or {"."},
+                vim.fn.glob("python", false, true) or { "." },
                 vim.fn.glob("libs/*/python", false, true),
             }
             sources = vim.tbl_flatten(sources)
