@@ -28,7 +28,7 @@ function M.setup()
     -- TODO not sure why that is needed
     -- from https://github.com/hrsh7th/nvim-cmp/#setup
     -- that makes vim the client say it can accept more from the LS?
-    local capabilities = require("cmp_nvim_lsp").update_capabilities(vim.lsp.protocol.make_client_capabilities())
+    local capabilities = require('cmp_nvim_lsp').default_capabilities()
     M.setup_luasnip()
     M.setup_completion()
 
