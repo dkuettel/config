@@ -57,3 +57,4 @@
     lost4 = !git show $(git fsck --no-progress --no-reflog --unreachable| awk '/unreachable commit/ {print $3}')
     set-who-private = !git config user.email 'dkuettel@gmail.com' && git config user.name 'Daniel Kuettel'
     set-who-ptc = !git config user.email 'dkuettel@ptc.com' && git config user.name 'Daniel Kuettel'
+    rv = remote -v
