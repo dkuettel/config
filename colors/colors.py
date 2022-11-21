@@ -113,6 +113,8 @@ def show_attributes():
     # NOTE for modern codes, colon is needed, those are subcodes, semicolons is just legacy from a wide misunderstanding of the standard
     # see https://github.com/terminalguide/terminalguide/issues/9
     p("4:3", "curly underline")
+    p("4:4", "dotted underline")
+    p("4:5", "dashed underline")
     p(5, "blink")
     p(6, "fast blink")
     p(7, "inverse")
@@ -423,9 +425,9 @@ if __name__ == "__main__":
     # show_256_colors()
     # show_16_colors()
     # show_24bit_colors()
-    # show_attributes()
+    show_attributes()
     # validate_solarized()
     # derive_solarized()
     # derive_solarized(named_labs=get_randomized_solarized_dark())
     # derive_solarized(named_labs=dim_theme(solarized_dark_named_labs))
-    make_tmux_source(named_labs=dim_theme(solarized_light_named_labs))
+    # make_tmux_source(named_labs=dim_theme(solarized_light_named_labs))
