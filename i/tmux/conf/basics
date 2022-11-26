@@ -1,7 +1,7 @@
 
 # tmux at 3934d9b24de376cf0b6868c56751b55bd2d60399 in input.c and tty-features.c
 #   ../tmux/input.c: see dispatch functions, like input_csi_dispatch_sgr_colon
-#   ../tmux/tty-features.c: lists all the options and codes use for the terminal-features flags
+#   ../tmux/tty-features.c: lists all the options and codes used for the terminal-features flags
 #   (maybe other tty-*.c)
 # alacritty at 1df7dc5171abfe1eab3e95be964f61c5876198f1
 #   ../../alacritty/alacritty/alacritty_terminal/src/ansi.rs:
@@ -11,10 +11,14 @@
 #   https://github.com/alacritty/alacritty/pull/4660 tries to add underline color support, but no styles yet
 # https://terminalguide.namepad.de/ has a good list, hard to know if anything is ever complete
 # alacritty support, from what I can tell:
-#   supported  : 256, clipboard, ccolour, cstyle, focus, mouse, RGB, strikethrough, title
-#   unsupported: extkeys, margins, overline, rectfill, sync, usstyle
-#   of the unsupported, those could be interesting: margins, overline, rectfill, sync, usstyle
-set-option -a terminal-features 'alacritty:256:clipboard:ccolour:cstyle:focus:mouse:RGB:strikethrough:title'
+#   supported  : 256, clipboard, ccolour, cstyle, focus, mouse, RGB, strikethrough, title, usstyle
+#   unsupported: extkeys, margins, overline, rectfill, sync
+#   of the unsupported, those could be interesting: margins, overline, rectfill, sync
+# TODO I'm not sure about terminal-features vs terminal-overrides, but RGB didnt work when I didn't do override
+# yet the tmux manpage looks very different for terminal-overrides
+# TODO used to have it as session option, now as server option, not sure if it matters
+set-option -sa terminal-features 'alacritty:256:clipboard:ccolour:cstyle:focus:mouse:RGB:strikethrough:title:usstyle'
+set-option -sa terminal-overrides 'alacritty:256:clipboard:ccolour:cstyle:focus:mouse:RGB:strikethrough:title:usstyle'
 
 # command prefix (default was ctrl-b)
 set-option -g prefix `
