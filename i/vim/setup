@@ -14,9 +14,11 @@ ln -sfT $h/config ~/.config/nvim
     # since things are sourced by nvim
     mkdir -p ~/.local/share/nvim
     cd ~/.local/share/nvim
-    accept=(rplugin.vim shada swap telescope_history)
     for i in $(ls); do
-        (( ${accept[(i)$i]} <= ${#accept} ))
+        if [[ $i != (rplugin.nvim|shada|swap|telescope_history|tree-sitter-*.tar.gz) ]]; then
+            echo "~/.local/share/nvim/$i might be stale data" >&2
+            exit 1
+        fi
     done
 )
 
@@ -24,6 +26,9 @@ ln -sfT $h/config ~/.config/nvim
     cd $h/nvim
 
     sudo apt-get install -yqq ninja-build gettext libtool libtool-bin autoconf automake cmake g++ pkg-config unzip
+
+    # they advice to delete the runtime folder before installing a new version
+    sudo rm -rf /usr/local/share/nvim/runtime
 
     make distclean
     make CMAKE_BUILD_TYPE=Release
@@ -92,3 +97,6 @@ nvim -V1 -es <<- 'EOF'
     TSUpdateSync
     helptags ALL
 EOF
+
+# TODO :checkhealth with grep on error or warnings?
+# not sure how to make it unattended :/
