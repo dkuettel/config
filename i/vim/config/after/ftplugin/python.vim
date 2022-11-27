@@ -22,3 +22,8 @@ iabbrev <buffer> O[ Optional[
 
 " TODO trying some shortcuts prefixed with shift-tab, shift-tab is never used, right?
 imap <buffer> <s-tab>o Optional[
+imap <buffer> <s-tab>b breakpoint()
+
+" TODO trying some -... shortcuts in normal mode for inserting easy stuff
+nmap <buffer> -i A  # pyright: ignore<esc>
+nmap <buffer> -b obreakpoint()<esc>
