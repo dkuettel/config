@@ -5,7 +5,9 @@ cmd=(
     python -m
     nn.flow config
     # --stream=dkuettel/flow/test-stream-after
-    --stream=dkuettel/flow/test-stream-before
+    # --stream=dkuettel/flow/test-stream-before
+    # --stream=astockinger/flow/training-streams/2022-09-30--MT360_objects
+    --stream=dkuettel/flow/upload-dataset-examples
     read-dataset
     --out-folder=.
 )

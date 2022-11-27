@@ -15,9 +15,9 @@ cmd=(
         #--assembly=ferrari_488_red.viewpoint_0000
         #--assembly=Ender3DPrinter.viewpoint_0000
         --out-folder=.
-        --short-training
+        # --short-training
         # --update-template batchnorm_convergence.num_batches 10
-        --variable-length-training
+        # --variable-length-training
         # --sample-count-multiplier=2
         # --gpu-count=4
         # --update-template training.batch_recycling '{"shuffle_buffer_size": 10, "repeat_count": 2}'
@@ -26,4 +26,4 @@ cmd=(
         #--testsets=mtar360/all/recolored/v2
 )
 
-run $@
+run $cmd
