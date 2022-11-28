@@ -2,8 +2,4 @@
 set -eux -o pipefail
 
 cd $h
-
-bin/pip-sync-wrapper &
-bin/build &
-
-wait
+parallel -- bin/pip-sync-wrapper bin/build
