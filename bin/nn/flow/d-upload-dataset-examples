@@ -1,0 +1,10 @@
+#!/bin/zsh
+set -eu -o pipefail
+
+cmd=(
+    python -m
+    nn.flow
+    upload-dataset-examples
+)
+
+run $cmd
