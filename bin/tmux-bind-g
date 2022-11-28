@@ -3,11 +3,27 @@ set -eux -o pipefail
 
 # bind an executable to g (split) and G (new window)
 # meant to use dynamically for whatever is the current task
-# at the end
-#   [q] to exit
-#   [enter] to rerun
+# (Maybe gotta be a bit careful because $@ gets expanded more than once?)
 
-# NOTE alternatively, we put the command in a file? less escape problems?
-cmd='while true; do clear; echo ">" '$@'; echo; '$@'; echo; echo ">" '$@' ; read -sk "r?exit code = $? [q or any]"; if [[ $r == q ]]; then break; fi; done'
+cmd='while true; do
+    clear
+    echo ">" '$@'
+    echo
+    '$@'
+    echo
+    echo ">" '$@'
+    echo "exit code = $?"
+    while true; do
+        read -sk "r?[q] to quit or [enter] to rerun:"
+        echo
+        if [[ $r == q ]]; then
+            exit
+        fi
+        if [[ $r == $'"'"'\n'"'"' ]]; then
+            break
+        fi
+    done
+done'
+
 tmux bind-key g split-window -h -c "#{pane_current_path}" zsh -ic $cmd
 tmux bind-key G new-window -n g-bound -c "#{pane_current_path}" zsh -ic $cmd
