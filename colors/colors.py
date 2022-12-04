@@ -1,6 +1,7 @@
 from pathlib import Path
 from typing import Union
 
+import click
 import numpy as np
 import skimage
 from tabulate import tabulate
@@ -10,6 +11,11 @@ from tabulate import tabulate
 # http://www.brucelindbloom.com/index.html?ColorCalculator.html
 # see http://misc.flogisoft.com/bash/tip_colors_and_formatting
 # see https://github.com/altercation/solarized
+
+
+@click.group()
+def cli():
+    pass
 
 
 def show_256_colors():
@@ -102,6 +108,7 @@ def print_reflowed(text: str, columns: int = 50):
     print(reflow(text, columns))
 
 
+@cli.command()
 def show_attributes():
     print_reflowed(
         """
@@ -128,6 +135,7 @@ def show_attributes():
     p("4:3", "curly underline")
     p("4:4", "dotted underline")
     p("4:5", "dashed underline")
+    # TODO how about different colors for underlines compared to main text color?
     p(5, "blink")
     p(6, "fast blink")
     p(7, "inverse")
@@ -434,11 +442,11 @@ def make_tmux_source(
 # TODO does asciicinema respect 24bit colors? then there are no theme problems anymore for demos, possibly need to run tmux after for that?
 
 if __name__ == "__main__":
+    cli()
     # TODO use click to make it easier?
     # show_256_colors()
     # show_16_colors()
     # show_24bit_colors()
-    show_attributes()
     # validate_solarized()
     # derive_solarized()
     # derive_solarized(named_labs=get_randomized_solarized_dark())
