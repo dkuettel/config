@@ -140,3 +140,6 @@
 [submodule "i/vim/config/pack/plugins/opt/funky-contexts.nvim"]
 	path = i/vim/config/pack/plugins/opt/funky-contexts.nvim
 	url = git@github.com:dkuettel/funky-contexts.nvim.git
+[submodule "i/vim/config/pack/plugins/opt/lsp_signature.nvim"]
+	path = i/vim/config/pack/plugins/opt/lsp_signature.nvim
+	url = https://github.com/ray-x/lsp_signature.nvim.git

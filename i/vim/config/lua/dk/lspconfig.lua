@@ -10,6 +10,7 @@ function M.setup()
     vim.cmd("packadd LuaSnip") -- should that be here?
     vim.cmd("packadd cmp_luasnip")
     vim.cmd("packadd lspkind-nvim")
+    vim.cmd("packadd lsp_signature.nvim") -- could also be separate, like many others
 
     -- https://github.com/hrsh7th/nvim-cmp
     -- TODO used to have it on commit 272cbdc
@@ -57,6 +58,7 @@ function M.setup()
         },
     })
     -- TODO all hard-coded for https://github.com/morhetz/gruvbox#light-mode-1
+    -- TODO or use the same icons as the lualine bottom right? lightbulb for hint, eg?
     vim.cmd([[
         highlight DiagnosticFloatingError guifg=#3c3836
         highlight DiagnosticVirtualTextError guifg=#bdae93
@@ -82,11 +84,18 @@ function M.setup()
         highlight DiagnosticSignHint guifg=#076678
         sign define DiagnosticSignHint text= texthl=DiagnosticSignHint linehl= numhl=
 
+        highlight LspSignatureActiveParameter gui=bold
     ]])
 
     M.setup_lua(capabilities)
     M.setup_python(capabilities)
     -- M.setup_python_jedi(capabilities)
+
+    -- TODO if this works well, maybe remove ctrl-K for insert mode?
+    -- https://github.com/ray-x/lsp_signature.nvim#full-configuration-with-default-values
+    require("lsp_signature").setup({
+        hint_prefix = " ",
+    })
 end
 
 function M.setup_luasnip()
