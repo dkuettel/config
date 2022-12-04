@@ -28,11 +28,61 @@ function M.setup()
     -- TODO not sure why that is needed
     -- from https://github.com/hrsh7th/nvim-cmp/#setup
     -- that makes vim the client say it can accept more from the LS?
-    local capabilities = require('cmp_nvim_lsp').default_capabilities()
+    local capabilities = require("cmp_nvim_lsp").default_capabilities()
     M.setup_luasnip()
     M.setup_completion()
 
-    -- TODO can we control the characters used for warning and error markers?  and others instead?
+    -- TODO can we control the characters used for warning and error markers?  and others instead?
+    -- https://neovim.io/doc/user/diagnostic.html#vim.diagnostic.config()
+    -- :Telescope diagnostics (?)
+    vim.diagnostic.config({
+        -- underline = { severity = vim.diagnostic.severity.ERROR },
+        virtual_text = {
+            -- TODO https://neovim.io/doc/user/diagnostic.html#diagnostic-severity
+            severity = { min = vim.diagnostic.severity.WARN },
+            prefix = "", -- alternatives ﲑﲒﲕﲖ
+            -- format = function(diagnostic)
+            -- TODO doesnt seem to disable, which signs are they? I want to change them
+            -- signs = false,
+            -- TODO doesnt seem to apply to open_float ...
+            -- float = {
+            --     prefix = function(diagnostics, i, total)
+            --         return "somee: "
+            --     end,
+            -- },
+            -- TODO also not happening?
+            -- update_in_insert=true,
+            severity_sort = true, -- is it working?
+            spacing = 0,
+        },
+    })
+    -- TODO all hard-coded for https://github.com/morhetz/gruvbox#light-mode-1
+    vim.cmd([[
+        highlight DiagnosticFloatingError guifg=#3c3836
+        highlight DiagnosticVirtualTextError guifg=#bdae93
+        highlight DiagnosticUnderlineError gui=undercurl guisp=#cc241d
+        highlight DiagnosticSignError guifg=#cc241d
+        sign define DiagnosticSignError text= texthl=DiagnosticSignError linehl= numhl=
+
+        highlight DiagnosticFloatingWarn guifg=#3c3836
+        highlight DiagnosticVirtualTextWarn guifg=#bdae93
+        highlight DiagnosticUnderlineWarn gui=undercurl guisp=#cc241d
+        highlight DiagnosticSignWarn guifg=#cc241d
+        sign define DiagnosticSignWarn text= texthl=DiagnosticSignWarn linehl= numhl=
+
+        highlight DiagnosticFloatingInfo guifg=#3c3836
+        highlight DiagnosticVirtualTextInfo guifg=#bdae93
+        highlight DiagnosticUnderlineInfo gui=underdotted guisp=#076678
+        highlight DiagnosticSignInfo guifg=#076678
+        sign define DiagnosticSignInfo text= texthl=DiagnosticSignInfo linehl= numhl=
+
+        highlight DiagnosticFloatingHint guifg=#3c3836
+        highlight DiagnosticVirtualTextHint guifg=#bdae93
+        highlight DiagnosticUnderlineHint gui=underdotted guisp=#076678
+        highlight DiagnosticSignHint guifg=#076678
+        sign define DiagnosticSignHint text= texthl=DiagnosticSignHint linehl= numhl=
+
+    ]])
 
     M.setup_lua(capabilities)
     M.setup_python(capabilities)
@@ -198,7 +248,14 @@ function M.mappings(client, bufnr)
 
     -- See `:help vim.diagnostic.*` for documentation on any of the below functions
     local D = vim.diagnostic
-    nmap(",d", D.open_float, "diagnostics float")
+    -- TODO vim.diagnostic.config({float={...}}) should configer this, doesnt work for me
+    nmap(",d", function()
+        D.open_float({
+            prefix = function(d, i, t)
+                return vim.diagnostic.severity[d.severity] .. ": "
+            end,
+        })
+    end, "diagnostics float")
     nmap("[d", D.goto_prev, "diagnostics previous")
     nmap("]d", D.goto_next, "diagnostics next")
     nmap(",q", D.setloclist, "diagnostics loclist")
