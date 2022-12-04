@@ -1,4 +1,5 @@
 from pathlib import Path
+from typing import Union
 
 import numpy as np
 import skimage
@@ -83,35 +84,47 @@ def show_24bit_colors():
     )
 
 
+def reflow(text: str, columns: int = 50) -> str:
+    def words():
+        c = 0
+        for word in text.split():
+            if c < columns:
+                yield word
+                c += len(word)
+            else:
+                yield "\n" + word
+                c = len(word)
+
+    return " ".join(words())
+
+
+def print_reflowed(text: str, columns: int = 50):
+    print(reflow(text, columns))
+
+
 def show_attributes():
-    print()
-    print("different attributes:")
-    print(
-        "(things are often not the same inside and outside tmux, because tmux does its own translations to accomodate for the client terminal emulator)"
+    print_reflowed(
+        """
+        Note that attributes are not always the same inside and outside of tmux.
+        Tmux does its own translations to accomodate for different client terminal emulators.
+        Here are some attributes:
+        """
     )
 
-    def p(code, label, desc=None):
-        print(f"[0m{code:>4}: [{code}m{label}[0m", end="")
-        if desc:
-            print(f"-> {desc}", end="")
-        print()
+    def p(code: Union[int, str], desc: str):
+        print(f"[0m{code:>4}: [{code}mtest[0m - {desc}")
 
-    p(0, "default")
-    p(
-        1,
-        "bold/bright",
-        "usually bold font, sometimes also forces named colors into the bright variant of 8+8=16 color palette",
-    )
-    p(2, "faint/dim", "most terminals use 1/3 or 2/3 of the original color intensities")
-    p(
-        21,
-        "double underline",
-        "tmux does a fallback if the client terminal doesnt support it",
-    )
+    p(0, "reset to defaults")
+    p(1, "bold, sometimes bright from a 8+8=16 color palette")
+    p(2, "faint/dim (most terminals use 1/3 or 2/3 of the original color intensities)")
+    p(21, "double underline (by some standard, but 4:2 in alacritty)")
     p(3, "italic")
     p(4, "underline")
-    # NOTE for modern codes, colon is needed, those are subcodes, semicolons is just legacy from a wide misunderstanding of the standard
+    # NOTE for modern codes, colon is needed, those are subcodes
+    # semicolons is just legacy from a wide misunderstanding of the standard
     # see https://github.com/terminalguide/terminalguide/issues/9
+    p("4:1", "alias for underline")
+    p("4:2", "alias for double underline")
     p("4:3", "curly underline")
     p("4:4", "dotted underline")
     p("4:5", "dashed underline")
@@ -431,3 +444,10 @@ if __name__ == "__main__":
     # derive_solarized(named_labs=get_randomized_solarized_dark())
     # derive_solarized(named_labs=dim_theme(solarized_dark_named_labs))
     # make_tmux_source(named_labs=dim_theme(solarized_light_named_labs))
+
+# TODO hmm https://iterm2.com/documentation-one-page.html#documentation-escape-codes.html
+# lists setting the color palette, so we could have it set by the server? would it remove some config?
+# not sure if other support it, but needed? would just minimize config for me maybe
+# would allow switching, but then again, we're probably not gonna do that
+# alacritty seems better overall, so maybe go with that for ios as well? -> feature parity (even windows?)
+# also in the code we can check what's supported, maybe suck it out automated? or watch git log on that file?
