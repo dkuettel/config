@@ -94,7 +94,7 @@ function M.setup()
     -- TODO if this works well, maybe remove ctrl-K for insert mode?
     -- https://github.com/ray-x/lsp_signature.nvim#full-configuration-with-default-values
     require("lsp_signature").setup({
-        hint_prefix = " ",
+        hint_prefix = " ", -- alternatives 
     })
 end
 
