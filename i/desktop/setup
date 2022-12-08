@@ -20,22 +20,23 @@ sudo systemctl stop gdm.service || true
 
 # apt installs (sorted)
 i=(
+    #kdenlive  # seems ok for cutting videos
     cool-retro-term
     d-feet  # introspect d-bus, dbus
     evince  # for the easier pdfs (when not using okular)
-    feh # note also .xsession uses feh, is that the only way?
-    firefox # NOTE in 22.04 this actually installs a snap
-    geeqie # pulls in many dependencies because of kde
-    gnome-sushi # nautilus plugin for preview on space-key
-    gpick # easy color picker from anything on the screen, useful when debugging terminal colors
-    gthumb # together with scrot
-    nautilus # filemanager gui
-    scrot # screenshots
-    transmission-gtk # NOTE keeps seetings in ~/.config/transmission/settings.json; could be configured if not specific for machine
+    feh  # note also .xsession uses feh, is that the only way?
+    firefox  # NOTE in 22.04 this actually installs a snap
+    geeqie  # pulls in many dependencies because of kde
+    gnome-sushi  # nautilus plugin for preview on space-key
+    gpick  # easy color picker from anything on the screen, useful when debugging terminal colors
+    gthumb  # together with scrot
+    nautilus  # filemanager gui
+    qdirstat  # disk space explorer (only gui)
+    scrot  # screenshots
+    transmission-gtk  # NOTE keeps seetings in ~/.config/transmission/settings.json; could be configured if not specific for machine
     xclip
-    xdotool # for xsession and spotify title
-    yaru-theme-icon # gnome apps currently seem to use that one and dont depend on it when installing, might change again
-    #kdenlive # seems ok for cutting videos
+    xdotool  # for xsession and spotify title
+    yaru-theme-icon  # gnome apps currently seem to use that one and dont depend on it when installing, might change again
 )
 sudo apt-get install -qy $i
 
