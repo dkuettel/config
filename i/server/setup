@@ -42,31 +42,32 @@ sudo timedatectl set-timezone Europe/Zurich
 
 # apt installs (sorted)
 i=(
-    #dtrx # easy and clean archive extraction  # todo gone?
-    #git-filter-repo # https://github.com/newren/git-filter-repo/blob/main/INSTALL.md should be there with ubuntu 22.04
-    #lm-sensors # check hardware temperatures
-    apt-file # apt-file list [package] to see before you install (instead of manually apt-get download [package]; dpgk --contents [file])
-    aptitude # 'aptitude why package' is quite cool, there might be more
-    attr # set extended file attributes, like 'attr -s com.dropbox.ignored -V 1 .venv'
-    bmon # bandwidth monitor
+    #dtrx  # easy and clean archive extraction  # todo gone?
+    #git-filter-repo  # https://github.com/newren/git-filter-repo/blob/main/INSTALL.md should be there with ubuntu 22.04
+    #lm-sensors  # check hardware temperatures
+    apt-file  # apt-file list [package] to see before you install (instead of manually apt-get download [package]; dpgk --contents [file])
+    aptitude  # 'aptitude why package' is quite cool, there might be more
+    attr  # set extended file attributes, like 'attr -s com.dropbox.ignored -V 1 .venv'
+    bmon  # bandwidth monitor
     cmake
     dkms
     g++
-    gcp # like cp, but with progress bar among other features
+    gcp  # like cp, but with progress bar among other features
     git
     gocryptfs
     htop
-    jq # json query engine
+    jq  # json query engine
     libboost-dev
-    lnav # log file viewer
-    markdown # for my ptc notes standup.markdown
-    mlocate # quickly find files in the full system
-    moreutils # sponge
-    mosh # ssh robust for unstable connections
-    nmap # 'nmap localhost' to see what is open, or check on other machines, nice to audit
+    lnav  # log file viewer
+    markdown  # for my ptc notes standup.markdown
+    mlocate  # quickly find files in the full system
+    moreutils  # sponge
+    mosh  # ssh robust for unstable connections
+    ncdu  # ncurses disk usage utility (space usage)
+    nmap  # 'nmap localhost' to see what is open, or check on other machines, nice to audit
     openssh-server
-    partitionmanager # now also shows some of LVM
-    pv # monitor data progress thru a pipe
+    partitionmanager  # now also shows some of LVM
+    pv  # monitor data progress thru a pipe
     sshfs
     suckless-tools
     sysstat
