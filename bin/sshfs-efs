@@ -1,13 +1,15 @@
 #!/bin/zsh
 set -eux -o pipefail
 
-if [[ ! -d /efs ]]; then
-    sudo mkdir -p /efs
-    sudo chown dkuettel:dkuettel /efs
+target=/efs
+
+if [[ ! -d $target ]]; then
+    sudo mkdir -p $target
+    sudo chown $USER:$USER $target
 fi
 
-if mountpoint /efs; then
-    echo 'something is already mounted at /efs' >&2
+if mountpoint $target; then
+    echo "Something is already mounted at $target." >&2
     exit 1
 fi
 
@@ -17,10 +19,10 @@ opts='allow_root,reconnect,auto_cache'
 case $(hostname) in
     (boom)
         # NOTE direct ip is much faster, aws ssm is only meant for admin ssh, not for data
-        sshfs -o $opts efs@00.000.000.00:/efs /efs
+        sshfs -o $opts efs@00.000.000.00:/efs $target
         ;;
     (base)
-        sshfs -o $opts efs:/efs /efs
+        sshfs -o $opts efs:/efs $target
         ;;
     (*)
         echo "unknown local host $(hostname)" >&2
