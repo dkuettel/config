@@ -92,7 +92,7 @@ function jql {
 
 # todo for now assuming globally installed, could also use a canonical pipenv?
 # lets see if fast enough, tf might be heavy/slow to import everytime?
-alias ipy="ipython3 -c 'import numpy as np, tensorflow as tf, math; from pathlib import Path' -i"
+alias ipy="TF_CPP_MIN_LOG_LEVEL=2 ipython3 -c 'import numpy as np, tensorflow as tf, pandas as pd, math; from pathlib import Path' -i"
 
 function treel { tree -C $@ | less }
 
@@ -120,6 +120,7 @@ alias gl='git l'
 alias gf='git f'
 alias gp='git p'
 alias gd='git d'
+alias gm='git m'
 
 # completion for tmux-bind-g
 compctl -c tmux-bind-g
