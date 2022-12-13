@@ -17,13 +17,14 @@ envs=(
     -e VIRTUAL_ENV=$base/.venv
     # NOTE .venv/**/nn.pth already contains PYTHONPATH=$base/python
     -e NN_S3_CACHE=$HOME/envs/s3-cache
+    -e TF_CPP_MIN_LOG_LEVEL=2  # disables tf's warnings (like no gpu, no libcuda, ...)
     -e build_flow=yes  # for the bin/build script
 )
 
 cmds=(
     new-session -s $name -A -c $base $envs true \;
     bind-key V new-window -n src -c $base -bt 1 V \;
-    bind-key j new-window -n jobs x .jobs ls -r \;
+    bind-key j new-window -n jobs x .jobs ls -r -t 1m \;
     new-window -n src V
 )
 
