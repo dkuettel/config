@@ -83,6 +83,7 @@ function M.setup()
         highlight DiagnosticUnderlineHint gui=underdotted guisp=#076678
         highlight DiagnosticSignHint guifg=#076678
         sign define DiagnosticSignHint text= texthl=DiagnosticSignHint linehl= numhl=
+        " sign define DiagnosticSignHint text= texthl=DiagnosticSignHint linehl= numhl=
 
         highlight LspSignatureActiveParameter gui=bold
     ]])
