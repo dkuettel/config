@@ -30,6 +30,7 @@ i=(
     gnome-sushi  # nautilus plugin for preview on space-key
     gpick  # easy color picker from anything on the screen, useful when debugging terminal colors
     gthumb  # together with scrot
+    maim  # for screenshot directly into copy buffer
     nautilus  # filemanager gui
     qdirstat  # disk space explorer (only gui)
     scrot  # screenshots
