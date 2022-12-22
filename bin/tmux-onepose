@@ -12,16 +12,15 @@ envs=(
     -e workspace_active=yes
     -e workspace_home=$base
     -e h=$base
-    # TODO eventually add the venv here if we make it outside docker
-    -e PATH=$base/bin:$PATH
-    # -e VIRTUAL_ENV=$base/.venv
-    -e PYTHONPATH=$base/src
+    -e PATH=$base/bin:$base:/.venv/bin:$PATH
+    -e VIRTUAL_ENV=$base/.venv
+    -e PYTHONPATH=$base
+    -e TF_CPP_MIN_LOG_LEVEL=2  # disables tf's warnings (like no gpu, no libcuda, ...)
 )
 
 cmds=(
     new-session -s $name -A -c $base $envs true \;
     bind-key V new-window -n src -c $base -bt 1 V \;
-    # bind-key j new-window -n jobs x jobs ls -r \;
     new-window -n src V
 )
 
