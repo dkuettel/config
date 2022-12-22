@@ -443,32 +443,39 @@ function M.python_mappings(client, bufnr)
         }
     end
 
+    local function ptags_from_command(cmd, opts)
+        opts = opts or {}
+        pickers.new(opts, {
+            prompt_title = "ptags",
+            finder = finders.new_oneshot_job(cmd, {
+                entry_maker = pdocs_entry_maker,
+            }),
+            sorter = conf.generic_sorter(opts),
+            previewer = conf.grep_previewer(opts),
+        }):find()
+    end
+
     local function ptags(sources, opts)
-        if not sources then
-            -- TODO for now no ./.pdocs or ./.list-symbols, just try to discover things
-            -- vim.pretty_print(vim.fn.glob("*", 0, 1))
+        if sources == nil and vim.fn.filereadable("./.vim-ptags-telescope") then
+            ptags_from_command({ "./.vim-ptags-telescope" }, opts)
+            return
+        end
+        if sources == nil then
+            -- guess some source locations
             sources = {
                 vim.fn.glob("python", false, true) or { "." },
                 vim.fn.glob("libs/*/python", false, true),
             }
             sources = vim.tbl_flatten(sources)
         end
-        local pdocs_command = {
+        local cmd = {
             "ptags",
             "--out=-",
             "--fmt=vim-telescope",
             "--quiet",
             unpack(sources),
         }
-        opts = opts or {}
-        pickers.new(opts, {
-            prompt_title = "ptags",
-            finder = finders.new_oneshot_job(pdocs_command, {
-                entry_maker = pdocs_entry_maker,
-            }),
-            sorter = conf.generic_sorter(opts),
-            previewer = conf.grep_previewer(opts),
-        }):find()
+        ptags_from_command(cmd, opts)
     end
 
     -- TODO long entries dont scroll left and right to the important parts, like fzf did?
