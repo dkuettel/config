@@ -1,4 +1,4 @@
 #!/bin/zsh
 set -eu -o pipefail
 
-python3 ${0:a:h}/../i/ptags/ptags/ptags.py $@
+python3.9 ${0:a:h}/../i/ptags/ptags/ptags.py $@
