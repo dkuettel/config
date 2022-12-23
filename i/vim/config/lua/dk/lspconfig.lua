@@ -456,7 +456,7 @@ function M.python_mappings(client, bufnr)
     end
 
     local function ptags(sources, opts)
-        if sources == nil and vim.fn.filereadable("./.vim-ptags-telescope") then
+        if sources == nil and vim.fn.filereadable("./.vim-ptags-telescope") == 1 then
             ptags_from_command({ "./.vim-ptags-telescope" }, opts)
             return
         end
