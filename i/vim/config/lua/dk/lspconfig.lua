@@ -51,8 +51,9 @@ function M.setup()
             --         return "somee: "
             --     end,
             -- },
-            -- TODO also not happening?
-            -- update_in_insert=true,
+            -- TODO also not happening? or maybe default is happening, so I didnt see a difference, lets try off
+            -- maybe we even want to hide in insert mode?
+            update_in_insert = false,
             severity_sort = true, -- is it working?
             spacing = 0,
         },
