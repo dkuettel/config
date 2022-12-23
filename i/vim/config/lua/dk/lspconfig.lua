@@ -414,7 +414,7 @@ end
 function M.python_mappings(client, bufnr)
     M.mappings(client, bufnr)
 
-    -- pyright, jedi, and language servers in general dont seem to index project symbols fullly qualified
+    -- pyright, jedi, and language servers in general dont seem to index project symbols fully qualified
     -- replace for python with pdocs instead of the original generic LSP call in lspconfig.lua
     -- TODO builtin.treesitter() could be adapted to make things fully qualified?
 
