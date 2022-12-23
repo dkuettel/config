@@ -53,7 +53,8 @@ ln -sfT $h/config ~/.config/nvim
 
     ( # pyright for python lsp
         if ! which pyright-langserver; then
-            npm install -g pyright
+            # NOTE see https://github.com/microsoft/pyright/releases
+            npm install --global pyright@1.1.285
         fi
     )
 
