@@ -14,7 +14,7 @@ envs=(
     -e h=$base
     -e PATH=$base/bin:$base/.venv/bin:$PATH
     -e VIRTUAL_ENV=$base/.venv
-    -e PYTHONPATH=$base
+    -e PYTHONPATH=$base/python
     -e TF_CPP_MIN_LOG_LEVEL=2  # disables tf's warnings (like no gpu, no libcuda, ...)
 )
 
