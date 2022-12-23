@@ -407,6 +407,16 @@ function M.setup_python(capabilities)
     require("lspconfig").pyright.setup({
         on_attach = M.python_mappings,
         capabilities = capabilities,
+        -- root_dir = function(startpath)
+        --     return vim.fn.getcwd()
+        -- end,
+        -- NOTE this is part of the LS protocol, sending changes to the configuration
+        -- it will be sent as a request, not part of the command line
+        -- but I think it's parallel to config files like pyrightconfig.json (?)
+        -- it notifies the LS that we want something changed there
+        -- lspconfig has some defaults here, is that smart? doesnt that overwrite a config file?
+        -- also, 2 out of 3 lspconfig defaults I cannot find anymore in the documentation of pyright
+        -- https://github.com/microsoft/pyright/blob/main/docs/settings.md , not sure if that is really part of the config file
         settings = {},
     })
 end
