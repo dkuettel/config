@@ -9,6 +9,7 @@ function M.setup()
     M.iabbrevs()
     M.session()
     M.new_zsh()
+    M.move()
     -- M.active_window()
 end
 
@@ -229,6 +230,21 @@ function M.new_zsh()
         "NewZsh",
         cmd_new_zsh,
         { nargs = 1, complete = "file", desc = "Create an executable zsh script and open for editing." }
+    )
+end
+
+local function cmd_move(args)
+    -- NOTE use %:h/new-file to put in the same folder
+    local before = vim.api.nvim_buf_get_name(0)
+    vim.cmd("saveas " .. args.args)
+    vim.fn.system({ "rm", before })
+end
+
+function M.move()
+    vim.api.nvim_create_user_command(
+        "Move",
+        cmd_move,
+        { nargs = 1, complete = "file", desc = "Move current buffer's file." }
     )
 end
 
