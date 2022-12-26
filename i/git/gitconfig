@@ -8,6 +8,8 @@
     # no SIGPIPE exit codes (usually 128+13=141) if you exit less before reading all piped input
     # but potentially slow, because sponge first consumes, before it passes on
     pager = zsh -c 'sponge | less'
+[init]
+    defaultBranch = main
 [push]
     default = simple
 [diff]
