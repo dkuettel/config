@@ -1,0 +1,8 @@
+#!/bin/zsh
+set -eux -o pipefail
+
+# https://github.com/ogham/exa
+# https://the.exa.website
+
+# TODO after ubuntu 20.04 there is also an apt version available
+cargo install exa

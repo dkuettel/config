@@ -99,6 +99,7 @@ setups=(
     kvm
     nodejs
     nvidia
+    exa
 )
 for i in $setups; do
     ../$i/setup

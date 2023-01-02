@@ -1,13 +1,22 @@
 
 # ls
-alias ls='ls -v --color=auto'
-alias lr='ls -cFGghrt --color=always'
-alias la='ls -aFhlv --color=always'
-alias ll='ls -Fhlv --color=always'
-function lll { ls -Fhlv --color=always $@ | less -R }
-alias lsd='ls -v -d */'
-alias lld='ls -hlv -d */'
+# alias ls='ls -v --color=auto'
+# alias lr='ls -cFGghrt --color=always'
+# alias la='ls -aFhlv --color=always'
+# alias ll='ls -Fhlv --color=always'
+# function lll { ls -Fhlv --color=always $@ | less -R }
+# alias lsd='ls -v -d */'
+# alias lld='ls -hlv -d */'
 # function lrt { ls -hltrcF --color=always $@ | tail }
+
+# trying exa to replace ls
+alias ls='exa --header --git --time-style=long-iso --icons --no-permissions --no-user --long --sort=name'
+alias lr='ls --sort=newest'
+alias la='ls --all'
+alias ll='exa --header --git --time-style=long-iso --icons --group --long --extended --sort=name'
+function lll { ll --color=always $@ | less -R }
+alias lsd='ls --only-dirs'
+alias lld='ll --only-dirs'
 
 # todo zsh supports .. and ... without aliases?
 #alias ..='cd ..'
