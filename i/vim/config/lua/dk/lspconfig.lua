@@ -92,6 +92,7 @@ function M.setup()
     M.setup_lua(capabilities)
     M.setup_python(capabilities)
     -- M.setup_python_jedi(capabilities)
+    M.setup_rust(capabilities)
 
     -- TODO if this works well, maybe remove ctrl-K for insert mode?
     -- https://github.com/ray-x/lsp_signature.nvim#full-configuration-with-default-values
@@ -505,6 +506,37 @@ function M.setup_python_jedi(capabilities)
     require("lspconfig").jedi_language_server.setup({
         on_attach = M.mappings,
         capabilities = capabilities,
+    })
+end
+
+function M.setup_rust(capabilities)
+    -- https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#rust_analyzer
+    -- https://rust-analyzer.github.io/manual.html
+
+    require("lspconfig").rust_analyzer.setup({
+        on_attach = M.mappings,
+        capabilities = capabilities,
+        -- TODO https://rust-analyzer.github.io/manual.html#rustup
+        cmd = { "rustup", "run", "stable", "rust-analyzer" },
+        settings = {
+            -- TODO copied from https://rust-analyzer.github.io/manual.html#nvim-lsp
+            ["rust-analyzer"] = {
+                imports = {
+                    granularity = {
+                        group = "module",
+                    },
+                    prefix = "self",
+                },
+                cargo = {
+                    buildScripts = {
+                        enable = true,
+                    },
+                },
+                procMacro = {
+                    enable = true,
+                },
+            },
+        },
     })
 end
 
