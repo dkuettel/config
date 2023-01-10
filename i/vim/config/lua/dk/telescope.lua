@@ -126,6 +126,10 @@ function M.after()
     -- TODO find files is pretty generic now, for some projects we might want to be more explicit?
     -- before had a .list-files in the root folder of those projects
     map("n", ",f", bi.find_files, { desc = "telescope find files" })
+    map("n", ",v", function()
+        -- TODO unfortunately search_file=... prefilters, it doesnt prefill the search text
+        bi.find_files({ search_file = vim.fn.expand("<cword>") })
+    end, { desc = "telescope find files <cword>" })
     map("n", ",F", function(opts)
         find_from_command({ "find-famous-files" }, "famous files", opts)
     end, { desc = "telescope find famous files" })
