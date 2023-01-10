@@ -11,6 +11,7 @@ function M.setup()
             -- or we say do some shell kungfu yourself, yeah probably nicer
             lua = { command = { "stylua", "--config-path", "./stylua.toml", "-" } },
             json = { command = { "jq" } },
+            rust = { command = { "rustfmt" } },
         },
     })
     vim.keymap.set("n", "==", funky_formatter.format, { desc = "funky formatter" })
