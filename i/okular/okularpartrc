@@ -12,6 +12,7 @@ ShowLeftPanel=false
 [PageView]
 EditToolBarPlacement=1
 ScrollOverlap=10
+TrimMargins=true
 
 [Reviews]
 AnnotationTools=<tool type="highlight" id="1"><engine type="TextSelector" color="#facc59"><annotation type="Highlight" color="#facc59"/></engine><shortcut>1</shortcut></tool>,<tool type="note-inline" id="2"><engine type="PickPoint" color="#ffff00" block="true" hoverIcon="tool-note-inline"><annotation type="FreeText" color="#ffff00"/></engine><shortcut>2</shortcut></tool>,<tool type="note-linked" id="3"><engine type="PickPoint" color="#ffff00" hoverIcon="tool-note"><annotation type="Text" icon="Note" color="#ffff00"/></engine><shortcut>3</shortcut></tool>,<tool type="underline" id="4"><engine type="TextSelector" color="#000000"><annotation type="Underline" color="#000000"/></engine><shortcut>4</shortcut></tool>,<tool type="ink" id="5"><engine type="SmoothLine" color="#00ff00"><annotation type="Ink" width="2" color="#00ff00"/></engine><shortcut>5</shortcut></tool>,<tool type="straight-line" id="6"><engine type="PolyLine" color="#ffe000" points="2"><annotation type="Line" width="1" color="#ffe000"/></engine><shortcut>6</shortcut></tool>,<tool type="polygon" id="7"><engine type="PolyLine" color="#007eee" points="-1"><annotation type="Line" width="1" color="#007eee"/></engine><shortcut>7</shortcut></tool>,<tool type="ellipse" id="8"><engine type="PickPoint" color="#00ffff" block="true"><annotation type="GeomCircle" width="5" color="#00ffff"/></engine><shortcut>8</shortcut></tool>
