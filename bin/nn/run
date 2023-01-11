@@ -17,7 +17,7 @@ args=()
 
 # mount
 function mount {
-    args+=(--mount type=bind,source=${1:a},destination=$2)
+    args+=(--volume ${1:a}:$2)
 }
 
 # mount an nn relative path to /xp/src/nn
