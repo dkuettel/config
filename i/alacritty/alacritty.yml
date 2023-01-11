@@ -1,4 +1,6 @@
 # see full config and documentation at alacritty/alacritty.yml
+# last time checked with alacritty at 8dbaa0bbd308a72075910ff32d8ffcca09ae3529
+# easy to use something like 'git diff 8dbaa0bbd308a72075910ff32d8ffcca09ae3529.. -- alacritty.yaml' to find new stuff
 import:
   - ~/config/i/alacritty/basics.yml
   - ~/config/i/alacritty/fonts.yml
