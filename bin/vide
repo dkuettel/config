@@ -1,4 +1,12 @@
 #!/bin/zsh
 set -eux -o pipefail
 
+# TODO would be nice to easily switch between TUI and GUI
+# both dont work well, because smallest client determines size
+# can we connect and disconnect on the fly?
+# nvim on master supports TUI as client
+# neovide also soon(?) supports sockets instead of TCP
+
+# TODO sometimes it doesnt use the right size, because of multigrid?
+
 neovide --multigrid
