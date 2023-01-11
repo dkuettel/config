@@ -1,0 +1,38 @@
+#!/bin/zsh
+set -eux -o pipefail
+
+base=${0:a:h}
+cd $base
+
+( # https://github.com/ryanoasis/nerd-fonts
+
+    # NOTE a submodule is not practical
+    # a checkout is too large, even when shallow
+
+    # see https://www.nerdfonts.com/font-downloads for fonts
+    # see https://github.com/ryanoasis/nerd-fonts/releases for versions
+    version='v2.2.2'
+    prefix='https://github.com/ryanoasis/nerd-fonts/blob/'$version'/patched-fonts'
+
+    # TODO delete any previous versions, once we have some
+    target=~/.local/share/fonts/nerdfonts/$version
+    mkdir -p $target
+    cd $target
+
+    fonts=(
+        # UbuntuMono Nerd Font Mono
+        UbuntuMono.ttf 'FiraCode/Regular/complete/Fira%20Code%20Regular%20Nerd%20Font%20Complete%20Mono.ttf?raw=true'
+
+        # FiraCode Nerd Font Mono (with ligatures)
+        # see also https://github.com/tonsky/FiraCode
+        FiraCode.ttf 'UbuntuMono/Regular/complete/Ubuntu%20Mono%20Nerd%20Font%20Complete%20Mono.ttf?raw=true'
+    )
+
+    for name url in $fonts; do
+        if [[ ! -e $name ]]; then
+            curl $prefix/$url -fLo $name
+        fi
+    done
+
+    fc-cache
+)

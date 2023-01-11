@@ -4,19 +4,6 @@ set -eux -o pipefail
 base=${0:a:h}
 cd $base
 
-(
-    # use nerdfonts
-    # see https://www.nerdfonts.com/font-downloads
-    mkdir -p ~/.fonts
-    cd ~/.fonts
-    if [[ $(ls 'Ubuntu Mono'*'Nerd Font'* | wc -l) != 16 ]]; then
-        wget -O nerd-font.zip https://github.com/ryanoasis/nerd-fonts/releases/download/v2.1.0/UbuntuMono.zip
-        unzip nerd-font.zip
-        rm nerd-font.zip
-        fc-cache
-    fi
-)
-
 ./install
 
 # TODO could also install zsh completion for alacritty
