@@ -68,6 +68,7 @@ setups=(
     dwm # sometimes '/dev/fb0: Permission denied' with startx, but probably not with good nvidia-drivers?
     dmenu
     bluetooth
+    fonts
     alacritty
     # st  # NOTE alacritty instead
     # steam
