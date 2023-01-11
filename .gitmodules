@@ -143,3 +143,6 @@
 [submodule "i/vim/config/pack/plugins/opt/lsp_signature.nvim"]
 	path = i/vim/config/pack/plugins/opt/lsp_signature.nvim
 	url = https://github.com/ray-x/lsp_signature.nvim.git
+[submodule "i/neovide/neovide"]
+	path = i/neovide/neovide
+	url = https://github.com/neovide/neovide

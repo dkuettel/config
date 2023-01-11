@@ -1,0 +1,17 @@
+#!/bin/zsh
+set -eux -o pipefail
+
+# https://neovide.dev
+
+h=${0:a:h}
+cd $h
+
+( # https://neovide.dev/installation.html
+    cd $h/neovide
+    # TODO doesnt cargo manage dependencies?
+    sudo apt install -yq curl gnupg ca-certificates git gcc-multilib g++-multilib cmake libssl-dev pkg-config libfreetype6-dev libasound2-dev libexpat1-dev libxcb-composite0-dev libbz2-dev libsndio-dev freeglut3-dev libxmu-dev libxi-dev libfontconfig1-dev libxcursor-dev
+    cargo build --release
+    cp target/release/neovide ~/bin
+    # TODO not sure if 'cargo install --path .' is the better way instead?
+    # cargo install --git https://github.com/neovide/neovide
+)

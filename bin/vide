@@ -1,0 +1,4 @@
+#!/bin/zsh
+set -eux -o pipefail
+
+neovide --multigrid
