@@ -1,35 +1,24 @@
 #!/bin/zsh
 set -eux -o pipefail
 
-# create a new virtualenv at ./.venv and install pip-tools
+# - create a new virtualenv at first argument or .venv
+# - install pip-tools
+# - disable dropbox sync for venv
+
+at=${1:-.venv}
 
 if [[ -v VIRTUAL_ENV ]]; then
     echo "A virtual env at $VIRTUAL_ENV is already active." >&2
     exit 1
 fi
 
-if [[ -e .venv ]]; then
-    echo 'The folder .venv already exists.' >&2
+if [[ -e $at ]]; then
+    echo "The folder $at already exists." >&2
     exit 1
 fi
 
-function setup {
-    python3.9 -m venv .venv
-
-    # ignored means not uploading data
-    # but unfortunately it still indexes everything (takes cpu time)
-    attr -s com.dropbox.ignored -V 1 .venv
-
-    path=($PWD/.venv/bin $path)
-    export VIRTUAL_ENV=$PWD/.venv
-    pip install --upgrade pip pip-tools
-}
-
-if systemctl is-active dropbox@$USER.service && [[ $(dbox filestatus .) != '.: unwatched' ]]; then
-    # TODO making dbox service as --user might be nicer, and probably good enough
-    # TODO I cant find out if this waits until actually stopped
-    sudo systemctl stop dropbox@$USER.service
-    { setup } always { sudo systemctl start dropbox@$USER.service }
-else
-    setup
-fi
+mkdir $at
+# disable dropbox upload, but indexing still happens (takes cpu time)
+attr -s com.dropbox.ignored -V 1 $at
+python3.9 -m venv --clear --upgrade-deps $at
+$at/bin/pip install --upgrade pip pip-tools
