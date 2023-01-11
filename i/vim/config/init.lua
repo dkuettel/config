@@ -6,6 +6,7 @@ end
 
 local function load()
     setup("basics")()
+    setup("neovide")()
 
     -- themes
     -- TODO themes also try to set cursor colors, but my alacritty, tmux, or term vim doesnt react to that?

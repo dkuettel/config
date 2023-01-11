@@ -111,6 +111,10 @@ function M.after()
     }
     defaults.path_display = { "truncate" }
 
+    if vim.g.neovide then
+        defaults.winblend = 30
+    end
+
     telescope.setup({
         defaults = defaults,
         extensions = {
