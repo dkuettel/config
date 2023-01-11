@@ -125,12 +125,21 @@ else
     cmd=($@)
 fi
 
-echo
-echo '** docker args:'
-echo $args
-echo
-echo '** command:'
-echo $cmd
-echo
+print
+print 'docker args:'
+show=($args)
+while [[ $#show > 0 ]]; do
+    print -N -- '  ' $show[1]
+    shift 1 show
+    while [[ $#show > 0 && $show[1] != -* ]]; do
+        print -N -- ' ' $show[1]
+        shift 1 show
+    done
+    print
+done
+
+print
+print 'command:'
+print -- '  ' $cmd
 
 nvidia-docker run $args nn-dev:latest $cmd
