@@ -48,5 +48,6 @@ if [[ $# == 0 ]]; then
         echo -e "\nexit virtual env $folder"
     }
 else
+    # TODO could source shortcuts and with that allow typical aliases?
     $@
 fi
