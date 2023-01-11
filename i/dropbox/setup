@@ -8,19 +8,22 @@ if [[ ! -e ~/bin/dropbox.py ]]; then
     chmod +x ~/bin/dropbox.py
 else
     echo 'note: we dont redownload dropbox.py, not sure if that would ever be out of date'
+    # TODO get it and compare? not so smooth, just get it anyway? slower
 fi
 
 if [[ ! -e ~/.dropbox-dist ]]; then
     (
         cd ~
-        # todo a bit shaky, could extract anything
+        # TODO a bit shaky, could extract anything
         wget -O - "https://www.dropbox.com/download?plat=lnx.x86_64" | tar xzf -
         # it seems like the ~/.dropbox-dist will get updates itself
     )
 fi
 
 # install in systemd
-# todo security risk to link files here?
+# TODO security risk to link files here? better if we go to user?
+# TODO but would that mean it doesnt startup before I login? could be fine still though
+# TODO making dbox service as --user might be nicer, and probably good enough
 sudo ln -sfT \
     ~/config/i/dropbox/dropbox@.service \
     /etc/systemd/system/dropbox@.service
