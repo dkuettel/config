@@ -1,11 +1,13 @@
 font:
   size: 15.5
+  # NOTE seems like font name matching ignores spaces
+  # (UbuntuMono and Ubuntu Mono works, same for NerdFont and Nerd Font ...)
   normal:
-    family: "UbuntuMono Nerd Font Mono"
-    # family: "FiraCode Nerd Font Mono"
+    family: "Ubuntu Mono NerdFont Mono"
+    # family: "Fira Code Nerd Font Mono"
   italic:
     family: "UbuntuMono Nerd Font Mono"
-    # family: "FiraCode Nerd Font Mono"
+    # family: "Fira Code Nerd Font Mono"
   # bold:
   # bold_italic:
     # family: "Anonymice Nerd Font Mono"
