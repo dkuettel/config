@@ -8,11 +8,14 @@ cd $base
 
     # NOTE a submodule is not practical
     # a checkout is too large, even when shallow
+    # plus trying to get only the one Mono.ttf from rawgithub
+    # results in blurry icons, or overall blurry font
+    # I dont understand why, so instead I just get the complte release zips
 
     # see https://www.nerdfonts.com/font-downloads for fonts
     # see https://github.com/ryanoasis/nerd-fonts/releases for versions
     version='v2.2.2'
-    prefix='https://github.com/ryanoasis/nerd-fonts/blob/'$version'/patched-fonts'
+    prefix='https://github.com/ryanoasis/nerd-fonts/releases/download/'$version
 
     # TODO delete any previous versions, once we have some
     target=~/.local/share/fonts/nerdfonts/$version
@@ -21,16 +24,19 @@ cd $base
 
     fonts=(
         # UbuntuMono Nerd Font Mono
-        UbuntuMono.ttf 'FiraCode/Regular/complete/Fira%20Code%20Regular%20Nerd%20Font%20Complete%20Mono.ttf?raw=true'
+        UbuntuMono
 
         # FiraCode Nerd Font Mono (with ligatures)
         # see also https://github.com/tonsky/FiraCode
-        FiraCode.ttf 'UbuntuMono/Regular/complete/Ubuntu%20Mono%20Nerd%20Font%20Complete%20Mono.ttf?raw=true'
+        # has some cool extra icons for progress, and a lot of bigram adaptive stuff
+        FiraCode
     )
 
-    for name url in $fonts; do
+    for name in $fonts; do
         if [[ ! -e $name ]]; then
-            curl $prefix/$url -fLo $name
+            curl $prefix/$name.zip -fLo $name.zip
+            unzip $name.zip -d $name
+            rm $name.zip
         fi
     done
 
