@@ -171,7 +171,12 @@ function M.setup_completion()
         -- check there was something that does virtual text completion for first hit I believe
         -- or an easy quick hack to test it is to hardcode in nvim-cmp the result list to 1 or 5 or so, see how it feels
         -- TODO with autocomplete tab is quite natural to execute it
-        completion = { autocomplete = { cmp.TriggerEvent.InsertEnter, cmp.TriggerEvent.TextChanged } },
+        completion = {
+            autocomplete = { cmp.TriggerEvent.InsertEnter, cmp.TriggerEvent.TextChanged },
+            -- NOTE this makes it select the first entry
+            -- including showing the doc, so you know what, eg, imports are considered
+            completeopt = "menu,menuone",
+        },
         snippet = {
             expand = function(args)
                 require("luasnip").lsp_expand(args.body)
@@ -184,8 +189,9 @@ function M.setup_completion()
             completion = vim.tbl_extend("force", cmp.config.window.bordered(), { max_height = 20 }),
             documentation = vim.tbl_extend("force", cmp.config.window.bordered(), { max_height = 20 }),
         },
-        -- preselect = cmp.PreselectMode.None,
-        preselect = cmp.PreselectMode.Item,
+        -- NOTE None no preselect, but we anyway preselect ourselves the first one
+        -- Item preselects what the LSP says is the best, not sure if all LSP implement that
+        preselect = cmp.PreselectMode.None,
         mapping = {
             ["<c-j>"] = cmp.mapping.select_next_item(),
             ["<c-k>"] = cmp.mapping.select_prev_item(),
