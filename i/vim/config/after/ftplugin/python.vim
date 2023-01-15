@@ -19,6 +19,7 @@ iabbrev <buffer> #$ # NOTE
 iabbrev <buffer> definit def __init__(self):<enter><tab>super().__init__()
 iabbrev <buffer> #i # pyright: ignore
 iabbrev <buffer> O[ Optional[
+iabbrev <buffer> fromfuture from __future__ import annotations
 
 " TODO trying some shortcuts prefixed with shift-tab, shift-tab is never used, right?
 imap <buffer> <s-tab>o Optional[
