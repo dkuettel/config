@@ -39,6 +39,7 @@ ln -sfT $h/config ~/.config/nvim
 
     # dependencies for some plugins
     pip3 install black pynvim isort black
+    sudo apt-get -y install pandoc  # for formatting markdown and others
 
     ( # treesitter
         # cd $h/config/pack/plugins/opt/nvim-treesitter
