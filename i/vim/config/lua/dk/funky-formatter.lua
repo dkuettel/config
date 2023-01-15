@@ -12,6 +12,7 @@ function M.setup()
             lua = { command = { "stylua", "--config-path", "./stylua.toml", "-" } },
             json = { command = { "jq" } },
             rust = { command = { "rustfmt" } },
+            markdown = { command = { "pandoc", "--from=markdown", "--to=markdown" } },
         },
     })
     vim.keymap.set("n", "==", funky_formatter.format, { desc = "funky formatter" })
