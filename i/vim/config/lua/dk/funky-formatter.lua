@@ -14,6 +14,7 @@ function M.setup()
             rust = { command = { "rustfmt" } },
             markdown = { command = { "pandoc", "--from=markdown", "--to=markdown" } },
             gitignore = { command = { "sort", "--unique" } },
+            ["requirements.in"] = { command = { "sort", "--unique" } },
         },
     })
     vim.keymap.set("n", "==", funky_formatter.format, { desc = "funky formatter" })
