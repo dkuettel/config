@@ -10,12 +10,12 @@ ln -sfT $h/config ~/.config/nvim
 
 ( # make sure no old left-overs from previous nvims with plugin managers
     # there is also ~/.local/share/nvim which contains transient data
-    # but there should not be too much, especially from an old installiation
+    # but there should not be too much, especially from an old installation
     # since things are sourced by nvim
     mkdir -p ~/.local/share/nvim
     cd ~/.local/share/nvim
     for i in $(ls); do
-        if [[ $i != (rplugin.nvim|shada|swap|telescope_history|tree-sitter-*.tar.gz) ]]; then
+        if [[ $i != (rplugin.nvim|shada|swap|telescope_history|tree-sitter-*.tar.gz|neovide-settings.json) ]]; then
             echo "~/.local/share/nvim/$i might be stale data" >&2
             exit 1
         fi
