@@ -58,6 +58,7 @@ function M.setup()
 end
 
 function M.play()
+    -- TODO see also :help show_tree, something similar is now built-in to nvim
     local queries = [[
         (import_statement) @ErrorMsg
     ]]
