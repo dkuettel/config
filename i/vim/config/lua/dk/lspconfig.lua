@@ -51,9 +51,8 @@ function M.setup()
             --         return "somee: "
             --     end,
             -- },
-            -- TODO also not happening? or maybe default is happening, so I didnt see a difference, lets try off
-            -- maybe we even want to hide in insert mode?
-            update_in_insert = false,
+            -- TODO not sure I see an effect either way, with false it was maybe flickery and out of date?
+            update_in_insert = true,
             severity_sort = true, -- is it working?
             spacing = 0,
         },
