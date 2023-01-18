@@ -214,6 +214,10 @@ function M.session()
     if os.getenv("vim_is_in_session") == "yes" then
         vim.cmd("autocmd VimLeave * execute 'mksession!'")
     end
+
+    if os.getenv("vim_is_flip_flopping") == "yes" then
+        vim.cmd("autocmd VimLeave * execute 'mksession! flip-flop.vim'")
+    end
 end
 
 local function cmd_new_zsh(args)
