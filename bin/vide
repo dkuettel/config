@@ -9,4 +9,20 @@ set -eux -o pipefail
 
 # TODO sometimes it doesnt use the right size, because of multigrid?
 
+# TODO a simple thing could be
+# in normal vim, a way to start neovide with blocking
+# first save session, pass to neovide, neovide saves on exit, and we reload
+# plus TUI should :e to be sure all changes are loaded?
+# two things are bad:
+# - a full new instance needs to run another pyright
+# - by default this tiles the window, should we make it floating "fullish" by default?
+# best would be if it could be connected to the same current nvim
+# but somehow in a passive way so that only on GUI is active and we dont have the "smaller window" problem
+# ah or maybe instead can we fake the terminal to be huge while in neovide mode?
+# tried it:
+# - almost works, --multigrid makes it buggy for some floating stuff, when TUI & GUI
+# - but the large terminal otherwise works
+# can we make tmux fake a large terminal?
+# nvim with TUI is not yet ready, but slated for 0.9 or so
+
 neovide --multigrid
