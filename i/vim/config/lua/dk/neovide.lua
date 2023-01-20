@@ -11,6 +11,7 @@ local function setup_neovide()
     if os.getenv("vim_is_flip_flopping") == "yes" then
         vim.g.neovide_fullscreen = true
         vim.cmd("autocmd VimLeave * execute 'mksession! flip-flop.vim'")
+        vim.cmd("autocmd SessionLoadPost * ++once execute 'silent !rm flip-flop.vim'")
     end
 end
 
@@ -36,7 +37,6 @@ local function cmd_neovide()
     vim.fn.jobwait({ job_id })
     vim.cmd("source flip-flop.vim")
     vim.fn.system("rm flip-flop.vim")
-    -- TODO update or edit to be sure to read changes?
 end
 
 local function setup_vim()
