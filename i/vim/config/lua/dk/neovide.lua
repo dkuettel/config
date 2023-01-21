@@ -13,6 +13,10 @@ local function setup_neovide()
         vim.cmd("autocmd VimLeave * execute 'mksession! flip-flop.vim'")
         vim.cmd("autocmd SessionLoadPost * ++once execute 'silent !rm flip-flop.vim'")
     end
+
+    vim.api.nvim_create_user_command("NeovideToggleFullscreen", function()
+        vim.g.neovide_fullscreen = not vim.g.neovide_fullscreen
+    end, { nargs = 0 })
 end
 
 local function cmd_neovide()
