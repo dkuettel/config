@@ -4,7 +4,8 @@ local function setup_neovide()
     -- vim.go.guifont = "UbuntuMono Nerd Font Mono:h13"  -- no ligatures
     vim.go.guifont = "FiraCode Nerd Font Mono:h13" -- with ligatures
     vim.g.neovide_scale_factor = 1.0
-    -- vim.g.neovide_cursor_vfx_mode = "railgun"
+    -- vim.g.neovide_cursor_vfx_mode = "railgun"  # default is ""
+    -- vim.g.neovide_scroll_animation_length = 1.0  # default is 0.3
     vim.o.winblend = 30
     vim.go.pumblend = 30
 
