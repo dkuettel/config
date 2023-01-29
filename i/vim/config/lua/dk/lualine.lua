@@ -8,6 +8,11 @@ function M.setup()
     -- https://github.com/nvim-lualine/lualine.nvim
     vim.cmd("packadd lualine.nvim")
 
+    vim.cmd([[
+        highlight AlwaysOnWindowNumber guibg=#8ab9e0
+        " highlight AlwaysOnWindowNumber guibg=#458588
+    ]])
+
     require("lualine").setup({
         options = {
             -- see https://github.com/nvim-lualine/lualine.nvim/blob/master/THEMES.md
@@ -52,7 +57,7 @@ function M.setup()
 end
 
 function M.show_window()
-    return "藍" .. vim.api.nvim_win_get_number(0)
+    return "%#AlwaysOnWindowNumber#藍" .. vim.api.nvim_win_get_number(0)
 end
 
 function M.show_context()
