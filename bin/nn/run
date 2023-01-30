@@ -141,5 +141,6 @@ done
 print
 print 'command:'
 print -- '  ' $cmd
+print
 
 nvidia-docker run $args nn-dev:latest $cmd
