@@ -1,10 +1,32 @@
 #!/bin/zsh
 set -eux -o pipefail
 
-if [[ -e ~/bin/nodejs ]]; then
-    exit
+# install nodejs
+# see https://nodejs.org/en/
+
+version=v18.13.0  # see https://nodejs.org/en/download/ for latest LTS version
+prefix=$HOME/bin/nodejs
+
+function install {
+    mkdir -p $prefix
+    cd $prefix
+    curl -sfLS install-node.vercel.app/$version | bash -s -- --yes --prefix=$prefix
+}
+
+if [[ ! -e $prefix || ! -e $prefix/bin/node || ! -e $prefix/bin/npm ]]; then
+    install
 fi
 
-mkdir -p ~/bin/nodejs
-cd ~/bin/nodejs
-curl -sfLS install-node.vercel.app | bash -s -- --yes --prefix=$HOME/bin/nodejs
+[[ $(which node) == $prefix/bin/node ]]
+[[ $(which npm) == $prefix/bin/npm ]]
+
+if [[ $(node --version) != $version ]]; then
+    # NOTE looks like overwriting just works for an update
+    # so previously installed global packages (npm install -g ...) are still there
+    install
+fi
+
+# NOTE
+# 'npm install --global' goes the the install prefix
+# otherwise local folder
+# see https://nodejs.org/en/blog/npm/npm-1-0-global-vs-local-installation/#two-paths
