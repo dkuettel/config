@@ -20,7 +20,13 @@ args=(
 )
 
 # ad-hoc rules
-if [[ -f ./pylint ]]; then
+if [[ -f ./bin/lint-pylint ]]; then
+    # use nn repo's ./bin/lint-pylint
+    [[ $# == 0 ]]
+    function run_pylint {
+        ./bin/lint-pylint $args
+    }
+elif [[ -f ./pylint ]]; then
     # use nn repo's ./pylint
     [[ $# == 0 ]]
     function run_pylint {
