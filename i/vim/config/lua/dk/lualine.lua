@@ -13,6 +13,9 @@ function M.setup()
         " highlight AlwaysOnWindowNumber guibg=#458588
     ]])
 
+    lsp_progress = require("dk.lsp-progress")
+    lsp_progress.setup()
+
     require("lualine").setup({
         options = {
             -- see https://github.com/nvim-lualine/lualine.nvim/blob/master/THEMES.md
@@ -29,7 +32,14 @@ function M.setup()
             lualine_c = {},
             lualine_x = {},
             lualine_y = { { "diagnostics", sources = { "nvim_lsp" }, colored = false } },
-            lualine_z = { M.show_lsp_activity, { "filetype", icons_enabled = false }, M.show_progress },
+            lualine_z = {
+                M.show_lsp_activity,
+                function()
+                    return lsp_progress.get_state(0)
+                end,
+                { "filetype", icons_enabled = false },
+                M.show_progress,
+            },
         },
         inactive_sections = {
             lualine_a = { M.show_window, M.show_file },
@@ -50,6 +60,12 @@ function M.setup()
                     component_separators = { left = " " },
                     section_separators = { left = "" },
                 },
+            },
+            lualine_z = {
+                -- TODO because documentation doesnt say what those params are that it passes ...
+                function()
+                    return lsp_progress.get_named_progress()
+                end,
             },
         },
         extensions = {},
@@ -131,6 +147,8 @@ function M.show_lsp_activity()
         return M.lsp_activity_icons.missing
     end
     -- TODO same here is it progress for the buffer or anything else? which LSP is it?
+    -- there is also vim.lsp.util.server_ready() but seems to return true also when still indexing
+    -- sometimes it seems stuck on "busy" forever, when I do start/stop lsp to reload things?
     if #vim.lsp.util.get_progress_messages() == 0 then
         return M.lsp_activity_icons.idle
     end
