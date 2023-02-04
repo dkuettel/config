@@ -25,4 +25,4 @@ set -eux -o pipefail
 # can we make tmux fake a large terminal?
 # nvim with TUI is not yet ready, but slated for 0.9 or so
 
-neovide --multigrid
+neovide --multigrid -- $@
