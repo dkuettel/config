@@ -147,7 +147,8 @@ end
 
 -- zen low-flicker indicator of progress in file (location as percentage)
 -- M.progress_icons = { "█", "▇", "▆", "▅", "▄", "▃", "▂", "▁", " " }
-M.progress_icons = { "", "", "", "", "", "", "", "", "", "", "", "", "", "" }
+-- M.progress_icons = { "", "", "", "", "", "", "", "", "", "", "", "", "", "" }
+M.progress_icons = { "꜍", "꜎", "꜏", "꜐", "꜑" }
 function M.show_progress()
     local i = 1 + math.floor(vim.fn.line(".") / vim.fn.line("$") * (#M.progress_icons - 1))
     return M.progress_icons[i]
