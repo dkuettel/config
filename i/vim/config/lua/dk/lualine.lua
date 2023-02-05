@@ -13,7 +13,8 @@ function M.setup()
         " highlight AlwaysOnWindowNumber guibg=#458588
     ]])
 
-    local lsp_indicator = require("dk.lsp-indicator")
+    vim.cmd("packadd lsp-indicator.nvim")
+    local lsp_indicator = require("lsp-indicator")
     lsp_indicator.setup {
         on_update = function()
             vim.cmd("redrawstatus") -- only current window

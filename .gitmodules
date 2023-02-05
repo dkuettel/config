@@ -147,3 +147,6 @@
 [submodule "i/vim/config/pack/plugins/opt/neodev.nvim"]
 	path = i/vim/config/pack/plugins/opt/neodev.nvim
 	url = git@github.com:dkuettel/neodev.nvim.git
+[submodule "i/vim/config/pack/mine/opt/lsp-indicator.nvim"]
+	path = i/vim/config/pack/mine/opt/lsp-indicator.nvim
+	url = git@github.com:dkuettel/lsp-indicator.nvim.git
