@@ -146,4 +146,4 @@
 	url = https://github.com/neovide/neovide
 [submodule "i/vim/config/pack/plugins/opt/neodev.nvim"]
 	path = i/vim/config/pack/plugins/opt/neodev.nvim
-	url = https://github.com/folke/neodev.nvim.git
+	url = git@github.com:dkuettel/neodev.nvim.git
