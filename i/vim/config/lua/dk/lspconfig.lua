@@ -3,7 +3,7 @@ local M = {}
 function M.setup()
     -- see https://github.com/hrsh7th/nvim-cmp/wiki/List-of-sources
     vim.cmd("packadd cmp-nvim-lsp")
-    vim.cmd("packadd cmp-nvim-lua")
+    -- vim.cmd("packadd cmp-nvim-lua") -- not needed anymore because of neodev.vim
     vim.cmd("packadd cmp-buffer")
     vim.cmd("packadd cmp-path")
     vim.cmd("packadd cmp-cmdline")
@@ -368,44 +368,199 @@ function M.mappings(client, bufnr)
     -- })
 end
 
+function get_sumneko_lua_settings_neodev()
+    -- NOTE sumneko will not complain for wrong keys or value, it just ignores them
+    return {
+        Lua = {
+            runtime = {
+                -- I dont know why "Lua 5.1" needs a number, but "LuaJIT" doesnt
+                -- https://api7.ai/learning-center/openresty/luajit-vs-lua says LuaJIT is 5.1 syntax (?)
+                version = "LuaJIT",
+            },
+            workspace = {
+                ignoreDir = {}, -- uses gitignore grammar, files or dirs
+                ignoreSubmodules = false,
+                maxPreload = 10000, -- count
+                preloadFileSize = 50000, -- kb
+                useGitIgnore = true,
+                userThirdParty = {}, -- what is the difference here? also it says absolute path
+                checkThirdParty = false, -- TODO not sure, but it always pops up
+            },
+            telemetry = {
+                enable = false,
+            },
+            -- see https://github.com/sumneko/lua-language-server/wiki/Settings
+            completion = {
+                -- NOTE could be okay to enable
+                showWord = "Disable",
+                whorkspaceWord = false,
+            },
+            diagnostics = {
+                -- globals = { "vim" },  -- TODO neodev does it?
+                workspaceDelay = 1000,
+                workspaceEvent = "OnChange",
+            },
+            format = {
+                enable = false,
+            },
+            hint = {
+                -- TODO doesnt work, nvim lsp problem instead? inline hints?
+                -- or is it meant to be seen only in shift-k mode? hover?
+                enable = true,
+                arrayIndex = "Enable",
+                setType = true,
+            },
+            -- TODO enabled by default, but does nvim do it?
+            -- semantic coloring
+            -- semantic = {
+            --     enable=true,
+            -- }
+        },
+    }
+end
+
 function M.setup_lua(capabilities)
     -- using sumneko https://github.com/sumneko
-    -- alternative language server https://github.com/Alloyed/lua-lsp
+    -- alternative language server https://github.com/Alloyed/lua-lsp (looks unfinished and inactive)
 
-    local runtime_path = vim.split(package.path, ";")
-    table.insert(runtime_path, "lua/?.lua")
-    table.insert(runtime_path, "lua/?/init.lua")
-    -- TODO does this the right thing? vim seems to resolve last match, but lua originally does first match?
+    -- see https://github.com/folke/neodev.nvim
+    -- sets up things for neovim lua development
+    vim.cmd("packadd neodev.nvim")
+    require("neodev").setup({})
 
-    -- TODO probably that goes to individual config files or function, one per LSP?
-    -- from https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#sumneko_lua
+    -- see https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#sumneko_lua
     require("lspconfig").sumneko_lua.setup({
-        cmd = { os.getenv("HOME") .. "/bin/sumneko/bin/lua-language-server" },
-        settings = {
-            Lua = {
-                runtime = {
-                    -- Tell the language server which version of Lua you're using (most likely LuaJIT in the case of Neovim)
-                    version = "LuaJIT",
-                    -- Setup your lua path
-                    path = runtime_path,
-                },
-                diagnostics = {
-                    -- Get the language server to recognize the `vim` global
-                    globals = { "vim" },
-                },
-                workspace = {
-                    -- Make the server aware of Neovim runtime files
-                    library = vim.api.nvim_get_runtime_file("", true),
-                },
-                telemetry = {
-                    enable = false,
-                },
-            },
-        },
+        cmd = { vim.fn.expand("~/bin/sumneko/bin/lua-language-server") },
+        -- see https://github.com/sumneko/lua-language-server/wiki/Configuration-File
+        settings = get_sumneko_lua_settings_neodev(),
         on_attach = M.mappings,
         capabilities = capabilities,
     })
 end
+
+function M.manual_lua()
+    -- TODO not working, just trying to figure it out
+
+    if M.client_id ~= nil then
+        vim.lsp.buf_detach_client(M.manual_lua_buffer_id, M.manual_lua_client_id)
+        vim.lsp.stop_client(M.manual_lua_client_id)
+        M.manual_lua_client_id = nil
+    end
+
+    local binary = vim.fn.expand("~/bin/sumneko/bin/lua-language-server")
+    local capabilities = require("cmp_nvim_lsp").default_capabilities()
+
+    local paths = {} -- runtime.path
+    local lpaths = {} -- workspace.library
+    for _, p in ipairs(vim.api.nvim_list_runtime_paths()) do
+        table.insert(paths, p .. "/lua/?.lua")
+        table.insert(paths, p .. "/lua/?/init.lua")
+        table.insert(lpaths, p .. "/lua")
+    end
+    -- TODO package.path has strange paths in it, not sure I should use them
+
+    local settings = {
+        Lua = {
+            runtime = {
+                version = "LuaJIT",
+                pathStrict = true,
+                path = paths,
+            },
+            workspace = {
+                library = lpaths,
+                ignoreDir = {}, -- uses gitignore grammar, files or dirs
+                ignoreSubmodules = false,
+                maxPreload = 10000, -- count
+                preloadFileSize = 50000, -- kb
+                useGitIgnore = true,
+                userThirdParty = {}, -- what is the difference here? also it says absolute path
+                checkThirdParty = false, -- TODO not sure, but it always pops up
+            },
+            telemetry = {
+                enable = false,
+            },
+            completion = {
+                showWord = "Disable",
+                whorkspaceWord = false,
+            },
+            diagnostics = {
+                globals = { "vim" },
+                workspaceDelay = 1000,
+                workspaceEvent = "OnChange",
+            },
+            format = {
+                enable = false,
+            },
+            hint = {
+                enable = true,
+                arrayIndex = "Enable",
+                setType = true,
+            },
+        },
+    }
+
+    local function ws(path)
+        return {
+            name = path,
+            uri = "file://" .. path,
+        }
+    end
+
+    local client_id = vim.lsp.start_client({
+        cmd = {
+            binary,
+            -- NOTE configpath needs an absolute path
+            -- "--configpath=/home/dkuettel/config/i/vim/config/config.lua",
+            -- "--logpath=/home/dkuettel/Downloads/lua-logs",
+            -- "--loglevel=trace",
+        },
+        -- cmd_cwd = "/home/dkuettel/config/i/vim/config/test",
+        -- just to make sure there is nothing
+        cmd_cwd = "/home/dkuettel/config/i/vim/config/cwd",
+        cmd_env = {},
+        -- NOTE workspace only controls what files are considered worthy of producing diagnosis for to the user
+        -- other files are scanned as needed to make that diagnosis
+        workspace_folders = {
+            ws("/home/dkuettel/config/i/vim/config/test"),
+            -- ws("/home/dkuettel/config/i/vim/config/test2"),
+            -- ws("/home/dkuettel/config/i/vim/config/lua"),
+            -- ws("/home/dkuettel/config/i/vim/config/pack/plugins/opt/nvim-lspconfig/lua"),
+        },
+        capabilities = capabilities,
+        handlers = vim.lsp.handlers, -- TODO copy or shared?
+        -- TODO not sure if sent, or only if server asks
+        -- try --configpath to be sure for the moment?
+        settings = settings,
+        -- init_options={}, -- TODO check spec
+        name = "sumneko_lua",
+        on_attach = M.mappings,
+        -- TODO needed?
+        -- offset_encoding
+        -- on_error
+        -- before_init
+        -- on_init
+        -- on_exit
+    })
+
+    vim.lsp.buf_attach_client(M.manual_lua_buffer_id, client_id)
+
+    M.manual_lua_client_id = client_id
+
+    -- TODO notes/problems/findings
+    -- lua-language-server does not complain for anything, it just ignores any setting or arg that it doesnt like
+    -- often it doesnt accept relative paths and doesnt complain, just ignores :/
+    -- root_dir and workspace_folders only control what files are considered when reporting problems
+    -- other files are still scanned to understand typing information and require()s
+    -- runtime.path supposed to only matter for requires(), but I dont see completions
+    -- workspace.library not sure what part it covers
+    -- but I need things in both runtime.path and workspace.library to actually complete
+    -- (require still doesnt complete, but rest is typed once included)
+    -- see vim.lsp.buf.list_workspace_folders()
+end
+
+-- for when testing manual_lua
+M.manual_lua_buffer_id = 1 -- the one buffer with some lua cod
+M.manual_lua_client_id = nil -- previous client, to stop when retrying
 
 function M.setup_python(capabilities)
     -- https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#pyright

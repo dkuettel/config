@@ -49,9 +49,6 @@
 [submodule "i/vim/config/pack/plugins/opt/cmp-nvim-lsp"]
 	path = i/vim/config/pack/plugins/opt/cmp-nvim-lsp
 	url = https://github.com/hrsh7th/cmp-nvim-lsp
-[submodule "i/vim/config/pack/plugins/opt/cmp-nvim-lua"]
-	path = i/vim/config/pack/plugins/opt/cmp-nvim-lua
-	url = https://github.com/hrsh7th/cmp-nvim-lua
 [submodule "i/vim/config/pack/plugins/opt/cmp-path"]
 	path = i/vim/config/pack/plugins/opt/cmp-path
 	url = https://github.com/hrsh7th/cmp-path
@@ -147,3 +144,6 @@
 [submodule "i/neovide/neovide"]
 	path = i/neovide/neovide
 	url = https://github.com/neovide/neovide
+[submodule "i/vim/config/pack/plugins/opt/neodev.nvim"]
+	path = i/vim/config/pack/plugins/opt/neodev.nvim
+	url = https://github.com/folke/neodev.nvim.git
