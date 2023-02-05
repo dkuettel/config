@@ -42,7 +42,9 @@ function M.setup()
             -- TODO https://neovim.io/doc/user/diagnostic.html#diagnostic-severity
             severity = { min = vim.diagnostic.severity.WARN },
             prefix = "", -- alternatives ﲑﲒﲕﲖ
-            -- format = function(diagnostic)
+            format = function(diagnostic)
+                return diagnostic.code
+            end,
             -- TODO doesnt seem to disable, which signs are they? I want to change them
             -- signs = false,
             -- TODO doesnt seem to apply to open_float ...
