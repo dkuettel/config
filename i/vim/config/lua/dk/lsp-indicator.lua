@@ -151,71 +151,73 @@ local function format(bufnr, theme)
     end
 end
 
-return { -- public interface
+-- NOTE there is also vim.lsp.buf.server_ready()
+-- it only indicates if the current buffer's lsps are responsive
+-- it doesnt mean they are not busy scanning or with other background tasks
+-- that means completion or diagnostic can still be out of date
 
-    -- NOTE there is also vim.lsp.buf.server_ready()
-    -- it only indicates if the current buffer's lsps are responsive
-    -- it doesnt mean they are not busy scanning or with other background tasks
-    -- that means completion or diagnostic can still be out of date
+-- NOTE there is also vim.lsp.util.get_progress_messages
+-- but it's marked as private and not documented
+-- it seems to give messages since last call, so it's difficult to manage the side-effects
+-- plus it doesnt correctly aggregate and multiplex on the progress token from the lsp
 
-    -- NOTE there is also vim.lsp.util.get_progress_messages
-    -- but it's marked as private and not documented
-    -- it seems to give messages since last call, so it's difficult to manage the side-effects
-    -- plus it doesnt correctly aggregate and multiplex on the progress token from the lsp
+---setup lsp-progress, can be called more than once to change settings
+---the on_updates callback will be called when progress changes
+---this callback is rate limited by interval_ms
+---log is only for debugging the lsp messages, they will be written to a scratch buffer
+---@param config { on_updates: function, interval_ms: number, log: boolean }
+local function setup(config)
+    settings = vim.tbl_extend("keep", config or {}, { on_update = nil, interval_ms = 500, log = false })
+    if not handler_is_registered then
+        vim.lsp.handlers["$/progress"] = vim.lsp.with(lsp_progress_handler, { chain = vim.lsp.handlers["$/progress"] })
+        handler_is_registered = true
+    end
+end
 
-    ---setup lsp-progress, can be called more than once to change settings
-    ---the on_updates callback will be called when progress changes
-    ---this callback is rate limited by interval_ms
-    ---log is only for debugging the lsp messages, they will be written to a scratch buffer
-    ---@param config { on_updates: function, interval_ms: number, log: boolean }
-    setup = function(config)
-        settings = vim.tbl_extend("keep", config or {}, { on_update = nil, interval_ms = 500, log = false })
-        if not handler_is_registered then
-            vim.lsp.handlers["$/progress"] = vim.lsp.with(
-                lsp_progress_handler,
-                { chain = vim.lsp.handlers["$/progress"] }
-            )
-            handler_is_registered = true
-        end
-    end,
+---return something like " rust  lua" showing all lsp's progresses
+---@param bufnr nil | integer
+---@return string
+local function get_named_progress(bufnr)
+    local theme = {
+        name = true,
+        progress = "",
+        idle = "",
+    }
+    return format(bufnr, theme)
+end
 
-    ---return something like " rust  lua" showing all lsp's progresses
-    ---@param bufnr nil | integer
-    ---@return string
-    get_named_progress = function(bufnr)
-        local theme = {
-            name = true,
-            progress = "",
-            idle = "",
-        }
-        return format(bufnr, theme)
-    end,
+---return same as get_named_progress but without the names
+---@param bufnr nil | integer
+---@return string
+local function get_progress(bufnr)
+    local theme = {
+        name = false,
+        progress = "",
+        idle = "",
+    }
+    return format(bufnr, theme)
+end
 
-    ---return same as get_named_progress but without the names
-    ---@param bufnr nil | integer
-    ---@return string
-    get_progress = function(bufnr)
-        local theme = {
-            name = false,
-            progress = "",
-            idle = "",
-        }
-        return format(bufnr, theme)
-    end,
+---return something like " rust  lua" showing all lsp's states
+---@param bufnr nil | integer
+---@return string
+local function get_named_state(bufnr)
+    local theme = { name = true, progress = "", idle = "" }
+    return format(bufnr, theme)
+end
 
-    ---return something like " rust  lua" showing all lsp's states
-    ---@param bufnr nil | integer
-    ---@return string
-    get_named_state = function(bufnr)
-        local theme = { name = true, progress = "", idle = "" }
-        return format(bufnr, theme)
-    end,
+---return same as get_named_state but without the names
+---@param bufnr nil | integer
+---@return string
+local function get_state(bufnr)
+    local theme = { name = false, progress = "", idle = "" }
+    return format(bufnr, theme)
+end
 
-    ---return same as get_named_state but without the names
-    ---@param bufnr nil | integer
-    ---@return string
-    get_state = function(bufnr)
-        local theme = { name = false, progress = "", idle = "" }
-        return format(bufnr, theme)
-    end,
+return {
+    setup = setup,
+    get_named_progress = get_named_progress,
+    get_progress = get_progress,
+    get_named_state = get_named_state,
+    get_state = get_state,
 }
