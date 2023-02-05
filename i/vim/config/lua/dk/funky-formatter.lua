@@ -3,7 +3,7 @@ local M = {}
 function M.setup()
     vim.cmd("packadd funky-formatter.nvim")
     local funky_formatter = require("funky-formatter")
-    funky_formatter.setup({
+    funky_formatter.setup {
         formatters = {
             python = { command = { "isort-and-black" } },
             -- TODO if I want to have more smartness, we need to allow function here?
@@ -16,7 +16,7 @@ function M.setup()
             gitignore = { command = { "sort", "--unique" } },
             ["requirements.in"] = { command = { "sort", "--unique" } },
         },
-    })
+    }
     vim.keymap.set("n", "==", funky_formatter.format, { desc = "funky formatter" })
 end
 

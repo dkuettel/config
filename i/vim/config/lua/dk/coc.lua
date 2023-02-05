@@ -1,12 +1,12 @@
 local M = {}
 
 function M.packer(use)
-    use({
+    use {
         -- https://github.com/neoclide/coc.nvim
         "neoclide/coc.nvim",
         commit = "eb63672", -- from the release branch
         config = M.config,
-    })
+    }
 end
 
 function M.config()

@@ -16,7 +16,7 @@ function M.setup()
     lsp_progress = require("dk.lsp-progress")
     lsp_progress.setup()
 
-    require("lualine").setup({
+    require("lualine").setup {
         options = {
             -- see https://github.com/nvim-lualine/lualine.nvim/blob/master/THEMES.md
             -- "auto" uses vim.g.colors_name, usually what's set with :colorscheme
@@ -69,7 +69,7 @@ function M.setup()
             },
         },
         extensions = {},
-    })
+    }
 end
 
 function M.show_window()

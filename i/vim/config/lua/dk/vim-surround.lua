@@ -4,13 +4,11 @@
 -- plus much more
 local M = {}
 
-
 function M.packer(use)
     use {
-        'tpope/vim-surround',
-        commit='baf89ad',
+        "tpope/vim-surround",
+        commit = "baf89ad",
     }
 end
-
 
 return M

@@ -10,13 +10,13 @@ function M.simple()
     vim.opt.list = true
     -- vim.opt.listchars:append("eol:↴")
     vim.cmd([[highlight IndentBlanklineIndent1 guifg=#d5c4a1 gui=nocombine]])
-    require("indent_blankline").setup({
+    require("indent_blankline").setup {
         show_end_of_line = false,
         char = "",
         char_highlight_list = {
             "IndentBlanklineIndent1",
         },
-    })
+    }
 end
 
 function M.with_spaces()
@@ -24,10 +24,10 @@ function M.with_spaces()
     -- TODO not sure if that keeps old entries intact
     vim.opt.listchars:append("space:⋅")
     -- vim.opt.listchars:append("eol:↴")
-    require("indent_blankline").setup({
+    require("indent_blankline").setup {
         show_end_of_line = false,
         space_char_blankline = " ",
-    })
+    }
 end
 
 function M.rainbows()
@@ -44,7 +44,7 @@ function M.rainbows()
     -- vim.opt.listchars:append("eol:↴")
 
     -- TODO could be cool, but the lines are too thin to see the color
-    require("indent_blankline").setup({
+    require("indent_blankline").setup {
         space_char_blankline = " ",
         char_highlight_list = {
             "IndentBlanklineIndent1",
@@ -54,7 +54,7 @@ function M.rainbows()
             "IndentBlanklineIndent5",
             "IndentBlanklineIndent6",
         },
-    })
+    }
 end
 
 function M.bands()
@@ -64,7 +64,7 @@ function M.bands()
     vim.cmd([[highlight IndentBlanklineIndent2 guibg=#ebdbb2 gui=nocombine]])
 
     -- TODO doesnt do well yet with cursorline, and with inactive windows
-    require("indent_blankline").setup({
+    require("indent_blankline").setup {
         char = "",
         char_highlight_list = {
             "IndentBlanklineIndent1",
@@ -75,7 +75,7 @@ function M.bands()
             "IndentBlanklineIndent2",
         },
         show_trailing_blankline_indent = false,
-    })
+    }
 end
 
 function M.with_context()
@@ -83,11 +83,11 @@ function M.with_context()
     -- vim.opt.listchars:append("space:⋅")
     -- vim.opt.listchars:append("eol:↴")
 
-    require("indent_blankline").setup({
+    require("indent_blankline").setup {
         space_char_blankline = " ",
         show_current_context = true,
         show_current_context_start = true,
-    })
+    }
 end
 
 function M.with_blocks()
@@ -97,7 +97,7 @@ function M.with_blocks()
         highlight IndentBlanklineIndent2 guibg=#f2e5bc gui=nocombine
     ]])
 
-    require("indent_blankline").setup({
+    require("indent_blankline").setup {
         char = "",
         char_highlight_list = {
             "IndentBlanklineIndent1",
@@ -108,7 +108,7 @@ function M.with_blocks()
             "IndentBlanklineIndent2",
         },
         show_trailing_blankline_indent = false,
-    })
+    }
 end
 
 return M

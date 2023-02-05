@@ -4,7 +4,7 @@ function M.setup()
     -- https://github.com/lewis6991/gitsigns.nvim
     -- before I used https://github.com/airblade/vim-gitgutter
     vim.cmd("packadd gitsigns.nvim")
-    require("gitsigns").setup({
+    require("gitsigns").setup {
         signs = {
             -- add = { text = "" },
             -- change = { text = "" },
@@ -13,7 +13,7 @@ function M.setup()
             -- changedelete = { text = "" },
         },
         on_attach = M.on_attach,
-    })
+    }
 end
 
 function M.on_attach(bufnr)
@@ -60,7 +60,7 @@ function M.on_attach(bufnr)
     map("n", "R", gs.reset_buffer, { desc = "gitsigns reset buffer" })
     map("n", "p", gs.preview_hunk, { desc = "gitsigns preview hunk" })
     map("n", "b", function()
-        gs.blame_line({ full = true })
+        gs.blame_line { full = true }
     end, { desc = "gitsigns blame" })
     map("n", "tb", gs.toggle_current_line_blame, { desc = "gitsigns toggle line blame" })
     map("n", "d", gs.diffthis, { desc = "gitsigns diffthis" })

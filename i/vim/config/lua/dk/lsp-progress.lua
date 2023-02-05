@@ -134,7 +134,7 @@ end
 ---@param theme table
 ---@return string
 local function format(bufnr, theme)
-    local clients = vim.lsp.get_active_clients({ bufnr = bufnr })
+    local clients = vim.lsp.get_active_clients { bufnr = bufnr }
     table.sort(clients, compare_client_names)
     local function format_client(client)
         if theme.name then
