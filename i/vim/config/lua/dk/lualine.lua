@@ -67,6 +67,9 @@ function M.setup()
                     section_separators = { left = "" },
                 },
             },
+            lualine_c = {
+                M.tablist,
+            },
             lualine_z = {
                 -- TODO because documentation doesnt say what those params are that it passes ...
                 function()
@@ -165,6 +168,29 @@ function M.show_progress()
     -- strcharpart index is 0-based
     return vim.fn.strcharpart(M.progress_icons, at_icon, 1)
     -- NOTE g<c-g> shows the current position including col and line
+end
+
+function M.tablist()
+    local inactive = ""
+    local active = ""
+    local tab_ids = vim.api.nvim_list_tabpages()
+    local current_tab = vim.api.nvim_tabpage_get_number(0)
+    local format = ""
+    for i, _ in ipairs(tab_ids) do
+        if i > 9 then
+            break
+        end
+        if i == current_tab then
+            format = format .. vim.fn.strcharpart(active, i, 1)
+        else
+            format = format .. vim.fn.strcharpart(inactive, i, 1)
+        end
+    end
+    return format
+    -- NOTE ideas
+    -- add window count for tab
+    -- show how tabs "forked" from each other?
+    -- show names of windows if not too much?
 end
 
 return M
