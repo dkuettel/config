@@ -13,8 +13,8 @@ function M.setup()
         " highlight AlwaysOnWindowNumber guibg=#458588
     ]])
 
-    lsp_progress = require("dk.lsp-progress")
-    lsp_progress.setup {
+    local lsp_indicator = require("dk.lsp-indicator")
+    lsp_indicator.setup {
         on_update = function()
             vim.cmd("redrawstatus") -- only current window
             -- vim.cmd("redrawstatus!") -- all windows
@@ -40,7 +40,7 @@ function M.setup()
             lualine_y = { { "diagnostics", sources = { "nvim_lsp" }, colored = false } },
             lualine_z = {
                 function()
-                    return lsp_progress.get_state(0)
+                    return lsp_indicator.get_state(0)
                 end,
                 { "filetype", icons_enabled = false },
                 M.show_progress,
@@ -69,7 +69,7 @@ function M.setup()
             lualine_z = {
                 -- TODO because documentation doesnt say what those params are that it passes ...
                 function()
-                    return lsp_progress.get_named_progress()
+                    return lsp_indicator.get_named_progress()
                 end,
             },
         },
