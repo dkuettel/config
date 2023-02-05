@@ -146,12 +146,23 @@ function M.show_file()
 end
 
 -- zen low-flicker indicator of progress in file (location as percentage)
--- M.progress_icons = { "█", "▇", "▆", "▅", "▄", "▃", "▂", "▁", " " }
--- M.progress_icons = { "", "", "", "", "", "", "", "", "", "", "", "", "", "" }
-M.progress_icons = { "꜍", "꜎", "꜏", "꜐", "꜑" }
+-- M.progress_icons = "█▇▆▅▄▃▂▁ "
+-- M.progress_icons = ""
+M.progress_icons = "꜍꜎꜏꜐꜑"
 function M.show_progress()
-    local i = 1 + math.floor(vim.fn.line(".") / vim.fn.line("$") * (#M.progress_icons - 1))
-    return M.progress_icons[i]
+    -- strcharpart index is 0-based
+    local first_icon = 0
+    local last_icon = vim.fn.strcharlen(M.progress_icons) - 1
+    -- vim lines are 1-based
+    local first_line = 1
+    local last_line = vim.fn.line("$")
+    -- we want first_line -> first_icon and last_line -> last_icon
+    local at_line = vim.fn.line(".")
+    local at_icon = math.floor(
+        0.5 + first_icon + (at_line - first_line) / (last_line - first_line) * (last_icon - first_icon)
+    )
+    -- strcharpart index is 0-based
+    return vim.fn.strcharpart(M.progress_icons, at_icon, 1)
     -- NOTE g<c-g> shows the current position including col and line
 end
 
