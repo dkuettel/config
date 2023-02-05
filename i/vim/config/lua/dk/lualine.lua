@@ -14,7 +14,13 @@ function M.setup()
     ]])
 
     lsp_progress = require("dk.lsp-progress")
-    lsp_progress.setup()
+    lsp_progress.setup {
+        on_update = function()
+            vim.cmd("redrawstatus") -- only current window
+            -- vim.cmd("redrawstatus!") -- all windows
+            vim.cmd("redrawtabline")
+        end,
+    }
 
     require("lualine").setup {
         options = {
@@ -33,7 +39,6 @@ function M.setup()
             lualine_x = {},
             lualine_y = { { "diagnostics", sources = { "nvim_lsp" }, colored = false } },
             lualine_z = {
-                M.show_lsp_activity,
                 function()
                     return lsp_progress.get_state(0)
                 end,
@@ -149,6 +154,9 @@ function M.show_lsp_activity()
     -- TODO same here is it progress for the buffer or anything else? which LSP is it?
     -- there is also vim.lsp.util.server_ready() but seems to return true also when still indexing
     -- sometimes it seems stuck on "busy" forever, when I do start/stop lsp to reload things?
+    -- TODO ok maybe that would make it unnecessary to attach my listener?
+    -- looks like it's a final aggregated list of things in flight
+    -- kinda exactly what I need :)
     if #vim.lsp.util.get_progress_messages() == 0 then
         return M.lsp_activity_icons.idle
     end
