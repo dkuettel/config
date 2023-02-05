@@ -371,7 +371,7 @@ function M.mappings(client, bufnr)
     -- })
 end
 
-function get_sumneko_lua_settings_neodev()
+local function get_sumneko_lua_settings_neodev()
     -- NOTE sumneko will not complain for wrong keys or value, it just ignores them
     return {
         Lua = {
