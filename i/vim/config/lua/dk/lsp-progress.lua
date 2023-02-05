@@ -158,13 +158,17 @@ return { -- public interface
     -- it doesnt mean they are not busy scanning or with other background tasks
     -- that means completion or diagnostic can still be out of date
 
+    -- NOTE there is also vim.lsp.util.get_progress_messages
+    -- but it's marked as private and not documented
+    -- it seems to give messages since last call, so it's difficult to manage the side-effects
+    -- plus it doesnt correctly aggregate and multiplex on the progress token from the lsp
+
     ---setup lsp-progress, can be called more than once to change settings
     ---the on_updates callback will be called when progress changes
     ---this callback is rate limited by interval_ms
     ---log is only for debugging the lsp messages, they will be written to a scratch buffer
     ---@param config { on_updates: function, interval_ms: number, log: boolean }
     setup = function(config)
-        -- TODO it lsp doesnt show me the right type for config yet, all is "any"
         settings = vim.tbl_extend("keep", config or {}, { on_update = nil, interval_ms = 500, log = false })
         if not handler_is_registered then
             vim.lsp.handlers["$/progress"] = vim.lsp.with(
@@ -175,7 +179,7 @@ return { -- public interface
         end
     end,
 
-    ---return something like " pyright  rust  lua" showing all lsp's progresses
+    ---return something like " rust  lua" showing all lsp's progresses
     ---@param bufnr nil | integer
     ---@return string
     get_named_progress = function(bufnr)
@@ -199,7 +203,7 @@ return { -- public interface
         return format(bufnr, theme)
     end,
 
-    ---return something like " pyright  rust  lua" showing all lsp's states
+    ---return something like " rust  lua" showing all lsp's states
     ---@param bufnr nil | integer
     ---@return string
     get_named_state = function(bufnr)
@@ -214,8 +218,4 @@ return { -- public interface
         local theme = { name = false, progress = "", idle = "" }
         return format(bufnr, theme)
     end,
-
-    -- TODO version is smooth again
-    -- but play a bit more with type annotations and comments again
-    -- still not sure why it doesnt complain when I dont provie args that cant be nil
 }

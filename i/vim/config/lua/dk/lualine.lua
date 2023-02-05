@@ -145,24 +145,6 @@ function M.show_file()
     return icon .. autosave .. " " .. protocol .. "%t"
 end
 
--- zen low-flicker indication of lsp activity (no lsp, busy lsp, idle lsp)
-M.lsp_activity_icons = { missing = "", busy = "", idle = "" }
-function M.show_lsp_activity()
-    if #vim.lsp.buf_get_clients() == 0 then
-        return M.lsp_activity_icons.missing
-    end
-    -- TODO same here is it progress for the buffer or anything else? which LSP is it?
-    -- there is also vim.lsp.util.server_ready() but seems to return true also when still indexing
-    -- sometimes it seems stuck on "busy" forever, when I do start/stop lsp to reload things?
-    -- TODO ok maybe that would make it unnecessary to attach my listener?
-    -- looks like it's a final aggregated list of things in flight
-    -- kinda exactly what I need :)
-    if #vim.lsp.util.get_progress_messages() == 0 then
-        return M.lsp_activity_icons.idle
-    end
-    return M.lsp_activity_icons.busy
-end
-
 -- zen low-flicker indicator of progress in file (location as percentage)
 -- M.progress_icons = { "█", "▇", "▆", "▅", "▄", "▃", "▂", "▁", " " }
 M.progress_icons = { "", "", "", "", "", "", "", "", "", "", "", "", "", "" }
