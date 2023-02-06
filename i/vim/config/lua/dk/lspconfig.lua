@@ -45,7 +45,11 @@ function M.setup()
             format = function(diagnostic)
                 -- local icons = {"", "", "", ""}
                 local icons = { "E", "W", "I", "H" }
-                return icons[diagnostic.severity] .. " " .. diagnostic.code
+                if diagnostic.code == nil then
+                    return icons[diagnostic.severity] .. " " .. diagnostic.message
+                else
+                    return icons[diagnostic.severity] .. "/" .. diagnostic.code
+                end
             end,
             -- TODO doesnt seem to disable, which signs are they? I want to change them
             -- signs = false,
