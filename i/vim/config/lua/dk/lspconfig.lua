@@ -43,7 +43,9 @@ function M.setup()
             severity = { min = vim.diagnostic.severity.WARN },
             prefix = "", -- alternatives ﲑﲒﲕﲖ
             format = function(diagnostic)
-                return diagnostic.code
+                -- local icons = {"", "", "", ""}
+                local icons = { "E", "W", "I", "H" }
+                return icons[diagnostic.severity] .. " " .. diagnostic.code
             end,
             -- TODO doesnt seem to disable, which signs are they? I want to change them
             -- signs = false,
