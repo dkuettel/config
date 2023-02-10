@@ -4,13 +4,20 @@ set -eux -o pipefail
 # install nodejs
 # see https://nodejs.org/en/
 
-version=v18.13.0  # see https://nodejs.org/en/download/ for latest LTS version
+# see https://nodejs.org/en/download/ for latest LTS version
+version='v18.13.0'
+url='https://nodejs.org/dist/v18.14.0/node-'$version'-linux-x64.tar.xz'
+
 prefix=$HOME/bin/nodejs
 
 function install {
     mkdir -p $prefix
-    cd $prefix
-    curl -sfLS install-node.vercel.app/$version | bash -s -- --yes --prefix=$prefix
+    # see https://install-node.vercel.app/ at the very end
+    # installation is just extraction, not sure if that's always okay when
+    # installing over an older version, this way previous installed
+    # packages will stay (npm install -g ...)
+    # not sure if npm itself gets updated here
+    curl -sfLS $url | tar --extract --ungzip --file=- --strip-components=1 --directory=$prefix
 }
 
 if [[ ! -e $prefix || ! -e $prefix/bin/node || ! -e $prefix/bin/npm ]]; then
@@ -21,12 +28,10 @@ fi
 [[ $(which npm) == $prefix/bin/npm ]]
 
 if [[ $(node --version) != $version ]]; then
-    # NOTE looks like overwriting just works for an update
-    # so previously installed global packages (npm install -g ...) are still there
     install
 fi
 
 # NOTE
-# 'npm install --global' goes the the install prefix
+# 'npm install --global' goes to the install prefix
 # otherwise local folder
 # see https://nodejs.org/en/blog/npm/npm-1-0-global-vs-local-installation/#two-paths
