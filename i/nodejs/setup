@@ -6,7 +6,8 @@ set -eux -o pipefail
 
 # see https://nodejs.org/en/download/ for latest LTS version
 version='v18.13.0'
-url='https://nodejs.org/dist/v18.14.0/node-'$version'-linux-x64.tar.xz'
+# NOTE the .xz versions are smaller than .gz because of better compression
+url='https://nodejs.org/dist/'$version'/node-'$version'-linux-x64.tar.xz'
 
 prefix=$HOME/bin/nodejs
 
@@ -17,7 +18,7 @@ function install {
     # installing over an older version, this way previous installed
     # packages will stay (npm install -g ...)
     # not sure if npm itself gets updated here
-    curl -sfLS $url | tar --extract --ungzip --file=- --strip-components=1 --directory=$prefix
+    curl -sfLS $url | tar --extract --xz --file=- --strip-components=1 --directory=$prefix
 }
 
 if [[ ! -e $prefix || ! -e $prefix/bin/node || ! -e $prefix/bin/npm ]]; then
