@@ -98,7 +98,7 @@ args+=(--env PYTHONBREAKPOINT)
 f=~/toys/vtrace/vtrace.py; [[ -e $f ]] && id_mount $f
 
 # probably not needed anymore
-# args+=(--env NN_USER=kuettel)
+args+=(--env NN_USER=dkuettel)
 
 # for with-tb
 # internally tb uses port 6006
