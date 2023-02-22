@@ -15,7 +15,7 @@ cmd=(
         #--assembly=ferrari_488_red.viewpoint_0000
         #--assembly=Ender3DPrinter.viewpoint_0000
         --out-folder=.
-        # --short-training
+        --short-training
         # --update-template batchnorm_convergence.num_batches 10
         # --variable-length-training
         # --sample-count-multiplier=2
