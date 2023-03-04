@@ -50,4 +50,5 @@ if [[ -e .git && -v user ]]; then
 fi
 
 # echo $target '->' $key >&2
-ssh -i ~/.ssh/$key $@
+# -q should suppress remote server banner messages
+ssh -q -i ~/.ssh/$key $@
