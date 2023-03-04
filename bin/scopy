@@ -1,4 +1,4 @@
 #!/bin/zsh
 set -eux -o pipefail
 
-maim -s | xclip -selection clipboard -t image/png
+maim --select --hidecursor | xclip -selection clipboard -t image/png
