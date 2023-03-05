@@ -2,7 +2,7 @@
 set -eux -o pipefail
 
 zparseopts -D -E -F -A opts - -default: -python e+:=envs
-name=${1:?name of the tmux session}
+name=${1:?name of the tmux session}
 base=${2:?folder of the workspace}
 [[ ! -v 3 ]]
 
