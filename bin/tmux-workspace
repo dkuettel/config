@@ -1,0 +1,35 @@
+#!/bin/zsh
+set -eux -o pipefail
+
+zparseopts -D -E -F -A opts - -default: -python e+:=envs
+name=${1:?name of the tmux session}
+base=${2:?folder of the workspace}
+[[ ! -v 3 ]]
+
+if tmux attach-session -t $name; then
+    exit
+fi
+
+envs+=(
+    -e workspace_active=yes
+    -e workspace_home=$base
+    -e h=$base
+)
+
+if [[ -v opts[--python] ]]; then
+    envs+=(
+        -e PATH=$base/bin:$base/.venv/bin:$PATH
+        -e VIRTUAL_ENV=$base/.venv
+        -e PYTHONPATH=$base/python
+    )
+fi
+
+cmds=(
+    new-session -s $name -c $base $envs true \;
+    bind-key V new-window -n src -c $base -bt 1 V \;
+    # NOTE technically mapping j is only for nn-like workspaces
+    bind-key j new-window -n jobs x .jobs ls -r -t 1m \;
+    new-window -n src V ${opts[--default]:-} \;
+)
+
+tmux $cmds

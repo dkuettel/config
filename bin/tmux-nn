@@ -1,29 +1,17 @@
 #!/bin/zsh
 set -eux -o pipefail
 
-# setup workspace for nn
-# name by first argument or current folder
-
 base=${1:-.}
 base=${base:a}
+
 name=$(realpath --relative-base=$HOME $base)
 
 envs=(
-    -e workspace_active=yes
-    -e workspace_home=$base
-    -e h=$base
     -e PATH=$HOME/config/bin/nn:$base/bin:$base/.venv/bin:$PATH
     -e VIRTUAL_ENV=$base/.venv
-    # NOTE .venv/**/nn.pth already contains PYTHONPATH=$base/python
+    # NOTE PYTHONPATH: .venv/**/nn.pth already contains PYTHONPATH=$base/python
     -e NN_S3_CACHE=$HOME/envs/s3-cache
     -e TF_CPP_MIN_LOG_LEVEL=2  # disables tf's warnings (like no gpu, no libcuda, ...)
 )
 
-cmds=(
-    new-session -s $name -A -c $base $envs true \;
-    bind-key V new-window -n src -c $base -bt 1 V \;
-    bind-key j new-window -n jobs x .jobs ls -r -t 1m \;
-    new-window -n src V
-)
-
-tmux $cmds
+tmux-workspace $name $base $envs

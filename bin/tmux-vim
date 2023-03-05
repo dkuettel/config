@@ -1,26 +1,4 @@
 #!/bin/zsh
 set -eux -o pipefail
 
-# new or attach to an ~/config/i/vim/config session
-
-base=~/config/i/vim/config
-name=vim
-
-if tmux attach-session -t $name; then
-    exit
-fi
-
-envs=(
-    -e workspace_active=yes
-    -e workspace_home=$base
-    -e h=$base
-)
-
-cmds=(
-    new-session -s $name -c $base $envs true \;
-    bind-key V new-window -n src -c $base -bt 1 V \;
-    new-window -n src V init.lua \;
-)
-
-tmux $cmds
-# TODO factor our things
+tmux-workspace vim ~/config/i/vim/config --default init.lua
