@@ -1,6 +1,9 @@
 #!/bin/zsh
 set -eux -o pipefail
 
+# load, run, and save Session.vim
+# if there was no Session.vim, $@ files are loaded
+
 touch Session.vim
 vim_is_in_session=yes nvim -S Session.vim $@
 
