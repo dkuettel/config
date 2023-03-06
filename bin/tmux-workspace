@@ -2,7 +2,7 @@
 set -eux -o pipefail
 
 zparseopts -D -E -F -A opts - -default: -python e+:=envs
-name=${1:?name of the tmux session}
+name=${1:?name of the tmux session}
 base=${2:?folder of the workspace}
 [[ ! -v 3 ]]
 
@@ -26,6 +26,7 @@ fi
 
 cmds=(
     new-session -s $name -c $base $envs true \;
+    set-option @workspace_active yes \;
     bind-key V new-window -n src -c $base -bt 1 V \;
     # NOTE technically mapping j is only for nn-like workspaces
     bind-key j new-window -n jobs x .jobs ls -r -t 1m \;
