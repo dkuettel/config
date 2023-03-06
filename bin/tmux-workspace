@@ -1,6 +1,7 @@
 #!/bin/zsh
 set -eux -o pipefail
 
+# NOTE -e must come as -e key=value, not as -e key value
 zparseopts -D -E -F -A opts - -default: -python e+:=envs
 name=${1:?name of the tmux session}
 base=${2:?folder of the workspace}
