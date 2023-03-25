@@ -12,14 +12,23 @@ sudo add-apt-repository -yu ppa:deadsnakes/ppa
 # this one is not by deadsnakes and often too old
 sudo apt-get remove -yq python3-pip
 
+# remove some potentially old stuff (used with pipx now)
+python3.9 -m pip uninstall -y black isort
+python3.10 -m pip uninstall -y black isort
+
 # NOTE should work for any 3.x version
+# the last one is probably then in ~/.local/bin, but that's a bit shaky
 for python in python3.9 python3.10; do
     # NOTE python3-pip allows to bootstrap pip into the actual python version package site later
     # TODO python3-pip is not from deadsnakes, probably old then
     sudo apt-get install -yq $python $python-venv $python-dev $python-distutils $python-tk build-essential
     $python -m ensurepip --upgrade
-    $python -m pip install --upgrade pip virtualenv ipython
+    $python -m pip install --upgrade pip virtualenv ipython pipx
 done
+
+# NOTE i/zsh/basics.zsh also sets envs for pipx
+PIPX_BIN_DIR=~/.local/bin-pipx python3.10 -m pipx install --python=python3.10 black==22.3.0
+PIPX_BIN_DIR=~/.local/bin-pipx python3.10 -m pipx install --python=python3.10 isort==5.10
 
 # ipython
 # TODO also see how to make it autoreload stuff, especially in debug mode

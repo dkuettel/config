@@ -96,3 +96,7 @@ export TIME_STYLE=+'[0m%F %R[0m
 # taken from https://github.com/seebi/dircolors-solarized
 # NOTE slight impact on startup speed
 eval $(dircolors ~/.zshrc.d/dircolors.ansi-dark)
+
+# pipx
+export PIPX_BIN_DIR=~/.local/bin-pipx
+export PIPX_DEFAULT_PYTHON=python3.10

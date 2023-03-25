@@ -4,7 +4,8 @@ path=(
     $HOME/bin
     $HOME/bin/nodejs/bin
     $HOME/.cargo/bin  # rust toolchain
-    $HOME/.local/bin  # pip install puts executables here
+    $HOME/.local/bin-pipx  # pipx puts executables here
+    $HOME/.local/bin  # pip puts executables here
     /snap/bin  # should be there from system settings?
     $path
 )
