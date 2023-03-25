@@ -1,0 +1,29 @@
+#!/bin/zsh
+set -eu -o pipefail
+
+version=${1:-3.10}
+file=${2?python file to run}
+
+if ! requirements=$(tail --lines=+2 $file | sed -e '/^$/Q' -e '/^# /!Q1' -e 's/^# //' | sort); then
+    print -- "Syntax errors in requirements header of $file:" >&2
+    tail --lines=+2 $file | sed -e '/^$/Q' -e '/^# /d' -e 's/^.*$/  - &/' >&2
+    exit 1
+fi
+
+venvs=~/.cache/with-python/venvs
+sha=$(sha256sum <(echo $version; echo $requirements) | cut -f 1 -d ' ')
+venv=$venvs/$sha
+
+if [[ -e $venv ]]; then
+    print -- 'using venv at' $venv
+else
+    print -- 'creating venv at' $venv
+    mkdir -p $venv
+    print -l -- $requirements > $venv/requirements.txt
+    # NOTE maybe also install python$version on demand
+    python$version -m venv --upgrade-deps $venv
+    $venv/bin/pip install --upgrade pip pip-tools
+    $venv/bin/pip install -r $venv/requirements.txt
+fi
+
+$venv/bin/python $file
