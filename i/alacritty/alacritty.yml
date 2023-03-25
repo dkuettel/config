@@ -5,3 +5,4 @@ import:
   - ~/config/i/alacritty/basics.yml
   - ~/config/i/alacritty/fonts.yml
   - ~/config/i/alacritty/colors.yml
+  - ~/config/i/alacritty/bindings.yml
