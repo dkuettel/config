@@ -11,6 +11,7 @@ function M.setup()
     M.new_zsh()
     M.move()
     -- M.active_window()
+    M.shift_enter_comments()
 end
 
 function M.options()
@@ -246,6 +247,16 @@ function M.move()
         cmd_move,
         { nargs = 1, complete = "file", desc = "Move current buffer's file." }
     )
+end
+
+function M.shift_enter_comments()
+    -- shift-enter will continue the current comment
+    -- but formatoptions is restored after that
+    vim.keymap.set("i", "<s-enter>", function()
+        local fo = vim.bo.formatoptions
+        vim.opt.formatoptions:append("r")
+        return "<enter><esc>:setlocal formatoptions=" .. fo .. "<enter>a "
+    end, { silent = true, expr = true })
 end
 
 return M
