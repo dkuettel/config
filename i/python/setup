@@ -1,19 +1,25 @@
 #!/bin/zsh
 set -eux -o pipefail
 
-# NOTE should work for any 3.x version
-python=python3.9
+if [[ ! -e ~/.config/pip/pip.conf ]]; then
+    # remove old links to ~/config/i/python/pip.conf
+    rm -f ~/.config/pip/pip.conf
+fi
 
 # https://launchpad.net/~deadsnakes/+archive/ubuntu/ppa
 sudo add-apt-repository -yu ppa:deadsnakes/ppa
-# NOTE python3-pip allows to bootstrap pip into the actual python version package site later
-sudo apt-get install -yq $python $python-venv $python-dev $python-distutils $python-tk python3-pip build-essential
 
-# TODO this is actually empty now, recheck what are the settings, if nothing, remove
-mkdir -p ~/.config/pip
-ln -sfT ~/config/i/python/pip.conf ~/.config/pip/pip.conf
+# this one is not by deadsnakes and often too old
+sudo apt-get remove -yq python3-pip
 
-$python -m pip install --upgrade pip virtualenv ipython
+# NOTE should work for any 3.x version
+for python in python3.9 python3.10; do
+    # NOTE python3-pip allows to bootstrap pip into the actual python version package site later
+    # TODO python3-pip is not from deadsnakes, probably old then
+    sudo apt-get install -yq $python $python-venv $python-dev $python-distutils $python-tk build-essential
+    $python -m ensurepip --upgrade
+    $python -m pip install --upgrade pip virtualenv ipython
+done
 
 # ipython
 # TODO also see how to make it autoreload stuff, especially in debug mode
