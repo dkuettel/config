@@ -1,0 +1,30 @@
+#!/bin/zsh
+set -eu -o pipefail
+
+# > with-venv --python python3.10 -r requirements.txt -- python test.py -y --path=/here
+
+zparseopts -D -E -F -A opts - -python: r:
+if [[ $1 == '--' ]]; then shift; fi
+
+python=${opts[--python]:-python3.10}
+requirements=$(sort $opts[-r])
+
+venvs=~/.cache/with-venv/venvs
+sha=$(sha256sum <(print -l -- $python $requirements) | cut -f 1 -d ' ')
+venv=$venvs/$sha
+
+if [[ -e $venv ]]; then
+    print -- 'using venv at' $venv
+else
+    print -- 'creating venv at' $venv
+    mkdir -p $venv
+    print -l -- $requirements > $venv/requirements.txt
+    # NOTE maybe also install $python version on-demand
+    $python -m venv --upgrade-deps $venv
+    $venv/bin/pip install --upgrade pip pip-tools
+    $venv/bin/pip install -r $venv/requirements.txt
+fi
+
+path=($venv/bin $path)
+export VIRTUAL_ENV=$venv
+$@
