@@ -1,0 +1,6 @@
+#!/bin/zsh
+set -eu -o pipefail
+
+# use as a bang: #!python-with-venv
+
+with-venv --embedded $1 -- python $1
