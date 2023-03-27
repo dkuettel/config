@@ -13,8 +13,8 @@ sudo add-apt-repository -yu ppa:deadsnakes/ppa
 sudo apt-get remove -yq python3-pip
 
 # remove some potentially old stuff (used with pipx now)
-python3.9 -m pip uninstall -y black isort
-python3.10 -m pip uninstall -y black isort
+[[ -e python3.9 ]] && python3.9 -m pip uninstall -y black isort
+[[ -e python3.10 ]] && python3.10 -m pip uninstall -y black isort
 
 # NOTE should work for any 3.x version
 # the last one is probably then in ~/.local/bin, but that's a bit shaky
