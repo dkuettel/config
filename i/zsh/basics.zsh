@@ -102,3 +102,8 @@ export PIPX_BIN_DIR=~/.local/bin-pipx
 export PIPX_DEFAULT_PYTHON=python3.10
 # this name is pretty generic, more tools use it?
 export USE_EMOJI=no
+
+# poetry
+# this name is pretty generic, more tools use it?
+# (seems to apply to /home/dkuettel/.local/bin/keyring from python)
+export PYTHON_KEYRING_BACKEND=keyring.backends.null.Keyring
