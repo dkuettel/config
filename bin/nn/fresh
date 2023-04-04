@@ -2,4 +2,9 @@
 set -eux -o pipefail
 
 cd $h
-parallel -- bin/pip-sync-wrapper bin/build
+
+if [[ -e bin/pip-sync-wrapper ]]; then
+    parallel -- bin/pip-sync-wrapper bin/build
+else
+    parallel -- bin/venv-sync bin/build
+fi
