@@ -30,7 +30,7 @@
     b = branch -vv
     mb = branch -vv --list 'dk/*'
     mrb = branch -rv --list 'origin/dk/*'
-    db = ! git push --delete origin $1 && git branch -D $1 && true
+    bd = ! git push --delete origin $1 && git branch -D $1 && true
     co = checkout
     co- = !git checkout $(fzf-branch)
     c = commit
