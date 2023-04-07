@@ -1,9 +1,8 @@
 #!/bin/zsh
 set -eux -o pipefail
 
-f=~/dbox/shows.todo
-[[ -e $f ]]
+if [[ -v TMUX_PANE ]]; then
+    tmux rename-window -t $TMUX_PANE shows
+fi
 
-[[ -v TMUX_PANE ]] && tmux rename-window -t $TMUX_PANE shows
-
-nvim $f
+nvim ~/dbox/shows.todo

@@ -1,0 +1,13 @@
+#!/bin/zsh
+set -eux -o pipefail
+
+if tmux attach-session -t shows; then
+    exit
+fi
+
+cmds=(
+    new-session -s shows -A -c ~/Downloads \;
+    split-window -h shows \;
+)
+
+tmux $cmds
