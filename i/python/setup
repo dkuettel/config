@@ -1,6 +1,8 @@
 #!/bin/zsh
 set -eux -o pipefail
 
+base=${0:a:h}
+
 if [[ ! -e ~/.config/pip/pip.conf ]]; then
     # remove old links to ~/config/i/python/pip.conf
     rm -f ~/.config/pip/pip.conf
@@ -27,11 +29,20 @@ for python in python3.9 python3.10; do
 done
 
 # NOTE i/zsh/basics.zsh also sets envs for pipx
-alias install='PIPX_BIN_DIR=~/.local/bin-pipx python3.10 -m pipx install --python=python3.10'
-install black==22.3.0
-install isort==5.10
-install poetry
-install hatch
+alias pipx-install='PIPX_BIN_DIR=~/.local/bin-pipx python3.10 -m pipx install --python=python3.10'
+
+pipx-install black==22.3.0
+pipx-install isort==5.10
+
+# poetry is okay, but worse than hatch
+pipx-install poetry
+
+# hatch is okay, but not good enough
+# no locking, couldn't find ways to make default new projects use a modern python
+# documentation also doesnt seem to be up-to-date (?)
+pipx-install hatch
+mkdir -p ~/.config/hatch
+ln -sfT $base/hatch-config.toml ~/.config/hatch/config.toml
 
 # ipython
 # TODO also see how to make it autoreload stuff, especially in debug mode

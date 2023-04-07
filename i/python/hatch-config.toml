@@ -1,0 +1,43 @@
+mode = "local"
+project = ""
+shell = "zsh"
+
+[dirs]
+project = []
+python = "isolated"
+data = "/home/dkuettel/.local/share/hatch"
+cache = "/home/dkuettel/.cache/hatch"
+
+[dirs.env]
+# this makes envs local to the project folder
+# that can be messy with dropbox
+#virtual = ".hatch"
+
+[projects]
+
+[publish.index]
+repo = "main"
+
+[template]
+name = "Daniel Kuettel"
+email = "dkuettel@gmail.com"
+
+[template.licenses]
+headers = false
+default = [
+    "MIT",
+]
+
+[template.plugins.default]
+tests = true
+ci = false
+src-layout = true
+
+[terminal.styles]
+info = "bold"
+success = "bold cyan"
+error = "bold red"
+warning = "bold yellow"
+waiting = "bold magenta"
+debug = "bold"
+spinner = "simpleDotsScrolling"
