@@ -653,9 +653,7 @@ function M.python_mappings(client, bufnr)
         end
         local cmd = {
             "ptags",
-            "--out=-",
-            "--fmt=vim-telescope",
-            "--quiet",
+            "--format=telescope",
             unpack(sources),
         }
         ptags_from_command(cmd, opts)
