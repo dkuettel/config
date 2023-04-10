@@ -1,4 +1,1 @@
-#!/bin/zsh
-set -eu -o pipefail
-
-python3.9 ${0:a:h}/../i/ptags/ptags/ptags.py $@
+../i/vim/config/pack/mine/opt/ptags.nvim/bin/ptags

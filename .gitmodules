@@ -7,9 +7,6 @@
 [submodule "i/pdocs/pdocs"]
 	path = i/pdocs/pdocs
 	url = git@github.com:dkuettel/pdocs.git
-[submodule "i/ptags/ptags"]
-	path = i/ptags/ptags
-	url = git@github.com:dkuettel/ptags.git
 [submodule "i/dwm/dwm"]
 	path = i/dwm/dwm
 	url = git@bitbucket.org:dkuettel/dwm.git
@@ -150,3 +147,6 @@
 [submodule "i/vim/config/pack/mine/opt/lsp-indicator.nvim"]
 	path = i/vim/config/pack/mine/opt/lsp-indicator.nvim
 	url = git@github.com:dkuettel/lsp-indicator.nvim.git
+[submodule "i/vim/config/pack/mine/opt/ptags.nvim"]
+	path = i/vim/config/pack/mine/opt/ptags.nvim
+	url = git@github.com:dkuettel/ptags.nvim.git

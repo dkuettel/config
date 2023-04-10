@@ -87,7 +87,6 @@ setups=(
     locales
     python
     pdocs
-    ptags
     ltstatus
     tmux
     nodejs
