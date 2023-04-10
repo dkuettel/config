@@ -70,6 +70,11 @@ function M.setup()
             lualine_c = {
                 M.tablist,
             },
+            lualine_y = {
+                function()
+                    return lsp_indicator.get_diagnostics()
+                end,
+            },
             lualine_z = {
                 -- TODO because documentation doesnt say what those params are that it passes ...
                 function()
