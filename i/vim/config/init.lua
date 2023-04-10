@@ -26,7 +26,7 @@ local function load()
     setup("telescope")()
     setup("lualine")()
     -- setup("coc")()
-    -- setup("null-ls")()  -- trying funky-formatter for now
+    -- setup("null-ls")()
     setup("lspconfig")()
     setup("hop")()
     setup("gitsigns")()
