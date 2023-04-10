@@ -12,6 +12,7 @@ function M.setup()
     M.move()
     -- M.active_window()
     M.shift_enter_comments()
+    M.resize_relayout()
 end
 
 function M.options()
@@ -257,6 +258,15 @@ function M.shift_enter_comments()
         vim.opt.formatoptions:append("r")
         return "<enter><esc>:setlocal formatoptions=" .. fo .. "<enter>a "
     end, { silent = true, expr = true })
+end
+
+function M.resize_relayout()
+    vim.api.nvim_create_autocmd({ "VimResized" }, {
+        desc = "relayout on resize",
+        callback = function()
+            vim.cmd("wincmd =")
+        end,
+    })
 end
 
 return M
