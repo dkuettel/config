@@ -6,10 +6,7 @@ function M.setup()
     funky_formatter.setup {
         formatters = {
             python = { command = { "isort-and-black" } },
-            -- TODO if I want to have more smartness, we need to allow function here?
-            -- so that I can check if there is a stylua, and alternatively choose another one?
-            -- or we say do some shell kungfu yourself, yeah probably nicer
-            lua = { command = { "stylua", "--config-path", "./stylua.toml", "-" } },
+            lua = { command = { "some-stylua" } },
             json = { command = { "jq" } },
             rust = { command = { "rustfmt" } },
             markdown = { command = { "pandoc", "--from=markdown", "--to=markdown" } },

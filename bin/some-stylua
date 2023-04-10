@@ -1,0 +1,9 @@
+#!/bin/zsh
+set -eu -o pipefail
+
+if [[ -e ./stylua.toml ]]; then
+    stylua --config-path ./stylua.toml -
+    exit
+fi
+
+stylua --config-path ${0:a:h}/../i/vim/config/stylua.toml -
