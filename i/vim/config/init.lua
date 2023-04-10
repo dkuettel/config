@@ -39,6 +39,10 @@ local function load()
     --setup("ptags")() -- could maybe have that, now it's in lspconfig, because only for python buffers
     -- but with a workspace_kind=python or something, we could have it directly?
 
+    -- TODO https://github.com/folke/trouble.nvim
+    -- looks nice, but not sure what it really brings
+    -- all operations are already possible in basic nvim
+
     require("dk.basics").active_window()
 end
 
