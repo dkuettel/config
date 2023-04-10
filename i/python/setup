@@ -33,6 +33,7 @@ alias pipx-install='PIPX_BIN_DIR=~/.local/bin-pipx python3.10 -m pipx install --
 
 pipx-install black==22.3.0
 pipx-install isort==5.10
+pipx-install pip-tools==6.13.0
 
 # poetry is okay, but worse than hatch
 pipx-install poetry
