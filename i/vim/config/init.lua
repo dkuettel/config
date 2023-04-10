@@ -35,6 +35,8 @@ local function load()
     setup("indent-blankline")()
     setup("funky-formatter")()
     setup("funky-contexts")()
+    --setup("ptags")() -- could maybe have that, now it's in lspconfig, because only for python buffers
+    -- but with a workspace_kind=python or something, we could have it directly?
 
     require("dk.basics").active_window()
 end

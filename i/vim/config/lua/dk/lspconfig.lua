@@ -597,75 +597,24 @@ end
 function M.python_mappings(client, bufnr)
     M.mappings(client, bufnr)
 
-    -- pyright, jedi, and language servers in general dont seem to index project symbols fully qualified
-    -- replace for python with pdocs instead of the original generic LSP call in lspconfig.lua
-    -- TODO builtin.treesitter() could be adapted to make things fully qualified?
+    vim.cmd("packadd ptags.nvim")
+    local ptags = require("ptags")
 
-    local pickers = require("telescope.pickers")
-    local finders = require("telescope.finders")
-    local conf = require("telescope.config").values
+    local function ptags_local()
+        ptags.telescope { vim.fn.expand("%") }
+    end
 
-    -- TODO function make_entry.gen_from_treesitter(opts) could be interesting for generic tags? if we collect parent identifiers. and faster than the lsps probably, with fully qualified elements
-
-    local kinds = { ["function"] = " func", ["variable"] = "  var", ["class"] = "class" }
-    local function pdocs_entry_maker(raw_line)
-        local name, line, kind, file = string.match(raw_line, "^(.*)%z(.*)%z(.*)%z(.*)$")
-        line = tonumber(line)
-        kind = kinds[kind]
-        if not kind then
-            kind = "???"
-        end
-        local display = kind .. ": " .. name
-        return {
-            value = { name = name, line = line, kind = kind, file = file },
-            display = display,
-            ordinal = display,
-            path = file,
-            lnum = line,
-            col = 0,
+    local function ptags_workspace()
+        local sources = {
+            vim.fn.glob("python", false, true) or { "." },
+            vim.fn.glob("libs/*/python", false, true),
         }
+        sources = vim.tbl_flatten(sources)
+        ptags.telescope(sources)
     end
 
-    local function ptags_from_command(cmd, opts)
-        opts = opts or {}
-        pickers.new(opts, {
-            prompt_title = "ptags",
-            finder = finders.new_oneshot_job(cmd, {
-                entry_maker = pdocs_entry_maker,
-            }),
-            sorter = conf.generic_sorter(opts),
-            previewer = conf.grep_previewer(opts),
-        }):find()
-    end
-
-    local function ptags(sources, opts)
-        if sources == nil and vim.fn.filereadable("./.vim-ptags-telescope") == 1 then
-            ptags_from_command({ "./.vim-ptags-telescope" }, opts)
-            return
-        end
-        if sources == nil then
-            -- guess some source locations
-            sources = {
-                vim.fn.glob("python", false, true) or { "." },
-                vim.fn.glob("libs/*/python", false, true),
-            }
-            sources = vim.tbl_flatten(sources)
-        end
-        local cmd = {
-            "ptags",
-            "--format=telescope",
-            unpack(sources),
-        }
-        ptags_from_command(cmd, opts)
-    end
-
-    -- TODO long entries dont scroll left and right to the important parts, like fzf did?
-    -- maybe use dropdown or so, with full width?
-
-    vim.keymap.set("n", ",.", function()
-        ptags { vim.fn.expand("%") }
-    end, { buffer = bufnr, desc = "ptags local symbols" })
-    vim.keymap.set("n", ",,", ptags, { buffer = bufnr, desc = "ptags workspace symbols" })
+    vim.keymap.set("n", ",.", ptags_local, { buffer = bufnr, desc = "ptags local symbols" })
+    vim.keymap.set("n", ",,", ptags_workspace, { buffer = bufnr, desc = "ptags workspace symbols" })
 end
 
 function M.setup_python_jedi(capabilities)
