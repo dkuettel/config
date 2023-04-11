@@ -1,0 +1,7 @@
+#!/bin/zsh
+set -eu -o pipefail
+
+# use as a bang: #!python-with-venv
+# --quiet means predictable output
+
+with-venv --quiet --embedded $1 -- python $@

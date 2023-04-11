@@ -3,8 +3,10 @@ set -eu -o pipefail
 
 # > with-venv --python python3.10 -r requirements.txt -- python test.py -y --path=/here
 # > with-venv --embedded test.py -- python test.py -y --path=/here
+# by default you see output for which venv is used and more output when actually creating the venv
+# use '--quiet' for no output at all, important when you need predictable output
 
-zparseopts -D -E -F -A opts - -python: r: -embedded:
+zparseopts -D -E -F -A opts - -python: r: -embedded: -quiet
 if [[ $1 == '--' ]]; then shift; fi
 
 if [[ -v opts[--embedded] ]]; then
@@ -15,7 +17,7 @@ if [[ -v opts[--embedded] ]]; then
     # TODO doesnt complain if you have more than one requirements section
     python=$(sed -n -E 's/^"""! ([^ ]+) requirements$/\1/p' $opts[--embedded])
     requirements=$(sed -n -E '/^"""! [^ ]+ requirements$/ , /^""".*$/ { /^"""/d; p }' $opts[--embedded])
-    $0 --python $python -r <(print -- $requirements) -- $@
+    $0 ${opts[--quiet]+--quiet} --python $python -r <(print -- $requirements) -- $@
     exit
 fi
 
@@ -27,15 +29,27 @@ sha=$(sha256sum <(print -l -- $python $requirements) | cut -f 1 -d ' ')
 venv=$venvs/$sha
 
 if [[ -e $venv ]]; then
-    print -- 'using venv at' $venv
+    if [[ ! -v opts[--quiet] ]]; then
+        print -- 'using venv at' $venv
+    fi
 else
-    print -- 'creating venv at' $venv
+    if [[ ! -v opts[--quiet] ]]; then
+        print -- 'creating venv at' $venv
+    fi
     mkdir -p $venv
     print -l -- $requirements > $venv/requirements.txt
     # NOTE maybe also install $python version on-demand
-    $python -m venv --upgrade-deps $venv
-    $venv/bin/pip install --upgrade pip pip-tools
-    $venv/bin/pip install -r $venv/requirements.txt
+    if [[ -v opts[--quiet] ]]; then
+        (
+            $python -m venv --upgrade-deps $venv
+            $venv/bin/pip install --upgrade pip pip-tools
+            $venv/bin/pip install -r $venv/requirements.txt
+        ) >/dev/null
+    else
+        $python -m venv --upgrade-deps $venv
+        $venv/bin/pip install --upgrade pip pip-tools
+        $venv/bin/pip install -r $venv/requirements.txt
+    fi
 fi
 
 path=($venv/bin $path)
