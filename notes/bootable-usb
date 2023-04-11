@@ -1,4 +1,2 @@
-on linux try
-> apt install usb-creator-gtk
-then
-> sudo GDK_SCALER=2 usb-creator-gt
+works nicely
+> sudo dd bs=4M if=some.iso of=/dev/sdg status=progress oflag=sync
