@@ -26,5 +26,10 @@ dependencies=(
 sudo apt-get install -y $dependencies
 
 cargo build --release
+# TODO it's also not clear if that is the up-to-date terminfo, is it copied as part of cargo build?
+# also I think dependencies have changed with a new version, had a note somewhere? I think release
+# page of alacritty mentions it
+# indeed, see https://github.com/alacritty/alacritty/blob/master/INSTALL.md#post-build
+# doing same in dbox/macos/alacritty/setup, when at it, make that macos stuff a git for versioning
 infocmp alacritty || (echo 'no alacritty terminfo'; exit 1)
 cp --force target/release/alacritty ~/bin
