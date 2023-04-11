@@ -3,5 +3,18 @@ set -eu -o pipefail
 
 # run isort and black on piped content
 # both commands have to be available, often thru an active venv
+# but also installed globally using pipx
 
-isort --profile=black --combine-as - | black --quiet --target-version=py310 -
+base=${0:a:h}
+
+if [[ -e .isort.cfg ]]; then
+    isort --settings-path=.isort.cfg - | black --quiet --target-version=py310 -
+else
+    args=(
+        --py=310
+        --profile=black
+        --combine-as
+        --src=python,src
+    )
+    isort $args - | black --quiet --target-version=py310 -
+fi
