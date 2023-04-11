@@ -3,7 +3,13 @@ man lvm is a good overview
 is an easier shell without needing sudo everytime
 > partitionmanager supports parts of lvm
 but I still dont know of an easy way to get an overview of the "topology"
+> lvm-overview
+helps (from me)
 
 filters in /etc/lvm/lvm.conf can prevent
 "/dev/sde no medium found"-like warnings
 eg, use filter = [ "r|/dev/sde|" ] to ignore that device
+
+resize, especially shrink
+> lvresize --resizefs --size 100G /dev/vg/vg_data
+but needs to be unmounted?
