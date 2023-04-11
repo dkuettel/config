@@ -27,6 +27,7 @@ local function load()
     setup("lualine")()
     -- setup("coc")()
     -- setup("null-ls")()
+    -- setup("statusline")() -- TODO before lsp because we want to set the handlers? do it explicit instead
     setup("lspconfig")()
     setup("hop")()
     setup("gitsigns")()
