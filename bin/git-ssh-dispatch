@@ -38,7 +38,7 @@ case $target in
 
 esac
 
-if [[ -e .git && -v user ]]; then
+if [[ -e .git && -v user && $2 =~ "git-receive-pack '(.*)'" ]]; then
     if ! actual="$(git config --get user.name) $(git config --get user.email)"; then
         echo 'no git user is set instead of' $user >&2
         exit 1
