@@ -1,14 +1,4 @@
-Host chbeck1
-    HostName i-0ee94e9131e1eeb93
-    User chbeck
-    ProxyCommand ssh-proxy-command-aws-start-and-ssm %h %p
-    ServerAliveInterval 10
-
-Host chbeck2
-    HostName i-0f3af64099d189b05
-    User chbeck
-    ProxyCommand ssh-proxy-command-aws-start-and-ssm %h %p
-    ServerAliveInterval 10
+Include ~/dbox/config/ssh-config
 
 Host efs
     HostName i-099c3d939c5680d79
@@ -46,22 +36,3 @@ Host i-*
     User dkuettel
     ProxyCommand ssh-proxy-command-aws-start-and-ssm %h %p
     ServerAliveInterval 10
-
-Host Boom
-    HostName 00.000.000.00
-    User dkuettel
-    Port 3437
-    ServerAliveInterval 10
-
-Host blue
-    HostName 192.168.178.29
-    User dkuettel
-
-Host Base
-    Port 8347
-    HostName somewhere
-
-Host blackhole
-    Port 3438
-    User yineichen
-    HostName 192.168.0.90

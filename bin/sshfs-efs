@@ -19,7 +19,7 @@ opts='allow_root,reconnect,auto_cache'
 case $(hostname) in
     (boom)
         # NOTE direct ip is much faster, aws ssm is only meant for admin ssh, not for data
-        sshfs -o $opts efs@00.000.000.00:/efs $target
+        sshfs -o $opts efs-direct:/efs $target
         ;;
     (base)
         sshfs -o $opts efs:/efs $target
