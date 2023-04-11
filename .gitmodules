@@ -120,7 +120,7 @@
 	url = https://github.com/lukas-reineke/indent-blankline.nvim.git
     ignore = untracked
 [submodule "i/vim/config/pack/plugins/opt/funky-formatter.nvim"]
-	path = i/vim/config/pack/plugins/opt/funky-formatter.nvim
+	path = i/vim/config/pack/mine/opt/funky-formatter.nvim
 	url = git@github.com:dkuettel/funky-formatter.nvim.git
 [submodule "i/zsh/plugins/omz"]
 	path = i/zsh/plugins/omz
@@ -132,7 +132,7 @@
 	path = i/vim/config/pack/plugins/opt/vim-fugitive
 	url = https://github.com/tpope/vim-fugitive.git
 [submodule "i/vim/config/pack/plugins/opt/funky-contexts.nvim"]
-	path = i/vim/config/pack/plugins/opt/funky-contexts.nvim
+	path = i/vim/config/pack/mine/opt/funky-contexts.nvim
 	url = git@github.com:dkuettel/funky-contexts.nvim.git
 [submodule "i/vim/config/pack/plugins/opt/lsp_signature.nvim"]
 	path = i/vim/config/pack/plugins/opt/lsp_signature.nvim
