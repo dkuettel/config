@@ -56,7 +56,7 @@ function M.options()
 
     -- fillchars for diff
     -- NOTE that's not a normal forward slash, but a tile-able one
-    opt.fillchars:append { diff = "" }
+    opt.fillchars:append({ diff = "" })
 
     -- wrapped lines
     opt.wrap = false
@@ -219,7 +219,7 @@ function M.session()
 end
 
 local function cmd_new_zsh(args)
-    local reply = vim.fn.system { "new-zsh", args.args }
+    local reply = vim.fn.system({ "new-zsh", args.args })
     if vim.v.shell_error ~= 0 then
         print("new-zsh failed: " .. reply)
     else
@@ -239,7 +239,7 @@ local function cmd_move(args)
     -- NOTE use %:h/new-file to put in the same folder
     local before = vim.api.nvim_buf_get_name(0)
     vim.cmd("saveas " .. args.args)
-    vim.fn.system { "rm", before }
+    vim.fn.system({ "rm", before })
 end
 
 function M.move()

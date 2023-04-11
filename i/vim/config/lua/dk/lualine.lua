@@ -15,15 +15,15 @@ function M.setup()
 
     vim.cmd("packadd lsp-indicator.nvim")
     local lsp_indicator = require("lsp-indicator")
-    lsp_indicator.setup {
+    lsp_indicator.setup({
         on_update = function()
             vim.cmd("redrawstatus") -- only current window
             -- vim.cmd("redrawstatus!") -- all windows
             vim.cmd("redrawtabline")
         end,
-    }
+    })
 
-    require("lualine").setup {
+    require("lualine").setup({
         options = {
             -- see https://github.com/nvim-lualine/lualine.nvim/blob/master/THEMES.md
             -- "auto" uses vim.g.colors_name, usually what's set with :colorscheme
@@ -83,7 +83,7 @@ function M.setup()
             },
         },
         extensions = {},
-    }
+    })
 end
 
 function M.show_window()

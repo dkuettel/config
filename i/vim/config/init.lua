@@ -35,7 +35,7 @@ local function load()
     setup("indent-blankline")()
     setup("funky-formatter")()
     setup("funky-contexts")()
-    setup("pylint")()  -- just a small POC for now
+    setup("pylint")() -- just a small POC for now
     --setup("ptags")() -- could maybe have that, now it's in lspconfig, because only for python buffers
     -- but with a workspace_kind=python or something, we could have it directly?
 

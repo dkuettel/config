@@ -36,7 +36,7 @@ function M.setup()
     -- TODO can we control the characters used for warning and error markers?  and others instead?
     -- https://neovim.io/doc/user/diagnostic.html#vim.diagnostic.config()
     -- :Telescope diagnostics (?)
-    vim.diagnostic.config {
+    vim.diagnostic.config({
         -- underline = { severity = vim.diagnostic.severity.ERROR },
         virtual_text = {
             -- TODO https://neovim.io/doc/user/diagnostic.html#diagnostic-severity
@@ -64,7 +64,7 @@ function M.setup()
             severity_sort = true, -- is it working?
             spacing = 0,
         },
-    }
+    })
     -- TODO all hard-coded for https://github.com/morhetz/gruvbox#light-mode-1
     -- TODO or use the same icons as the lualine bottom right? lightbulb for hint, eg? trying
     vim.cmd([[
@@ -106,9 +106,9 @@ function M.setup()
 
     -- TODO if this works well, maybe remove ctrl-K for insert mode?
     -- https://github.com/ray-x/lsp_signature.nvim#full-configuration-with-default-values
-    require("lsp_signature").setup {
+    require("lsp_signature").setup({
         hint_prefix = " ", -- alternatives 
-    }
+    })
 end
 
 function M.setup_luasnip()
@@ -171,7 +171,7 @@ function M.setup_completion()
         vim.lsp.buf_request(0, "textDocument/completion", params, handler)
     end, { desc = "auto-import" })
 
-    cmp.setup {
+    cmp.setup({
         -- completion = { autocomplete = false },
         -- TODO definitely it seems very responsive, could have it in background always
         -- and only show on ctrl-n?
@@ -209,22 +209,22 @@ function M.setup_completion()
             ["<c-b>"] = cmp.mapping(cmp.mapping.scroll_docs(-4), { "i", "c" }),
             ["<c-f>"] = cmp.mapping(cmp.mapping.scroll_docs(4), { "i", "c" }),
             ["<c-e>"] = cmp.mapping.abort(),
-            ["<c-n>"] = cmp.mapping.confirm { select = true },
+            ["<c-n>"] = cmp.mapping.confirm({ select = true }),
             -- TODO tab, just like terminal, c-space a good idea?
             -- TODO tab especially very natural for cmp.complete_common_string() ?
         },
         -- see https://github.com/hrsh7th/nvim-cmp/wiki/List-of-sources
         -- TODO removed buffer as source, but still seems to be happening ...
-        sources = cmp.config.sources {
+        sources = cmp.config.sources({
             { name = "nvim_lsp" },
             -- TODO should not be here for most filetypes, ah but I think it does it itself
             { name = "nvim_lua" },
             -- TODO start trying, and see how to work with or combine with iabbrev?
             { name = "luasnip" },
             --{name='buffer'},
-        },
+        }),
         formatting = {
-            format = require("lspkind").cmp_format {
+            format = require("lspkind").cmp_format({
                 mode = "symbol_text",
                 maxwidth = 50,
                 menu = {
@@ -232,9 +232,9 @@ function M.setup_completion()
                     nvim_lsp = "[lsp]",
                     nvim_lua = "[lua]",
                 },
-            },
+            }),
         },
-    }
+    })
 
     --[[ -- `/` cmdline setup.
     cmp.setup.cmdline("/", {
@@ -278,11 +278,11 @@ function M.mappings(client, bufnr)
     local D = vim.diagnostic
     -- TODO vim.diagnostic.config({float={...}}) should configer this, doesnt work for me
     nmap(",d", function()
-        D.open_float {
+        D.open_float({
             prefix = function(d, i, t)
                 return vim.diagnostic.severity[d.severity] .. ": "
             end,
-        }
+        })
     end, "diagnostics float")
     nmap("[d", D.goto_prev, "diagnostics previous")
     nmap("]d", D.goto_next, "diagnostics next")
@@ -437,16 +437,16 @@ function M.setup_lua(capabilities)
     -- see https://github.com/folke/neodev.nvim
     -- sets up things for neovim lua development
     vim.cmd("packadd neodev.nvim")
-    require("neodev").setup {}
+    require("neodev").setup({})
 
     -- see https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#sumneko_lua
-    require("lspconfig").sumneko_lua.setup {
+    require("lspconfig").sumneko_lua.setup({
         cmd = { vim.fn.expand("~/bin/sumneko/bin/lua-language-server") },
         -- see https://github.com/sumneko/lua-language-server/wiki/Configuration-File
         settings = get_sumneko_lua_settings_neodev(),
         on_attach = M.mappings,
         capabilities = capabilities,
-    }
+    })
 end
 
 function M.manual_lua()
@@ -517,7 +517,7 @@ function M.manual_lua()
         }
     end
 
-    local client_id = vim.lsp.start_client {
+    local client_id = vim.lsp.start_client({
         cmd = {
             binary,
             -- NOTE configpath needs an absolute path
@@ -551,7 +551,7 @@ function M.manual_lua()
         -- before_init
         -- on_init
         -- on_exit
-    }
+    })
 
     vim.lsp.buf_attach_client(M.manual_lua_buffer_id, client_id)
 
@@ -577,7 +577,7 @@ function M.setup_python(capabilities)
     -- https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#pyright
     -- https://github.com/microsoft/pyright
 
-    require("lspconfig").pyright.setup {
+    require("lspconfig").pyright.setup({
         on_attach = M.python_mappings,
         capabilities = capabilities,
         -- root_dir = function(startpath)
@@ -591,7 +591,7 @@ function M.setup_python(capabilities)
         -- also, 2 out of 3 lspconfig defaults I cannot find anymore in the documentation of pyright
         -- https://github.com/microsoft/pyright/blob/main/docs/settings.md , not sure if that is really part of the config file
         settings = {},
-    }
+    })
 end
 
 function M.python_mappings(client, bufnr)
@@ -601,7 +601,7 @@ function M.python_mappings(client, bufnr)
     local ptags = require("ptags")
 
     local function ptags_local()
-        ptags.telescope { vim.fn.expand("%") }
+        ptags.telescope({ vim.fn.expand("%") })
     end
 
     local function ptags_workspace()
@@ -621,17 +621,17 @@ function M.setup_python_jedi(capabilities)
     -- https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#jedi_language_server
     -- pip installed https://github.com/pappasam/jedi-language-server
     -- TODO pff same useless workspace symbol search
-    require("lspconfig").jedi_language_server.setup {
+    require("lspconfig").jedi_language_server.setup({
         on_attach = M.mappings,
         capabilities = capabilities,
-    }
+    })
 end
 
 function M.setup_rust(capabilities)
     -- https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#rust_analyzer
     -- https://rust-analyzer.github.io/manual.html
 
-    require("lspconfig").rust_analyzer.setup {
+    require("lspconfig").rust_analyzer.setup({
         on_attach = M.mappings,
         capabilities = capabilities,
         -- TODO https://rust-analyzer.github.io/manual.html#rustup
@@ -655,7 +655,7 @@ function M.setup_rust(capabilities)
                 },
             },
         },
-    }
+    })
 end
 
 return M

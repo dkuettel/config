@@ -8,7 +8,7 @@ function M.setup()
 
     local null = require("null-ls")
 
-    null.setup {
+    null.setup({
         sources = {
             -- NOTE works in theory, but pylint is just too slow for large projects
             -- need something that does things on demand only
@@ -19,7 +19,7 @@ function M.setup()
             -- NOTE didnt do anything for me :/
             -- null.builtins.diagnostics.zsh,
         },
-    }
+    })
 end
 
 return M

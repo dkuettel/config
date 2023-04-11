@@ -1,7 +1,7 @@
 local M = {}
 
 function M.packer(use)
-    use {
+    use({
         -- https://github.com/nvim-telescope/telescope.nvim
         "nvim-telescope/telescope.nvim",
         commit = "1a72a92",
@@ -9,7 +9,7 @@ function M.packer(use)
         requires = { "nvim-lua/plenary.nvim", commit = "0d66015" },
         setup = M.before,
         config = M.after,
-    }
+    })
 
     -- done
     --
@@ -115,13 +115,13 @@ function M.after()
         defaults.winblend = 30
     end
 
-    telescope.setup {
+    telescope.setup({
         defaults = defaults,
         extensions = {
             -- https://github.com/nvim-telescope/telescope-fzf-native.nvim#telescope-setup-and-configuration
             fzf = {},
         },
-    }
+    })
     telescope.load_extension("fzf")
 
     local map = vim.keymap.set
@@ -132,7 +132,7 @@ function M.after()
     map("n", ",f", bi.find_files, { desc = "telescope find files" })
     map("n", ",v", function()
         -- TODO unfortunately search_file=... prefilters, it doesnt prefill the search text
-        bi.find_files { search_file = vim.fn.expand("<cword>") }
+        bi.find_files({ search_file = vim.fn.expand("<cword>") })
     end, { desc = "telescope find files <cword>" })
     map("n", ",F", function(opts)
         find_from_command({ "find-famous-files" }, "famous files", opts)
@@ -144,7 +144,7 @@ function M.after()
     map("n", ",b", bi.buffers, { desc = "telescope buffers" })
     map("n", ",h", bi.help_tags, { desc = "telescope help tags" })
     map("n", ",m", function()
-        bi.man_pages { sections = { "ALL" } }
+        bi.man_pages({ sections = { "ALL" } })
     end, { desc = "telescope man pages" })
     map("n", ",cc", bi.commands, { desc = "telescope vim commands" })
 

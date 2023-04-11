@@ -6,7 +6,7 @@ function M.setup()
     -- https://github.com/nvim-treesitter/playground
     vim.cmd("packadd playground")
 
-    require("nvim-treesitter.configs").setup {
+    require("nvim-treesitter.configs").setup({
         ensure_installed = "all",
         highlight = {
             enable = true,
@@ -45,7 +45,7 @@ function M.setup()
             use_virtual_text = true,
             lint_events = { "BufWrite", "CursorHold" },
         },
-    }
+    })
 
     -- TODO is this useful for some custom colors in python?
     -- require("nvim-treesitter.highlight").set_custom_captures({

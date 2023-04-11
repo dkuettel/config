@@ -5,10 +5,10 @@
 local M = {}
 
 function M.packer(use)
-    use {
+    use({
         "tpope/vim-surround",
         commit = "baf89ad",
-    }
+    })
 end
 
 return M

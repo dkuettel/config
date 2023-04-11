@@ -5,7 +5,7 @@ function M.setup()
     vim.cmd("packadd hop.nvim")
 
     local hop = require("hop")
-    hop.setup {
+    hop.setup({
         multi_windows = true, -- this means more targets, potentially longer sequence to reach
         -- multi_windows is broken https://github.com/phaazon/hop.nvim/issues/244
         -- because they use signs (arguably better than easymotion)
@@ -13,7 +13,7 @@ function M.setup()
         -- commented there with a possible solution
         char2_fallback_key = "<enter>",
         jump_on_sole_occurrence = false,
-    }
+    })
 
     vim.keymap.set("n", "s", hop.hint_char1, { desc = "hop char1" })
     vim.keymap.set("n", "S", hop.hint_char2, { desc = "hop char2" })

@@ -2,11 +2,11 @@
 local M = {}
 
 function M.packer(use)
-    use {
+    use({
         "jiangmiao/auto-pairs",
         commit = "39f06b8",
         setup = M.setup,
-    }
+    })
 end
 
 function M.setup()

@@ -39,7 +39,7 @@ local function cmd_neovide()
         "flip-flop.vim",
     }
     local job_id = vim.fn.jobstart(cmd, { env = { vim_is_flip_flopping = "yes" } })
-    vim.fn.jobwait { job_id }
+    vim.fn.jobwait({ job_id })
     vim.cmd("source flip-flop.vim")
     vim.fn.system("rm flip-flop.vim")
 end
