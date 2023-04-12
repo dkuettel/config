@@ -82,6 +82,10 @@ ln -sfT $h/config ~/.config/nvim
         fi
     )
 
+    ( # ptags.nvim
+        $h/config/pack/mine/opt/ptags.nvim/setup
+    )
+
 )
 
 # ex commands to finalize plugins and vim config
