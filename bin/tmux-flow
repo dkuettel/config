@@ -12,6 +12,7 @@ envs=(
     # NOTE PYTHONPATH: .venv/**/nn.pth already contains PYTHONPATH=$base/python
     -e NN_S3_CACHE=$HOME/envs/s3-cache
     -e TF_CPP_MIN_LOG_LEVEL=2  # disables tf's warnings (like no gpu, no libcuda, ...)
+    # TODO need to make this build --flow, shadow bin/build?
     -e build_flow=yes  # for the bin/build script
 )
 
