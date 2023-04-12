@@ -1,9 +1,15 @@
 #!/bin/zsh
 set -eux -o pipefail
 
+# TODO can it
+# a) on g, do vertical or horizontal split depending on what's better from the current layout?
+# b) maybe replace the previous one? so there is ever only one g window? maybe too dangerous
+
 # bind an executable to g (split) and G (new window)
 # meant to use dynamically for whatever is the current task
 # (Maybe gotta be a bit careful because $@ gets expanded more than once?)
+# if it was based on name 'g-bound' that would be cool, replace
+# if you dont want that, rename your window, but I dont see how to do that with panes :/
 
 cmd='while true; do
     clear
