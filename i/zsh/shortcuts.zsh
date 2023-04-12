@@ -86,6 +86,13 @@ alias hsync='rsync -ah -L -r --info=progress2'
 
 # tensorboard
 function tb {
+    if [[ -v TMUX ]]; then
+        # TODO or tmux select-pane -T name? not visible then
+        # tmux set -g pane-border-format " [ ###P #T ]" shows that
+        # but not totally compatible with my stuff yet, show both?
+        # TODO only rename, if window doesnt have a name yet?
+        tmux rename-window tb
+    fi
     set -x
     tensorboard --bind_all --logdir=${1:-.}
 }
