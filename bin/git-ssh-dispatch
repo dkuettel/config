@@ -51,4 +51,5 @@ fi
 
 # echo $target '->' $key >&2
 # -q should suppress remote server banner messages
-ssh -q -i ~/.ssh/$key $@
+# but it also suppresses host key problems (eg, when it changed, it just fails)
+ssh -i ~/.ssh/$key $@
