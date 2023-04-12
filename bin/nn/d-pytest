@@ -16,6 +16,7 @@ else
     cmd=(
         # NOTE arg 1 can look like 'mtar360/test_train_eval_runs.py::test_train_eval[mt360-style1]'
         # that's what you get at the end of a summary for failed tests
+        # needed -k?
         pytest -xsvv $1
     )
     shift

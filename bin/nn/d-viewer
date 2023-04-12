@@ -9,7 +9,7 @@ cmd=(
     trainset
     s3://e2e-benchmarking/training/zurich-all-set/recolored/v2
     --target-id=ktm.viewpoint_0000
-    --cloud-from=../nn/cloud.json
+    # --cloud-from=../nn/cloud.json
 )
 
 run $cmd
