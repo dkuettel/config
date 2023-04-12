@@ -10,8 +10,9 @@ function M.setup()
             json = { command = { "jq" } },
             rust = { command = { "rustfmt" } },
             markdown = { command = { "pandoc", "--from=markdown", "--to=markdown" } },
-            gitignore = { command = { "sort", "--unique" } },
-            ["requirements.in"] = { command = { "sort", "--unique" } },
+            gitignore = { command = { "env", "-", "LC_ALL=C", "sort", "--unique" } },
+            ["requirements.in"] = { command = { "env", "-", "LC_ALL=C", "sort", "--unique" } },
+            ["requirements-dev.in"] = { command = { "env", "-", "LC_ALL=C", "sort", "--unique" } },
         },
     })
     vim.keymap.set("n", "==", funky_formatter.format, { desc = "funky formatter" })
