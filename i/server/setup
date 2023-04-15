@@ -96,7 +96,6 @@ setups=(
     aws
     docker
     kvm
-    nodejs
     nvidia
     exa
 )
