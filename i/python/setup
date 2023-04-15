@@ -23,8 +23,7 @@ sudo apt-get remove -yq python3-pip
 for python in python3.9 python3.10; do
     # NOTE python3-pip allows to bootstrap pip into the actual python version package site later
     # TODO python3-pip is not from deadsnakes, probably old then
-    sudo apt-get install -yq $python $python-venv $python-dev $python-distutils $python-tk build-essential
-    $python -m ensurepip --upgrade
+    sudo apt-get install -yq $python $python-venv $python-dev $python-distutils $python-tk build-essential python3-pip
     $python -m pip install --upgrade pip virtualenv ipython pipx
 done
 
