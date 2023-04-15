@@ -13,3 +13,8 @@ eg, use filter = [ "r|/dev/sde|" ] to ignore that device
 resize, especially shrink
 > lvresize --resizefs --size 100G /dev/vg/vg_data
 but needs to be unmounted?
+
+snapshot
+> lvcreate --snapshot --name snap --size 200g vg/u2204server /dev/sdb
+recover into origin
+> lvconvert --mergesnapshot vg/snap
