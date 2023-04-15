@@ -1,0 +1,5 @@
+#!/bin/bash
+set -eu -o pipefail
+
+sudo apt-get install -qy zsh
+curl -sfLS https://raw.githubusercontent.com/dkuettel/config/main/bootstrap/run | zsh -s -- "$@"

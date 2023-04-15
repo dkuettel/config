@@ -1,0 +1,21 @@
+#!/bin/zsh
+set -eu -o pipefail
+
+base=${0:a:h}
+cd $base
+
+./make-seed-from-here
+
+name=$(cat seed/hostname)
+
+echo 'Create new id_rsa.'
+rm -f seed/ssh/id_rsa seed/ssh/id_rsa.pub
+ssh-keygen -q -C $USER@$name -N '' -f seed/ssh/id_rsa
+
+echo 'Create new ptc_git_id_rsa.'
+rm -f seed/ssh/ptc_git_id_rsa seed/ssh/ptc_git_id_rsa.pub
+ssh-keygen -q -C ptc-$USER@$name -N '' -f seed/ssh/ptc_git_id_rsa
+
+cat seed/ssh/id_rsa.pub
+echo 'Add this public key (id_rsa.pub) to relevant servers (github, bitbucket, other instances, ...).'
+read -sq '?Continue? (y/n) '
