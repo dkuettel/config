@@ -22,9 +22,6 @@ export LC_ALL=en_US.UTF-8
 export DEBIAN_FRONTEND=noninteractive
 export NEEDRESTART_MODE=a
 
-sudo apt-get update
-sudo apt-get upgrade -qy
-
 # NOTE
 # maybe think about if I want to keep the --install-recommends everywhere? installs more than needed usually
 # for most okay, but vbox install kernels, that makes updates slow, really needed? I only need one, or two, kernels
@@ -100,6 +97,8 @@ done
 # NOTE at the end, so that above apt's hopefully dont complain about "kernel update in progress" (requires restart)
 # see https://wiki.ubuntu.com/Kernel/LTSEnablementStack
 # linux-generic is fixed stable kernel, linux-generic-hwe-* is rolling kernel, *-edge is preview rolling kernel
+sudo apt-get update
+sudo apt-get upgrade -qy
 sudo apt-get install -qy --install-recommends linux-generic-hwe-$(lsb_release --short --release)
 sudo apt-get remove -y linux-generic linux-headers-generic linux-image-generic
 sudo apt-get autoremove -y
