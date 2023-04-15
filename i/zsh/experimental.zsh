@@ -54,5 +54,5 @@ function take {
 # set -u -o pipefail
 
 # the current default pythons
-alias python-=python3.9
-alias pip-='python3.9 -m pip'
+alias python-=python3.10
+alias pip-='python3.10 -m pip'
