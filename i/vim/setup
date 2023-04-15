@@ -42,8 +42,7 @@ ln -sfT $h/config ~/.config/nvim
     # pip3 install pynvim isort black
     # we know assume they are installed from python/setup already
     # not sure we still need pynvim?
-    [[ -e black ]]
-    [[ -e isort ]]
+    which black isort
 
     ( # treesitter
         # cd $h/config/pack/plugins/opt/nvim-treesitter
