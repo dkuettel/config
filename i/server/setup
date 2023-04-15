@@ -25,13 +25,6 @@ export NEEDRESTART_MODE=a
 sudo apt-get update
 sudo apt-get upgrade -qy
 
-# switch to hwe kernels (rolling updates)
-# see https://wiki.ubuntu.com/Kernel/LTSEnablementStack
-# linux-generic is fixed stable kernel, linux-generic-hwe-* is rolling kernel, *-edge is preview rolling kernel
-sudo apt-get install -qy --install-recommends linux-generic-hwe-$(lsb_release --short --release)
-sudo apt-get remove -y linux-generic linux-headers-generic linux-image-generic
-sudo apt-get autoremove -y
-
 # NOTE
 # maybe think about if I want to keep the --install-recommends everywhere? installs more than needed usually
 # for most okay, but vbox install kernels, that makes updates slow, really needed? I only need one, or two, kernels
@@ -84,7 +77,7 @@ setups=(
     fzf
     top
     htop
-    locales
+    # locales  # already done at the top to get less warnings
     python
     pdocs
     ltstatus
@@ -103,4 +96,13 @@ for i in $setups; do
     ../$i/setup
 done
 
-# NOTE usually a restart is needed at the end to boot into new kernels and modules
+# switch to hwe kernels (rolling updates)
+# NOTE at the end, so that above apt's hopefully dont complain about "kernel update in progress" (requires restart)
+# see https://wiki.ubuntu.com/Kernel/LTSEnablementStack
+# linux-generic is fixed stable kernel, linux-generic-hwe-* is rolling kernel, *-edge is preview rolling kernel
+sudo apt-get install -qy --install-recommends linux-generic-hwe-$(lsb_release --short --release)
+sudo apt-get remove -y linux-generic linux-headers-generic linux-image-generic
+sudo apt-get autoremove -y
+
+echo 'Usually need to restart here for new kernel.'
+echo 'Depending on the setup grub-install or/and update-grub is a good idea.'
