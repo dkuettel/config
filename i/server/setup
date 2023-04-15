@@ -29,7 +29,7 @@ sudo apt-get upgrade -qy
 # see https://wiki.ubuntu.com/Kernel/LTSEnablementStack
 # linux-generic is fixed stable kernel, linux-generic-hwe-* is rolling kernel, *-edge is preview rolling kernel
 sudo apt-get install -qy --install-recommends linux-generic-hwe-$(lsb_release --short --release)
-sudo apt-get remove -y linux-generic
+sudo apt-get remove -y linux-generic linux-headers-generic linux-image-generic
 sudo apt-get autoremove -y
 
 # NOTE
