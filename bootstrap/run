@@ -19,6 +19,8 @@ set -eu -o pipefail
 
     sudo hostname $name
     sudo hostnamectl set-hostname $name
+
+    echo "Hostname set to $name."
 }
 
 { # ssh keys
@@ -26,6 +28,7 @@ set -eu -o pipefail
     chmod go-rwx ~/.ssh
 
     if [[ ! -f ~/.ssh/id_rsa && -e ~/seed/ssh/id_rsa ]]; then
+        echo 'Use id_rsa from seed.'
         cp ~/seed/ssh/id_rsa ~/seed/ssh/id_rsa.pub ~/.ssh
         chmod 0600 ~/.ssh/id_rsa
         chmod 0644 ~/.ssh/id_rsa.pub
@@ -38,7 +41,8 @@ set -eu -o pipefail
         read -sq '?Continue? (y/n) '
     fi
 
-    if [[ ! -f ~/.ssh/ssh/ptc_git_id_rsa && -e ~/seed/shh/ptc_git_id_rsa ]]; then
+    if [[ ! -f ~/.ssh/ptc_git_id_rsa && -e ~/seed/ssh/ptc_git_id_rsa ]]; then
+        echo 'Use ptc_git_id_rsa from seed.'
         cp ~/seed/ssh/ptc_git_id_rsa ~/seed/ssh/ptc_git_id_rsa.pub ~/.ssh
         chmod 0600 ~/.ssh/ptc_git_id_rsa
         chmod 0644 ~/.ssh/ptc_git_id_rsa.pub
@@ -59,19 +63,21 @@ set -eu -o pipefail
     mkdir -p ~/.ssh
 
     if [[ -e ~/seed/ssh/known_hosts2 ]]; then
+        echo 'Use known_hosts2 from seed.'
         cp ~/seed/ssh/known_hosts2 ~/.ssh/known_hosts2
         chmod go-rwx ~/.ssh/known_hosts2
     else
+        echo 'Set hard-coded known_hosts2.'
         touch ~/.ssh/known_hosts2
-        for i in (
+        for i (
             # https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/githubs-ssh-key-fingerprints
             # or via API https://docs.github.com/en/rest/meta?apiVersion=2022-11-28#get-github-meta-information
             # > curl -sfLS -H "Accept: application/vnd.github+json" -H "X-GitHub-Api-Version: 2022-11-28" https://api.github.com/meta | jq -r '.ssh_keys | map("github.com "+.) | .[]'
-            github.com ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIOMqqnkVzrm0SdG6UOoqKLsabgH5C9okWi0dh2l9GKJl
-            github.com ecdsa-sha2-nistp256 AAAAE2VjZHNhLXNoYTItbmlzdHAyNTYAAAAIbmlzdHAyNTYAAABBBEmKSENjQEezOmxkZMy7opKgwFB9nkt5YRrYMjNuG5N87uRgg6CLrbo5wAdT/y6v0mKV0U2w0WZ2YB/++Tpockg=
-            github.com ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQCj7ndNxQowgcQnjshcLrqPEiiphnt+VTTvDP6mHBL9j1aNUkY4Ue1gvwnGLVlOhGeYrnZaMgRK6+PKCUXaDbC7qtbW8gIkhL7aGCsOr/C56SJMy/BCZfxd1nWzAOxSDPgVsmerOBYfNqltV9/hWCqBywINIR+5dIg6JTJ72pcEpEjcYgXkE2YEFXV1JHnsKgbLWNlhScqb2UmyRkQyytRLtL+38TGxkxCflmO+5Z8CSSNY7GidjMIZ7Q4zMjA2n1nGrlTDkzwDCsw+wqFPGQA179cnfGWOWRVruj16z6XyvxvjJwbz0wQZ75XK5tKSb7FNyeIEs4TT4jk+S4dhPeAUC5y+bDYirYgM4GC7uEnztnZyaVWQ7B381AK4Qdrwt51ZqExKbQpTUNn+EjqoTwvqNj4kqx5QUCI0ThS/YkOxJCXmPUWZbhjpCg56i+2aB6CmK2JGhn57K5mj0MNdBXA4/WnwH6XoPWJzK5Nyu2zB3nAZp+S5hpQs+p1vN1/wsjk=
+            'github.com ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIOMqqnkVzrm0SdG6UOoqKLsabgH5C9okWi0dh2l9GKJl'
+            'github.com ecdsa-sha2-nistp256 AAAAE2VjZHNhLXNoYTItbmlzdHAyNTYAAAAIbmlzdHAyNTYAAABBBEmKSENjQEezOmxkZMy7opKgwFB9nkt5YRrYMjNuG5N87uRgg6CLrbo5wAdT/y6v0mKV0U2w0WZ2YB/++Tpockg='
+            'github.com ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQCj7ndNxQowgcQnjshcLrqPEiiphnt+VTTvDP6mHBL9j1aNUkY4Ue1gvwnGLVlOhGeYrnZaMgRK6+PKCUXaDbC7qtbW8gIkhL7aGCsOr/C56SJMy/BCZfxd1nWzAOxSDPgVsmerOBYfNqltV9/hWCqBywINIR+5dIg6JTJ72pcEpEjcYgXkE2YEFXV1JHnsKgbLWNlhScqb2UmyRkQyytRLtL+38TGxkxCflmO+5Z8CSSNY7GidjMIZ7Q4zMjA2n1nGrlTDkzwDCsw+wqFPGQA179cnfGWOWRVruj16z6XyvxvjJwbz0wQZ75XK5tKSb7FNyeIEs4TT4jk+S4dhPeAUC5y+bDYirYgM4GC7uEnztnZyaVWQ7B381AK4Qdrwt51ZqExKbQpTUNn+EjqoTwvqNj4kqx5QUCI0ThS/YkOxJCXmPUWZbhjpCg56i+2aB6CmK2JGhn57K5mj0MNdBXA4/WnwH6XoPWJzK5Nyu2zB3nAZp+S5hpQs+p1vN1/wsjk='
             # from https://support.atlassian.com/bitbucket-cloud/docs/configure-ssh-and-two-step-verification/
-            bitbucket.org ssh-rsa AAAAB3NzaC1yc2EAAAABIwAAAQEAubiN81eDcafrgMeLzaFPsw2kNvEcqTKl/VqLat/MaB33pZy0y3rJZtnqwR2qOOvbwKZYKiEO1O6VqNEBxKvJJelCq0dTXWT5pbO2gDXC6h6QDXCaHo6pOHGPUy+YBaGQRGuSusMEASYiWunYN0vCAI8QaXnWMXNMdFP3jHAJH0eDsoiGnLPBlBp4TNm6rYI74nMzgz3B9IikW4WVK+dc8KZJZWYjAuORU3jc1c/NPskD2ASinf8v3xnfXeukU0sJ5N6m5E8VLjObPEO+mN2t/FZTMZLiFqPWc/ALSqnMnnhwrNi2rbfg/rd/IpL8Le3pSBne8+seeFVBoGqzHM9yXw==
+            'bitbucket.org ssh-rsa AAAAB3NzaC1yc2EAAAABIwAAAQEAubiN81eDcafrgMeLzaFPsw2kNvEcqTKl/VqLat/MaB33pZy0y3rJZtnqwR2qOOvbwKZYKiEO1O6VqNEBxKvJJelCq0dTXWT5pbO2gDXC6h6QDXCaHo6pOHGPUy+YBaGQRGuSusMEASYiWunYN0vCAI8QaXnWMXNMdFP3jHAJH0eDsoiGnLPBlBp4TNm6rYI74nMzgz3B9IikW4WVK+dc8KZJZWYjAuORU3jc1c/NPskD2ASinf8v3xnfXeukU0sJ5N6m5E8VLjObPEO+mN2t/FZTMZLiFqPWc/ALSqnMnnhwrNi2rbfg/rd/IpL8Le3pSBne8+seeFVBoGqzHM9yXw=='
         ); do
             echo $i >> ~/.ssh/known_hosts2
         done
@@ -83,6 +89,6 @@ if [[ ! -e ~/config ]]; then
     git clone --recurse-submodules git@github.com:dkuettel/config.git ~/config
 fi
 
-~/config/server/setup
+~/config/i/server/setup
 
-echo 'Run ~/config/desktop/setup later, if desired.'
+echo 'Run ~/config/i/desktop/setup later, if desired.'
