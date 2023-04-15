@@ -1,5 +1,21 @@
 #!/bin/zsh
 set -eux -o pipefail
 
-target=$(hostname)__$(date --iso-8601=minutes)
-aptitude search --display-format '%p @%v (%c%M) [%r]' '~i' --disable-columns > $target
+stamp=$(date --iso-8601=minutes)
+
+target=$(hostname)__apt_$stamp
+aptitude search --display-format '%p @%v (%c%M) [%r]' '?installed' --disable-columns > $target
+
+# display-format:
+#   %p is package name
+#   %v is version
+#   %c or C is install state
+#   %M is automatic or not
+#   %r is reverse dependency (how many depend on this)
+# more filters:
+#   ?automatic installed as a dependency of something else that was requested
+#   ?installed installed as requested by user
+#   ?name(pattern) filter on name
+
+target=$(hostname)__pse_$stamp
+ps -e --forest -o comm --no-headers --sort=comm > $target
