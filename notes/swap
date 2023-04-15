@@ -2,11 +2,12 @@ by default I had it in /swap.img, from a more or less default ubuntu 20.04 serve
 as defined in /etc/fstab
 
 usually not really needed so much anymore, could be none
-but for hibernate you need it, and should be large enough (?)
+but for hibernate you need it, and should be large enough
+(typically they say even a little larger than your ram, for overhead info)
 I guess then it can be on a slower disk, not so important
 
 I dont think there is a way to make it "lazy" so it only uses the spaces when it actually does
-(lvm-based, but maybe not worth the hassle)
+(lvm-based, but maybe not worth the hassle, with thin provisioning)
 
 commands to hot enable and disable
 > swapoff, mkswap, swapon
