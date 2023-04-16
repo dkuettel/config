@@ -61,33 +61,25 @@ systemctl --user stop $tracker_units || true
 # sudo snap install $i
 
 # ordered list of custom setups
-# NOTE currently disabled below all that are not unattended
+# only the unattended ones
+# see ./attended-setup for others
 setups=(
     redshift
     keyboard # probably not doing the right thing in virtual box
-    dwm # sometimes '/dev/fb0: Permission denied' with startx, but probably not with good nvidia-drivers?
+    dwm # sometimes '/dev/fb0: Permission denied' with startx, probably just bad drivers
     dmenu
     bluetooth
     fonts
     alacritty
-    # st  # NOTE alacritty instead
-    # steam
     sound
-    # chrome
-    # spotify
-    # dropbox
-    # syncthing # NOTE dropbox instead
-    # todoist # NOTE web version is better
     okular
-    # slack  # dont really need it anymore as an app, browser is more versatile here
     vlc
     ltstatus
     pstart
-    # vbox
-    # vscode
-    # wakeup
-    # webcam
 )
 for i in $setups; do
     ../$i/setup
 done
+
+
+echo 'Use i/desktop/attended-setup when in X.'
