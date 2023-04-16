@@ -57,3 +57,5 @@ xdg-settings set default-web-browser dkuettel-chrome.desktop
 xdg-settings set default-url-scheme-handler http dkuettel-chrome.desktop
 xdg-settings set default-url-scheme-handler https dkuettel-chrome.desktop
 xdg-settings set default-url-scheme-handler mailto dkuettel-chrome.desktop
+
+echo 'Now go and sign in to get chrome synced.'
