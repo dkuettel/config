@@ -1,0 +1,118 @@
+● base
+    State: running
+     Jobs: 0 queued
+   Failed: 0 units
+    Since: Sun 2023-04-16 19:22:48 CEST; 1min 22s ago
+   CGroup: /
+           ├─user.slice 
+           │ └─user-1000.slice 
+           │   ├─user@1000.service …
+           │   │ ├─session.slice 
+           │   │ │ ├─filter-chain.service 
+           │   │ │ │ └─2049 /usr/bin/pipewire -c filter-chain.conf
+           │   │ │ ├─pipewire-pulse.service 
+           │   │ │ │ └─2051 /usr/bin/pipewire-pulse
+           │   │ │ ├─pipewire-media-session.service 
+           │   │ │ │ └─2048 /usr/bin/pipewire-media-session
+           │   │ │ └─pipewire.service 
+           │   │ │   └─2047 /usr/bin/pipewire
+           │   │ ├─app.slice 
+           │   │ │ ├─osh.service 
+           │   │ │ │ ├─2046 /bin/zsh /home/dkuettel/config/i/osh/osh/systemd/ExecStart
+           │   │ │ │ ├─2050 /bin/zsh bin/osh run-server
+           │   │ │ │ └─2053 python -m osh run-server
+           │   │ │ └─dbus.service 
+           │   │ │   └─2054 /usr/bin/dbus-daemon --session --address=systemd: --nofork --nopidfile --systemd-activation --syslog-only
+           │   │ └─init.scope 
+           │   │   ├─2039 /lib/systemd/systemd --user
+           │   │   └─2040 (sd-pam)
+           │   └─session-1.scope 
+           │     ├─1416 /bin/login -p --
+           │     ├─2052 -zsh
+           │     ├─2308 /bin/sh /usr/bin/startx
+           │     ├─2330 xinit /etc/X11/xinit/xinitrc -- /etc/X11/xinit/xserverrc :0 vt1 -keeptty -auth /tmp/serverauth.2MdwMtny4d
+           │     ├─2331 /usr/lib/xorg/Xorg -nolisten tcp :0 vt1 -keeptty -auth /tmp/serverauth.2MdwMtny4d
+           │     ├─2337 /bin/zsh /home/dkuettel/.xsession
+           │     ├─2390 /usr/bin/ssh-agent /home/dkuettel/.xsession
+           │     ├─2391 /usr/bin/perl /usr/bin/ts %F %T
+           │     ├─2395 redshift -r -v
+           │     ├─2396 /usr/bin/perl /usr/bin/ts %F %T
+           │     ├─2414 /bin/zsh /home/dkuettel/.xsession
+           │     ├─2415 dwm
+           │     ├─2416 /bin/zsh /home/dkuettel/config/bin/ltstatus /home/dkuettel/config/i/ltstatus/ltstatus/examples/dwm-status.py
+           │     ├─2417 python /home/dkuettel/config/i/ltstatus/ltstatus/examples/dwm-status.py
+           │     ├─2420 tail --lines=+0 -F /home/dkuettel/.log-redshift
+           │     ├─2431 bluetoothctl
+           │     ├─2434 pactl subscribe
+           │     ├─2442 alacritty
+           │     ├─2449 /usr/bin/zsh
+           │     ├─2506 /bin/zsh ../../snapshot
+           │     ├─2517 /bin/zsh /home/dkuettel/config/bin/sudo systemctl status
+           │     ├─2518 /usr/bin/sudo --preserve-env=DEBIAN_FRONTEND NEEDRESTART_MODE systemctl status
+           │     ├─2520 /usr/bin/sudo --preserve-env=DEBIAN_FRONTEND NEEDRESTART_MODE systemctl status
+           │     └─2521 systemctl status
+           ├─init.scope 
+           │ └─1 /sbin/init
+           └─system.slice 
+             ├─irqbalance.service 
+             │ └─1319 /usr/sbin/irqbalance --foreground
+             ├─containerd.service …
+             │ └─1370 /usr/bin/containerd
+             ├─systemd-networkd.service 
+             │ └─1291 /lib/systemd/systemd-networkd
+             ├─systemd-udevd.service 
+             │ └─761 /lib/systemd/systemd-udevd
+             ├─cron.service 
+             │ └─1360 /usr/sbin/cron -f -P
+             ├─docker.service …
+             │ └─1500 /usr/bin/dockerd -H fd:// --containerd=/run/containerd/containerd.sock
+             ├─polkit.service 
+             │ └─1322 /usr/libexec/polkitd --no-debug
+             ├─networkd-dispatcher.service 
+             │ └─1320 /usr/bin/python3 /usr/bin/networkd-dispatcher --run-startup-triggers
+             ├─rtkit-daemon.service 
+             │ └─2055 /usr/libexec/rtkit-daemon
+             ├─bluetooth.service 
+             │ └─1312 /usr/lib/bluetooth/bluetoothd
+             ├─multipathd.service 
+             │ └─755 /sbin/multipathd -d -s
+             ├─wpa_supplicant.service 
+             │ └─1332 /sbin/wpa_supplicant -u -s -O /run/wpa_supplicant
+             ├─libvirtd.service 
+             │ ├─1392 /usr/sbin/libvirtd
+             │ ├─1590 /usr/sbin/dnsmasq --conf-file=/var/lib/libvirt/dnsmasq/default.conf --leasefile-ro --dhcp-script=/usr/lib/libvirt/libvirt_leaseshelper
+             │ └─1591 /usr/sbin/dnsmasq --conf-file=/var/lib/libvirt/dnsmasq/default.conf --leasefile-ro --dhcp-script=/usr/lib/libvirt/libvirt_leaseshelper
+             ├─ModemManager.service 
+             │ └─1349 /usr/sbin/ModemManager
+             ├─systemd-journald.service 
+             │ └─714 /lib/systemd/systemd-journald
+             ├─unattended-upgrades.service 
+             │ └─1409 /usr/bin/python3 /usr/share/unattended-upgrades/unattended-upgrade-shutdown --wait-for-signal
+             ├─ssh.service 
+             │ └─1417 sshd: /usr/sbin/sshd -D [listener] 0 of 10-100 startups
+             ├─nvidia-persistenced.service 
+             │ └─1323 /usr/bin/nvidia-persistenced --user nvidia-persistenced --no-persistence-mode --verbose
+             ├─snapd.service 
+             │ └─1326 /usr/lib/snapd/snapd
+             ├─systemd-machined.service 
+             │ └─1329 /lib/systemd/systemd-machined
+             ├─uuidd.service 
+             │ └─2019 /usr/sbin/uuidd --socket-activation
+             ├─rsyslog.service 
+             │ └─1324 /usr/sbin/rsyslogd -n -iNONE
+             ├─system-dropbox.slice 
+             │ └─dropbox@dkuettel.service 
+             │   └─1358 /home/dkuettel/.dropbox-dist/dropbox-lnx.x86_64-171.4.6182/dropbox
+             ├─geoclue.service 
+             │ └─2409 /usr/libexec/geoclue
+             ├─systemd-resolved.service 
+             │ └─1293 /lib/systemd/systemd-resolved
+             ├─dbus.service 
+             │ └─1313 @dbus-daemon --system --address=systemd: --nofork --nopidfile --systemd-activation --syslog-only
+             ├─systemd-timesyncd.service 
+             │ └─1219 /lib/systemd/systemd-timesyncd
+             ├─avahi-daemon.service 
+             │ ├─1310 avahi-daemon: running [base.local]
+             │ └─1338 avahi-daemon: chroot helper
+             └─systemd-logind.service 
+               └─1327 /lib/systemd/systemd-logind

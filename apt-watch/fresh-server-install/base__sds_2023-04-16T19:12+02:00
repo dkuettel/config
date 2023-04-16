@@ -1,0 +1,78 @@
+● base
+    State: running
+     Jobs: 0 queued
+   Failed: 0 units
+    Since: Sun 2023-04-16 19:10:36 CEST; 1min 35s ago
+   CGroup: /
+           ├─user.slice 
+           │ └─user-1000.slice 
+           │   ├─user@1000.service …
+           │   │ ├─app.slice 
+           │   │ │ └─osh.service 
+           │   │ │   ├─1927 /bin/zsh /home/dkuettel/config/i/osh/osh/systemd/ExecStart
+           │   │ │   ├─1928 /bin/zsh bin/osh run-server
+           │   │ │   └─1930 python -m osh run-server
+           │   │ └─init.scope 
+           │   │   ├─1920 /lib/systemd/systemd --user
+           │   │   └─1921 (sd-pam)
+           │   └─session-1.scope 
+           │     ├─1348 /bin/login -p --
+           │     ├─1929 -zsh
+           │     ├─2117 /bin/zsh ../snapshot
+           │     ├─2128 /bin/zsh /home/dkuettel/config/bin/sudo systemctl status
+           │     ├─2129 /usr/bin/sudo --preserve-env=DEBIAN_FRONTEND NEEDRESTART_MODE systemctl status
+           │     ├─2130 /usr/bin/sudo --preserve-env=DEBIAN_FRONTEND NEEDRESTART_MODE systemctl status
+           │     └─2131 systemctl status
+           ├─init.scope 
+           │ └─1 /sbin/init
+           └─system.slice 
+             ├─irqbalance.service 
+             │ └─1288 /usr/sbin/irqbalance --foreground
+             ├─containerd.service …
+             │ └─1309 /usr/bin/containerd
+             ├─systemd-networkd.service 
+             │ └─1263 /lib/systemd/systemd-networkd
+             ├─systemd-udevd.service 
+             │ └─764 /lib/systemd/systemd-udevd
+             ├─cron.service 
+             │ └─1280 /usr/sbin/cron -f -P
+             ├─docker.service …
+             │ └─1433 /usr/bin/dockerd -H fd:// --containerd=/run/containerd/containerd.sock
+             ├─polkit.service 
+             │ └─1291 /usr/libexec/polkitd --no-debug
+             ├─networkd-dispatcher.service 
+             │ └─1289 /usr/bin/python3 /usr/bin/networkd-dispatcher --run-startup-triggers
+             ├─multipathd.service 
+             │ └─760 /sbin/multipathd -d -s
+             ├─libvirtd.service 
+             │ ├─1358 /usr/sbin/libvirtd
+             │ ├─1752 /usr/sbin/dnsmasq --conf-file=/var/lib/libvirt/dnsmasq/default.conf --leasefile-ro --dhcp-script=/usr/lib/libvirt/libvirt_leaseshelper
+             │ └─1753 /usr/sbin/dnsmasq --conf-file=/var/lib/libvirt/dnsmasq/default.conf --leasefile-ro --dhcp-script=/usr/lib/libvirt/libvirt_leaseshelper
+             ├─ModemManager.service 
+             │ └─1336 /usr/sbin/ModemManager
+             ├─systemd-journald.service 
+             │ └─715 /lib/systemd/systemd-journald
+             ├─unattended-upgrades.service 
+             │ └─1360 /usr/bin/python3 /usr/share/unattended-upgrades/unattended-upgrade-shutdown --wait-for-signal
+             ├─ssh.service 
+             │ └─1347 sshd: /usr/sbin/sshd -D [listener] 0 of 10-100 startups
+             ├─nvidia-persistenced.service 
+             │ └─1292 /usr/bin/nvidia-persistenced --user nvidia-persistenced --no-persistence-mode --verbose
+             ├─snapd.service 
+             │ └─1296 /usr/lib/snapd/snapd
+             ├─systemd-machined.service 
+             │ └─1303 /lib/systemd/systemd-machined
+             ├─rsyslog.service 
+             │ └─1293 /usr/sbin/rsyslogd -n -iNONE
+             ├─systemd-resolved.service 
+             │ └─1265 /lib/systemd/systemd-resolved
+             ├─udisks2.service 
+             │ └─1308 /usr/libexec/udisks2/udisksd
+             ├─dbus.service 
+             │ └─1282 @dbus-daemon --system --address=systemd: --nofork --nopidfile --systemd-activation --syslog-only
+             ├─systemd-timesyncd.service 
+             │ └─1198 /lib/systemd/systemd-timesyncd
+             ├─dm-event.service 
+             │ └─747 /sbin/dmeventd -f
+             └─systemd-logind.service 
+               └─1301 /lib/systemd/systemd-logind

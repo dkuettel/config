@@ -1,0 +1,25 @@
+● base
+    State: running
+     Jobs: 0 queued
+   Failed: 0 units
+    Since: Sun 2023-04-16 19:23:02 CEST; 1min 8s ago
+   CGroup: /user.slice/user-1000.slice/user@1000.service
+           ├─session.slice 
+           │ ├─filter-chain.service 
+           │ │ └─2049 /usr/bin/pipewire -c filter-chain.conf
+           │ ├─pipewire-pulse.service 
+           │ │ └─2051 /usr/bin/pipewire-pulse
+           │ ├─pipewire-media-session.service 
+           │ │ └─2048 /usr/bin/pipewire-media-session
+           │ └─pipewire.service 
+           │   └─2047 /usr/bin/pipewire
+           ├─app.slice 
+           │ ├─osh.service 
+           │ │ ├─2046 /bin/zsh /home/dkuettel/config/i/osh/osh/systemd/ExecStart
+           │ │ ├─2050 /bin/zsh bin/osh run-server
+           │ │ └─2053 python -m osh run-server
+           │ └─dbus.service 
+           │   └─2054 /usr/bin/dbus-daemon --session --address=systemd: --nofork --nopidfile --systemd-activation --syslog-only
+           └─init.scope 
+             ├─2039 /lib/systemd/systemd --user
+             └─2040 (sd-pam)

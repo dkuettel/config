@@ -1,0 +1,62 @@
+● base
+    State: running
+     Jobs: 0 queued
+   Failed: 0 units
+    Since: Sun 2023-04-16 16:05:15 UTC; 1min 3s ago
+   CGroup: /
+           ├─user.slice 
+           │ └─user-1000.slice 
+           │   ├─user@1000.service …
+           │   │ └─init.scope 
+           │   │   ├─1587 /lib/systemd/systemd --user
+           │   │   └─1588 (sd-pam)
+           │   └─session-1.scope 
+           │     ├─1310 /bin/login -p --
+           │     ├─1595 -bash
+           │     ├─1984 /bin/zsh ../snapshot
+           │     ├─1995 sudo systemctl status
+           │     ├─1996 sudo systemctl status
+           │     └─1997 systemctl status
+           ├─init.scope 
+           │ └─1 /sbin/init
+           └─system.slice 
+             ├─irqbalance.service 
+             │ └─1225 /usr/sbin/irqbalance --foreground
+             ├─packagekit.service 
+             │ └─1875 /usr/libexec/packagekitd
+             ├─systemd-networkd.service 
+             │ └─1203 /lib/systemd/systemd-networkd
+             ├─systemd-udevd.service 
+             │ └─794 /lib/systemd/systemd-udevd
+             ├─cron.service 
+             │ └─1219 /usr/sbin/cron -f -P
+             ├─polkit.service 
+             │ └─1227 /usr/libexec/polkitd --no-debug
+             ├─networkd-dispatcher.service 
+             │ └─1226 /usr/bin/python3 /usr/bin/networkd-dispatcher --run-startup-triggers
+             ├─multipathd.service 
+             │ └─783 /sbin/multipathd -d -s
+             ├─ModemManager.service 
+             │ └─1290 /usr/sbin/ModemManager
+             ├─systemd-journald.service 
+             │ └─737 /lib/systemd/systemd-journald
+             ├─unattended-upgrades.service 
+             │ └─1299 /usr/bin/python3 /usr/share/unattended-upgrades/unattended-upgrade-shutdown --wait-for-signal
+             ├─ssh.service 
+             │ └─1260 sshd: /usr/sbin/sshd -D [listener] 0 of 10-100 startups
+             ├─snapd.service 
+             │ └─1236 /usr/lib/snapd/snapd
+             ├─rsyslog.service 
+             │ └─1229 /usr/sbin/rsyslogd -n -iNONE
+             ├─systemd-resolved.service 
+             │ └─1205 /lib/systemd/systemd-resolved
+             ├─udisks2.service 
+             │ └─1242 /usr/libexec/udisks2/udisksd
+             ├─dbus.service 
+             │ └─1220 @dbus-daemon --system --address=systemd: --nofork --nopidfile --systemd-activation --syslog-only
+             ├─systemd-timesyncd.service 
+             │ └─1166 /lib/systemd/systemd-timesyncd
+             ├─dm-event.service 
+             │ └─769 /sbin/dmeventd -f
+             └─systemd-logind.service 
+               └─1238 /lib/systemd/systemd-logind

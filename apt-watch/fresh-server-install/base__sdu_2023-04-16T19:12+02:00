@@ -1,0 +1,14 @@
+● base
+    State: running
+     Jobs: 0 queued
+   Failed: 0 units
+    Since: Sun 2023-04-16 19:10:52 CEST; 1min 19s ago
+   CGroup: /user.slice/user-1000.slice/user@1000.service
+           ├─app.slice 
+           │ └─osh.service 
+           │   ├─1927 /bin/zsh /home/dkuettel/config/i/osh/osh/systemd/ExecStart
+           │   ├─1928 /bin/zsh bin/osh run-server
+           │   └─1930 python -m osh run-server
+           └─init.scope 
+             ├─1920 /lib/systemd/systemd --user
+             └─1921 (sd-pam)

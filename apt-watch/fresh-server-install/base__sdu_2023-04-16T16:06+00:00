@@ -1,0 +1,9 @@
+● base
+    State: running
+     Jobs: 0 queued
+   Failed: 0 units
+    Since: Sun 2023-04-16 16:05:33 UTC; 44s ago
+   CGroup: /user.slice/user-1000.slice/user@1000.service
+           └─init.scope 
+             ├─1587 /lib/systemd/systemd --user
+             └─1588 (sd-pam)
