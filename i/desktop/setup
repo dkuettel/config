@@ -81,5 +81,4 @@ for i in $setups; do
     ../$i/setup
 done
 
-
 echo 'Use i/desktop/attended-setup when in X.'
