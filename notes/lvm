@@ -18,4 +18,4 @@ snapshot
 > lvcreate --snapshot --name snap --size 200g vg/u2204server /dev/sdb
 recover into origin
 > lvconvert --mergesnapshot vg/snap
-often needs update-grub because it might a different kernel now
+often needs update-grub because it might be a different kernel now
