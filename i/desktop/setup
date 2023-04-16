@@ -73,7 +73,7 @@ setups=(
     # st  # NOTE alacritty instead
     # steam
     # sound # NOTE using pipewire now
-    pipewire # NOTE isnt 22.04 now with this default?
+    # pipewire # NOTE isnt 22.04 now with this default?
     # chrome
     # spotify
     # dropbox
