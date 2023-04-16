@@ -1,16 +1,38 @@
 #!/bin/zsh
 set -eux -o pipefail
 
-packages=(
+# from https://askubuntu.com/questions/831331/failed-to-change-profile-to-headset-head-unit/1339908#1339908
+# could help to use airpods in headset mode
+# pulseaudio does not support it yet (then)
+# but it looked to me like they merged some fix
+# so eventually it might be working
+# not yet as of 2021-08-28 and version 13.99.1
+
+# NOTE ubuntu 22.04 uses pipewire now, so it's in the offical repos
+# but we might get slighly newer version from this ppa
+sudo add-apt-repository -y ppa:pipewire-debian/pipewire-upstream
+sudo apt update
+apts=(
     pavucontrol  # gui
     blueman  # bluetooth
     pulseaudio-utils  # pacmd
+    pipewire
+    libspa-0.2-bluetooth
+    pipewire-audio-client-libraries
 )
-sudo apt-get install -yqq $packages
+sudo apt install -qy $apts
 
-# install hostname specific configurations
-mkdir -p ~/.config/pulse
-folder=${0:a:h}/hosts/$(hostname)
-[[ -d $folder ]] || (echo 'no host specific pulse configuration at' $folder; false)
-ln -sfT $folder/daemon.conf ~/.config/pulse/daemon.conf
-ln -sfT $folder/default.pa ~/.config/pulse/default.pa
+systemctl --user daemon-reload
+systemctl --user --now disable pulseaudio.service pulseaudio.socket || true
+systemctl --user mask pulseaudio || true
+systemctl --user --now enable pipewire-media-session.service
+
+if apt list --installed | grep 'ofono'; then
+    echo 'ofono packages might interfere with pipewire, bluetooth, and airpods' >&2
+fi
+
+if pactl info | grep 'on PipeWire'; then
+    echo 'seems to be working'
+else
+    echo 'I needed to reboot to get it working' >&2
+fi
