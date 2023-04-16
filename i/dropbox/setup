@@ -31,7 +31,9 @@ sudo systemctl enable dropbox@$USER
 sudo systemctl start dropbox@$USER
 
 echo 'check dropbox status below, probably need to authenticate in a browser'
-journalctl --follow --unit=dropbox@$USER.service || true
+if ! journalctl --follow --unit=dropbox@$USER.service; then
+    true
+fi
 
 ln -sfT ~/Dropbox ~/dbox
 ln -sfT ~/Dropbox/toys ~/toys

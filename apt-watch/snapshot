@@ -19,3 +19,9 @@ aptitude search --display-format '%p @%v (%c%M) [%r]' '?installed' --disable-col
 
 target=$(hostname)__pse_$stamp
 ps -e --forest -o comm --no-headers --sort=comm > $target
+
+target=$(hostname)__sds_$stamp
+sudo systemctl status > $target
+
+target=$(hostname)__sdu_$stamp
+systemctl --user status > $target

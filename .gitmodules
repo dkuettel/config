@@ -13,9 +13,6 @@
 [submodule "i/dwm/slock"]
 	path = i/dwm/slock
 	url = https://git.suckless.org/slock
-[submodule "i/st/st"]
-	path = i/st/st
-	url = git@bitbucket.org:dkuettel/st.git
 [submodule "i/alacritty/alacritty"]
 	path = i/alacritty/alacritty
 	url = https://github.com/alacritty/alacritty.git
