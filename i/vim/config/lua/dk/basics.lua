@@ -264,7 +264,9 @@ function M.resize_relayout()
     vim.api.nvim_create_autocmd({ "VimResized" }, {
         desc = "relayout on resize",
         callback = function()
-            vim.cmd("wincmd =")
+            local t = vim.api.nvim_get_current_tabpage()
+            vim.cmd("tabdo wincmd =")
+            vim.api.nvim_set_current_tabpage(t)
         end,
     })
 end
