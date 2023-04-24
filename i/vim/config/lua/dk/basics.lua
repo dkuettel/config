@@ -261,6 +261,8 @@ function M.shift_enter_comments()
 end
 
 function M.resize_relayout()
+    -- other intersting events maybe: WinEnter, WinNew
+    -- but for those only "wincmd =", not "tabdo", probably
     vim.api.nvim_create_autocmd({ "VimResized" }, {
         desc = "relayout on resize",
         callback = function()
