@@ -1,10 +1,11 @@
 Include ~/dbox/config/ssh-config
 
-Host github.com
-    UpdateHostKeys yes
-
-Host bitbucket.org
-    UpdateHostKeys yes
+# UpdateHostKeys seems okay
+# but not 100% sure, and also not useful very often
+#Host github.com
+#    UpdateHostKeys yes
+#Host bitbucket.org
+#    UpdateHostKeys yes
 
 Host efs
     HostName i-099c3d939c5680d79
