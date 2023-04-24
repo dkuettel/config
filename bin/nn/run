@@ -34,6 +34,11 @@ function id_mount {
 args+=(--interactive --tty --rm --detach-keys 'ctrl-@,x,x')
 #args+=(--env TERM --env SHELL)
 
+# privileged
+# fuse needs it, sometimes other things too
+# kubernetes also runs with this
+args+=(--privileged)
+
 # docker in docker
 args+=(-v /var/run/docker.sock:/var/run/docker.sock)
 
