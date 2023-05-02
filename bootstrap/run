@@ -85,6 +85,14 @@ set -eu -o pipefail
     fi
 }
 
+{ # ssh authorized keys
+    if [[ -e ~/seed/ssh/authorized_keys ]]; then
+        echo 'Use authorized_keys from seed.'
+        cp ~/seed/ssh/authorized_keys ~/.ssh/authorized_keys
+        chmod go-rwx ~/.ssh/authorized_keys
+    fi
+}
+
 if [[ ! -e ~/config ]]; then
     git clone --recurse-submodules git@github.com:dkuettel/config.git ~/config
 fi

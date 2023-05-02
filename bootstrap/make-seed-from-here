@@ -13,5 +13,5 @@ hostname > seed/hostname
 mkdir seed/ssh
 cp ~/.ssh/id_rsa ~/.ssh/id_rsa.pub seed/ssh
 cp ~/.ssh/ptc_git_id_rsa ~/.ssh/ptc_git_id_rsa.pub seed/ssh
-
 cp ~/.ssh/known_hosts2 seed/ssh/known_hosts2
+cp ~/.ssh/authorized_keys seed/ssh/authorized_keys
