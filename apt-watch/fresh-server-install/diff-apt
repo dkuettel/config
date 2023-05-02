@@ -1,0 +1,31 @@
+#!python-with-venv-quiet
+# pyright: strict
+
+"""! python3.10 requirements
+typer==0.7.0
+"""
+
+from pathlib import Path
+
+import typer
+
+
+def as_set(file: Path) -> set[str]:
+    return {i.split(" ")[0] for i in file.read_text().splitlines()}
+
+
+def main(files: list[Path]):
+    all_packages = [as_set(f) for f in files]
+
+    state: set[str] = set()
+    for file, packages in zip(files, all_packages):
+        added = packages - state
+        removed = state - packages
+        print(file)
+        print(f"  adds {len(added)}")
+        print(f"  removes {len(removed)}")
+        state = packages
+
+
+if __name__ == "__main__":
+    typer.run(main)
