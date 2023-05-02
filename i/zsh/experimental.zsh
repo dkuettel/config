@@ -56,3 +56,13 @@ function take {
 # the current default pythons
 alias python-=python3.10
 alias pip-='python3.10 -m pip'
+
+# part of tools like bin/vv and bin/vv-*
+function vv-activate {
+    if ! venv=$(vv-validate); then
+        return 1
+    fi
+    path=($venv/bin $path)
+    export VIRTUAL_ENV=$venv
+    echo "Entering venv at '$venv'."
+}

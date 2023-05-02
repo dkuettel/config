@@ -1,53 +1,16 @@
 #!/bin/zsh
 set -eu -o pipefail
 
-# > vv cmd args...
+# > vv [cmd [args ...]]
 # run a command in the virtualenv ./.venv
-# > vv
-# starts in an interactive shell instead
-# if it exists, ./.env will be sourced
+# cmd defaults to 'zsh'
 
-if [[ -v VIRTUAL_ENV ]]; then
-    echo "a virtual env ($VIRTUAL_ENV) is already active"
-    exit 1
-fi
+# NOTE could think about some .vv-something that will be sourced if it's there?
+# to set python paths or other things
 
-folder=$(pwd)/.venv
-if [[ ! -d $folder ]]; then
-    echo "$folder does not exist"
-    exit 1
-fi
+venv=$(vv-validate)
+path=($venv/bin $path)
+export VIRTUAL_ENV=$venv
 
-if ! grep --quiet ${folder:A} $folder/bin/activate; then
-    echo "$folder was probably originally in a different location"
-    exit 1
-fi
-
-path=($folder/bin $path)
-export VIRTUAL_ENV=$folder
-
-if [[ -f .vv-env ]]; then
-    echo "$folder has a .vv-env, that's probably old"
-    exit 1
-fi
-
-if [[ -f .env ]]; then
-    for i in $(cat .env); do
-        export $i
-    done
-fi
-
-if [[ $# == 0 ]]; then
-    {
-        echo -e "\nenter virtualenv $folder"
-        # TODO start the shell as sub or exec?
-        # exec could feel more "natural"
-        zsh
-    } always {
-        # TODO this always block isnt executed when zsh exits non-zero, but it works with other commands, maybe a bug
-        echo -e "\nexit virtual env $folder"
-    }
-else
-    # TODO could source shortcuts and with that allow typical aliases?
-    $@
-fi
+# TODO could source shortcuts and with that allow typical aliases?
+${@:-zsh}

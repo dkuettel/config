@@ -1,0 +1,30 @@
+#!/bin/zsh
+set -eu -o pipefail
+
+if [[ -v VIRTUAL_ENV ]]; then
+    echo "A virtual env '$VIRTUAL_ENV' is already active." >&2
+    exit 1
+fi
+
+venv=$(pwd)/.venv
+if [[ ! -d $venv ]]; then
+    echo "A venv at '$venv' does not exist." >&2
+    exit 1
+fi
+
+if ! grep --quiet ${venv:A} $venv/bin/activate; then
+    echo "The venv at '$venv' was probably originally in a different location." >&2
+    exit 1
+fi
+
+if [[ -f .vv-env ]]; then
+    echo "There is a legacy '.vv-env'." >&2
+    exit 1
+fi
+
+if [[ -f .env ]]; then
+    echo "There is a legacy '.env'." >&2
+    exit 1
+fi
+
+echo $venv
