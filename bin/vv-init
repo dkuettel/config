@@ -1,24 +1,26 @@
 #!/bin/zsh
 set -eux -o pipefail
 
-# - create a new virtualenv at first argument or .venv
-# - install pip-tools
-# - disable dropbox sync for venv
+# > vv-init [venv]
+# will do
+# 1) create a new virtualenv at 'venv' or .venv
+# 2) disable dropbox sync for new venv
+# 3) install pip-tools
 
-at=${1:-.venv}
+venv=${1:-.venv}
 
 if [[ -v VIRTUAL_ENV ]]; then
-    echo "A virtual env at $VIRTUAL_ENV is already active." >&2
+    echo "A virtual env '$VIRTUAL_ENV' is already active." >&2
     exit 1
 fi
 
-if [[ -e $at ]]; then
-    echo "The folder $at already exists." >&2
+if [[ -d $venv ]]; then
+    echo "A venv at '$venv' already exists." >&2
     exit 1
 fi
 
-mkdir $at
+mkdir $venv
 # disable dropbox upload, but indexing still happens (takes cpu time)
-attr -s com.dropbox.ignored -V 1 $at
-python3.9 -m venv --clear --upgrade-deps $at
-$at/bin/pip install --upgrade pip pip-tools
+attr -s com.dropbox.ignored -V 1 $venv
+python3.10 -m venv --clear --upgrade-deps $venv
+$venv/bin/pip install --upgrade pip pip-tools
