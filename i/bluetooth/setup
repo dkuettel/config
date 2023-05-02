@@ -3,6 +3,8 @@ set -eux -o pipefail
 
 # make sure bluetooth is powered off by default on startup
 # (we dont stop the service, just power off the hardware, if any)
+# NOTE one time it didnt work, but then re-executing worked
+# is it possible the main.conf is not there in the beginning?
 
 if [[ ! -f /etc/bluetooth/main.conf ]]; then
     exit
