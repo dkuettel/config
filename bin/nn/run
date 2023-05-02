@@ -7,14 +7,6 @@ if [[ ! -v h ]]; then
     exit 1
 fi
 
-# prepare host folders
-out=$(realpath out)
-[[ -d $out ]] && rm -r $out
-mkdir -p $out
-
-# docker arguments
-args=()
-
 # mount
 function mount {
     args+=(--volume ${1:a}:$2)
@@ -29,6 +21,24 @@ function nn_mount  {
 function id_mount {
     mount ${1:a} ${1:a}
 }
+
+# docker arguments
+args=()
+
+# out dir
+if [[ -d ~/sprint/out ]]; then
+    # use ~/sprint/out if it was there
+    out=$(realpath ~/sprint/out)
+    echo 'Using dropbox out folder.\n'
+else
+    # otherwise use ./out
+    out=$(realpath out)
+    echo 'Using local out folder.\n'
+fi
+rm -rf $out
+mkdir -p $out
+mount $out /xp/src/out
+args+=(--workdir=/xp/src/out)
 
 # interactive
 args+=(--interactive --tty --rm --detach-keys 'ctrl-@,x,x')
@@ -80,10 +90,6 @@ nn_mount .
 
 # mount in current workspace
 id_mount $h
-
-# out dir
-mount $out /xp/src/out
-args+=(--workdir=/xp/src/out)
 
 # ipython
 # TODO we need to map in config too, because symlinks go there, is that okay?
