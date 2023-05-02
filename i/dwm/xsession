@@ -22,7 +22,7 @@ xset s off
 # switch off monitor in virtual terminal [idle minutes]
 setterm --blank 20 --powerdown 20
 
-redshift -r -v |& ts '%F %T' >& .log-redshift &
+redshift -v |& ts '%F %T' >& .log-redshift &
 
 # NOTE we need this here because inet(evdev) is applied in xkb after our pointluck layout, see config/i/keyboard/setup
 xmodmap ~/config/i/keyboard/mods

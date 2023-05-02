@@ -1,7 +1,16 @@
 #!/bin/zsh
 set -eux -o pipefail
 
+base=${0:a:h}
+
 # http://jonls.dk/redshift/
+# but getting pretty old, and page is "not secure" anymore
+# however https://github.com/jonls/redshift seems alive
 sudo apt install -yqq redshift
 
-ln -sfT ${0:a:h}/redshift.conf ~/.config/redshift.conf
+mkdir -p ~/.config/redshift
+ln -sfT ${0:a:h}/redshift.conf ~/.config/redshift/redshift.conf
+
+# NOTE in 22.04 around 2023-05-02 the apparmor profile was too restrictive
+sudo cp $base/apparmor /etc/apparmor.d/local/usr.bin.redshift
+sudo chown root:root /etc/apparmor.d/local/usr.bin.redshift
