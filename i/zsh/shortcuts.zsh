@@ -20,6 +20,8 @@ else
     function lrt { ls -hltrcF --color=always $@ | tail }
 fi
 
+alias ls-=/usr/bin/ls
+
 # todo zsh supports .. and ... without aliases?
 #alias ..='cd ..'
 #alias ...='cd ../..'
