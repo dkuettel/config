@@ -37,6 +37,7 @@ fi
 
 ln -sfT ~/Dropbox ~/dbox
 ln -sfT ~/Dropbox/toys ~/toys
+ln -sfT ~/Dropbox/sprint ~/sprint
 
 if [[ realpath ~/.osh/data != ~/Dropbox/osh-data ]]; then
     echo 'Maybe ~/.osh/data should point at ~/Dropbox/osh-data.'
