@@ -1,0 +1,4 @@
+#!/bin/zsh
+set -eux -o pipefail
+
+run python -m nn.imt.$@
