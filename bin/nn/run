@@ -91,6 +91,9 @@ nn_mount .
 # mount in current workspace
 id_mount $h
 
+# mount dropbox/sprint folder
+id_mount ~/sprint
+
 # ipython
 # TODO we need to map in config too, because symlinks go there, is that okay?
 id_mount ~/config
