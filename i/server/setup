@@ -103,5 +103,9 @@ sudo apt-get install -qy --install-recommends linux-generic-hwe-$(lsb_release --
 sudo apt-get remove -y linux-generic linux-headers-generic linux-image-generic
 sudo apt-get autoremove -y
 
-echo 'Usually need to restart here for new kernel.'
-echo 'Depending on the setup grub-install or/and update-grub is a good idea.'
+cat <<- EON
+Some notes:
+- Usually need to restart here for new kernel.
+- Depending on the setup grub-install or/and update-grub is a good idea.
+- Probably see about osh history, especially later when dropbox is active.
+EON

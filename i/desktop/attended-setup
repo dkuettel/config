@@ -10,3 +10,16 @@ setups=(
 for i in $setups; do
     ../$i/setup
 done
+
+cat <<- EON
+Some notes:
+- maybe 'xrandr --output DP-0 --mode 3840x2160 --rate 120'
+    - but that's not persistent, need nvidia-settings and
+        - "X Server Display Configuration"
+        - Advanced
+        - select resolution non-auto and refresh rate
+        - apply and save to configuration file
+        - needed to make /usr/share/screen-resolution-extra/nvidia-polkit executable last time
+- with ifi sound I used "AudioPro", ltstatus also has the alias for that one
+- see notes/console and notes/grub for text mode resolutions and fonts
+EON
