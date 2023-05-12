@@ -1,4 +1,13 @@
 
+resolutions:
+- go to console with 'c'
+- videoinfo shows available modes
+- switch resolution interactively: terminal_output console; set gfxterm=wxh; terminal_output gfxterm
+    - super slow in any gfx mode, except maybe 640x480 or so
+- using video=efifb:3840x2160 works for console
+    - needs to be added do the postfix thing: GRUB_CMDLINE_LINUX_DEFAULT
+    - https://www.kernel.org/doc/html/v5.10/fb/efifb.html
+
 to have it wait for selection (in /etc/default/grub)
     GRUB_TIMEOUT=-1
     GRUB_RECORDFAIL_TIMEOUT=-1

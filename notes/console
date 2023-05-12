@@ -1,0 +1,9 @@
+- sudo dkpg-reconfigure console-setup
+- how to make it unattended?
+- choices were: utf-8, guess character set, TerminusBold, 16x32; this runs update-initramfs
+    - there I also see FRAMEBUFFER=y, that's where we need to add nvidia?
+- I think that's in /etc/default/console-setup
+    CHARMAP="UTF-8"
+    CODESET="guess"
+    FONTFACE="Fixed"
+    FONTSIZE="8x16"
