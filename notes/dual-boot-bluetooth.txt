@@ -13,6 +13,10 @@ on windows:
     it contains the key in a similar fashion as linux
     in the device manager best change the bluetooth receiver's name to what it is in linux
     before you connect a device, so the names don't conflict
+    .\PsExec.exe -i -d -s c:\windows\regedit.exe
+    in command (run as admin)
+    HKEY_LOCAL_MACHINE\SYSTEM\ControlSet001\Services\BTHPORT\Parameters\Keys
+    really no easy way to run elevated ... crazy windows :0
 
 the main idea is to make both systems use the same link key
 one approach is:
