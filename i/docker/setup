@@ -2,6 +2,8 @@
 set -eux -o pipefail
 
 # ubuntu 20.04 has a recent version of docker
+# TODO this started and interactive prompt if /etd/docker/daemon.json was already edited
+# (like by nn repo setup), and it doesnt automatically take the default but fail because we have it interactive
 sudo apt-get -yqq install --no-install-recommends docker.io
 
 # test
