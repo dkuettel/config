@@ -32,5 +32,5 @@ sudo apt install -qqy $expected
 
 # NOTE alternatives
 # - see ./manual
-# - https://launchpad.net/~graphics-drivers/+archive/ubuntu/ppa , same as ubunut's own?
+# - https://launchpad.net/~graphics-drivers/+archive/ubuntu/ppa , same as ubuntu's own?
 # - sudo ubuntu-drivers install [--gpgpu] for server headless?
