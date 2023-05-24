@@ -14,7 +14,8 @@ Host efs
     ServerAliveInterval 10
 
 Host staging
-    HostName i-0ed102c1042488382
+    # HostName i-0ed102c1042488382
+    HostName i-03e5a8d83cf86f916
     User dkuettel
     ProxyCommand ssh-proxy-command-aws-start-and-ssm %h %p
     ServerAliveInterval 10
