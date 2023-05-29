@@ -144,3 +144,5 @@ alias gm='git m'
 
 # completion for tmux-bind-g
 compctl -c tmux-bind-g
+
+alias ssh-tb='ssh -L 6006:localhost:6006'
