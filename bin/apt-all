@@ -1,9 +1,0 @@
-#!/bin/zsh
-set -eux -o pipefail
-
-# NOTE using apt instead of apt-get, the later sometimes "kept back" some packages
-sudo apt update
-sudo apt upgrade  # --autoremove does seem to do something, but not fully
-sudo apt autoremove
-
-sudo snap refresh
