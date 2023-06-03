@@ -1,35 +1,21 @@
 #!/bin/zsh
 set -eux -o pipefail
 
-# TODO can it
-# a) on g, do vertical or horizontal split depending on what's better from the current layout?
-# b) maybe replace the previous one? so there is ever only one g window? maybe too dangerous
+# NOTE lets try this
+# we assume we are in a workspace
+# we find all .tmux-bind-g-*
+# we map them all for g and G
 
-# bind an executable to g (split) and G (new window)
-# meant to use dynamically for whatever is the current task
-# (Maybe gotta be a bit careful because $@ gets expanded more than once?)
-# if it was based on name 'g-bound' that would be cool, replace
-# if you dont want that, rename your window, but I dont see how to do that with panes :/
+# TODO aliases dont work in those scripts
 
-cmd='while true; do
-    clear
-    echo ">" '$@'
-    echo
-    '$@'
-    echo
-    echo ">" '$@'
-    echo "exit code = $?"
-    while true; do
-        read -sk "r?[q] to quit or [enter] to rerun:"
-        echo
-        if [[ $r == q ]]; then
-            exit
-        fi
-        if [[ $r == $'"'"'\n'"'"' ]]; then
-            break
-        fi
-    done
-done'
+[[ -v workspace_active ]]
 
-tmux bind-key g split-window -h -c "#{pane_current_path}" zsh -ic $cmd
-tmux bind-key G new-window -n g-bound -c "#{pane_current_path}" zsh -ic $cmd
+cd $workspace_home/.tmux-bind-g
+
+tmux bind-key g switch-client -T small-g
+tmux bind-key G switch-client -T large-g
+
+for i in *; do
+    tmux bind-key -T small-g $i split-window -h -c $workspace_home run-tmux-g-bound $i
+    tmux bind-key -T large-g $i new-window -n $i -c $workspace_home run-tmux-g-bound $i
+done
