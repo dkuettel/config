@@ -1,6 +1,12 @@
 #!/bin/zsh
 set -eux -o pipefail
 
+case ${1:-} in
+    ('') open=(standup.markdown todo.todo) ;;
+    (imt) open=(topics/instant-model-targets.todo) ;;
+    (*) exit 1 ;;
+esac
+
 cd ~/dbox/notes
 [[ -v TMUX_PANE ]] && tmux rename-window -t $TMUX_PANE notes
-nvim -p standup.markdown todo.todo
+nvim -p $open
