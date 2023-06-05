@@ -11,7 +11,8 @@ while true; do
     echo ">>>" $x "<<<"
     echo
 
-    if .tmux-bind-g/$x; then
+    TIMEFMT=$'\n> %E total @ %P cpu: %U user, %S system'
+    if time .tmux-bind-g/$x; then
         echo
         echo ">>>" $x "<<<"
     else
