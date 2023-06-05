@@ -7,15 +7,19 @@ cd $workspace_home
 
 while true; do
 
+    reset
     echo ">>>" $x "<<<"
     echo
 
-    .tmux-bind-g/$x
-    ret=$?
-
-    echo
-    echo ">>>" $x "<<<"
-    echo "exit code = $?"
+    if .tmux-bind-g/$x; then
+        echo
+        echo ">>>" $x "<<<"
+    else
+        ret=$?
+        echo
+        echo ">>>" $x "<<<"
+        echo "exit code = $ret"
+    fi
 
     while true; do
         read -sk "r?[q] to quit or [enter] to rerun:"
@@ -23,7 +27,7 @@ while true; do
         if [[ $r == q ]]; then
             exit $ret
         fi
-        if [[ $r == $'"'"'\n'"'"' ]]; then
+        if [[ $r == $'\n' ]]; then
             break
         fi
     done
