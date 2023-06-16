@@ -5,7 +5,12 @@ if which exa &>/dev/null; then
     alias lr='ls --sort=newest'
     alias la='ls --all'
     alias ll='exa --header --git --time-style=long-iso --icons --group --long --extended --sort=name'
-    function lll { ll --color=always $@ | less -R }
+    function lll {
+        # NOTE an alias here doesnt work
+        # we use same as 'll' above, plus --color=always
+        exa --header --git --time-style=long-iso --icons --group --long --extended --sort=name --color=always |
+            less -R
+    }
     alias lsd='ls --only-dirs'
     alias lld='ll --only-dirs'
 else
