@@ -4,5 +4,7 @@ set -eux -o pipefail
 # https://github.com/ogham/exa
 # https://the.exa.website
 
-# TODO after ubuntu 20.04 there is also an apt version available
-cargo install exa
+# NOTE after ubuntu 20.04 there is also an apt version available
+
+# NOTE path should be set from what I understand, but last time it didnt work
+~/.cargo/bin/cargo install exa
