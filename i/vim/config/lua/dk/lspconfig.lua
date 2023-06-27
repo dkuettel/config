@@ -288,6 +288,7 @@ function M.mappings(client, bufnr)
     nmap("]d", D.goto_next, "diagnostics next")
     nmap(",q", D.setloclist, "diagnostics loclist")
 
+    -- TODO I think it's actually being set, but where?
     -- Enable completion triggered by <c-x><c-o>
     -- vim.api.nvim_buf_set_option(bufnr, "omnifunc", "v:lua.vim.lsp.omnifunc")
     -- TODO that's probably newbish, read about omnifunc and stuff
@@ -590,7 +591,16 @@ function M.setup_python(capabilities)
         -- lspconfig has some defaults here, is that smart? doesnt that overwrite a config file?
         -- also, 2 out of 3 lspconfig defaults I cannot find anymore in the documentation of pyright
         -- https://github.com/microsoft/pyright/blob/main/docs/settings.md , not sure if that is really part of the config file
-        settings = {},
+        -- TODO trying these settings, but I think much is out-of-date, or default already, take a close look on next pyright update(s)
+        settings = {
+            pyright = { useLibraryCodeForTypes = true },
+            python = {
+                analysis = {
+                    useLibraryCodeForTypes = true,
+                    diagnosticMode = "workspace",
+                },
+            },
+        },
     })
 end
 
