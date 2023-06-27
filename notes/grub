@@ -34,7 +34,7 @@ using the uuid from blkid from the right partition
 (probably called "EFI system partition")
 update-grub after that
 
-booth from an iso, this works
+boot from an iso, this works
 but I think the linux ... line depends on what type of linux you want to boot
 (note, iso can be mounted like normal to inspect)
     menuentry "server iso" {
