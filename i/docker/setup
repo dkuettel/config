@@ -16,7 +16,7 @@ echo 'use of docker without sudo only takes effect after new login, ssh localhos
 if which nvidia-smi >/dev/null; then
 
     curl -s -L https://nvidia.github.io/nvidia-docker/gpgkey | \
-        sudo apt-key add -
+        sudo tee /etc/apt/trusted.gpg.d/nvidia-docker.gpg
     curl -s -L https://nvidia.github.io/nvidia-docker/ubuntu$(lsb_release --release --short)/nvidia-docker.list | \
         sudo tee /etc/apt/sources.list.d/nvidia-docker.list
 
