@@ -1,6 +1,9 @@
 #!/bin/zsh
 set -eux -o pipefail
 
+this=$0
+continue_from=${1:-}
+
 cd ${0:a:h}
 
 source ../zsh/path.zsh
@@ -78,8 +81,24 @@ setups=(
     ltstatus
     pstart
 )
+
+if [[ $continue_from != '' ]]; then
+    at=$setups[(i)$continue_from]
+    if [[ $at -gt $#setups ]]; then
+        echo "Cannot find $continue_from to continue from." 1>&2
+        exit 1
+    fi
+    setups=$setups[$at,-1]
+fi
+
+function TRAPZERR {
+    echo 'Setup failed for "'$i'". Fix and then resume with "'$this $i'".'
+}
+set +x
 for i in $setups; do
     ../$i/setup
 done
+set -x
+unset -f TRAPZERR
 
 echo 'Use i/desktop/attended-setup when in X.'
