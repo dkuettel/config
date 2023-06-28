@@ -31,7 +31,7 @@ sudo systemctl enable dropbox@$USER
 sudo systemctl start dropbox@$USER
 
 echo 'check dropbox status below, probably need to authenticate in a browser'
-if ! journalctl --follow --unit=dropbox@$USER.service; then
+if ! journalctl --follow --unit=dropbox@$USER.service | grep --max-count=1 'now linked'; then
     true
 fi
 
@@ -39,7 +39,7 @@ ln -sfT ~/Dropbox ~/dbox
 ln -sfT ~/Dropbox/toys ~/toys
 ln -sfT ~/Dropbox/sprint ~/sprint
 
-if [[ realpath ~/.osh/data != ~/Dropbox/osh-data ]]; then
+if [[ $(realpath ~/.osh/data) != ~/Dropbox/osh-data ]]; then
     echo 'Maybe ~/.osh/data should point at ~/Dropbox/osh-data.'
     # NOTE not sure if I should do it scripted, it might not be synced yet here anyway
 fi
