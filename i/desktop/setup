@@ -28,6 +28,7 @@ i=(
     firefox  # NOTE in 22.04 this actually installs a snap
     geeqie  # pulls in many dependencies because of kde
     gnome-sushi  # nautilus plugin for preview on space-key
+    gparted  # seems a bit better than "partitionmanager"
     gpick  # easy color picker from anything on the screen, useful when debugging terminal colors
     gthumb  # together with scrot
     maim  # for screenshot directly into copy buffer
