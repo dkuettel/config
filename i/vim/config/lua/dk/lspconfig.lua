@@ -432,7 +432,7 @@ local function get_sumneko_lua_settings_neodev()
 end
 
 function M.setup_lua(capabilities)
-    -- using sumneko https://github.com/sumneko
+    -- using https://github.com/luals/lua-language-server
     -- alternative language server https://github.com/Alloyed/lua-lsp (looks unfinished and inactive)
 
     -- see https://github.com/folke/neodev.nvim
@@ -440,10 +440,10 @@ function M.setup_lua(capabilities)
     vim.cmd("packadd neodev.nvim")
     require("neodev").setup({})
 
-    -- see https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#sumneko_lua
-    require("lspconfig").sumneko_lua.setup({
+    -- see https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#lua_ls
+    require("lspconfig").lua_ls.setup({
         cmd = { vim.fn.expand("~/bin/sumneko/bin/lua-language-server") },
-        -- see https://github.com/sumneko/lua-language-server/wiki/Configuration-File
+        -- see https://github.com/LuaLS/lua-language-server/wiki/Configuration-File
         settings = get_sumneko_lua_settings_neodev(),
         on_attach = M.mappings,
         capabilities = capabilities,
