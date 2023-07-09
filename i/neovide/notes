@@ -1,0 +1,3 @@
+note:
+- '--multigrid' is not yet default I think, and it makes things smooth
+- '--nofork' when using a modal editor, blocking until exit
