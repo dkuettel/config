@@ -115,8 +115,8 @@ zle -N zle-keymap-select
 # this way it should be easy to skip/ignore and understand what is the actual output
 # but we cannot color the actual expansion :/ because there is no PS4_after or similar
 # '[%x:%I %e]' might sometimes be more useful? not sure when it's different from the more default below
-PS4='%K{0}%F{10}[%N:%i %_]%f%k
-  > '
+PS4='%K{0}%F{10}[%N:%i %_]
+    %f%k %F{4}%f '
 
 
 export PS1 PS4
