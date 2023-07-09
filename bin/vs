@@ -4,8 +4,11 @@ set -eux -o pipefail
 # load, run, and save Session.vim
 # if there was no Session.vim, $@ files are loaded
 
-touch Session.vim
-vim_is_in_session=yes nvim -S Session.vim $@
+if [[ -e Session.vim ]]; then
+    vim_is_in_session=yes nvim -S Session.vim
+else
+    vim_is_in_session=yes nvim $@
+fi
 
 # NOTE vim has a variable v:this_session that points at the last loaded session
 # but with an empty session (touch Session.vim) it doesnt work

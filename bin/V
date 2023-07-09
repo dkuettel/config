@@ -3,7 +3,8 @@ set -eux -o pipefail
 
 # open vim in workspace mode
 
-[[ $workspace_active == yes ]] || exit 1
+[[ $# == 0 ]]
+[[ $workspace_active == yes ]]
 
 cd $workspace_home
 
@@ -11,4 +12,10 @@ cd $workspace_home
 # - where to ,f find files, maybe include specific files for that workspace
 # - start language server already? (can it be shared once and for all? start with tmux?)
 
-vs $@
+if [[ -e todo ]]; then
+    vs todo
+elif [[ -e notes ]]; then
+    vs notes
+else
+    vs
+fi
