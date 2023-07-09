@@ -1,0 +1,15 @@
+random:
+- we often split (to the right) and stuck up contexts, map this to a single step, maybe visually stack? there was something for that already somewhere
+- vim command mode
+    - once I hit esc go to q mode and normal mode? instead of ctrl-f? feels more natural?
+    - and also handle ctrl-c different?
+- have a top statusline
+    - "command & control" with flashy animation :)
+    - "weapons hot" with flashy animation
+    - and a ring-buffer like time-based [xydyalk;jdfa] last keys hit
+    - with some "flawless" hints on a condition
+- map '--' to ':x'? almost no difference really
+- if all keybindings defined in one file, or every sub dk/* has a keybinding entrypoint
+    - with a keymap.set injected
+    - we can run it twice, second/final time in validation mode
+    - not sure if it always works, because many plugins roll their own stuff :/
