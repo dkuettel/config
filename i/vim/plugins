@@ -1,0 +1,73 @@
+#!/bin/zsh
+set -eux -o pipefail
+
+# plugins and other dependencies
+
+h=${0:a:h}
+cd $h
+
+# dependencies for some plugins
+sudo apt-get -y install pandoc  # for formatting markdown and others
+# pip3 install pynvim isort black
+# we know assume they are installed from python/setup already
+# not sure we still need pynvim?
+which black isort
+
+( # treesitter
+    # cd $h/config/pack/plugins/opt/nvim-treesitter
+)
+
+( # telescope & co
+    cd $h/config/pack/plugins/opt/telescope.nvim
+    sudo apt-get -y install fd-find ripgrep
+    cd $h/config/pack/plugins/opt/telescope-fzf-native.nvim
+    make
+)
+
+( # pyright for python lsp
+    if ! which pyright-langserver; then
+        # NOTE see https://github.com/microsoft/pyright/releases
+        npm install --global pyright@1.1.289
+    fi
+)
+
+( # stylua and sumneko for lua
+    # downloaded from https://github.com/JohnnyMorganz/StyLua/releases
+    # but how to detect or go and update to newer versions? or git?
+    if [[ ! -e ~/bin/stylua ]]; then
+        cd ~/bin
+        wget -O ~/bin/stylua.zip 'https://github.com/JohnnyMorganz/StyLua/releases/download/v0.13.0/stylua-linux.zip'
+        unzip stylua.zip stylua
+        rm stylua.zip
+        chmod +x stylua
+    fi
+
+    # see https://github.com/sumneko/lua-language-server
+    # releases at https://github.com/sumneko/lua-language-server/releases
+    if [[ ! -e ~/bin/sumneko || $(~/bin/sumneko/bin/lua-language-server --version) != 3.6.23 ]]; then
+        rm -rf ~/bin/sumneko
+        mkdir -p ~/bin/sumneko
+        cd ~/bin/sumneko
+        wget -O lls.tar.gz 'https://github.com/LuaLS/lua-language-server/releases/download/3.6.23/lua-language-server-3.6.23-linux-x64.tar.gz'
+        tar xzf lls.tar.gz
+        rm lls.tar.gz
+    fi
+)
+
+( # ptags.nvim
+    $h/config/pack/mine/opt/ptags.nvim/setup
+)
+
+# NOTE treesitter installs take long, some might fail with "xyz not a gzip"
+# this is because gitlab or others could be in maintenance or down
+# but nvim-treesitter just downloads whatever it gets, even the error page
+# and then tar complains that it's not gzip data
+# I dont have a good way to work around that, it will fail
+# would be nice if we could install that stuff outside vim anyway
+# also 'TSInstallSync!' forces reinstall, but in turn doesnt ask yes/no questions, so it might be more scripty?
+# TODO would be nice if we somehow at least before the below make a check if gitlab or others are down to make the error less cryptic
+# see https://status.gitlab.com/
+nvim -l plugins.lua
+
+# TODO :checkhealth with grep on error or warnings?
+# not sure how to make it unattended :/

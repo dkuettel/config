@@ -1,0 +1,35 @@
+#!/bin/zsh
+set -eux -o pipefail
+
+# compile and install nvim
+# see https://github.com/neovim/neovim/wiki/Building-Neovim
+
+h=${0:a:h}
+
+( # make sure no old left-overs from previous nvims with plugin managers
+    # there is also ~/.local/share/nvim which contains transient data
+    # but there should not be too much, especially from an old installation
+    # since things are sourced by nvim
+    # TODO I'm just not sure if I could delete it everytime instead? will tree-sitter-* files get updated?
+    mkdir -p ~/.local/share/nvim
+    cd ~/.local/share/nvim
+    for i in $(ls); do
+        if [[ $i != (rplugin.nvim|shada|swap|telescope_history|tree-sitter-*.tar.gz|neovide-settings.json) ]]; then
+            echo "~/.local/share/nvim/$i might be stale data" >&2
+            exit 1
+        fi
+    done
+)
+
+cd $h/nvim
+
+# NOTE older list of dependencies was longer
+# sudo apt-get install -yqq ninja-build gettext libtool libtool-bin autoconf automake cmake g++ pkg-config unzip
+sudo apt-get install -yqq ninja-build gettext cmake unzip curl
+
+# they advice to delete the runtime folder before installing a new version
+sudo rm -rf /usr/local/share/nvim/runtime
+
+make distclean
+make CMAKE_BUILD_TYPE=Release  # there is also RelWithDebInfo
+sudo make install

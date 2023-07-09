@@ -83,4 +83,14 @@ function M.play()
     -- can we dump it into a file and look at the structure of the highlights?
 end
 
+
+function M.refresh()
+    -- used in i/nvim/plugins, to make sure all is up-to-date again
+    vim.cmd([[
+        TSInstallSync all
+        TSUpdateSync
+        helptags ALL
+    ]])
+end
+
 return M
