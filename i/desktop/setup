@@ -80,6 +80,7 @@ setups=(
     vlc
     ltstatus
     pstart
+    neovide
 )
 
 if [[ $continue_from != '' ]]; then
